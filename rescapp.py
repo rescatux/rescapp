@@ -427,12 +427,12 @@ if __name__ == "__main__":
     lang_environment=os.environ['LANG']
 
     if ((datetime.datetime.now().month==4) and (datetime.datetime.now().day==1) and (not (lang_environment.startswith("es_"))) ):
-		execfile(current_pwd + "/" + "afd.py")
-		execfile(current_pwd + "/" + "afd2.py")
+		subprocess.Popen("rescapp-afd")
+		subprocess.Popen("rescapp-afd2")
 
     if ((datetime.datetime.now().month==12) and (datetime.datetime.now().day==28) and (lang_environment.startswith("es_")) ):
-		execfile(current_pwd + "/" + "afd_es.py")
-		execfile(current_pwd + "/" + "afd2_es.py")
+		subprocess.Popen("rescapp-afd-es")
+		subprocess.Popen("rescapp-afd2-es")
 
     app=QtGui.QApplication(sys.argv)
     url = QtCore.QUrl('file:///' + current_pwd + '/' + help_support_option.getCode() + '/' + offlinedoc_filename)
