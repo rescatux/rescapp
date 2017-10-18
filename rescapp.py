@@ -77,6 +77,7 @@ class RescappOption():
       return self.beta
     def setFromDir(self, dir_to_check, ndir):
       global current_pwd
+      global rescapp_doc_path
       global name_filename
       global description_filename
       global run_filename
@@ -107,7 +108,7 @@ class RescappOption():
 	self.setExecutable(True)
       if (os.path.isfile(current_pwd + '/' + ndir + '/' + beta_filename)):
 	self.setBeta(True)
-      if (os.path.isfile(current_pwd + '/' + ndir + '/' + offlinedoc_filename)):
+      if (os.path.isfile(rescapp_doc_path + '/' + ndir + '/' + offlinedoc_filename)):
 	self.setAsOption()
 	self.setHasOfflineDoc(True)
 
@@ -117,6 +118,7 @@ class MainWindow(QtGui.QWidget):
 
     def selectOptionCommon (self, n_option):
 	global current_pwd
+	global rescapp_doc_path
       	global name_filename
 	global description_filename
 	global run_filename
@@ -345,7 +347,7 @@ class MainWindow(QtGui.QWidget):
 	  frame.setStyleSheet("margin:0px; border:10px solid rgb(124, 127, 126); ")
 	  grid.addWidget(frame, bottom_start + 5, 0, 5, 5)
 	  if (self.selected_option.getHasOfflineDoc()):
-	    self.wb.load(QtCore.QUrl('file:///' + current_pwd + '/' + self.selected_option.getCode() + '/' + offlinedoc_filename))
+	    self.wb.load(QtCore.QUrl('file:///' + rescapp_doc_path + '/' + self.selected_option.getCode() + '/' + offlinedoc_filename))
 	  self.setLayout(grid)
 	else:
 	  scrollArea = VerticalScrollArea()
@@ -380,6 +382,8 @@ class MainWindow(QtGui.QWidget):
 if __name__ == "__main__":
   
   
+    rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
+    rescapp_doc_path = rescapp_binary_path + "/../" + "share/doc/rescapp"
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
     code_list = list ()
@@ -435,7 +439,7 @@ if __name__ == "__main__":
 		subprocess.Popen("rescapp-afd2-es")
 
     app=QtGui.QApplication(sys.argv)
-    url = QtCore.QUrl('file:///' + current_pwd + '/' + help_support_option.getCode() + '/' + offlinedoc_filename)
+    url = QtCore.QUrl('file:///' + rescapp_doc_path + '/' + help_support_option.getCode() + '/' + offlinedoc_filename)
     mw=MainWindow(url)
     mw.setWindowTitle("Rescatux " + rescapp_version +" Rescapp")
 
