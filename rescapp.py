@@ -384,6 +384,7 @@ if __name__ == "__main__":
   
     rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
     rescapp_doc_path = rescapp_binary_path + "/../" + "share/doc/rescapp"
+    rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
     code_list = list ()
@@ -410,12 +411,11 @@ if __name__ == "__main__":
       rescapp_version = "Unknown"
       print "DEBUG: Warning! Version not found. Using 'Unknown' instead"
     
-    images_path = current_pwd + '/' + "images"
-    mainmenu_icon_path = images_path + "/" + "go-home.png"
-    back_icon_path = images_path + "/" + "go-previous.png"
-    menu_icon_path = images_path + "/" + "folder.png"
-    support_icon_path = images_path + "/" + "help-browser.png"
-    rescue_icon_path = images_path + "/" + "text-x-script.png"
+    mainmenu_icon_path = rescapp_icons_path + "/" + "go-home.png"
+    back_icon_path = rescapp_icons_path + "/" + "go-previous.png"
+    menu_icon_path = rescapp_icons_path + "/" + "folder.png"
+    support_icon_path = rescapp_icons_path + "/" + "help-browser.png"
+    rescue_icon_path = rescapp_icons_path + "/" + "text-x-script.png"
     
     chat_support_option= RescappOption()
     chat_support_option.setFromDir(os.path.join(current_pwd, 'chat'), 'chat')

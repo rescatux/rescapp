@@ -2,6 +2,7 @@
 prefix?=/usr/local
 target=$(DESTDIR)$(prefix)
 doctarget=$(target)/share/doc/rescapp
+icontarget=$(target)/share/icons/rescapp
 
 all:
 .PHONY	:	all
@@ -42,7 +43,7 @@ install_documentation:	about-rescapp_install_documentation\
 	winunlock_install_documentation
 
 
-install:	install_documentation
+install:	install_documentation	install_icons
 
 
 
@@ -520,5 +521,7 @@ winunlock_install_documentation:	winunlock/*html	$(winunlock_installdocimages_di
 
 
 
-
+install_icons:	icons/*png
+	install -d $(icontarget)/
+	install -m 755 icons/*png $(icontarget)/
 
