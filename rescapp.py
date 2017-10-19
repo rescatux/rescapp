@@ -207,7 +207,7 @@ class MainWindow(QtGui.QWidget):
 	  f2=open(current_pwd + '/' + ndir + '.lis')
 	  for mydir2 in f2:
 	    ndir2 = mydir2.rstrip('\r\n');
-	    dir_to_check2 = os.path.join(current_pwd, ndir2)
+	    dir_to_check2 = os.path.join(current_pwd, plugins, ndir2)
 	    print dir_to_check2
 	    if os.path.isdir(dir_to_check2):
 	      new_option2 = RescappOption()
