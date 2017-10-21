@@ -10,6 +10,7 @@ imagetarget=$(target)/share/rescapp/images
 librarytarget=$(target)/lib/rescapp
 menutarget=$(target)/share/rescapp/menus
 plugintarget=$(target)/share/rescapp/plugins
+versiontarget=$(target)/share/rescapp
 
 all:
 .PHONY	:	all
@@ -58,7 +59,8 @@ install:	install_documentation\
 	install_images\
 	install_libraries\
 	install_menus\
-	install_plugins
+	install_plugins\
+	install_version\
 
 
 
@@ -1082,3 +1084,7 @@ winunlock_install_plugin:	plugins/winunlock/description\
 	install -m 644 plugins/winunlock/name $(plugintarget)/winunlock/
 	install -m 644 plugins/winunlock/run $(plugintarget)/winunlock/
 	install -m 644 plugins/winunlock/sudo $(plugintarget)/winunlock/
+
+install_version:	VERSION
+	install -d $(versiontarget)
+	install -m 644 VERSION $(versiontarget)
