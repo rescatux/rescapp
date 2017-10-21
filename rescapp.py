@@ -119,6 +119,7 @@ class MainWindow(QtGui.QWidget):
     def selectOptionCommon (self, n_option):
 	global current_pwd
 	global rescapp_doc_path
+	global rescapp_menus_path
       	global name_filename
 	global description_filename
 	global run_filename
@@ -195,19 +196,19 @@ class MainWindow(QtGui.QWidget):
       option_list = list()
       
       
-      f=open(current_pwd + '/' + 'rescatux.lis')
+      f=open(rescapp_menus_path + '/' + 'rescatux.lis')
       for mydir in f:
 	ndir = mydir.rstrip('\r\n');
-	dir_to_check = os.path.join(current_pwd, ndir)
+	dir_to_check = os.path.join(rescapp_menus_path, ndir)
 	print dir_to_check
 	if os.path.isdir(dir_to_check):
 	  new_option = RescappOption()
 	  new_option.setFromDir(dir_to_check, ndir)
 	  option_list.append(new_option)
-	  f2=open(current_pwd + '/' + ndir + '.lis')
+	  f2=open(rescapp_menus_path + '/' + ndir + '.lis')
 	  for mydir2 in f2:
 	    ndir2 = mydir2.rstrip('\r\n');
-	    dir_to_check2 = os.path.join(current_pwd, plugins, ndir2)
+	    dir_to_check2 = os.path.join(rescapp_doc_path, plugins, ndir2)
 	    print dir_to_check2
 	    if os.path.isdir(dir_to_check2):
 	      new_option2 = RescappOption()
@@ -384,6 +385,7 @@ if __name__ == "__main__":
   
     rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
     rescapp_doc_path = rescapp_binary_path + "/../" + "share/doc/rescapp"
+    rescapp_menus_path = rescapp_binary_path + "/../" + "share/rescapp/menus"
     rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
@@ -426,7 +428,7 @@ if __name__ == "__main__":
     help_support_option.setFromDir(os.path.join(current_pwd, 'help-rescapp'), 'help-rescapp')
 
     main_menu_support_option= RescappOption()
-    main_menu_support_option.setFromDir(os.path.join(current_pwd, 'main-menu'), 'main-menu')
+    main_menu_support_option.setFromDir(os.path.join(rescapp_menus_path, 'main-menu'), 'main-menu')
     
     lang_environment=os.environ['LANG']
 
