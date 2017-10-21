@@ -155,11 +155,11 @@ if __name__ == "__main__":
  
     app=QtGui.QApplication(sys.argv)
     
-    # TODO: rescapp.py an rescapp-set-hard-disks-boot-order take images_path from the same included py file
-    current_pwd="/home/user/Desktop/rescapp"
-    images_path = current_pwd + '/' + "images"
-    go_down_icon_path = images_path + "/" + "go-down.png"
-    go_up_icon_path = images_path + "/" + "go-up.png"
+    # TODO: rescapp.py an rescapp-set-hard-disks-boot-order take rescapp_icons_path from the same included py file
+    rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
+    rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
+    go_down_icon_path = rescapp_icons_path + "/" + "go-down.png"
+    go_up_icon_path = rescapp_icons_path + "/" + "go-up.png"
     
     harddisks = []
     label_list = QStringList()
