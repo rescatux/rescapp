@@ -389,6 +389,7 @@ if __name__ == "__main__":
     rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
     rescapp_share_path = rescapp_binary_path + "/../" + "share"
     rescapp_library_path = rescapp_binary_path + "/../" + "lib/rescapp"
+    rescapp_images_path = rescapp_binary_path + "/../" + "share/rescapp/images"
     rescapp_version_path = rescapp_share_path
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'

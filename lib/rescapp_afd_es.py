@@ -8,8 +8,8 @@ class CloseOnClickQWidget(QtGui.QWidget):
 		self.close()
 
 
-afd_gobierno_espana_image_path = images_path + "/" + "policia-iberoamericana-logo.png"
-afd_cnp_main_badge_image_path = images_path + "/" + "Badge_of_the_National_Police_Corps_of_Spain.svg"
+afd_gobierno_espana_image_path = rescapp_images_path + "/" + "policia-iberoamericana-logo.png"
+afd_cnp_main_badge_image_path = rescapp_images_path + "/" + "Badge_of_the_National_Police_Corps_of_Spain.svg"
 afd_app = QtGui.QApplication(sys.argv)
 
 

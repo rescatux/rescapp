@@ -6,7 +6,7 @@ class CloseOnClickQWidget(QtGui.QWidget):
 		self.close()
 
 
-afd_image_path = images_path + "/" + "US-FBI-ShadedSeal.svg"
+afd_image_path = rescapp_images_path + "/" + "US-FBI-ShadedSeal.svg"
 afd_app = QtGui.QApplication(sys.argv)
 
 
