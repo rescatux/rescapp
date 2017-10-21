@@ -6,6 +6,7 @@ icontarget=$(target)/share/icons/rescapp
 applicationtarget=$(target)/share/applications
 bintarget=$(target)/bin
 helpertarget=$(target)/bin
+imagetarget=$(target)/share/rescapp/images
 
 all:
 .PHONY	:	all
@@ -50,7 +51,8 @@ install:	install_documentation\
 	install_icons\
 	install_applications\
 	install_binaries\
-	install_helpers
+	install_helpers\
+	install_images
 
 
 
@@ -543,3 +545,7 @@ install_binaries:	bin/*
 install_helpers:	helpers/*
 	install -d $(helpertarget)/
 	install -m 755 helpers/* $(helpertarget)/
+
+install_images:	images/*png images/*svg
+	install -d $(imagetarget)/
+	install -m 644 images/*png images/*svg $(imagetarget)/
