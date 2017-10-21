@@ -387,6 +387,8 @@ if __name__ == "__main__":
     rescapp_doc_path = rescapp_binary_path + "/../" + "share/doc/rescapp"
     rescapp_menus_path = rescapp_binary_path + "/../" + "share/rescapp/menus"
     rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
+    rescapp_share_path = rescapp_binary_path + "/../" + "share"
+    rescapp_version_path = rescapp_share_path
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
     code_list = list ()
@@ -405,8 +407,8 @@ if __name__ == "__main__":
     
     maximum_option_columns=3
     
-    if (os.path.isfile(current_pwd + '/' + version_filename)): 
-      rescapp_version = linecache.getline(current_pwd + '/' + version_filename, 1)
+    if (os.path.isfile(rescapp_version_path + '/' + version_filename)): 
+      rescapp_version = linecache.getline(rescapp_version_path + '/' + version_filename, 1)
       rescapp_version = rescapp_version.rstrip('\r\n'); 
       print "DEBUG: Version " + rescapp_version + " found."
     else:
