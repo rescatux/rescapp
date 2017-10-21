@@ -8,6 +8,7 @@ bintarget=$(target)/bin
 helpertarget=$(target)/bin
 imagetarget=$(target)/share/rescapp/images
 librarytarget=$(target)/lib/rescapp
+menutarget=$(target)/share/rescapp/menus
 
 all:
 .PHONY	:	all
@@ -54,7 +55,8 @@ install:	install_documentation\
 	install_binaries\
 	install_helpers\
 	install_images\
-	install_libraries
+	install_libraries\
+	install_menus
 
 
 
@@ -555,3 +557,70 @@ install_images:	images/*png images/*svg
 install_libraries:	lib/*sh lib/*py
 	install -d $(librarytarget)/
 	install -m 644 lib/*sh lib/*py $(librarytarget)/
+
+
+install_menus:	install_menus_basedir\
+	install_menus_about\
+	install_menus_boot\
+	install_menus_expert-tools\
+	install_menus_fs\
+	install_menus_gpt\
+	install_menus_grub\
+	install_menus_main-menu\
+	install_menus_pass\
+	install_menus_support\
+	install_menus_win
+
+install_menus_basedir:	menus/*lis
+	install -d $(menutarget)/
+	install -m 644 menus/*lis $(menutarget)/
+
+install_menus_about:	menus/about/description menus/about/name
+	install -d $(menutarget)/about
+	install -m 644 menus/about/description $(menutarget)/about/
+	install -m 644 menus/about/name $(menutarget)/about/
+
+install_menus_boot:	menus/boot/description menus/boot/name
+	install -d $(menutarget)/boot
+	install -m 644 menus/boot/description $(menutarget)/boot/
+	install -m 644 menus/boot/name $(menutarget)/boot/
+
+install_menus_expert-tools:	menus/expert-tools/description menus/expert-tools/name
+	install -d $(menutarget)/expert-tools
+	install -m 644 menus/expert-tools/description $(menutarget)/expert-tools/
+	install -m 644 menus/expert-tools/name $(menutarget)/expert-tools/
+
+install_menus_fs:	menus/fs/description menus/fs/name
+	install -d $(menutarget)/fs
+	install -m 644 menus/fs/description $(menutarget)/fs/
+	install -m 644 menus/fs/name $(menutarget)/fs/
+
+install_menus_gpt:	menus/gpt/description menus/gpt/name
+	install -d $(menutarget)/gpt
+	install -m 644 menus/gpt/description $(menutarget)/gpt/
+	install -m 644 menus/gpt/name $(menutarget)/gpt/
+
+install_menus_grub:	menus/grub/description menus/grub/name
+	install -d $(menutarget)/grub
+	install -m 644 menus/grub/description $(menutarget)/grub/
+	install -m 644 menus/grub/name $(menutarget)/grub/
+
+install_menus_main-menu:	menus/main-menu/description menus/main-menu/name
+	install -d $(menutarget)/main-menu
+	install -m 644 menus/main-menu/description $(menutarget)/main-menu/
+	install -m 644 menus/main-menu/name $(menutarget)/main-menu/
+
+install_menus_pass:	menus/pass/description menus/pass/name
+	install -d $(menutarget)/pass
+	install -m 644 menus/pass/description $(menutarget)/pass/
+	install -m 644 menus/pass/name $(menutarget)/pass/
+
+install_menus_support:	menus/support/description menus/support/name
+	install -d $(menutarget)/support
+	install -m 644 menus/support/description $(menutarget)/support/
+	install -m 644 menus/support/name $(menutarget)/support/
+
+install_menus_win:	menus/win/description menus/win/name
+	install -d $(menutarget)/win
+	install -m 644 menus/win/description $(menutarget)/win/
+	install -m 644 menus/win/name $(menutarget)/win/
