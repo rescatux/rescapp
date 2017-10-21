@@ -9,7 +9,6 @@ class CloseOnClickQWidget(QtGui.QWidget):
 
 
 afd_gobierno_espana_image_path = rescapp_images_path + "/" + "policia-iberoamericana-logo.png"
-afd_cnp_main_badge_image_path = rescapp_images_path + "/" + "Badge_of_the_National_Police_Corps_of_Spain.svg"
 afd_app = QtGui.QApplication(sys.argv)
 
 
@@ -103,15 +102,6 @@ afd_gobierno_espana_pixmap = QtGui.QPixmap(afd_gobierno_espana_image_path)
 afd_gobierno_espana.resize(384,288)
 afd_gobierno_espana_scaled_pixmap = afd_gobierno_espana_pixmap.scaled(afd_gobierno_espana.size(),QtCore.Qt.KeepAspectRatio)
 afd_gobierno_espana.setPixmap(afd_gobierno_espana_scaled_pixmap)
-
-# cnp_main_badge_image
-
-afd_cnp_main_badge = QtGui.QLabel()
-afd_cnp_main_badge_pixmap = QtGui.QPixmap(afd_cnp_main_badge_image_path)
-afd_cnp_main_badge.resize(240,180)
-afd_cnp_main_badge_scaled_pixmap = afd_cnp_main_badge_pixmap.scaled(afd_cnp_main_badge.size(),QtCore.Qt.KeepAspectRatio)
-afd_cnp_main_badge.setPixmap(afd_cnp_main_badge_scaled_pixmap)
-
 
 #afd_fbi.setPixmap(afd_pixmap)
 
