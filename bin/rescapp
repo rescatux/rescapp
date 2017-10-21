@@ -387,7 +387,7 @@ if __name__ == "__main__":
     rescapp_plugins_doc_path = rescapp_doc_path + "/" + "plugins"
     rescapp_menus_path = rescapp_binary_path + "/../" + "share/rescapp/menus"
     rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
-    rescapp_share_path = rescapp_binary_path + "/../" + "share"
+    rescapp_share_path = rescapp_binary_path + "/../" + "share/rescapp"
     rescapp_library_path = rescapp_binary_path + "/../" + "lib/rescapp"
     rescapp_images_path = rescapp_binary_path + "/../" + "share/rescapp/images"
     rescapp_plugins_path = rescapp_binary_path + "/../" + "share/rescapp/plugins"
