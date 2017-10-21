@@ -38,7 +38,7 @@ function rtux_Sudoers () {
   local TMP_DEV_PARTITION=/dev/${n_partition}
   local SUDOERS_DIRECTORY="sudoers"
   local SUDOERS_TEMPLATE_FILENAME=\
-"${RESCATUX_PATH}${SUDOERS_DIRECTORY}/sudoers_template"
+"${RESCAPP_PLUGINS_PATH}/${SUDOERS_DIRECTORY}/sudoers_template"
   mkdir --parents ${TMP_MNT_PARTITION}
   if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
     then
