@@ -1,5 +1,5 @@
 #!/bin/bash
-# Rescapp Rescatux main library: rescatux_lib
+# Rescapp main library: rescapp_lib
 # Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify

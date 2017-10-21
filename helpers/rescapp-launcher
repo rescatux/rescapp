@@ -35,7 +35,7 @@ RESCAPP_PLUGINS_PATH="${SCRIPT_PATH}/../share/rescapp/plugins"
 RESCAPP_SHARE_PATH="${SCRIPT_PATH}/../share/rescapp"
 RESCAPP_VERSION_PATH="${RESCAPP_SHARE_PATH}"
 
-RESCAPP_LIB_FILE="${RESCAPP_LIB_PATH}/rescatux_lib.sh"
+RESCAPP_LIB_FILE="${RESCAPP_LIB_PATH}/rescapp_lib.sh"
 export RESCAPP_LIB_FILE # Make it available to run scripts
 export RESCAPP_VERSION="$(head -n 1 ${RESCAPP_VERSION_PATH}/VERSION)"
 
