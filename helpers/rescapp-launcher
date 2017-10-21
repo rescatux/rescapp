@@ -16,17 +16,30 @@
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 
 # Main program
+pushd . > /dev/null
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+if ([ -h "${SCRIPT_PATH}" ]) then
+  while([ -h "${SCRIPT_PATH}" ]) do cd $(dirname "$SCRIPT_PATH"); SCRIPT_PATH=$(readlink "${SCRIPT_PATH}"); done
+fi
+cd $(dirname ${SCRIPT_PATH}) > /dev/null
+SCRIPT_PATH=$(pwd);
+popd  > /dev/null
+
 DEFAULT_PATH="${HOME}/Desktop/rescapp/"
 
 RESCATUX_PATH=${DEFAULT_PATH}
 export RESCATUX_PATH # Make it available to run scripts
 
-RESCATUX_LIB_FILE="${DEFAULT_PATH}/rescatux_lib.sh"
-export RESCATUX_LIB_FILE # Make it available to run scripts
+RESCAPP_LIB_PATH="${SCRIPT_PATH}/../lib/rescapp"
+export RESCAPP_LIB_PATH # Make it available to run scripts
+
+
+RESCAPP_LIB_FILE="${RESCAPP_LIB_PATH}/rescatux_lib.sh"
+export RESCAPP_LIB_FILE # Make it available to run scripts
 export RESCATUX_VERSION="$(head -n 1 ${RESCATUX_PATH}/VERSION)"
 
 
-source ${RESCATUX_LIB_FILE}
+source ${RESCAPP_LIB_FILE}
 LOG_DIRECTORY="log"
 export LOG_DIRECTORY # Make it available to run scripts
 LIST_FILE_SUFFIX="lis"
