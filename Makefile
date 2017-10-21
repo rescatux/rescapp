@@ -7,6 +7,7 @@ applicationtarget=$(target)/share/applications
 bintarget=$(target)/bin
 helpertarget=$(target)/bin
 imagetarget=$(target)/share/rescapp/images
+librarytarget=$(target)/lib/rescapp
 
 all:
 .PHONY	:	all
@@ -52,7 +53,8 @@ install:	install_documentation\
 	install_applications\
 	install_binaries\
 	install_helpers\
-	install_images
+	install_images\
+	install_libraries
 
 
 
@@ -549,3 +551,7 @@ install_helpers:	helpers/*
 install_images:	images/*png images/*svg
 	install -d $(imagetarget)/
 	install -m 644 images/*png images/*svg $(imagetarget)/
+
+install_libraries:	lib/*sh lib/*py
+	install -d $(librarytarget)/
+	install -m 644 lib/*sh lib/*py $(librarytarget)/
