@@ -20,7 +20,7 @@ source ${RESCATUX_LIB_FILE}
 function rtux_share_log () {
 local SELECTED_FILE="$1"
 
-pastebinit -i "${RESCATUX_PATH}${LOG_DIRECTORY}\
+pastebinit -i "${RESCAPP_LOG_DIRECTORY}\
 /${SELECTED_FILE}" -b ${RESCATUX_PASTEBIN_URL} \
 -a resc_$$ -f bash
 
@@ -32,7 +32,7 @@ PASTEBIN_HINT="Right-click and select copy please. You will be able to paste it 
 SHARE_LOG_RUNNING_STR="Sharing log."
 
 m=1
-for ffile in ${RESCATUX_PATH}${LOG_DIRECTORY}/* ; do
+for ffile in ${RESCAPP_LOG_DIRECTORY}/* ; do
 
   BFILE=$(basename $ffile)
   if [[ m -eq 1 ]] ; then

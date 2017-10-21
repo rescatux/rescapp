@@ -37,7 +37,7 @@ SHARE_FORUM_DEFAULT_SIGNATURE_DESCRIPTION="The ultimate noob! (You are supposed 
 RANDOM_SHARE_FORUM_FILE="${TMP_FOLDER}/$$.text"
 
 m=1
-for ffile in ${RESCATUX_PATH}${LOG_DIRECTORY}/* ; do
+for ffile in ${RESCAPP_LOG_DIRECTORY}/* ; do
 
   BFILE=$(basename $ffile)
   if [[ m -eq 1 ]] ; then
@@ -95,7 +95,7 @@ I join the Rescatux output for ${SELECTED_FILE} :
 EOF
 
 
-cat ${RESCATUX_PATH}${LOG_DIRECTORY}\
+cat ${RESCAPP_LOG_DIRECTORY}\
 /${SELECTED_FILE} >> ${RANDOM_SHARE_FORUM_FILE}
 
 cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}

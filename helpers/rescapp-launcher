@@ -41,8 +41,11 @@ export RESCATUX_VERSION="$(head -n 1 ${RESCATUX_PATH}/VERSION)"
 
 
 source ${RESCAPP_LIB_FILE}
-LOG_DIRECTORY="log"
-export LOG_DIRECTORY # Make it available to run scripts
+LOG_DIRECTORY="${HOME}/.rescapp/log"
+export RESCAPP_LOG_DIRECTORY # Make it available to run scripts
+[ -d "${RESCAPP_LOG_DIRECTORY}" ] || mkdir -p "${RESCAPP_LOG_DIRECTORY}"
+
+
 LIST_FILE_SUFFIX="lis"
 GRUB_INSTALL_TO_MBR_STR="Restore GRUB / Fix Linux Boot"
 CHAT_STR="Get online human help (chat)"
@@ -71,4 +74,4 @@ cd ${DEFAULT_PATH}
 DIRECTORY="${RESCAPP_PLUGINS_PATH}/${1}"
 SUDO="sudo -E"
 [ -e ${DIRECTORY}/sudo ] || SUDO=""
-exec ${SUDO} ${DIRECTORY}/${RUN_FILE_STR} > ${LOG_DIRECTORY}/${DIRECTORY}_log.txt 2>&1
+exec ${SUDO} ${DIRECTORY}/${RUN_FILE_STR} > ${RESCAPP_LOG_DIRECTORY}/${DIRECTORY}_log.txt 2>&1
