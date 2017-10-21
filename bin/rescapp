@@ -77,7 +77,8 @@ class RescappOption():
       return self.beta
     def setFromDir(self, dir_to_check, ndir):
       global current_pwd
-      global rescapp_doc_path
+      global rescapp_plugins_doc_path
+      global rescapp_plugins_path
       global name_filename
       global description_filename
       global run_filename
@@ -108,7 +109,7 @@ class RescappOption():
 	self.setExecutable(True)
       if (os.path.isfile(current_pwd + '/' + ndir + '/' + beta_filename)):
 	self.setBeta(True)
-      if (os.path.isfile(rescapp_doc_path + '/' + ndir + '/' + offlinedoc_filename)):
+      if (os.path.isfile(rescapp_plugins_doc_path + '/' + ndir + '/' + offlinedoc_filename)):
 	self.setAsOption()
 	self.setHasOfflineDoc(True)
 
@@ -118,7 +119,7 @@ class MainWindow(QtGui.QWidget):
 
     def selectOptionCommon (self, n_option):
 	global current_pwd
-	global rescapp_doc_path
+	global rescapp_plugins_doc_path
 	global rescapp_menus_path
 	global rescapp_plugins_path
       	global name_filename
@@ -349,7 +350,7 @@ class MainWindow(QtGui.QWidget):
 	  frame.setStyleSheet("margin:0px; border:10px solid rgb(124, 127, 126); ")
 	  grid.addWidget(frame, bottom_start + 5, 0, 5, 5)
 	  if (self.selected_option.getHasOfflineDoc()):
-	    self.wb.load(QtCore.QUrl('file:///' + rescapp_doc_path + '/' + self.selected_option.getCode() + '/' + offlinedoc_filename))
+	    self.wb.load(QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/' + self.selected_option.getCode() + '/' + offlinedoc_filename))
 	  self.setLayout(grid)
 	else:
 	  scrollArea = VerticalScrollArea()
@@ -386,6 +387,7 @@ if __name__ == "__main__":
   
     rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
     rescapp_doc_path = rescapp_binary_path + "/../" + "share/doc/rescapp"
+    rescapp_plugins_doc_path = rescapp_doc_path + "/" + "plugins"
     rescapp_menus_path = rescapp_binary_path + "/../" + "share/rescapp/menus"
     rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
     rescapp_share_path = rescapp_binary_path + "/../" + "share"
@@ -448,7 +450,7 @@ if __name__ == "__main__":
 
 
     app=QtGui.QApplication(sys.argv)
-    url = QtCore.QUrl('file:///' + rescapp_doc_path + '/' + help_support_option.getCode() + '/' + offlinedoc_filename)
+    url = QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/' + help_support_option.getCode() + '/' + offlinedoc_filename)
     mw=MainWindow(url)
     mw.setWindowTitle("Rescatux " + rescapp_version +" Rescapp")
 
