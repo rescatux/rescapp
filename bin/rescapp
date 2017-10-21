@@ -428,12 +428,12 @@ if __name__ == "__main__":
     rescue_icon_path = rescapp_icons_path + "/" + "text-x-script.png"
     
     chat_support_option= RescappOption()
-    chat_support_option.setFromDir(os.path.join(current_pwd, 'chat'), 'chat')
+    chat_support_option.setFromDir(os.path.join(rescapp_plugins_path, 'chat'), 'chat')
     share_log_support_option= RescappOption()
-    share_log_support_option.setFromDir(os.path.join(current_pwd, 'share_log'), 'share_log')
+    share_log_support_option.setFromDir(os.path.join(rescapp_plugins_path, 'share_log'), 'share_log')
 
     help_support_option= RescappOption()
-    help_support_option.setFromDir(os.path.join(current_pwd, 'help-rescapp'), 'help-rescapp')
+    help_support_option.setFromDir(os.path.join(rescapp_plugins_path, 'help-rescapp'), 'help-rescapp')
 
     main_menu_support_option= RescappOption()
     main_menu_support_option.setFromDir(os.path.join(rescapp_menus_path, 'main-menu'), 'main-menu')
