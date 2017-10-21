@@ -536,10 +536,6 @@ install_applications:	applications/*desktop
 	install -d $(applicationtarget)/
 	install -m 644 applications/*desktop $(applicationtarget)/
 
-install_applications:	applications/*desktop
-	install -d $(applicationtarget)/
-	install -m 644 applications/*desktop $(applicationtarget)/
-
 install_binaries:	bin/*
 	install -d $(bintarget)/
 	install -m 755 bin/* $(bintarget)/
