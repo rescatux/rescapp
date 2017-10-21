@@ -388,6 +388,7 @@ if __name__ == "__main__":
     rescapp_menus_path = rescapp_binary_path + "/../" + "share/rescapp/menus"
     rescapp_icons_path = rescapp_binary_path + "/../" + "share/icons/rescapp"
     rescapp_share_path = rescapp_binary_path + "/../" + "share"
+    rescapp_library_path = rescapp_binary_path + "/../" + "lib/rescapp"
     rescapp_version_path = rescapp_share_path
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
@@ -435,12 +436,13 @@ if __name__ == "__main__":
     lang_environment=os.environ['LANG']
 
     if ((datetime.datetime.now().month==4) and (datetime.datetime.now().day==1) and (not (lang_environment.startswith("es_"))) ):
-		subprocess.Popen("rescapp-afd")
-		subprocess.Popen("rescapp-afd2")
+		execfile(rescapp_library_path + "/" + "rescapp_afd.py")
+		execfile(rescapp_library_path + "/" + "rescapp_afd2.py")
 
     if ((datetime.datetime.now().month==12) and (datetime.datetime.now().day==28) and (lang_environment.startswith("es_")) ):
-		subprocess.Popen("rescapp-afd-es")
-		subprocess.Popen("rescapp-afd2-es")
+		execfile(rescapp_library_path + "/" + "rescapp_afd_es.py")
+		execfile(rescapp_library_path + "/" + "rescapp_afd2_es.py")
+
 
     app=QtGui.QApplication(sys.argv)
     url = QtCore.QUrl('file:///' + rescapp_doc_path + '/' + help_support_option.getCode() + '/' + offlinedoc_filename)
