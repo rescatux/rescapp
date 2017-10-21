@@ -5,6 +5,7 @@ doctarget=$(target)/share/doc/rescapp
 icontarget=$(target)/share/icons/rescapp
 applicationtarget=$(target)/share/applications
 bintarget=$(target)/bin
+helpertarget=$(target)/bin
 
 all:
 .PHONY	:	all
@@ -48,7 +49,8 @@ install_documentation:	about-rescapp_install_documentation\
 install:	install_documentation\
 	install_icons\
 	install_applications\
-	install_binaries
+	install_binaries\
+	install_helpers
 
 
 
@@ -541,3 +543,7 @@ install_applications:	applications/*desktop
 install_binaries:	bin/*
 	install -d $(bintarget)/
 	install -m 755 bin/* $(bintarget)/
+
+install_helpers:	helpers/*
+	install -d $(helpertarget)/
+	install -m 755 helpers/* $(helpertarget)/
