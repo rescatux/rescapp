@@ -86,11 +86,11 @@ class RescappOption():
       global offlinedoc_filename
 
       
-      name_tmp = linecache.getline(current_pwd + '/' + ndir + '/' + name_filename,1)
+      name_tmp = linecache.getline(rescapp_plugins_path + '/' + ndir + '/' + name_filename,1)
       name_tmp = name_tmp.rstrip('\r\n');
       
       
-      description_tmp = linecache.getline(current_pwd + '/' + ndir + '/' + description_filename,1)
+      description_tmp = linecache.getline(rescapp_plugins_path + '/' + ndir + '/' + description_filename,1)
       description_tmp = description_tmp.rstrip('\r\n');
       
       
@@ -104,10 +104,10 @@ class RescappOption():
       self.setDescription(description_tmp)
       description_list.append(description_tmp)
       
-      if (os.path.isfile(current_pwd + '/' + ndir + '/' + run_filename)):
+      if (os.path.isfile(rescapp_plugins_path + '/' + ndir + '/' + run_filename)):
 	self.setAsOption()
 	self.setExecutable(True)
-      if (os.path.isfile(current_pwd + '/' + ndir + '/' + beta_filename)):
+      if (os.path.isfile(rescapp_plugins_path + '/' + ndir + '/' + beta_filename)):
 	self.setBeta(True)
       if (os.path.isfile(rescapp_plugins_doc_path + '/' + ndir + '/' + offlinedoc_filename)):
 	self.setAsOption()
