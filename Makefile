@@ -146,15 +146,15 @@ gparted_install_documentation:	plugins/gparted/*html	$(gparted_installdocimages_
 
 
 
-gpt-check-bios-grub_installdocimages_directory = $(subst /,_,$(wildcard plugins/plugins/gpt-check-bios-grub/images))
+gpt-check-bios-grub_installdocimages_directory = $(subst /,_,$(wildcard plugins/gpt-check-bios-grub/images))
 
-$(gpt-check-bios-grub_installdocimages_directory):	plugins/plugins/gpt-check-bios-grub/images/*
-	install -d $(doctarget)/plugins/plugins/gpt-check-bios-grub/images/
-	install -m 755 plugins/plugins/gpt-check-bios-grub/images/* $(doctarget)/plugins/plugins/gpt-check-bios-grub/images/
+$(gpt-check-bios-grub_installdocimages_directory):	plugins/gpt-check-bios-grub/images/*
+	install -d $(doctarget)/plugins/gpt-check-bios-grub/images/
+	install -m 755 plugins/gpt-check-bios-grub/images/* $(doctarget)/plugins/gpt-check-bios-grub/images/
 
-gpt-check-bios-grub_install_documentation:	plugins/plugins/gpt-check-bios-grub/*html	$(gpt-check-bios-grub_installdocimages_directory)
-	install -d $(doctarget)/plugins/plugins/gpt-check-bios-grub/
-	install -m 755 plugins/plugins/gpt-check-bios-grub/*html $(doctarget)/plugins/plugins/gpt-check-bios-grub/
+gpt-check-bios-grub_install_documentation:	plugins/gpt-check-bios-grub/*html	$(gpt-check-bios-grub_installdocimages_directory)
+	install -d $(doctarget)/plugins/gpt-check-bios-grub/
+	install -m 755 plugins/gpt-check-bios-grub/*html $(doctarget)/plugins/gpt-check-bios-grub/
 
 
 
@@ -188,15 +188,15 @@ gpt-recompute-hybrid-mbr-chs_install_documentation:	plugins/gpt-recompute-hybrid
 
 
 
-grubeasy_installdocimages_directory = $(subst /,_,$(wildcard plugins/plugins/plugins/grubeasy/images))
+grubeasy_installdocimages_directory = $(subst /,_,$(wildcard plugins/grubeasy/images))
 
-$(grubeasy_installdocimages_directory):	plugins/plugins/plugins/grubeasy/images/*
-	install -d $(doctarget)/plugins/plugins/plugins/grubeasy/images/
-	install -m 755 plugins/plugins/plugins/grubeasy/images/* $(doctarget)/plugins/plugins/plugins/grubeasy/images/
+$(grubeasy_installdocimages_directory):	plugins/grubeasy/images/*
+	install -d $(doctarget)/plugins/grubeasy/images/
+	install -m 755 plugins/grubeasy/images/* $(doctarget)/plugins/grubeasy/images/
 
-grubeasy_install_documentation:	plugins/plugins/plugins/grubeasy/*html	$(grubeasy_installdocimages_directory)
-	install -d $(doctarget)/plugins/plugins/plugins/grubeasy/
-	install -m 755 plugins/plugins/plugins/grubeasy/*html $(doctarget)/plugins/plugins/plugins/grubeasy/
+grubeasy_install_documentation:	plugins/grubeasy/*html	$(grubeasy_installdocimages_directory)
+	install -d $(doctarget)/plugins/grubeasy/
+	install -m 755 plugins/grubeasy/*html $(doctarget)/plugins/grubeasy/
 
 
 
@@ -412,15 +412,15 @@ uefipartstatus_install_documentation:	plugins/uefipartstatus/*html	$(uefipartsta
 
 
 
-uefireinstallmicrosoft_installdocimages_directory = $(subst /,_,$(wildcard plugins/plugins/uefireinstallmicrosoft/images))
+uefireinstallmicrosoft_installdocimages_directory = $(subst /,_,$(wildcard plugins/uefireinstallmicrosoft/images))
 
-$(uefireinstallmicrosoft_installdocimages_directory):	plugins/plugins/uefireinstallmicrosoft/images/*
-	install -d $(doctarget)/plugins/plugins/uefireinstallmicrosoft/images/
-	install -m 755 plugins/plugins/uefireinstallmicrosoft/images/* $(doctarget)/plugins/plugins/uefireinstallmicrosoft/images/
+$(uefireinstallmicrosoft_installdocimages_directory):	plugins/uefireinstallmicrosoft/images/*
+	install -d $(doctarget)/plugins/uefireinstallmicrosoft/images/
+	install -m 755 plugins/uefireinstallmicrosoft/images/* $(doctarget)/plugins/uefireinstallmicrosoft/images/
 
-uefireinstallmicrosoft_install_documentation:	plugins/plugins/uefireinstallmicrosoft/*html	$(uefireinstallmicrosoft_installdocimages_directory)
-	install -d $(doctarget)/plugins/plugins/uefireinstallmicrosoft/
-	install -m 755 plugins/plugins/uefireinstallmicrosoft/*html $(doctarget)/plugins/plugins/uefireinstallmicrosoft/
+uefireinstallmicrosoft_install_documentation:	plugins/uefireinstallmicrosoft/*html	$(uefireinstallmicrosoft_installdocimages_directory)
+	install -d $(doctarget)/plugins/uefireinstallmicrosoft/
+	install -m 755 plugins/uefireinstallmicrosoft/*html $(doctarget)/plugins/uefireinstallmicrosoft/
 
 
 
@@ -454,15 +454,15 @@ web_install_documentation:	plugins/web/*html	$(web_installdocimages_directory)
 
 
 
-wineasy_installdocimages_directory = $(subst /,_,$(wildcard plugins/plugins/wineasy/images))
+wineasy_installdocimages_directory = $(subst /,_,$(wildcard plugins/wineasy/images))
 
-$(wineasy_installdocimages_directory):	plugins/plugins/wineasy/images/*
-	install -d $(doctarget)/plugins/plugins/wineasy/images/
-	install -m 755 plugins/plugins/wineasy/images/* $(doctarget)/plugins/plugins/wineasy/images/
+$(wineasy_installdocimages_directory):	plugins/wineasy/images/*
+	install -d $(doctarget)/plugins/wineasy/images/
+	install -m 755 plugins/wineasy/images/* $(doctarget)/plugins/wineasy/images/
 
-wineasy_install_documentation:	plugins/plugins/wineasy/*html	$(wineasy_installdocimages_directory)
-	install -d $(doctarget)/plugins/plugins/wineasy/
-	install -m 755 plugins/plugins/wineasy/*html $(doctarget)/plugins/plugins/wineasy/
+wineasy_install_documentation:	plugins/wineasy/*html	$(wineasy_installdocimages_directory)
+	install -d $(doctarget)/plugins/wineasy/
+	install -m 755 plugins/wineasy/*html $(doctarget)/plugins/wineasy/
 
 
 
@@ -482,15 +482,15 @@ winmbr_install_documentation:	plugins/winmbr/*html	$(winmbr_installdocimages_dir
 
 
 
-winpass_installdocimages_directory = $(subst /,_,$(wildcard plugins/plugins/winpass/images))
+winpass_installdocimages_directory = $(subst /,_,$(wildcard plugins/winpass/images))
 
-$(winpass_installdocimages_directory):	plugins/plugins/winpass/images/*
-	install -d $(doctarget)/plugins/plugins/winpass/images/
-	install -m 755 plugins/plugins/winpass/images/* $(doctarget)/plugins/plugins/winpass/images/
+$(winpass_installdocimages_directory):	plugins/winpass/images/*
+	install -d $(doctarget)/plugins/winpass/images/
+	install -m 755 plugins/winpass/images/* $(doctarget)/plugins/winpass/images/
 
-winpass_install_documentation:	plugins/plugins/winpass/*html	$(winpass_installdocimages_directory)
-	install -d $(doctarget)/plugins/plugins/winpass/
-	install -m 755 plugins/plugins/winpass/*html $(doctarget)/plugins/plugins/winpass/
+winpass_install_documentation:	plugins/winpass/*html	$(winpass_installdocimages_directory)
+	install -d $(doctarget)/plugins/winpass/
+	install -m 755 plugins/winpass/*html $(doctarget)/plugins/winpass/
 
 
 
