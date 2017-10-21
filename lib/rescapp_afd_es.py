@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-# April Fools Day Script
 # -*- coding: utf-8 -*-
+# April Fools Day Script
 # Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
 
 class CloseOnClickQWidget(QtGui.QWidget):
