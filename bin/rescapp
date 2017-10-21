@@ -76,7 +76,6 @@ class RescappOption():
     def getBeta(self):
       return self.beta
     def setFromDir(self, dir_to_check, ndir):
-      global current_pwd
       global rescapp_plugins_doc_path
       global rescapp_plugins_path
       global name_filename
@@ -118,7 +117,6 @@ class MainWindow(QtGui.QWidget):
 
 
     def selectOptionCommon (self, n_option):
-	global current_pwd
 	global rescapp_plugins_doc_path
 	global rescapp_menus_path
 	global rescapp_plugins_path
@@ -186,7 +184,6 @@ class MainWindow(QtGui.QWidget):
       global name_list
       global description_list
       global option_list
-      global current_pwd
       
       global chat_support_option
       
@@ -395,7 +392,6 @@ if __name__ == "__main__":
     rescapp_images_path = rescapp_binary_path + "/../" + "share/rescapp/images"
     rescapp_plugins_path = rescapp_binary_path + "/../" + "share/rescapp/plugins"
     rescapp_version_path = rescapp_share_path
-    current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
     code_list = list ()
     name_list = list ()
