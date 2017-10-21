@@ -885,12 +885,14 @@ show_log_install_plugin:	plugins/show_log/description\
 sudoers_install_plugin:	plugins/sudoers/description\
 	plugins/sudoers/name\
 	plugins/sudoers/run\
-	plugins/sudoers/sudo
+	plugins/sudoers/sudo\
+	plugins/sudoers/sudoers_template
 	install -d $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/description $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/name $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/run $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/sudo $(plugintarget)/sudoers/
+	install -m 644 plugins/sudoers/sudoers_template $(plugintarget)/sudoers/
 
 
 
