@@ -33,7 +33,7 @@ export RESCATUX_PATH # Make it available to run scripts
 RESCAPP_LIB_PATH="${SCRIPT_PATH}/../lib/rescapp"
 export RESCAPP_LIB_PATH # Make it available to run scripts
 
-RESCAPP_PLUGINS_PATH="${SCRIPT_PATH}/../rescapp/plugins"
+RESCAPP_PLUGINS_PATH="${SCRIPT_PATH}/../share/rescapp/plugins"
 
 RESCAPP_LIB_FILE="${RESCAPP_LIB_PATH}/rescatux_lib.sh"
 export RESCAPP_LIB_FILE # Make it available to run scripts
