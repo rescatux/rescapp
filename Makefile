@@ -4,6 +4,7 @@ target=$(DESTDIR)$(prefix)
 doctarget=$(target)/share/doc/rescapp
 icontarget=$(target)/share/icons/rescapp
 applicationtarget=$(target)/share/applications
+bintarget=$(target)/bin
 
 all:
 .PHONY	:	all
@@ -44,7 +45,7 @@ install_documentation:	about-rescapp_install_documentation\
 	winunlock_install_documentation
 
 
-install:	install_documentation	install_icons	install_applications
+install:	install_documentation	install_icons	install_applications	install_binaries
 
 
 
@@ -529,3 +530,11 @@ install_icons:	icons/*png
 install_applications:	applications/*desktop
 	install -d $(applicationtarget)/
 	install -m 755 applications/*desktop $(applicationtarget)/
+
+install_applications:	applications/*desktop
+	install -d $(applicationtarget)/
+	install -m 755 applications/*desktop $(applicationtarget)/
+
+install_binaries:	bin/*
+	install -d $(bintarget)/
+	install -m 755 bin/* $(bintarget)/
