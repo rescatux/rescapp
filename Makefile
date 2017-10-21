@@ -45,7 +45,10 @@ install_documentation:	about-rescapp_install_documentation\
 	winunlock_install_documentation
 
 
-install:	install_documentation	install_icons	install_applications	install_binaries
+install:	install_documentation\
+	install_icons\
+	install_applications\
+	install_binaries
 
 
 
