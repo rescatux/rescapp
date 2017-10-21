@@ -120,6 +120,7 @@ class MainWindow(QtGui.QWidget):
 	global current_pwd
 	global rescapp_doc_path
 	global rescapp_menus_path
+	global rescapp_plugins_path
       	global name_filename
 	global description_filename
 	global run_filename
@@ -208,7 +209,7 @@ class MainWindow(QtGui.QWidget):
 	  f2=open(rescapp_menus_path + '/' + ndir + '.lis')
 	  for mydir2 in f2:
 	    ndir2 = mydir2.rstrip('\r\n');
-	    dir_to_check2 = os.path.join(rescapp_doc_path, plugins, ndir2)
+	    dir_to_check2 = os.path.join(rescapp_plugins_path, ndir2)
 	    print dir_to_check2
 	    if os.path.isdir(dir_to_check2):
 	      new_option2 = RescappOption()
@@ -390,6 +391,7 @@ if __name__ == "__main__":
     rescapp_share_path = rescapp_binary_path + "/../" + "share"
     rescapp_library_path = rescapp_binary_path + "/../" + "lib/rescapp"
     rescapp_images_path = rescapp_binary_path + "/../" + "share/rescapp/images"
+    rescapp_plugins_path = rescapp_binary_path + "/../" + "share/rescapp/plugins"
     rescapp_version_path = rescapp_share_path
     current_pwd="/home/user/Desktop/rescapp"
     mainmenu_filename = 'rescatux.lis'
