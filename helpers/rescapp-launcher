@@ -41,7 +41,7 @@ export RESCAPP_VERSION="$(head -n 1 ${RESCAPP_VERSION_PATH}/VERSION)"
 
 
 source ${RESCAPP_LIB_FILE}
-LOG_DIRECTORY="${HOME}/.rescapp/log"
+RESCAPP_LOG_DIRECTORY="${HOME}/.rescapp/log"
 export RESCAPP_LOG_DIRECTORY # Make it available to run scripts
 [ -d "${RESCAPP_LOG_DIRECTORY}" ] || mkdir -p "${RESCAPP_LOG_DIRECTORY}"
 
