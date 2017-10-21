@@ -75,7 +75,7 @@ class RescappOption():
       self.beta=mybool
     def getBeta(self):
       return self.beta
-    def setFromDir(self, dir_to_check, ndir):
+    def setOptionFromDir(self, dir_to_check, ndir):
       global rescapp_plugins_doc_path
       global rescapp_plugins_path
       global name_filename
@@ -93,13 +93,13 @@ class RescappOption():
       description_tmp = description_tmp.rstrip('\r\n');
       
       
-      print 'DEBUG: Directory (code) found: ' + ndir
+      print 'DEBUG: [Option] Directory (code) found: ' + ndir
       code_list.append(ndir)
       self.setCode(ndir)
-      print 'DEBUG: Name found: ' + name_tmp
+      print 'DEBUG: [Option] Name found: ' + name_tmp
       self.setName(name_tmp)
       name_list.append(name_tmp)
-      print 'DEBUG: Description found: ' + description_tmp
+      print 'DEBUG: [Option] Description found: ' + description_tmp
       self.setDescription(description_tmp)
       description_list.append(description_tmp)
       
@@ -112,6 +112,32 @@ class RescappOption():
 	self.setAsOption()
 	self.setHasOfflineDoc(True)
 
+    def setMenuFromDir(self, dir_to_check, ndir):
+      global rescapp_menus_path
+      global name_filename
+      global description_filename
+      global run_filename
+      global beta_filename
+      global offlinedoc_filename
+
+
+      name_tmp = linecache.getline(rescapp_menus_path + '/' + ndir + '/' + name_filename,1)
+      name_tmp = name_tmp.rstrip('\r\n');
+
+
+      description_tmp = linecache.getline(rescapp_menus_path + '/' + ndir + '/' + description_filename,1)
+      description_tmp = description_tmp.rstrip('\r\n');
+
+
+      print 'DEBUG: [Menu] Directory (code) found: ' + ndir
+      code_list.append(ndir)
+      self.setCode(ndir)
+      print 'DEBUG: [Menu] Name found: ' + name_tmp
+      self.setName(name_tmp)
+      name_list.append(name_tmp)
+      print 'DEBUG: [Menu] Description found: ' + description_tmp
+      self.setDescription(description_tmp)
+      description_list.append(description_tmp)
 
 class MainWindow(QtGui.QWidget):	
 
@@ -202,7 +228,7 @@ class MainWindow(QtGui.QWidget):
 	print dir_to_check
 	if os.path.isdir(dir_to_check):
 	  new_option = RescappOption()
-	  new_option.setFromDir(dir_to_check, ndir)
+	  new_option.setMenuFromDir(dir_to_check, ndir)
 	  option_list.append(new_option)
 	  f2=open(rescapp_menus_path + '/' + ndir + '.lis')
 	  for mydir2 in f2:
@@ -211,7 +237,7 @@ class MainWindow(QtGui.QWidget):
 	    print dir_to_check2
 	    if os.path.isdir(dir_to_check2):
 	      new_option2 = RescappOption()
-	      new_option2.setFromDir(dir_to_check2, ndir2)
+	      new_option2.setOptionFromDir(dir_to_check2, ndir2)
 	      option_list.append(new_option2)
 	  
 	  
@@ -424,15 +450,15 @@ if __name__ == "__main__":
     rescue_icon_path = rescapp_icons_path + "/" + "text-x-script.png"
     
     chat_support_option= RescappOption()
-    chat_support_option.setFromDir(os.path.join(rescapp_plugins_path, 'chat'), 'chat')
+    chat_support_option.setOptionFromDir(os.path.join(rescapp_plugins_path, 'chat'), 'chat')
     share_log_support_option= RescappOption()
-    share_log_support_option.setFromDir(os.path.join(rescapp_plugins_path, 'share_log'), 'share_log')
+    share_log_support_option.setOptionFromDir(os.path.join(rescapp_plugins_path, 'share_log'), 'share_log')
 
     help_support_option= RescappOption()
-    help_support_option.setFromDir(os.path.join(rescapp_plugins_path, 'help-rescapp'), 'help-rescapp')
+    help_support_option.setOptionFromDir(os.path.join(rescapp_plugins_path, 'help-rescapp'), 'help-rescapp')
 
     main_menu_support_option= RescappOption()
-    main_menu_support_option.setFromDir(os.path.join(rescapp_menus_path, 'main-menu'), 'main-menu')
+    main_menu_support_option.setOptionFromDir(os.path.join(rescapp_menus_path, 'main-menu'), 'main-menu')
     
     lang_environment=os.environ['LANG']
 
