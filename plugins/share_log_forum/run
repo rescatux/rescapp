@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 
-source ${RESCATUX_LIB_FILE}
+source ${RESCAPP_LIB_FILE}
 
 LOG_CHOOSE_STR="Please choose a log file"
 LOG_STR="log"
