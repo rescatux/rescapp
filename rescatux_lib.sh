@@ -53,7 +53,7 @@ function rtux_Get_Partition_Filesystem_payload() {
   local TMP_DEV_PARTITION=/dev/${n_partition}
   local partition_filesystem
 
-  partition_filesystem="$(${RESCATUX_PATH}show_partition_filesystem.py ${TMP_DEV_PARTITION})"
+  partition_filesystem="$(rescapp-show-partition-filesystem ${TMP_DEV_PARTITION})"
   SHOW_PARTITION_FILESYSTEM_EXIT_VALUE=$?
   if [ $SHOW_PARTITION_FILESYSTEM_EXIT_VALUE -eq 0 ] ; then
     echo "${partition_filesystem}" |\
@@ -73,7 +73,7 @@ function rtux_Get_Partition_Flags_payload() {
   local TMP_DEV_PARTITION=/dev/${n_partition}
   local partition_flags
 
-  partition_flags="$(${RESCATUX_PATH}show_partition_flags.py ${TMP_DEV_PARTITION})"
+  partition_flags="$(rescapp-show-partition-flags ${TMP_DEV_PARTITION})"
   SHOW_PARTITION_FLAGS_EXIT_VALUE=$?
   if [ $SHOW_PARTITION_FLAGS_EXIT_VALUE -eq 0 ] ; then
     echo "${partition_flags}" |\
@@ -518,7 +518,7 @@ function rtux_File_Reordered_Device_Map_payload() {
 		    | awk '{ sub(/,/,"");  print $3 "-" $4 }'`"
       let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
     done
-    DESIRED_ORDER=`${RESCATUX_PATH}order.py "${ARGS_ARRAY[@]}"`
+    DESIRED_ORDER=`rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
   else
     DESIRED_ORDER="${DETECTED_HARD_DISKS}"
   fi
@@ -1121,7 +1121,7 @@ function rtux_Choose_UEFI_Boot_Order_Update () {
       let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
 
     done < <( ${EFIBOOTMGR_BINARY} --verbose | grep -E '^Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]' )
-    TMP_DESIRED_ORDER=`${RESCATUX_PATH}order.py "${ARGS_ARRAY[@]}"`
+    TMP_DESIRED_ORDER=`rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
     # Put commas in place - Begin
     FIRST_ENTRY_FOUND='true'
     DESIRED_ORDER=""
@@ -1300,7 +1300,7 @@ function rtux_UEFI_Part_Check_esp_Flag () {
 
   local EXIT_VALUE=1 # Error by default
 
-  ${RESCATUX_PATH}check_partition_flag.py ${TMP_DEV_PARTITION} 'esp'
+  rescapp-check-partition-flag ${TMP_DEV_PARTITION} 'esp'
   EXIT_VALUE=$?
 
   return ${EXIT_VALUE}
@@ -1318,7 +1318,7 @@ function rtux_UEFI_Part_Check_boot_Flag () {
 
   local EXIT_VALUE=1 # Error by default
 
-  ${RESCATUX_PATH}check_partition_flag.py ${TMP_DEV_PARTITION} 'boot'
+  rescapp-check-partition-flag ${TMP_DEV_PARTITION} 'boot'
   EXIT_VALUE=$?
 
   return ${EXIT_VALUE}
@@ -1336,15 +1336,15 @@ function rtux_UEFI_Part_Check_uefi_filesystem () {
 
   local EXIT_VALUE=1 # Error by default
 
-  if ${RESCATUX_PATH}check_partition_filesystem.py ${TMP_DEV_PARTITION} 'fat32' ; then
+  if rescapp-check-partition-filesystem ${TMP_DEV_PARTITION} 'fat32' ; then
     return 0
   fi
 
-  if ${RESCATUX_PATH}check_partition_filesystem.py ${TMP_DEV_PARTITION} 'fat16' ; then
+  if rescapp-check-partition-filesystem ${TMP_DEV_PARTITION} 'fat16' ; then
     return 0
   fi
 
-  if ${RESCATUX_PATH}check_partition_filesystem.py ${TMP_DEV_PARTITION} 'fat12' ; then
+  if rescapp-check-partition-filesystem ${TMP_DEV_PARTITION} 'fat12' ; then
     return 0
   fi
 
@@ -1387,11 +1387,11 @@ function rtux_UEFI_Part_Check_disk_type_is_gpt_or_msdos() {
 
   local EXIT_VALUE=1 # Error by default
 
-  if ${RESCATUX_PATH}check_partition_disk_type.py ${TMP_DEV_PARTITION} 'gpt' ; then
+  if rescapp-check-partition-disk-type ${TMP_DEV_PARTITION} 'gpt' ; then
     return 0
   fi
 
-  if ${RESCATUX_PATH}check_partition_disk_type.py ${TMP_DEV_PARTITION} 'msdos' ; then
+  if rescapp-check-partition-disk-type ${TMP_DEV_PARTITION} 'msdos' ; then
     return 0
   fi
 

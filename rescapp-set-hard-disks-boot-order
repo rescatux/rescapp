@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Rescapp order.py script
+# Rescapp rescapp-set-hard-disks-boot-order script
 # Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
@@ -155,7 +155,7 @@ if __name__ == "__main__":
  
     app=QtGui.QApplication(sys.argv)
     
-    # TODO: rescapp.py an order.py take images_path from the same included py file
+    # TODO: rescapp.py an rescapp-set-hard-disks-boot-order take images_path from the same included py file
     current_pwd="/home/user/Desktop/rescapp"
     images_path = current_pwd + '/' + "images"
     go_down_icon_path = images_path + "/" + "go-down.png"
