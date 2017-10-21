@@ -172,6 +172,7 @@ class RescappOption:
 class MainWindow(QtGui.QWidget):
 
     def selectOptionCommon(self, n_option):
+        global rescapp_binary_path
         global rescapp_plugins_doc_path
         global rescapp_menus_path
         global rescapp_plugins_path
@@ -224,7 +225,7 @@ class MainWindow(QtGui.QWidget):
     def runRescue(self):
         print 'DEBUG: Running option (code) [BEGIN]: ' \
             + self.selected_option_code
-        run_status = subprocess.Popen(['rescapp-launcher',
+        run_status = subprocess.Popen([rescapp_binary_path + '/' + 'rescapp-launcher',
                 self.selected_option_code])
         print 'DEBUG: Running option (code) [FINISH]: ' \
             + self.selected_option_code + ' with code: ' \

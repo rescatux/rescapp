@@ -25,10 +25,8 @@ cd $(dirname ${SCRIPT_PATH}) > /dev/null
 SCRIPT_PATH=$(pwd);
 popd  > /dev/null
 
-DEFAULT_PATH="${HOME}/Desktop/rescapp/"
-
-RESCATUX_PATH=${DEFAULT_PATH}
-export RESCATUX_PATH # Make it available to run scripts
+RESCAPP_BINARY_PATH="${SCRIPT_PATH}"
+export RESCAPP_BINARY_PATH # Make it available to run scripts
 
 RESCAPP_LIB_PATH="${SCRIPT_PATH}/../lib/rescapp"
 export RESCAPP_LIB_PATH # Make it available to run scripts
@@ -71,7 +69,7 @@ ONLINE_DOC_URL="http://git.berlios.de/cgi-bin/cgit.cgi/rescatux/plain"
 RESCAPP_TITLE_STR="RESCATUX's RESCAPP"
 
 
-cd ${DEFAULT_PATH}
+cd "${SCRIPT_PATH}"
 
 OPTION_CODE="${1}"
 DIRECTORY="${RESCAPP_PLUGINS_PATH}/${OPTION_CODE}"
