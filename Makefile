@@ -680,7 +680,7 @@ bootinfoscript_install_plugin:	plugins/bootinfoscript/description\
 	install -d $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/description $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/name $(plugintarget)/bootinfoscript/
-	install -m 644 plugins/bootinfoscript/run $(plugintarget)/bootinfoscript/
+	install -m 755 plugins/bootinfoscript/run $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/sudo $(plugintarget)/bootinfoscript/
 
 
@@ -693,7 +693,7 @@ boot-repair_install_plugin:	plugins/boot-repair/description\
 	install -d $(plugintarget)/boot-repair/
 	install -m 644 plugins/boot-repair/description $(plugintarget)/boot-repair/
 	install -m 644 plugins/boot-repair/name $(plugintarget)/boot-repair/
-	install -m 644 plugins/boot-repair/run $(plugintarget)/boot-repair/
+	install -m 755 plugins/boot-repair/run $(plugintarget)/boot-repair/
 	install -m 644 plugins/boot-repair/sudo $(plugintarget)/boot-repair/
 
 
@@ -705,7 +705,7 @@ chat_install_plugin:	plugins/chat/description\
 	install -d $(plugintarget)/chat/
 	install -m 644 plugins/chat/description $(plugintarget)/chat/
 	install -m 644 plugins/chat/name $(plugintarget)/chat/
-	install -m 644 plugins/chat/run $(plugintarget)/chat/
+	install -m 755 plugins/chat/run $(plugintarget)/chat/
 
 
 
@@ -717,7 +717,7 @@ chpasswd_install_plugin:	plugins/chpasswd/description\
 	install -d $(plugintarget)/chpasswd/
 	install -m 644 plugins/chpasswd/description $(plugintarget)/chpasswd/
 	install -m 644 plugins/chpasswd/name $(plugintarget)/chpasswd/
-	install -m 644 plugins/chpasswd/run $(plugintarget)/chpasswd/
+	install -m 755 plugins/chpasswd/run $(plugintarget)/chpasswd/
 	install -m 644 plugins/chpasswd/sudo $(plugintarget)/chpasswd/
 
 
@@ -730,7 +730,7 @@ fsck_install_plugin:	plugins/fsck/description\
 	install -d $(plugintarget)/fsck/
 	install -m 644 plugins/fsck/description $(plugintarget)/fsck/
 	install -m 644 plugins/fsck/name $(plugintarget)/fsck/
-	install -m 644 plugins/fsck/run $(plugintarget)/fsck/
+	install -m 755 plugins/fsck/run $(plugintarget)/fsck/
 	install -m 644 plugins/fsck/sudo $(plugintarget)/fsck/
 
 
@@ -743,7 +743,7 @@ gparted_install_plugin:	plugins/gparted/description\
 	install -d $(plugintarget)/gparted/
 	install -m 644 plugins/gparted/description $(plugintarget)/gparted/
 	install -m 644 plugins/gparted/name $(plugintarget)/gparted/
-	install -m 644 plugins/gparted/run $(plugintarget)/gparted/
+	install -m 755 plugins/gparted/run $(plugintarget)/gparted/
 	install -m 644 plugins/gparted/sudo $(plugintarget)/gparted/
 
 
@@ -756,7 +756,7 @@ gpt-check-bios-grub_install_plugin:	plugins/gpt-check-bios-grub/description\
 	install -d $(plugintarget)/gpt-check-bios-grub/
 	install -m 644 plugins/gpt-check-bios-grub/description $(plugintarget)/gpt-check-bios-grub/
 	install -m 644 plugins/gpt-check-bios-grub/name $(plugintarget)/gpt-check-bios-grub/
-	install -m 644 plugins/gpt-check-bios-grub/run $(plugintarget)/gpt-check-bios-grub/
+	install -m 755 plugins/gpt-check-bios-grub/run $(plugintarget)/gpt-check-bios-grub/
 	install -m 644 plugins/gpt-check-bios-grub/sudo $(plugintarget)/gpt-check-bios-grub/
 
 
@@ -769,7 +769,7 @@ gpt-create-hybrid-mbr_install_plugin:	plugins/gpt-create-hybrid-mbr/description\
 	install -d $(plugintarget)/gpt-create-hybrid-mbr/
 	install -m 644 plugins/gpt-create-hybrid-mbr/description $(plugintarget)/gpt-create-hybrid-mbr/
 	install -m 644 plugins/gpt-create-hybrid-mbr/name $(plugintarget)/gpt-create-hybrid-mbr/
-	install -m 644 plugins/gpt-create-hybrid-mbr/run $(plugintarget)/gpt-create-hybrid-mbr/
+	install -m 755 plugins/gpt-create-hybrid-mbr/run $(plugintarget)/gpt-create-hybrid-mbr/
 	install -m 644 plugins/gpt-create-hybrid-mbr/sudo $(plugintarget)/gpt-create-hybrid-mbr/
 
 
@@ -782,7 +782,7 @@ gpt-recompute-hybrid-mbr-chs_install_plugin:	plugins/gpt-recompute-hybrid-mbr-ch
 	install -d $(plugintarget)/gpt-recompute-hybrid-mbr-chs/
 	install -m 644 plugins/gpt-recompute-hybrid-mbr-chs/description $(plugintarget)/gpt-recompute-hybrid-mbr-chs/
 	install -m 644 plugins/gpt-recompute-hybrid-mbr-chs/name $(plugintarget)/gpt-recompute-hybrid-mbr-chs/
-	install -m 644 plugins/gpt-recompute-hybrid-mbr-chs/run $(plugintarget)/gpt-recompute-hybrid-mbr-chs/
+	install -m 755 plugins/gpt-recompute-hybrid-mbr-chs/run $(plugintarget)/gpt-recompute-hybrid-mbr-chs/
 	install -m 644 plugins/gpt-recompute-hybrid-mbr-chs/sudo $(plugintarget)/gpt-recompute-hybrid-mbr-chs/
 
 
@@ -795,7 +795,7 @@ grubeasy_install_plugin:	plugins/grubeasy/description\
 	install -d $(plugintarget)/grubeasy/
 	install -m 644 plugins/grubeasy/description $(plugintarget)/grubeasy/
 	install -m 644 plugins/grubeasy/name $(plugintarget)/grubeasy/
-	install -m 644 plugins/grubeasy/run $(plugintarget)/grubeasy/
+	install -m 755 plugins/grubeasy/run $(plugintarget)/grubeasy/
 	install -m 644 plugins/grubeasy/sudo $(plugintarget)/grubeasy/
 
 
@@ -808,7 +808,7 @@ grub-install_install_plugin:	plugins/grub-install/description\
 	install -d $(plugintarget)/grub-install/
 	install -m 644 plugins/grub-install/description $(plugintarget)/grub-install/
 	install -m 644 plugins/grub-install/name $(plugintarget)/grub-install/
-	install -m 644 plugins/grub-install/run $(plugintarget)/grub-install/
+	install -m 755 plugins/grub-install/run $(plugintarget)/grub-install/
 	install -m 644 plugins/grub-install/sudo $(plugintarget)/grub-install/
 
 
@@ -830,7 +830,7 @@ os-uninstaller_install_plugin:	plugins/os-uninstaller/description\
 	install -d $(plugintarget)/os-uninstaller/
 	install -m 644 plugins/os-uninstaller/description $(plugintarget)/os-uninstaller/
 	install -m 644 plugins/os-uninstaller/name $(plugintarget)/os-uninstaller/
-	install -m 644 plugins/os-uninstaller/run $(plugintarget)/os-uninstaller/
+	install -m 755 plugins/os-uninstaller/run $(plugintarget)/os-uninstaller/
 	install -m 644 plugins/os-uninstaller/sudo $(plugintarget)/os-uninstaller/
 
 
@@ -843,7 +843,7 @@ photorec_install_plugin:	plugins/photorec/description\
 	install -d $(plugintarget)/photorec/
 	install -m 644 plugins/photorec/description $(plugintarget)/photorec/
 	install -m 644 plugins/photorec/name $(plugintarget)/photorec/
-	install -m 644 plugins/photorec/run $(plugintarget)/photorec/
+	install -m 755 plugins/photorec/run $(plugintarget)/photorec/
 	install -m 644 plugins/photorec/sudo $(plugintarget)/photorec/
 
 
@@ -855,7 +855,7 @@ share_log_install_plugin:	plugins/share_log/description\
 	install -d $(plugintarget)/share_log/
 	install -m 644 plugins/share_log/description $(plugintarget)/share_log/
 	install -m 644 plugins/share_log/name $(plugintarget)/share_log/
-	install -m 644 plugins/share_log/run $(plugintarget)/share_log/
+	install -m 755 plugins/share_log/run $(plugintarget)/share_log/
 
 
 
@@ -866,7 +866,7 @@ share_log_forum_install_plugin:	plugins/share_log_forum/description\
 	install -d $(plugintarget)/share_log_forum/
 	install -m 644 plugins/share_log_forum/description $(plugintarget)/share_log_forum/
 	install -m 644 plugins/share_log_forum/name $(plugintarget)/share_log_forum/
-	install -m 644 plugins/share_log_forum/run $(plugintarget)/share_log_forum/
+	install -m 755 plugins/share_log_forum/run $(plugintarget)/share_log_forum/
 
 
 
@@ -877,7 +877,7 @@ show_log_install_plugin:	plugins/show_log/description\
 	install -d $(plugintarget)/show_log/
 	install -m 644 plugins/show_log/description $(plugintarget)/show_log/
 	install -m 644 plugins/show_log/name $(plugintarget)/show_log/
-	install -m 644 plugins/show_log/run $(plugintarget)/show_log/
+	install -m 755 plugins/show_log/run $(plugintarget)/show_log/
 
 
 
@@ -890,7 +890,7 @@ sudoers_install_plugin:	plugins/sudoers/description\
 	install -d $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/description $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/name $(plugintarget)/sudoers/
-	install -m 644 plugins/sudoers/run $(plugintarget)/sudoers/
+	install -m 755 plugins/sudoers/run $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/sudo $(plugintarget)/sudoers/
 	install -m 644 plugins/sudoers/sudoers_template $(plugintarget)/sudoers/
 
@@ -904,7 +904,7 @@ testdisk_install_plugin:	plugins/testdisk/description\
 	install -d $(plugintarget)/testdisk/
 	install -m 644 plugins/testdisk/description $(plugintarget)/testdisk/
 	install -m 644 plugins/testdisk/name $(plugintarget)/testdisk/
-	install -m 644 plugins/testdisk/run $(plugintarget)/testdisk/
+	install -m 755 plugins/testdisk/run $(plugintarget)/testdisk/
 	install -m 644 plugins/testdisk/sudo $(plugintarget)/testdisk/
 
 
@@ -917,7 +917,7 @@ ueficheck_install_plugin:	plugins/ueficheck/description\
 	install -d $(plugintarget)/ueficheck/
 	install -m 644 plugins/ueficheck/description $(plugintarget)/ueficheck/
 	install -m 644 plugins/ueficheck/name $(plugintarget)/ueficheck/
-	install -m 644 plugins/ueficheck/run $(plugintarget)/ueficheck/
+	install -m 755 plugins/ueficheck/run $(plugintarget)/ueficheck/
 	install -m 644 plugins/ueficheck/sudo $(plugintarget)/ueficheck/
 
 
@@ -930,7 +930,7 @@ ueficreate_install_plugin:	plugins/ueficreate/description\
 	install -d $(plugintarget)/ueficreate/
 	install -m 644 plugins/ueficreate/description $(plugintarget)/ueficreate/
 	install -m 644 plugins/ueficreate/name $(plugintarget)/ueficreate/
-	install -m 644 plugins/ueficreate/run $(plugintarget)/ueficreate/
+	install -m 755 plugins/ueficreate/run $(plugintarget)/ueficreate/
 	install -m 644 plugins/ueficreate/sudo $(plugintarget)/ueficreate/
 
 
@@ -943,7 +943,7 @@ uefifakemicrosoft_install_plugin:	plugins/uefifakemicrosoft/description\
 	install -d $(plugintarget)/uefifakemicrosoft/
 	install -m 644 plugins/uefifakemicrosoft/description $(plugintarget)/uefifakemicrosoft/
 	install -m 644 plugins/uefifakemicrosoft/name $(plugintarget)/uefifakemicrosoft/
-	install -m 644 plugins/uefifakemicrosoft/run $(plugintarget)/uefifakemicrosoft/
+	install -m 755 plugins/uefifakemicrosoft/run $(plugintarget)/uefifakemicrosoft/
 	install -m 644 plugins/uefifakemicrosoft/sudo $(plugintarget)/uefifakemicrosoft/
 
 
@@ -956,7 +956,7 @@ uefihidemicrosoft_install_plugin:	plugins/uefihidemicrosoft/description\
 	install -d $(plugintarget)/uefihidemicrosoft/
 	install -m 644 plugins/uefihidemicrosoft/description $(plugintarget)/uefihidemicrosoft/
 	install -m 644 plugins/uefihidemicrosoft/name $(plugintarget)/uefihidemicrosoft/
-	install -m 644 plugins/uefihidemicrosoft/run $(plugintarget)/uefihidemicrosoft/
+	install -m 755 plugins/uefihidemicrosoft/run $(plugintarget)/uefihidemicrosoft/
 	install -m 644 plugins/uefihidemicrosoft/sudo $(plugintarget)/uefihidemicrosoft/
 
 
@@ -969,7 +969,7 @@ uefiorder_install_plugin:	plugins/uefiorder/description\
 	install -d $(plugintarget)/uefiorder/
 	install -m 644 plugins/uefiorder/description $(plugintarget)/uefiorder/
 	install -m 644 plugins/uefiorder/name $(plugintarget)/uefiorder/
-	install -m 644 plugins/uefiorder/run $(plugintarget)/uefiorder/
+	install -m 755 plugins/uefiorder/run $(plugintarget)/uefiorder/
 	install -m 644 plugins/uefiorder/sudo $(plugintarget)/uefiorder/
 
 
@@ -982,7 +982,7 @@ uefipartstatus_install_plugin:	plugins/uefipartstatus/description\
 	install -d $(plugintarget)/uefipartstatus/
 	install -m 644 plugins/uefipartstatus/description $(plugintarget)/uefipartstatus/
 	install -m 644 plugins/uefipartstatus/name $(plugintarget)/uefipartstatus/
-	install -m 644 plugins/uefipartstatus/run $(plugintarget)/uefipartstatus/
+	install -m 755 plugins/uefipartstatus/run $(plugintarget)/uefipartstatus/
 	install -m 644 plugins/uefipartstatus/sudo $(plugintarget)/uefipartstatus/
 
 
@@ -995,7 +995,7 @@ uefireinstallmicrosoft_install_plugin:	plugins/uefireinstallmicrosoft/descriptio
 	install -d $(plugintarget)/uefireinstallmicrosoft/
 	install -m 644 plugins/uefireinstallmicrosoft/description $(plugintarget)/uefireinstallmicrosoft/
 	install -m 644 plugins/uefireinstallmicrosoft/name $(plugintarget)/uefireinstallmicrosoft/
-	install -m 644 plugins/uefireinstallmicrosoft/run $(plugintarget)/uefireinstallmicrosoft/
+	install -m 755 plugins/uefireinstallmicrosoft/run $(plugintarget)/uefireinstallmicrosoft/
 	install -m 644 plugins/uefireinstallmicrosoft/sudo $(plugintarget)/uefireinstallmicrosoft/
 
 
@@ -1008,7 +1008,7 @@ update-grub_install_plugin:	plugins/update-grub/description\
 	install -d $(plugintarget)/update-grub/
 	install -m 644 plugins/update-grub/description $(plugintarget)/update-grub/
 	install -m 644 plugins/update-grub/name $(plugintarget)/update-grub/
-	install -m 644 plugins/update-grub/run $(plugintarget)/update-grub/
+	install -m 755 plugins/update-grub/run $(plugintarget)/update-grub/
 	install -m 644 plugins/update-grub/sudo $(plugintarget)/update-grub/
 
 
@@ -1020,7 +1020,7 @@ web_install_plugin:	plugins/web/description\
 	install -d $(plugintarget)/web/
 	install -m 644 plugins/web/description $(plugintarget)/web/
 	install -m 644 plugins/web/name $(plugintarget)/web/
-	install -m 644 plugins/web/run $(plugintarget)/web/
+	install -m 755 plugins/web/run $(plugintarget)/web/
 
 
 
@@ -1032,7 +1032,7 @@ wineasy_install_plugin:	plugins/wineasy/description\
 	install -d $(plugintarget)/wineasy/
 	install -m 644 plugins/wineasy/description $(plugintarget)/wineasy/
 	install -m 644 plugins/wineasy/name $(plugintarget)/wineasy/
-	install -m 644 plugins/wineasy/run $(plugintarget)/wineasy/
+	install -m 755 plugins/wineasy/run $(plugintarget)/wineasy/
 	install -m 644 plugins/wineasy/sudo $(plugintarget)/wineasy/
 
 
@@ -1045,7 +1045,7 @@ winmbr_install_plugin:	plugins/winmbr/description\
 	install -d $(plugintarget)/winmbr/
 	install -m 644 plugins/winmbr/description $(plugintarget)/winmbr/
 	install -m 644 plugins/winmbr/name $(plugintarget)/winmbr/
-	install -m 644 plugins/winmbr/run $(plugintarget)/winmbr/
+	install -m 755 plugins/winmbr/run $(plugintarget)/winmbr/
 	install -m 644 plugins/winmbr/sudo $(plugintarget)/winmbr/
 
 
@@ -1058,7 +1058,7 @@ winpass_install_plugin:	plugins/winpass/description\
 	install -d $(plugintarget)/winpass/
 	install -m 644 plugins/winpass/description $(plugintarget)/winpass/
 	install -m 644 plugins/winpass/name $(plugintarget)/winpass/
-	install -m 644 plugins/winpass/run $(plugintarget)/winpass/
+	install -m 755 plugins/winpass/run $(plugintarget)/winpass/
 	install -m 644 plugins/winpass/sudo $(plugintarget)/winpass/
 
 
@@ -1071,7 +1071,7 @@ winpromote_install_plugin:	plugins/winpromote/description\
 	install -d $(plugintarget)/winpromote/
 	install -m 644 plugins/winpromote/description $(plugintarget)/winpromote/
 	install -m 644 plugins/winpromote/name $(plugintarget)/winpromote/
-	install -m 644 plugins/winpromote/run $(plugintarget)/winpromote/
+	install -m 755 plugins/winpromote/run $(plugintarget)/winpromote/
 	install -m 644 plugins/winpromote/sudo $(plugintarget)/winpromote/
 
 
@@ -1084,7 +1084,7 @@ winunlock_install_plugin:	plugins/winunlock/description\
 	install -d $(plugintarget)/winunlock/
 	install -m 644 plugins/winunlock/description $(plugintarget)/winunlock/
 	install -m 644 plugins/winunlock/name $(plugintarget)/winunlock/
-	install -m 644 plugins/winunlock/run $(plugintarget)/winunlock/
+	install -m 755 plugins/winunlock/run $(plugintarget)/winunlock/
 	install -m 644 plugins/winunlock/sudo $(plugintarget)/winunlock/
 
 install_version:	VERSION
