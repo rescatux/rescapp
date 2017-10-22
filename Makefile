@@ -676,12 +676,14 @@ about-rescapp_install_plugin:	plugins/about-rescapp/description\
 bootinfoscript_install_plugin:	plugins/bootinfoscript/description\
 	plugins/bootinfoscript/name\
 	plugins/bootinfoscript/run\
-	plugins/bootinfoscript/sudo
+	plugins/bootinfoscript/sudo\
+	plugins/bootinfoscript/bootinfoscript
 	install -d $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/description $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/name $(plugintarget)/bootinfoscript/
 	install -m 755 plugins/bootinfoscript/run $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/sudo $(plugintarget)/bootinfoscript/
+	install -m 755 plugins/bootinfoscript/bootinfoscript $(plugintarget)/bootinfoscript/
 
 
 
