@@ -115,6 +115,7 @@ FILESYSTEM_PACKAGES="reiserfsprogs \
  btrfs-tools \
  xfsprogs \
  xfsdump \
+ ntfs-3g \
  "
 
 #TAILSGREETER_PACKAGES="\
@@ -296,6 +297,12 @@ PYTHON_PARTED_PACKAGES="python-parted"
 GDDRESCUE_PACKAGES="gddrescue"
 MYRESCUE_PACKAGES="myrescue"
 
+CHNTPW_PACKAGES="\
+ chntpw \
+ samdump2 \
+ bkhive \
+"
+
 COMMON_PACKAGES="${LXDE_PACKAGES} \
  ${PYTHON_PACKAGES} \
  ${RAID_PACKAGES} \
@@ -314,16 +321,13 @@ COMMON_PACKAGES="${LXDE_PACKAGES} \
  ${UEFI_PACKAGES} \
  ${GDDRESCUE_PACKAGES} \
  ${MYRESCUE_PACKAGES} \
+ ${CHNTPW_PACKAGES} \
  zenity \
  iceweasel \
  xchat \
  syslinux \
  pastebinit \
  lilo \
- ntfs-3g \
- chntpw \
- samdump2 \
- bkhive \
  gawk\
  extundelete\
  locales \
