@@ -1,0 +1,149 @@
+Source: rescapp
+Section: main
+Priority: optional
+Maintainer: Adrian Gibanel Lopez <adrian15sgd@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://github.com/rescatux/rescapp
+Vcs-Git: https://github.com/rescatux/rescapp.git
+Vcs-Browser: https://github.com/rescatux/rescapp.git
+
+Package: rescapp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+# Python
+         ,python-sip
+         ,python-qt4
+# Raid
+         ,dmraid
+# Lvm
+         ,lvm2
+         ,gparted
+         ,gpart
+         ,dosfstools
+# Bootrepair
+         ,boot-repair
+         ,boot-sav
+         ,gawk
+         ,pastebinit
+         ,xz-utils
+         ,gettext-base
+         ,glade2script
+         ,os-prober
+         ,parted
+         ,xdg-utils
+         ,zenity
+         ,boot-sav-extra
+         ,gksu
+         ,lsb-release
+         ,zip
+         ,dmraid
+         ,lvm2
+         ,mbr
+         ,mdadm
+         ,os-uninstaller
+         ,clean-ubiquity
+         ,python
+         ,gir1.2-gtk-3.0
+         ,python-gi
+         ,ntfs-3g
+         ,efibootmgr
+         ,syslinux-common
+         ,cryptsetup
+         ,boot-info
+# Testdisk
+         ,testdisk
+         ,e2fslibs
+         ,libc6
+         ,libcomerr2
+         ,libjpeg62-turbo
+         ,libncursesw5
+         ,libntfs-3g852
+         ,libtinfo5
+         ,libuuid1
+         ,zlib1g
+         ,ntfs-3g
+         ,cryptsetup
+         ,libcryptsetup4
+         ,cryptsetup-bin
+         ,reiserfsprogs
+         ,reiser4progs
+         ,btrfs-tools
+         ,xfsprogs
+         ,xfsdump
+         ,ntfs-3g
+# Cryptsetup
+         ,libapol4
+         ,libqpol1
+         ,policycoreutils
+         ,python-ipy
+         ,python-selinux
+         ,python-semanage
+         ,python-sepolgen
+         ,python-sepolicy
+         ,python-setools
+         ,selinux-utils
+         ,selinux-basics
+         ,auditd
+         ,selinux-policy-default
+         ,setools
+# Gdisk
+         ,gdisk
+# Efibootmgr
+         ,efibootmgr
+         ,libefivar1
+         ,libefiboot1
+# Python-parted
+         ,python-parted
+# gddrescue
+         ,gddrescue
+# myrescue
+         ,myrescue
+# chntpw
+         ,chntpw
+         ,samdump2
+         ,bkhive
+# misc
+         ,zenity
+         ,iceweasel
+         ,xchat
+         ,syslinux
+         ,pastebinit
+         ,lilo
+         ,gawk
+         ,extundelete
+Description: Rescapp is a nice wizard that helps you in your rescue tasks.
+ Rescapp is the Rescatux main program. It is a nice wizard that helps you in your rescue tasks.
+ Boot options:
+  Update UEFI order
+  Create a new UEFI Boot entry
+  UEFI Partition Status
+  Fake Microsoft Windows UEFI
+  Hide Microsoft Windows UEFI
+  Reinstall Microsoft Windows EFI
+  Check UEFI Boot
+ GRUB options:
+  Easy GNU/Linux Boot Fix
+  Restore GRUB and GRUB2
+  Update any GRUB2 menues
+  Update Debian/Ubuntu grub menues
+ Windows options:
+  Restore Windows MBR (BETA)
+  Clear Windows passwords
+  Promote a Windows user to Administrator role
+  Reinstall Microsoft Windows EFI
+  Unlock Windows user
+ Password options:
+  Change Gnu/Linux Password
+  Regenerate sudoers file
+  Clear Windows passwords
+ Filesystem options:
+  File System Check (Forced Fix)
+ Support options:
+  Help
+  Web
+  Chat
+  Show log
+  Share log
+  Share log on forum
+  Boot Info Script
