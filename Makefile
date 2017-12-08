@@ -15,7 +15,6 @@ versiontarget=$(target)/share/rescapp
 all:
 .PHONY	:	all
 
-#	boot-repair_install_documentation
 #	gparted_install_documentation
 #	grubeasy_install_documentation
 #	os-uninstaller_install_documentation
@@ -87,20 +86,6 @@ $(bootinfoscript_installdocimages_directory):	plugins/bootinfoscript/images/*
 bootinfoscript_install_documentation:	plugins/bootinfoscript/*html	$(bootinfoscript_installdocimages_directory)
 	install -d $(doctarget)/plugins/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/*html $(doctarget)/plugins/bootinfoscript/
-
-
-
-
-
-boot-repair_installdocimages_directory = $(subst /,_,$(wildcard plugins/boot-repair/images))
-
-$(boot-repair_installdocimages_directory):	plugins/boot-repair/images/*
-	install -d $(doctarget)/plugins/boot-repair/images/
-	install -m 644 plugins/boot-repair/images/* $(doctarget)/plugins/boot-repair/images/
-
-boot-repair_install_documentation:	plugins/boot-repair/*html	$(boot-repair_installdocimages_directory)
-	install -d $(doctarget)/plugins/boot-repair/
-	install -m 644 plugins/boot-repair/*html $(doctarget)/plugins/boot-repair/
 
 
 
@@ -631,7 +616,6 @@ install_menus_win:	menus/win/description menus/win/name
 
 install_plugins:	about-rescapp_install_plugin\
 	bootinfoscript_install_plugin\
-	boot-repair_install_plugin\
 	chat_install_plugin\
 	chpasswd_install_plugin\
 	fsck_install_plugin\
@@ -684,19 +668,6 @@ bootinfoscript_install_plugin:	plugins/bootinfoscript/description\
 	install -m 755 plugins/bootinfoscript/run $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/sudo $(plugintarget)/bootinfoscript/
 	install -m 755 plugins/bootinfoscript/bootinfoscript $(plugintarget)/bootinfoscript/
-
-
-
-
-boot-repair_install_plugin:	plugins/boot-repair/description\
-	plugins/boot-repair/name\
-	plugins/boot-repair/run\
-	plugins/boot-repair/sudo
-	install -d $(plugintarget)/boot-repair/
-	install -m 644 plugins/boot-repair/description $(plugintarget)/boot-repair/
-	install -m 644 plugins/boot-repair/name $(plugintarget)/boot-repair/
-	install -m 755 plugins/boot-repair/run $(plugintarget)/boot-repair/
-	install -m 644 plugins/boot-repair/sudo $(plugintarget)/boot-repair/
 
 
 
