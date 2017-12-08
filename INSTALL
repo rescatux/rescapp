@@ -173,3 +173,46 @@ RESCAPP_PACKAGES=" \
  gawk\
  extundelete\
  " # I add syslinux so that isohybrid command is recognised.
+
+Git based Debian package build
+==============================
+
+The official repo use two branches for rescapp:
+ master
+and
+ debian-dev
+.
+
+debian-dev branch is used only for representing the debian/ branch.
+
+
+When a new release comes out there will be one tag at the master branch
+and another tag at the debian-dev tag.
+
+We are going to use version 0.51b3 as an example on how to build
+Rescapp as a package.
+
+Available tags are: v0.51b3 and v051b3-debian .
+Please enter an empty folder and follow this procedure:
+
+git clone https://github.com/rescatux/rescapp.git -b v0.51b3 rescapp-0.51b3
+# Ignore detached HEAD warning
+rm -rf rescapp-0.51b3/.git/
+tar czf rescapp_0.51b3.orig.tar.gz rescapp-0.51b3/
+rm -rf rescapp-0.51b3/
+git clone https://github.com/rescatux/rescapp.git -b v0.51b3-debian rescapp-0.51b3
+# Ignore detached HEAD warning
+rm -rf rescapp-0.51b3/.git/
+cd rescapp-0.51b3
+dpkg-buildpackage -us -uc
+cd ..
+rm -rf rescapp-0.51b3/
+
+Once the procedure has ended without any errors you will find these
+package files:
+
+rescapp_0.51b3-1.debian.tar.xz
+rescapp_0.51b3-1.dsc
+rescapp_0.51b3-1_i386.changes
+rescapp_0.51b3-1_i386.deb
+rescapp_0.51b3.orig.tar.gz
