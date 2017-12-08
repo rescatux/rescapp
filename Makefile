@@ -17,7 +17,6 @@ all:
 
 #	gparted_install_documentation
 #	grubeasy_install_documentation
-#	os-uninstaller_install_documentation
 #	photorec_install_documentation
 #	testdisk_install_documentation
 #	ueficheck_install_documentation
@@ -226,20 +225,6 @@ $(help-rescapp_installdocimages_directory):	plugins/help-rescapp/images/*
 help-rescapp_install_documentation:	plugins/help-rescapp/*html	$(help-rescapp_installdocimages_directory)
 	install -d $(doctarget)/plugins/help-rescapp/
 	install -m 644 plugins/help-rescapp/*html $(doctarget)/plugins/help-rescapp/
-
-
-
-
-
-os-uninstaller_installdocimages_directory = $(subst /,_,$(wildcard plugins/os-uninstaller/images))
-
-$(os-uninstaller_installdocimages_directory):	plugins/os-uninstaller/images/*
-	install -d $(doctarget)/plugins/os-uninstaller/images/
-	install -m 644 plugins/os-uninstaller/images/* $(doctarget)/plugins/os-uninstaller/images/
-
-os-uninstaller_install_documentation:	plugins/os-uninstaller/*html	$(os-uninstaller_installdocimages_directory)
-	install -d $(doctarget)/plugins/os-uninstaller/
-	install -m 644 plugins/os-uninstaller/*html $(doctarget)/plugins/os-uninstaller/
 
 
 
@@ -626,7 +611,6 @@ install_plugins:	about-rescapp_install_plugin\
 	grubeasy_install_plugin\
 	grub-install_install_plugin\
 	help-rescapp_install_plugin\
-	os-uninstaller_install_plugin\
 	photorec_install_plugin\
 	share_log_install_plugin\
 	share_log_forum_install_plugin\
@@ -792,19 +776,6 @@ help-rescapp_install_plugin:	plugins/help-rescapp/description\
 	install -d $(plugintarget)/help-rescapp/
 	install -m 644 plugins/help-rescapp/description $(plugintarget)/help-rescapp/
 	install -m 644 plugins/help-rescapp/name $(plugintarget)/help-rescapp/
-
-
-
-
-os-uninstaller_install_plugin:	plugins/os-uninstaller/description\
-	plugins/os-uninstaller/name\
-	plugins/os-uninstaller/run\
-	plugins/os-uninstaller/sudo
-	install -d $(plugintarget)/os-uninstaller/
-	install -m 644 plugins/os-uninstaller/description $(plugintarget)/os-uninstaller/
-	install -m 644 plugins/os-uninstaller/name $(plugintarget)/os-uninstaller/
-	install -m 755 plugins/os-uninstaller/run $(plugintarget)/os-uninstaller/
-	install -m 644 plugins/os-uninstaller/sudo $(plugintarget)/os-uninstaller/
 
 
 
