@@ -88,36 +88,6 @@ PYTHON_PACKAGES="python-sip python-qt4"
 RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
 GPARTED_PACKAGES="gparted gpart dosfstools"
-BOOTREPAIR_PACKAGES="boot-repair \
- boot-sav \
- gawk \
- pastebinit \
- xz-utils \
- gettext-base \
- glade2script \
- os-prober \
- parted \
- xdg-utils \
- zenity \
- boot-sav-extra \
- gksu \
- lsb-release \
- zip \
- dmraid \
- lvm2 \
- mbr \
- mdadm \
- os-uninstaller \
- clean-ubiquity \
- python \
- gir1.2-gtk-3.0 \
- python-gi \
- ntfs-3g \
- efibootmgr \
- syslinux-common \
- cryptsetup \
- boot-info \
- "
 TESTDISK_PACKAGES="testdisk \
  e2fslibs \
  libc6 \
@@ -184,7 +154,6 @@ RESCAPP_PACKAGES=" \
  ${RAID_PACKAGES} \
  ${LVM_PACKAGES} \
  ${GPARTED_PACKAGES} \
- ${BOOTREPAIR_PACKAGES} \
  ${TESTDISK_PACKAGES} \
  ${CRYPTSETUP_PACKAGES} \
  ${FILESYSTEM_PACKAGES} \
