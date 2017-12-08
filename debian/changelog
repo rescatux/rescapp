@@ -1,3 +1,9 @@
+rescapp (0.51b3-1) UNRELEASED; urgency=medium
+
+  * Removed boot-repair uninstaller entries from Makefile
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Fri, 08 Dec 2017 21:20:26 +0000
+
 rescapp (0.51b2-1) unstable; urgency=low
 
   * Removed boot-repair option
