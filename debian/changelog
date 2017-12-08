@@ -1,3 +1,9 @@
+rescapp (0.51b2-1) unstable; urgency=low
+
+  * Removed boot-repair option
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Fri, 08 Dec 2017 21:00:51 +0000
+
 rescapp (0.51b1-1) unstable; urgency=low
 
   * Initial release
