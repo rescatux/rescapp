@@ -1,8 +1,9 @@
-rescapp (0.51b3-1) UNRELEASED; urgency=medium
+rescapp (0.51b3-2) unstable; urgency=low
 
   * Removed boot-repair uninstaller entries from Makefile
+  * Removed boot-repair dependencies from control file
 
- -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Fri, 08 Dec 2017 21:20:26 +0000
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Fri, 08 Dec 2017 22:11:44 +0000
 
 rescapp (0.51b2-1) unstable; urgency=low
 

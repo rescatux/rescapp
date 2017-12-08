@@ -21,36 +21,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,gparted
          ,gpart
          ,dosfstools
-# Bootrepair
-         ,boot-repair
-         ,boot-sav
-         ,gawk
-         ,pastebinit
-         ,xz-utils
-         ,gettext-base
-         ,glade2script
-         ,os-prober
-         ,parted
-         ,xdg-utils
-         ,zenity
-         ,boot-sav-extra
-         ,gksu
-         ,lsb-release
-         ,zip
-         ,dmraid
-         ,lvm2
-         ,mbr
-         ,mdadm
-         ,os-uninstaller
-         ,clean-ubiquity
-         ,python
-         ,gir1.2-gtk-3.0
-         ,python-gi
-         ,ntfs-3g
-         ,efibootmgr
-         ,syslinux-common
-         ,cryptsetup
-         ,boot-info
 # Testdisk
          ,testdisk
          ,e2fslibs
