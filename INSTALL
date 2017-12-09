@@ -54,29 +54,8 @@ Rescapp depends on some software packages installed into your system. If
 you don't have any of them, please obtain and install them before
 using Rescapp.
 
-
-
-chntpw binaries need to be overwritten after their Debian Jessie packages installation (Check The Debian Package Runtime Requirements section )
-Here there is a copy-and-paste from Rescatux README documentation:
-
-Till the current bug in sampasswd (it does not save its changes)
-and till samunlock is added upstream we need to build this program on our own.
-
-Get chntpw source code from:
-
-* branch : chntpw-ng-1.01
-* repository : https://github.com/rescatux/chntpw
-
-You might need to run:
-
-ln -s /usr/include/asm-generic /usr/include/asm
-
-so that the upstream source code builds ok
-
-Then run (inside a Jessie chroot):
-make
-
-so that: samunlock, sampasswd, samunlock.static and sampasswd.static are generated.
+chntpw package should be get from Rescatux official repo.
+http://rescatux.sourceforge.io/repo/ stretch-dev main
 
 Debian Package Runtime Requirements
 ===================================
@@ -89,16 +68,6 @@ RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
 GPARTED_PACKAGES="gparted gpart dosfstools"
 TESTDISK_PACKAGES="testdisk \
- e2fslibs \
- libc6 \
- libcomerr2 \
- libjpeg62-turbo \
- libncursesw5 \
- libntfs-3g852 \
- libtinfo5 \
- libuuid1 \
- zlib1g \
- ntfs-3g \
  "
 CRYPTSETUP_PACKAGES="cryptsetup \
  libcryptsetup4 \
@@ -113,16 +82,9 @@ FILESYSTEM_PACKAGES="reiserfsprogs \
  "
 
 SELINUX_PACKAGES="\
- libapol4 \
- libqpol1 \
- policycoreutils \
- python-ipy \
  python-selinux \
  python-semanage \
- python-sepolgen \
- python-sepolicy \
- python-setools \
- selinux-utils \
+ policycoreutils-python-utils \
  selinux-basics \
  auditd \
  selinux-policy-default \
@@ -135,8 +97,6 @@ GPT_PACKAGES="\
 
 UEFI_PACKAGES="\
  efibootmgr \
- libefivar1 \
- libefiboot1 \
 "
 
 PYTHON_PARTED_PACKAGES="python-parted"
@@ -145,8 +105,6 @@ MYRESCUE_PACKAGES="myrescue"
 
 CHNTPW_PACKAGES="\
  chntpw \
- samdump2 \
- bkhive \
 "
 
 RESCAPP_PACKAGES=" \
