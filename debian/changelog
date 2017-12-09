@@ -1,3 +1,12 @@
+rescapp (0.51b4-4) unstable; urgency=low
+
+  * testdisk dependencies were simplified
+  * efibootmgr dependencies were simplified
+  * Removed samdump2 and bkhive non used packages
+  * Converted SELinux dependencies into Stretch ones
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 09 Dec 2017 15:59:46 +0000
+
 rescapp (0.51b4-1) unstable; urgency=low
 
   * xchat was replaced by hexchat
