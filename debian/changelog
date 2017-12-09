@@ -1,3 +1,9 @@
+rescapp (0.51b5-1) unstable; urgency=low
+
+  * Updated to 0.51b5 upstream version
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 09 Dec 2017 16:51:09 +0000
+
 rescapp (0.51b4-4) unstable; urgency=low
 
   * testdisk dependencies were simplified
