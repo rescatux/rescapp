@@ -1774,12 +1774,12 @@ RUN_STR="Run"
 
 FIREFOX_COMMAND="xdg-open"
 GEDIT_COMMAND="xdg-open"
-XCHAT_COMMAND="xchat"
+XCHAT_COMMAND="hexchat"
 FDISK_COMMAND="/sbin/fdisk"
 FILEMANAGER_COMMAND="xdg-open"
 
 FIREFOX_WINDOW_STR="Iceweasel"
-XCHAT_WINDOW_STR="Xchat"
+XCHAT_WINDOW_STR="HexChat"
 
 CODE_STR="Code"
 NAME_STR="Name"
