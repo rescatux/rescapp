@@ -166,7 +166,7 @@ RESCAPP_PACKAGES=" \
  ${CHNTPW_PACKAGES} \
  zenity \
  iceweasel \
- xchat \
+ hexchat \
  syslinux \
  pastebinit \
  lilo \
