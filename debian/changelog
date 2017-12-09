@@ -1,3 +1,9 @@
+rescapp (0.51b4-1) unstable; urgency=low
+
+  * xchat was replaced by hexchat
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 09 Dec 2017 15:56:08 +0000
+
 rescapp (0.51b3-2) unstable; urgency=low
 
   * Removed boot-repair uninstaller entries from Makefile

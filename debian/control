@@ -76,7 +76,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 # misc
          ,zenity
          ,iceweasel
-         ,xchat
+         ,hexchat
          ,syslinux
          ,pastebinit
          ,lilo
