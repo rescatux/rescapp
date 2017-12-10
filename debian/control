@@ -12,8 +12,8 @@ Package: rescapp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 # Python
-         ,python-sip
-         ,python-qt4
+         ,python-pyqt5
+         ,python-pyqt5.qtwebkit
 # Raid
          ,dmraid
 # Lvm

@@ -1,3 +1,10 @@
+rescapp (0.52b1-1) unstable; urgency=low
+
+  * Updated to 0.52b1 upstream version
+  * Dependencies no longer based on qt4 but qt5
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 10 Dec 2017 01:06:42 +0000
+
 rescapp (0.51b5-1) unstable; urgency=low
 
   * Updated to 0.51b5 upstream version
