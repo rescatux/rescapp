@@ -1,3 +1,10 @@
+rescapp (0.52b2-1) unstable; urgency=low
+
+  * Updated to 0.52b2 upstream version
+  * Removed SELinux dependencies
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 10 Dec 2017 10:25:14 +0000
+
 rescapp (0.52b1-1) unstable; urgency=low
 
   * Updated to 0.52b1 upstream version

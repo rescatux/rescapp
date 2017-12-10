@@ -23,14 +23,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,dosfstools
 # Testdisk
          ,testdisk
-# Selinux
-         ,python-selinux
-         ,python-semanage
-         ,policycoreutils-python-utils
-         ,selinux-basics
-         ,auditd
-         ,selinux-policy-default
-         ,setools
 # Gdisk
          ,gdisk
 # Efibootmgr
