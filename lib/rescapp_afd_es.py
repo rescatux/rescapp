@@ -2,33 +2,33 @@
 # April Fools Day Script
 # Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
 
-class CloseOnClickQWidget(QtGui.QWidget):
+class CloseOnClickQWidget(QtWidgets.QWidget):
 	def mousePressEvent(self,event):
 		self.close()
 
 
 afd_gobierno_espana_image_path = rescapp_images_path + "/" + "policia-iberoamericana-logo.png"
-afd_app = QtGui.QApplication(sys.argv)
+afd_app = QtWidgets.QApplication(sys.argv)
 
 
-afd_grid = QtGui.QGridLayout()
+afd_grid = QtWidgets.QGridLayout()
 afd_grid.setSpacing(10)
 
-afd_top_grid = QtGui.QGridLayout()
+afd_top_grid = QtWidgets.QGridLayout()
 afd_top_grid.setSpacing(10)
 
 # afd_title
-afd_title = QtGui.QLabel(u"¡Atención!")
+afd_title = QtWidgets.QLabel(u"¡Atención!")
 afd_title_font = QtGui.QFont()
 afd_title_font.setPointSize(20)
 afd_title.setFont(afd_title_font)
 
-afd_subtitle = QtGui.QLabel(u"Fue detectado un caso de actividad ilegal.\nEl sistema operativo fue bloqueado por violación de las leyes de España.\nFue detectada la siguiente infracción:")
+afd_subtitle = QtWidgets.QLabel(u"Fue detectado un caso de actividad ilegal.\nEl sistema operativo fue bloqueado por violación de las leyes de España.\nFue detectada la siguiente infracción:")
 afd_subtitle_font = QtGui.QFont()
 afd_subtitle_font.setPointSize(14)
 afd_subtitle.setFont(afd_subtitle_font)
 
-afd_brigada = QtGui.QLabel(u"BRIGADA DE INVESTIGACIÓN\nTECNOLÓGICA IBEROAMERICANA")
+afd_brigada = QtWidgets.QLabel(u"BRIGADA DE INVESTIGACIÓN\nTECNOLÓGICA IBEROAMERICANA")
 afd_brigada_font = QtGui.QFont()
 afd_brigada_font.setPointSize(20)
 afd_brigada.setFont(afd_brigada_font)
@@ -53,7 +53,7 @@ afd_brigada.setPalette(afd_brigada_palette)
 
 next_year = str(datetime.datetime.now().year + 1)
 
-afd_message = QtGui.QLabel(u"Desde su dirección IP bajo el número \"127.0.0.1\" fue efectuado un acceso a páginas de internet<br>que contienen <b>software libre</b>, open source y materiales para cambiar la contraseña de su equipo.<br>En su ordenador, así mismo, fue encontrado un artefacto binario de rescate denominado<br><b>Rescatux bajo la licencia GNU GPL 3.</b><br>El uso de esta licencia en territorio español así como en los países que han subscrito<br>el acuerdo de colaboración internacional<br>(Méjico, Argentina, Bolivia, Brasil, Chile, Colombia, Ecuador, Guyana, Paraguay,<br>Perú, Surinam, Uruguay y Venezuela) de acuerdo con la Ley 21/"+next_year+u", de 4 de noviembre<br>está penado con <b>cuatro meses de carcel.</b>")
+afd_message = QtWidgets.QLabel(u"Desde su dirección IP bajo el número \"127.0.0.1\" fue efectuado un acceso a páginas de internet<br>que contienen <b>software libre</b>, open source y materiales para cambiar la contraseña de su equipo.<br>En su ordenador, así mismo, fue encontrado un artefacto binario de rescate denominado<br><b>Rescatux bajo la licencia GNU GPL 3.</b><br>El uso de esta licencia en territorio español así como en los países que han subscrito<br>el acuerdo de colaboración internacional<br>(Méjico, Argentina, Bolivia, Brasil, Chile, Colombia, Ecuador, Guyana, Paraguay,<br>Perú, Surinam, Uruguay y Venezuela) de acuerdo con la Ley 21/"+next_year+u", de 4 de noviembre<br>está penado con <b>cuatro meses de carcel.</b>")
 
 
 afd_message_font = QtGui.QFont()
@@ -70,7 +70,7 @@ afd_message.setPalette(afd_message_palette)
 
 next_year = str(datetime.datetime.now().year + 1)
 
-afd_fine = QtGui.QLabel(u"Según la disposición adicional de la Ley 21 del año "+next_year+u" <br>usted puede conmutar la pena de carcel por <b>100 euros (150 sucres)</b>.")
+afd_fine = QtWidgets.QLabel(u"Según la disposición adicional de la Ley 21 del año "+next_year+u" <br>usted puede conmutar la pena de carcel por <b>100 euros (150 sucres)</b>.")
 afd_fine_font = QtGui.QFont()
 afd_fine_font.setPointSize(14)
 afd_fine.setFont(afd_fine_font)
@@ -84,7 +84,7 @@ afd_fine.setPalette(afd_fine_palette)
 
 next_year = str(datetime.datetime.now().year + 1)
 
-afd_pay = QtGui.QLabel(u"Se abre un periodo de dos días hábiles a contar desde hoy para que usted<br>pueda realizar el pago de la multa. Si no se procediese al abono de la misma se le arrestará.<br>Por favor haga clic en cualquier parte del texto<br> para tener acceso a los diferentes métodos de pago disponibles.")
+afd_pay = QtWidgets.QLabel(u"Se abre un periodo de dos días hábiles a contar desde hoy para que usted<br>pueda realizar el pago de la multa. Si no se procediese al abono de la misma se le arrestará.<br>Por favor haga clic en cualquier parte del texto<br> para tener acceso a los diferentes métodos de pago disponibles.")
 afd_pay_font = QtGui.QFont()
 afd_pay_font.setPointSize(14)
 afd_pay.setFont(afd_pay_font)
@@ -96,7 +96,7 @@ afd_pay.setPalette(afd_pay_palette)
 
 # gobierno_espana_image
 
-afd_gobierno_espana = QtGui.QLabel()
+afd_gobierno_espana = QtWidgets.QLabel()
 afd_gobierno_espana_pixmap = QtGui.QPixmap(afd_gobierno_espana_image_path)
 afd_gobierno_espana.resize(384,288)
 afd_gobierno_espana_scaled_pixmap = afd_gobierno_espana_pixmap.scaled(afd_gobierno_espana.size(),QtCore.Qt.KeepAspectRatio)
@@ -120,10 +120,10 @@ afd_scrollArea = VerticalScrollArea()
 
 afd_top_scrollArea = VerticalScrollArea()
 
-afd_gridQWidget =  QtGui.QWidget()
+afd_gridQWidget =  QtWidgets.QWidget()
 afd_gridQWidget.setLayout(afd_grid)
 
-afd_top_gridQWidget =  QtGui.QWidget()
+afd_top_gridQWidget =  QtWidgets.QWidget()
 afd_top_gridQWidget.setLayout(afd_top_grid)
 
 afd_scrollArea.setWidgetResizable(False)
@@ -135,7 +135,7 @@ afd_top_scrollArea.setWidget(afd_top_gridQWidget)
 afd_top_scrollArea.setMinimumWidth(afd_top_gridQWidget.minimumSizeHint().width())
 afd_top_scrollArea.setMaximumHeight(200)
 
-afd_qVboxLayout = QtGui.QVBoxLayout()
+afd_qVboxLayout = QtWidgets.QVBoxLayout()
 afd_qVboxLayout.addWidget(afd_top_scrollArea)
 afd_qVboxLayout.addWidget(afd_scrollArea)
 
@@ -149,6 +149,6 @@ if afd_window.layout() is not None:
 	sip.delete(old_layout)
 # Clear Layout - End
 
-QtGui.QWidget.setLayout(afd_window,afd_qVboxLayout)
+QtWidgets.QWidget.setLayout(afd_window,afd_qVboxLayout)
 afd_window.showFullScreen()
 afd_app.exec_()

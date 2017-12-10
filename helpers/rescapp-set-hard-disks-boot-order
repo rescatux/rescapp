@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Rescapp rescapp-set-hard-disks-boot-order script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,15 +17,14 @@
 
 
 import sys, subprocess, os, time, linecache, sip, getopt
-from PyQt4 import QtGui,QtCore,QtWebKit
-from PyQt4.QtGui import QIcon
-from PyQt4.QtCore import QStringList
+from PyQt5 import QtCore,QtWidgets,QtGui
+from PyQt5.QtGui import QIcon
 
-class MainWindow(QtGui.QWidget):
+class MainWindow(QtWidgets.QWidget):
 
     def setLayout(self, layout):
 	self.clearLayout()
-	QtGui.QWidget.setLayout(self, layout)
+	QtWidgets.QWidget.setLayout(self, layout)
 
     def clearLayout(self):
 	if self.layout() is not None:
@@ -44,7 +43,7 @@ class MainWindow(QtGui.QWidget):
 	    self.harddisks_tablewidget.insertRow(self.harddisks_tablewidget.rowCount())
 	    m = 0
 	    for cell in harddisk:
-	      item = QtGui.QTableWidgetItem(cell)
+	      item = QtWidgets.QTableWidgetItem(cell)
 	      self.harddisks_tablewidget.setItem(n,m,item)
 	      m +=1  
 	    n +=1
@@ -99,35 +98,35 @@ class MainWindow(QtGui.QWidget):
 	global description
       
 	
-	self.okbtn = QtGui.QPushButton('Ok', self)
+	self.okbtn = QtWidgets.QPushButton('Ok', self)
         self.okbtn.clicked.connect(self.close)
         self.okbtn.resize(self.okbtn.sizeHint())
 	
 	# Initialize hard disk stuff - BEGIN
-	self.harddisks_tablewidget = QtGui.QTableWidget()
+	self.harddisks_tablewidget = QtWidgets.QTableWidget()
 	self.harddisks_tablewidget.itemSelectionChanged.connect(self.selected_harddisk_changed)
 
-	self.harddisks_tablewidget.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows);
-	self.harddisks_tablewidget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection);
+	self.harddisks_tablewidget.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows);
+	self.harddisks_tablewidget.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection);
 	# Initialize hard disk stuff - END
 	# Move up button - BEGIN
-	self.move_up_button = QtGui.QToolButton();
+	self.move_up_button = QtWidgets.QToolButton();
 	self.move_up_button.setIcon(QtGui.QIcon(go_up_icon_path))
 	self.move_up_button.clicked.connect(self.move_up_button_clicked)
 	# Move up button - END
 	
 	# Move down button - BEGIN
-	self.move_down_button = QtGui.QToolButton();
+	self.move_down_button = QtWidgets.QToolButton();
 	self.move_down_button.setIcon(QtGui.QIcon(go_down_icon_path))
 	self.move_down_button.clicked.connect(self.move_down_button_clicked)
 	# Move down button - END
 	self.refresh_harddisks()
 	# Add button - BEGIN
 
-	self.descriptionwidget = QtGui.QLabel(description)
+	self.descriptionwidget = QtWidgets.QLabel(description)
 	self.descriptionwidget.setWordWrap(1==1)
 
-        grid = QtGui.QGridLayout()
+        grid = QtWidgets.QGridLayout()
         grid.setSpacing(10)
 
 	grid.addWidget(self.descriptionwidget, 0, 0, 1, 3)
@@ -144,7 +143,7 @@ class MainWindow(QtGui.QWidget):
 	self.setMinimumWidth(600)
 
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
     def closeEvent(self,event):
       for harddisk in harddisks:
 	print(harddisk[0])
@@ -153,7 +152,7 @@ class MainWindow(QtGui.QWidget):
 
 if __name__ == "__main__":
  
-    app=QtGui.QApplication(sys.argv)
+    app=QtWidgets.QApplication(sys.argv)
     
     # TODO: rescapp.py an rescapp-set-hard-disks-boot-order take rescapp_icons_path from the same included py file
     rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
@@ -162,7 +161,7 @@ if __name__ == "__main__":
     go_up_icon_path = rescapp_icons_path + "/" + "go-up.png"
     
     harddisks = []
-    label_list = QStringList()
+    label_list = list()
     mw=MainWindow()
     
     
