@@ -81,16 +81,6 @@ FILESYSTEM_PACKAGES="reiserfsprogs \
  ntfs-3g \
  "
 
-SELINUX_PACKAGES="\
- python-selinux \
- python-semanage \
- policycoreutils-python-utils \
- selinux-basics \
- auditd \
- selinux-policy-default \
- setools \
-"
-
 GPT_PACKAGES="\
  gdisk \
 "
@@ -115,7 +105,6 @@ RESCAPP_PACKAGES=" \
  ${TESTDISK_PACKAGES} \
  ${CRYPTSETUP_PACKAGES} \
  ${FILESYSTEM_PACKAGES} \
- ${SELINUX_PACKAGES} \
  ${GPT_PACKAGES} \
  ${PYTHON_PARTED_PACKAGES} \
  ${UEFI_PACKAGES} \
@@ -131,6 +120,30 @@ RESCAPP_PACKAGES=" \
  gawk\
  extundelete\
  " # I add syslinux so that isohybrid command is recognised.
+
+SELinux support
+===============
+
+If you want Rescapp to work ok with SELinux systems your Live CD system
+needs probably to be boot in SELinux mode.
+
+Suggested Kernel parametres might be:
+selinux=1 security=selinux enforcing=0
+
+And you will also need some SELinux packages.
+These were the needed ones when using jessie and sid
+back in 2015 October.
+
+
+SELINUX_PACKAGES="\
+ python-selinux \
+ python-semanage \
+ policycoreutils-python-utils \
+ selinux-basics \
+ auditd \
+ selinux-policy-default \
+ setools \
+"
 
 Git based Debian package build
 ==============================
