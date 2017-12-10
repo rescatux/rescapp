@@ -1,3 +1,12 @@
+rescapp (0.52b3-1) unstable; urgency=low
+
+  * Updated to 0.52b3 upstream version
+  * helpers/rescapp-set-hard-disks-boot-order ported to PyQT5
+  * lib/rescapp_afd* (English version) ported to PyQT5
+  * lib/rescapp_afd* (Spanish version) ported to PyQT5
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 10 Dec 2017 11:50:53 +0000
+
 rescapp (0.52b2-1) unstable; urgency=low
 
   * Updated to 0.52b2 upstream version
