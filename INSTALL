@@ -63,7 +63,7 @@ Debian Package Runtime Requirements
 You will find the needed Debian Jessie packages in the following list.
 
 
-PYTHON_PACKAGES="python-sip python-qt4"
+PYTHON_PACKAGES="python-pyqt5 python-pyqt5.qtwebkit"
 RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
 GPARTED_PACKAGES="gparted gpart dosfstools"
