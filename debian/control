@@ -1,5 +1,5 @@
 Source: rescapp
-Section: main
+Section: admin
 Priority: optional
 Maintainer: Adrian Gibanel Lopez <adrian15sgd@gmail.com>
 Build-Depends: debhelper (>= 9)
