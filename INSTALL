@@ -112,7 +112,7 @@ RESCAPP_PACKAGES=" \
  ${MYRESCUE_PACKAGES} \
  ${CHNTPW_PACKAGES} \
  zenity \
- iceweasel \
+ xdg-utils \
  hexchat \
  syslinux \
  pastebinit \
