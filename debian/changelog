@@ -1,3 +1,10 @@
+rescapp (0.52b5-1) unstable; urgency=low
+
+  * Updated to 0.52b5 upstream version
+  * Iceweasel is not longer a requirement. xdg-utils is.
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 03 Mar 2019 12:03:00 +0000
+
 rescapp (0.52b4-1) unstable; urgency=low
 
   * Updated to 0.52b4 upstream version

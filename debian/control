@@ -37,7 +37,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,chntpw
 # misc
          ,zenity
-         ,iceweasel
+         ,xdg-utils
          ,hexchat
          ,syslinux
          ,pastebinit
