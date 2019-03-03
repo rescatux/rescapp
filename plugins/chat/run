@@ -29,17 +29,17 @@ USER_NUMBER=$$
 let USER_NUMBER_2=$USER_NUMBER+1
 let USER_NUMBER_3=$USER_NUMBER+2
 
-mkdir --parents $HOME/.config/hexchat/
+XCHAT_CONF_DIR="$(mktemp -t -d hexchat-conf-XXXXXXXX)"
 
 XCHAT_RESCAPP_VERSION="$(echo ${RESCAPP_VERSION} | sed 's/\.//g')"
 
-cat << EOF > $HOME/.config/hexchat/hexchat.conf
+cat << EOF > ${XCHAT_CONF_DIR}/hexchat.conf
 irc_nick1 = ${RESC_USER_IRC_PREFIX}${XCHAT_RESCAPP_VERSION}_${USER_NUMBER}
 irc_nick2 = ${RESC_USER_IRC_PREFIX}${XCHAT_RESCAPP_VERSION}_${USER_NUMBER_2}
 irc_nick3 = ${RESC_USER_IRC_PREFIX}${XCHAT_RESCAPP_VERSION}_${USER_NUMBER_3}
 EOF
 
-${XCHAT_COMMAND} --url=${RESCATUX_IRC_URL} & 
+${XCHAT_COMMAND} --cfgdir=${XCHAT_CONF_DIR} --url=${RESCATUX_IRC_URL} & 
 sleep 2s;
 
 wmctrl \
