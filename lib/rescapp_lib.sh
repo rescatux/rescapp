@@ -29,7 +29,10 @@ function rtux_Get_Etc_Issue_Content_payload() {
   else
     mkdir --parents ${TMP_MNT_PARTITION}
     if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null) ; then
-      if [[ -e ${TMP_MNT_PARTITION}${ETC_ISSUE_PATH} ]] ; then
+      if [[ -e ${TMP_MNT_PARTITION}${ETC_REDHAT_RELEASE} ]] ; then
+        echo $(head -n 1 ${TMP_MNT_PARTITION}${ETC_REDHAT_RELEASE} |\
+          sed -e 's/\\. //g' -e 's/\\.//g' -e 's/^[ \t]*//' -e 's/\ /_/g' -e 's/\ \ /_/g' -e 's/\n/_/g' -e 's/--/_/g')
+      elif [[ -e ${TMP_MNT_PARTITION}${ETC_ISSUE_PATH} ]] ; then
         echo $(head -n 1 ${TMP_MNT_PARTITION}${ETC_ISSUE_PATH} |\
           sed -e 's/\\. //g' -e 's/\\.//g' -e 's/^[ \t]*//' -e 's/\ /_/g' -e 's/\ \ /_/g' -e 's/\n/_/g' -e 's/--/_/g')
       else
@@ -1823,6 +1826,7 @@ RESCATUX_ROOT_MNT=/mnt/rescatux
 LINUX_OS_DETECTOR="/etc/issue"
 GRUB_INSTALL_BINARY=grub-install
 ETC_ISSUE_PATH="/etc/issue"
+ETC_REDHAT_RELEASE="/etc/redhat-release"
 UEFI_DETECTION_DIR="/sys/firmware/efi"
 FDISK_EFI_SYSTEM_DETECTOR="EFI System"
 
@@ -1841,7 +1845,7 @@ DEFAULT_NON_SECURE_MICROSOFT_UEFI_BOOT_ENTRY_RELATIVE_PATH="EFI/Microsoft/Boot/b
 DEFAULT_SECURE_MICROSOFT_UEFI_BOOT_ENTRY_RELATIVE_PATH="EFI/Microsoft/Boot/bootmgfw.efi"
 DEFAULT_MICROSOFT_UEFI_BOOT_DIRECTORY_RELATIVE_PATH="EFI/Microsoft"
 
-UNKNOWN_GNULINUX_DISTRO="Unknown GNU/Linux distro"
+UNKNOWN_GNULINUX_DISTRO="Unknown-GNU/Linux-distro"
 
 DEFAULT_NON_SECURE_MICROSOFT_UEFI_FILE_RELATIVE_PATH="Windows/Boot/EFI/bootmgr.efi"
 DEFAULT_SECURE_MICROSOFT_UEFI_FILE_RELATIVE_PATH="Windows/Boot/EFI/bootmgfw.efi"

@@ -117,8 +117,9 @@ RESCAPP_PACKAGES=" \
  syslinux \
  pastebinit \
  lilo \
- gawk\
- extundelete\
+ gawk \
+ extundelete \
+ os-prober \
  " # I add syslinux so that isohybrid command is recognised.
 
 SELinux support
