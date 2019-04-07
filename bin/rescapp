@@ -26,6 +26,7 @@ import sip
 import datetime
 from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets
 from functools import partial
+from enum import Enum
 
 
 class VerticalScrollArea(QtWidgets.QScrollArea):
@@ -469,6 +470,8 @@ class MainWindow(QtWidgets.QWidget):
 
 class SelftestWindow(QtWidgets.QWidget):
 
+    ResultType = Enum('ResultType', 'Skip Success Warning Error')
+
     def setLayout(self, layout):
         self.clearLayout()
         QtWidgets.QWidget.setLayout(self, layout)
@@ -485,6 +488,25 @@ class SelftestWindow(QtWidgets.QWidget):
         self.exitAction.setShortcut('Ctrl+Q')
         self.exitAction.setStatusTip('Exit application')
         self.exitAction.triggered.connect(self.close)
+
+    def report(self, resulttype, summary, details):
+        item = QtGui.QStandardItem(str(summary))
+        # TODO: switch resulttype Icon
+        item.setEditable(False)
+        item.setWhatsThis(str(details))
+        #item.setData(resulttype, ResultTypeRole);
+        #item.setData(summary.toString(nullptr), SummaryRole);
+        #item.setData(details.toString(nullptr), DetailsRole);
+        self.mTestModel.appendRow(item);
+        return item;
+
+
+    def testSamunlock(self):
+        detailsOk = "Details from samunlock found"
+        self.report(self.ResultType.Success, "samunlock found.", detailsOk)
+
+    def runTests(self):
+        self.testSamunlock()
 
     def __init__(self, url):
         QtWidgets.QMainWindow.__init__(self)
@@ -509,6 +531,7 @@ class SelftestWindow(QtWidgets.QWidget):
         self.selftestLayout.addWidget(self.buttonBox)
         
         self.setLayout(self.selftestLayout)
+        self.runTests()
 
 
         
