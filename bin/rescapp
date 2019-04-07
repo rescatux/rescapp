@@ -500,6 +500,13 @@ class SelftestWindow(QtWidgets.QWidget):
         self.mTestModel.appendRow(item);
         return item;
 
+    def selectionChanged(self, index):
+        if (index.isValid()):
+            self.detailsLabel.setText(str(index.data(QtCore.Qt.WhatsThisRole)))
+            self.detailsGroup.setEnabled(True);
+        else:
+            self.detailsLabel.setText("")
+            self.detailsGroup.setEnabled(False);
 
     def testSamunlock(self):
         detailsOk = "Details from samunlock found"
@@ -554,7 +561,9 @@ class SelftestWindow(QtWidgets.QWidget):
         self.selftestLayout.addWidget(self.detailsGroup)
         self.selftestLayout.addWidget(self.bottomLabel)
         self.selftestLayout.addWidget(self.buttonBox)
-        
+
+        self.selftestView.selectionModel().currentChanged.connect(self.selectionChanged)
+
         self.setLayout(self.selftestLayout)
         self.runTests()
 
