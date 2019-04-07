@@ -527,7 +527,9 @@ class SelftestWindow(QtWidgets.QWidget):
         
 
         self.mTestModel = QtGui.QStandardItemModel()
-        self.selftestView = QtWidgets.QListView()
+        self.selftestView = QtWidgets.QTreeView()
+        self.selftestView.setRootIsDecorated(False)
+        self.selftestView.setHeaderHidden(True)
         self.selftestView.setModel(self.mTestModel)
         
         self.selftestLayout = QtWidgets.QVBoxLayout()
