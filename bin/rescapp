@@ -524,17 +524,30 @@ class SelftestWindow(QtWidgets.QWidget):
         self.user2Button = QtWidgets.QPushButton()
         self.buttonBox.addButton(self.user2Button, QtWidgets.QDialogButtonBox.ActionRole)
         self.user2Button.setText("Copy Report to Clipboard")
-        
 
         self.mTestModel = QtGui.QStandardItemModel()
         self.selftestView = QtWidgets.QTreeView()
         self.selftestView.setRootIsDecorated(False)
         self.selftestView.setHeaderHidden(True)
         self.selftestView.setModel(self.mTestModel)
+
+        self.detailsLabel = QtWidgets.QLabel()
+        self.detailsLabel.setWordWrap(True)
+        self.detailsLabel.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByMouse)
+
+        self.verticalLayout=QtWidgets.QVBoxLayout()
+        self.verticalLayout.addWidget(self.detailsLabel)
+
+        self.detailsGroup = QtWidgets.QGroupBox()
+        self.detailsGroup.setEnabled(False)
+        self.detailsGroup.setTitle("Details")
+        self.detailsGroup.setLayout(self.verticalLayout)
+
         
         self.selftestLayout = QtWidgets.QVBoxLayout()
         self.selftestLayout.addWidget(self.introductionLabel)
         self.selftestLayout.addWidget(self.selftestView)
+        self.selftestLayout.addWidget(self.detailsGroup)
         self.selftestLayout.addWidget(self.buttonBox)
         
         self.setLayout(self.selftestLayout)
