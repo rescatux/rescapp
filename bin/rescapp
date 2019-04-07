@@ -512,8 +512,13 @@ class SelftestWindow(QtWidgets.QWidget):
         detailsOk = "Details from samunlock found"
         self.report(self.ResultType.Success, "samunlock found.", detailsOk)
 
+    def testRescatuxLiveCD(self):
+        detailsOk = "Details from RescatuxLiveCD found"
+        self.report(self.ResultType.Success, "RescatuxLiveCD found.", detailsOk)
+
     def runTests(self):
         self.testSamunlock()
+        self.testRescatuxLiveCD()
 
     def __init__(self, url):
         QtWidgets.QMainWindow.__init__(self)
