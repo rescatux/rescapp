@@ -467,6 +467,51 @@ class MainWindow(QtWidgets.QWidget):
         self.selectSupportOption(main_menu_support_option)
         self.show()
 
+class SelftestWindow(QtWidgets.QWidget):
+
+    def setLayout(self, layout):
+        self.clearLayout()
+        QtWidgets.QWidget.setLayout(self, layout)
+
+    def clearLayout(self):
+        if self.layout() is not None:
+            old_layout = self.layout()
+            for i in reversed(range(old_layout.count())):
+                old_layout.itemAt(i).widget().setParent(None)
+            sip.delete(old_layout)
+
+    def initActions(self):
+        self.exitAction = QtWidgets.QAction('Quit', self)
+        self.exitAction.setShortcut('Ctrl+Q')
+        self.exitAction.setStatusTip('Exit application')
+        self.exitAction.triggered.connect(self.close)
+
+    def __init__(self, url):
+        QtWidgets.QMainWindow.__init__(self)
+        self.initActions()
+        self.addAction(self.exitAction)
+        self.buttonBox = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Close)
+        self.user1Button = QtWidgets.QPushButton()
+        self.user1Button.setText("Save Report...")
+
+        self.buttonBox.addButton(self.user1Button, QtWidgets.QDialogButtonBox.ActionRole)
+        self.user2Button = QtWidgets.QPushButton()
+        self.buttonBox.addButton(self.user2Button, QtWidgets.QDialogButtonBox.ActionRole)
+        self.user2Button.setText("Copy Report to Clipboard")
+        
+
+        self.mTestModel = QtGui.QStandardItemModel()
+        self.selftestView = QtWidgets.QListView()
+        self.selftestView.setModel(self.mTestModel)
+        
+        self.selftestLayout = QtWidgets.QVBoxLayout()
+        self.selftestLayout.addWidget(self.selftestView)
+        self.selftestLayout.addWidget(self.buttonBox)
+        
+        self.setLayout(self.selftestLayout)
+
+
+        
 
 if __name__ == '__main__':
 
@@ -550,11 +595,17 @@ if __name__ == '__main__':
     url = QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/'
                       + help_support_option.getCode() + '/'
                       + offlinedoc_filename)
-    mw = MainWindow(url)
-    mw.setWindowTitle('Rescatux ' + rescapp_version + ' Rescapp')
+    stw = SelftestWindow(url)
+    stw.setWindowTitle('Rescapp ' + rescapp_version + ' self-test')
 
-    mw.selectSupportOption(main_menu_support_option)
-    mw.show()
+    #stw.selectSupportOption(main_menu_support_option)
+    stw.show()
+
+    #mw = MainWindow(url)
+    #mw.setWindowTitle('Rescatux ' + rescapp_version + ' Rescapp')
+
+    #mw.selectSupportOption(main_menu_support_option)
+    #mw.show()
     sys.exit(app.exec_())
 
 			
