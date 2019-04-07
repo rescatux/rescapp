@@ -520,10 +520,11 @@ class SelftestWindow(QtWidgets.QWidget):
         self.testSamunlock()
         self.testRescatuxLiveCD()
 
-    def __init__(self, url):
+    def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
-        self.initActions()
-        self.addAction(self.exitAction)
+        #self.initActions()
+        #self.addAction(self.exitAction)
+        #app.aboutToQuit.connect(self.closeEvent)
 
         self.introductionLabel = QtWidgets.QLabel("This is the self-test window from Rescapp. It allows you to check if rescapp will work ok on your live system or not.")
         self.introductionLabel.setWordWrap(True)
@@ -574,8 +575,7 @@ class SelftestWindow(QtWidgets.QWidget):
 
         self.setLayout(self.selftestLayout)
         self.runTests()
-
-
+        #start_rescapp_gui()
         
 
 if __name__ == '__main__':
@@ -656,21 +656,27 @@ if __name__ == '__main__':
         execfile(rescapp_library_path + '/' + 'rescapp_afd_es.py')
         execfile(rescapp_library_path + '/' + 'rescapp_afd2_es.py')
 
-    app = QtWidgets.QApplication(sys.argv)
+    app_stw = QtWidgets.QApplication(sys.argv)
+
+    stw = SelftestWindow()
+    stw.setWindowTitle('Rescapp ' + rescapp_version + ' self-test')
+    stw.setWindowFlags(QtCore.Qt.Widget)
+    stw.show()
+
+    app_stw.exec_()
+    # Wait for self-test window application to end
+
+    print "DEBUG: start_rescapp_gui"
+    app_rescapp = QtWidgets.QApplication(sys.argv)
     url = QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/'
                       + help_support_option.getCode() + '/'
                       + offlinedoc_filename)
-    stw = SelftestWindow(url)
-    stw.setWindowTitle('Rescapp ' + rescapp_version + ' self-test')
+    mw = MainWindow(url)
+    mw.setWindowTitle('Rescapp ' + rescapp_version)
 
-    #stw.selectSupportOption(main_menu_support_option)
-    stw.show()
+    mw.selectSupportOption(main_menu_support_option)
+    mw.show()
 
-    #mw = MainWindow(url)
-    #mw.setWindowTitle('Rescatux ' + rescapp_version + ' Rescapp')
+    sys.exit(app_rescapp.exec_())
 
-    #mw.selectSupportOption(main_menu_support_option)
-    #mw.show()
-    sys.exit(app.exec_())
 
-			
