@@ -512,6 +512,10 @@ class SelftestWindow(QtWidgets.QWidget):
         QtWidgets.QMainWindow.__init__(self)
         self.initActions()
         self.addAction(self.exitAction)
+
+        self.introductionLabel = QtWidgets.QLabel("This is the self-test window from Rescapp. It allows you to check if rescapp will work ok on your live system or not.")
+        self.introductionLabel.setWordWrap(True)
+
         self.buttonBox = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Close)
         self.user1Button = QtWidgets.QPushButton()
         self.user1Button.setText("Save Report...")
@@ -527,6 +531,7 @@ class SelftestWindow(QtWidgets.QWidget):
         self.selftestView.setModel(self.mTestModel)
         
         self.selftestLayout = QtWidgets.QVBoxLayout()
+        self.selftestLayout.addWidget(self.introductionLabel)
         self.selftestLayout.addWidget(self.selftestView)
         self.selftestLayout.addWidget(self.buttonBox)
         
