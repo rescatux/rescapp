@@ -525,9 +525,19 @@ class SelftestWindow(QtWidgets.QWidget):
         detailsOk = "Details from RescatuxLiveCD found"
         self.report(self.ResultType.Error, "RescatuxLiveCD NOT found.", detailsOk)
 
+    def test2(self):
+        detailsOk = "Details from 2"
+        self.report(self.ResultType.Skip, "Header 2 (Skip)", detailsOk)
+
+    def test3(self):
+        detailsOk = "Details from 3"
+        self.report(self.ResultType.Warning, "Header 3 (Warning)", detailsOk)
+
     def runTests(self):
         self.testSamunlock()
         self.testRescatuxLiveCD()
+        self.test2()
+        self.test3()
 
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
