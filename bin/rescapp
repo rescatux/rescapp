@@ -492,6 +492,15 @@ class SelftestWindow(QtWidgets.QWidget):
     def report(self, resulttype, summary, details):
         item = QtGui.QStandardItem(str(summary))
         # TODO: switch resulttype Icon
+        if (resulttype == self.ResultType.Skip):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-ok.png'))
+        elif (resulttype == self.ResultType.Success):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-ok-apply.png'))
+        elif (resulttype == self.ResultType.Warning):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-warning.png'))
+        elif (resulttype == self.ResultType.Error):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-error.png'))
+
         item.setEditable(False)
         item.setWhatsThis(str(details))
         #item.setData(resulttype, ResultTypeRole);
@@ -514,7 +523,7 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def testRescatuxLiveCD(self):
         detailsOk = "Details from RescatuxLiveCD found"
-        self.report(self.ResultType.Success, "RescatuxLiveCD found.", detailsOk)
+        self.report(self.ResultType.Error, "RescatuxLiveCD NOT found.", detailsOk)
 
     def runTests(self):
         self.testSamunlock()
