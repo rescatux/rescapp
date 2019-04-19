@@ -691,8 +691,6 @@ class SelftestWindow(QtWidgets.QWidget):
         self.runTests()
         self.saveReportToLogFile()
 
-        
-
 if __name__ == '__main__':
 
     rescapp_title='Rescapp'
