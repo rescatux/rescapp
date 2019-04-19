@@ -612,7 +612,6 @@ class SelftestWindow(QtWidgets.QWidget):
         self.test3()
 
     def saveReportToLogFile(self):
-
         try:
             os.makedirs(self.rescapp_log_directory)
         except OSError as exc:  # Python >2.5
