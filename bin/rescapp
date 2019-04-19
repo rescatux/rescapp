@@ -590,11 +590,17 @@ class SelftestWindow(QtWidgets.QWidget):
             self.detailsGroup.setEnabled(False);
 
     def testSamunlock(self):
+        samunlock_binary='samunlock'
         detailsOk = "Details from samunlock found"
         detailsOk = "Details from samunlock found"
-        samunlock_which = self.which('samunlock')
-        if (samunlock_which is not None):
-            detailsOk = "Samunlock binary found at: " + samunlock_which
+        sudo_which = self.which('sudo')
+
+        proc = subprocess.Popen([sudo_which, "which", samunlock_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        samunlock_out, samunlock_err = proc.communicate()
+        samunlock_exitcode = proc.returncode
+
+        if (samunlock_exitcode == 0):
+            detailsOk = "Samunlock binary found at: " + samunlock_out
             self.report(self.ResultType.Success, "samunlock found.", detailsOk)
         else:
             detailsWarning = "Samunlock binary was not found.\nYou might be missing Rescatux chntpw package.\nYou won't be able to unlock users in Windows options."
