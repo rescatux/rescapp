@@ -26,7 +26,7 @@ import sip
 import datetime
 from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets
 from functools import partial
-from enum import Enum
+from enum import Enum, IntEnum
 
 
 class VerticalScrollArea(QtWidgets.QScrollArea):
@@ -471,6 +471,13 @@ class MainWindow(QtWidgets.QWidget):
 class SelftestWindow(QtWidgets.QWidget):
 
     ResultType = Enum('ResultType', 'Skip Success Warning Error')
+    class SelfTestRole(IntEnum):
+        ResultTypeRole = QtCore.Qt.UserRole
+        FileIncludeRole = ResultTypeRole + 1
+        ListDirectoryRole = ResultTypeRole + 2
+        EnvVarRole = ResultTypeRole + 3
+        SummaryRole = ResultTypeRole + 4
+        DetailsRole = ResultTypeRole + 5
 
     def setLayout(self, layout):
         self.clearLayout()
@@ -503,9 +510,9 @@ class SelftestWindow(QtWidgets.QWidget):
 
         item.setEditable(False)
         item.setWhatsThis(str(details))
-        #item.setData(resulttype, ResultTypeRole);
-        #item.setData(summary.toString(nullptr), SummaryRole);
-        #item.setData(details.toString(nullptr), DetailsRole);
+        item.setData(resulttype, self.SelfTestRole.ResultTypeRole);
+        item.setData(summary, self.SelfTestRole.SummaryRole);
+        item.setData(details, self.SelfTestRole.DetailsRole);
         self.mTestModel.appendRow(item);
         return item;
 
