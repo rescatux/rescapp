@@ -627,9 +627,6 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
-        #self.initActions()
-        #self.addAction(self.exitAction)
-        #app.aboutToQuit.connect(self.closeEvent)
         home_directory = os.path.expanduser('~')
         self.rescapp_log_directory = home_directory + '/.rescapp/log'
         self.selftest_log_file = self.rescapp_log_directory + '/selftest_log.txt'
