@@ -24,6 +24,7 @@ import time
 import linecache
 import sip
 import datetime
+import errno
 from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets
 from functools import partial
 from enum import Enum, IntEnum
@@ -611,11 +612,28 @@ class SelftestWindow(QtWidgets.QWidget):
         self.test2()
         self.test3()
 
+    def saveReportToLogFile(self):
+
+        try:
+            os.makedirs(self.rescapp_log_directory)
+        except OSError as exc:  # Python >2.5
+            if exc.errno == errno.EEXIST and os.path.isdir(self.rescapp_log_directory):
+                pass
+            else:
+                raise
+
+        file = open(self.selftest_log_file,"w")
+        file.write(self.createReport())
+        file.close()
+
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         #self.initActions()
         #self.addAction(self.exitAction)
         #app.aboutToQuit.connect(self.closeEvent)
+        home_directory = os.path.expanduser('~')
+        self.rescapp_log_directory = home_directory + '/.rescapp/log'
+        self.selftest_log_file = self.rescapp_log_directory + '/selftest_log.txt'
 
         self.introductionLabel = QtWidgets.QLabel("This is the self-test window from Rescapp. It allows you to check if rescapp will work ok on your live system or not.")
         self.introductionLabel.setWordWrap(True)
@@ -647,7 +665,7 @@ class SelftestWindow(QtWidgets.QWidget):
         self.detailsGroup.setTitle("Details")
         self.detailsGroup.setLayout(self.verticalLayout)
 
-        self.bottomLabel = QtWidgets.QLabel("<p>For more troubleshooting tips please refer to <a href=\"https://www.rescatux.org\">https://www.rescatux.org</a> or ask in the chat.</p>")
+        self.bottomLabel = QtWidgets.QLabel("<p>For more troubleshooting tips please refer to <a href=\"https://www.rescatux.org\">https://www.rescatux.org</a> or ask in the chat.</p><p>Selftest log file will be found at: " + self.selftest_log_file + ". You will be able to share it thanks to the 'Share log' option." )
         self.bottomLabel.setWordWrap(True)
         self.bottomLabel.setOpenExternalLinks(True)
         self.bottomLabel.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
@@ -666,7 +684,8 @@ class SelftestWindow(QtWidgets.QWidget):
 
         self.setLayout(self.selftestLayout)
         self.runTests()
-        print(self.createReport())
+        self.saveReportToLogFile()
+
         
 
 if __name__ == '__main__':
