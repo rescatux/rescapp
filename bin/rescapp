@@ -667,7 +667,6 @@ class SelftestWindow(QtWidgets.QWidget):
         self.setLayout(self.selftestLayout)
         self.runTests()
         print(self.createReport())
-        #start_rescapp_gui()
         
 
 if __name__ == '__main__':
