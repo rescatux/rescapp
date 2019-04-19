@@ -499,7 +499,7 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def createReport(self):
         s = ""
-        s += "Rescapp Server Self-Test Report" + '\n'
+        s += rescapp_title + " Server Self-Test Report" + '\n'
         s += "===============================" + '\n'
 
         for i in range (0,self.mTestModel.rowCount()):
@@ -635,7 +635,7 @@ class SelftestWindow(QtWidgets.QWidget):
         self.rescapp_log_directory = home_directory + '/.rescapp/log'
         self.selftest_log_file = self.rescapp_log_directory + '/selftest_log.txt'
 
-        self.introductionLabel = QtWidgets.QLabel("This is the self-test window from Rescapp. It allows you to check if rescapp will work ok on your live system or not.")
+        self.introductionLabel = QtWidgets.QLabel("This is the self-test window from '"+rescapp_title+"'. It allows you to check if '"+rescapp_title+"' will work ok on your live system or not.")
         self.introductionLabel.setWordWrap(True)
 
         self.buttonBox = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Close)
@@ -650,6 +650,7 @@ class SelftestWindow(QtWidgets.QWidget):
         '''
 
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).clicked.connect(self.close)
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).setText('Start '+rescapp_title+' !!!')
 
         self.mTestModel = QtGui.QStandardItemModel()
         self.selftestView = QtWidgets.QTreeView()
@@ -694,6 +695,7 @@ class SelftestWindow(QtWidgets.QWidget):
 
 if __name__ == '__main__':
 
+    rescapp_title='Rescapp'
     rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
     rescapp_doc_path = rescapp_binary_path + '/../' \
         + 'share/doc/rescapp'
@@ -773,7 +775,7 @@ if __name__ == '__main__':
     app_stw = QtWidgets.QApplication(sys.argv)
 
     stw = SelftestWindow()
-    stw.setWindowTitle('Rescapp ' + rescapp_version + ' self-test')
+    stw.setWindowTitle(rescapp_title + ' ' + rescapp_version + ' self-test')
     stw.setWindowFlags(QtCore.Qt.Widget)
     stw.show()
 
@@ -786,7 +788,7 @@ if __name__ == '__main__':
                       + help_support_option.getCode() + '/'
                       + offlinedoc_filename)
     mw = MainWindow(url)
-    mw.setWindowTitle('Rescapp ' + rescapp_version)
+    mw.setWindowTitle(rescapp_title + ' ' + rescapp_version)
 
     mw.selectSupportOption(main_menu_support_option)
     mw.show()
