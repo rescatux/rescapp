@@ -647,6 +647,8 @@ class SelftestWindow(QtWidgets.QWidget):
         self.buttonBox.addButton(self.user2Button, QtWidgets.QDialogButtonBox.ActionRole)
         self.user2Button.setText("Copy Report to Clipboard")
 
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).clicked.connect(self.close)
+
         self.mTestModel = QtGui.QStandardItemModel()
         self.selftestView = QtWidgets.QTreeView()
         self.selftestView.setRootIsDecorated(False)
