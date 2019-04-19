@@ -679,9 +679,11 @@ class SelftestWindow(QtWidgets.QWidget):
         self.selftestLayout.addWidget(self.buttonBox)
 
         self.selftestView.selectionModel().currentChanged.connect(self.selectionChanged)
-        #connect(ui.detailsLabel, &QLabel::linkActivated, this, &SelfTestDialog::linkActivated);
-        #connect(user1Button, &QPushButton::clicked, this, &SelfTestDialog::saveReport);
-        #connect(user2Button, &QPushButton::clicked, this, &SelfTestDialog::copyReport);
+        '''
+        connect(ui.detailsLabel, &QLabel::linkActivated, this, &SelfTestDialog::linkActivated);
+        connect(user1Button, &QPushButton::clicked, this, &SelfTestDialog::saveReport);
+        connect(user2Button, &QPushButton::clicked, this, &SelfTestDialog::copyReport);
+        '''
 
         self.setLayout(self.selftestLayout)
         self.runTests()
