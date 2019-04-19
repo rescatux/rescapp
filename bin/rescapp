@@ -564,7 +564,6 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def report(self, resulttype, summary, details):
         item = QtGui.QStandardItem(str(summary))
-        # TODO: switch resulttype Icon
         if (resulttype == self.ResultType.Skip):
             item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-ok.png'))
         elif (resulttype == self.ResultType.Success):
