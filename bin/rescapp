@@ -639,6 +639,7 @@ class SelftestWindow(QtWidgets.QWidget):
         self.introductionLabel.setWordWrap(True)
 
         self.buttonBox = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Close)
+        '''
         self.user1Button = QtWidgets.QPushButton()
         self.user1Button.setText("Save Report...")
 
@@ -646,6 +647,7 @@ class SelftestWindow(QtWidgets.QWidget):
         self.user2Button = QtWidgets.QPushButton()
         self.buttonBox.addButton(self.user2Button, QtWidgets.QDialogButtonBox.ActionRole)
         self.user2Button.setText("Copy Report to Clipboard")
+        '''
 
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).clicked.connect(self.close)
 
