@@ -613,9 +613,40 @@ class SelftestWindow(QtWidgets.QWidget):
             detailsSkip = "Rescapp is not running in a Rescatux media. Results might not be optimal. Your experience might vary on the different live cd vendors."
             self.report(self.ResultType.Skip, "Not running inside Rescatux.", detailsSkip)
 
+    def testSelinux(self):
+        getenforce_binary='getenforce'
+        sudo_which = self.which('sudo')
+
+        proc = subprocess.Popen([sudo_which, "which", getenforce_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        getenforce_which_out, getenforce_which_err = proc.communicate()
+        getenforce_which_exitcode = proc.returncode
+        if (len(getenforce_which_out.splitlines()) >= 1):
+            getenforce_complete_path=getenforce_which_out.splitlines()[0]
+
+        detailsWarningCommon = "You might be missing SELinux support.\nTrying to rescue Fedora/RHEL/CentOS systems will probably end on you having to recreate SELinux permissions manually thanks to a .autorelabel file which might take hours. It's probably better to use another live cd that supports SELinux such as Rescatux."
+
+        if (getenforce_which_exitcode == 0):
+            proc = subprocess.Popen([sudo_which, getenforce_complete_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            getenforce_out, getenforce_err = proc.communicate()
+            getenforce_exitcode = proc.returncode
+            getenforce_result = getenforce_out.splitlines()[0]
+
+            detailsGetEnforceFound = "Getenforce binary found at: " + getenforce_complete_path + '.'
+            detailsGetEnforceFoundOK = detailsGetEnforceFound + "SELinux is enabled either in permissive or enforced mode."
+            detailsGetEnforceFoundWarning = detailsGetEnforceFound + "However SELinux is not enabled.\n" + detailsWarningCommon
+
+            if ((getenforce_result == 'Permissive') or (getenforce_result == 'Enforcing')):
+                self.report(self.ResultType.Success, "SELinux support.", detailsGetEnforceFoundOK)
+            else:
+                self.report(self.ResultType.Warning, "No SELinux support.", detailsGetEnforceFoundWarning)
+        else:
+            detailsWarning = "Getenforce binary was not found.\n" + detailsWarningCommon
+            self.report(self.ResultType.Warning, "No SELinux support.", detailsWarning)
+
     def runTests(self):
         self.testSamunlock()
         self.testRescatuxLiveCD()
+        self.testSelinux()
 
     def saveReportToLogFile(self):
         try:
