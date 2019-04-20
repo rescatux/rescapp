@@ -613,19 +613,9 @@ class SelftestWindow(QtWidgets.QWidget):
             detailsSkip = "Rescapp is not running in a Rescatux media. Results might not be optimal. Your experience might vary on the different live cd vendors."
             self.report(self.ResultType.Skip, "Not running inside Rescatux.", detailsSkip)
 
-    def test2(self):
-        detailsOk = "Details from 2"
-        self.report(self.ResultType.Skip, "Header 2 (Skip)", detailsOk)
-
-    def test3(self):
-        detailsOk = "Details from 3"
-        self.report(self.ResultType.Warning, "Header 3 (Warning)", detailsOk)
-
     def runTests(self):
         self.testSamunlock()
         self.testRescatuxLiveCD()
-        self.test2()
-        self.test3()
 
     def saveReportToLogFile(self):
         try:
