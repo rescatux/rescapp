@@ -1761,9 +1761,9 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
 
 # Rescatux lib main variables
 
-RESCATUX_URL="http://www.supergrubdisk.org/rescatux/"
+RESCATUX_URL="https://www.rescatux.org/"
 RESCATUX_IRC_URL="irc://irc.freenode.net/rescatux"
-RESCATUX_PASTEBIN_URL="http://paste.debian.net"
+RESCATUX_PASTEBIN_URL="https://paste.debian.net"
 RESC_USER_IRC_PREFIX="resc_"
 
 RESCAPP_WIDTH="800"

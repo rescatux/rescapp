@@ -120,6 +120,7 @@ RESCAPP_PACKAGES=" \
  gawk \
  extundelete \
  os-prober \
+ mokutil \
  " # I add syslinux so that isohybrid command is recognised.
 
 SELinux support

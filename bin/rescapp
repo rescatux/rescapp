@@ -24,8 +24,10 @@ import time
 import linecache
 import sip
 import datetime
+import errno
 from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets
 from functools import partial
+from enum import Enum, IntEnum
 
 
 class VerticalScrollArea(QtWidgets.QScrollArea):
@@ -467,9 +469,325 @@ class MainWindow(QtWidgets.QWidget):
         self.selectSupportOption(main_menu_support_option)
         self.show()
 
+class SelftestWindow(QtWidgets.QWidget):
+
+    ResultType = Enum('ResultType', 'Skip Success Warning Error')
+    class SelfTestRole(IntEnum):
+        ResultTypeRole = QtCore.Qt.UserRole
+        FileIncludeRole = ResultTypeRole + 1
+        ListDirectoryRole = ResultTypeRole + 2
+        EnvVarRole = ResultTypeRole + 3
+        SummaryRole = ResultTypeRole + 4
+        DetailsRole = ResultTypeRole + 5
+
+    def setLayout(self, layout):
+        self.clearLayout()
+        QtWidgets.QWidget.setLayout(self, layout)
+
+    def clearLayout(self):
+        if self.layout() is not None:
+            old_layout = self.layout()
+            for i in reversed(range(old_layout.count())):
+                old_layout.itemAt(i).widget().setParent(None)
+            sip.delete(old_layout)
+
+    def initActions(self):
+        self.exitAction = QtWidgets.QAction('Quit', self)
+        self.exitAction.setShortcut('Ctrl+Q')
+        self.exitAction.setStatusTip('Exit application')
+        self.exitAction.triggered.connect(self.close)
+
+    def createReport(self):
+        s = ""
+        s += rescapp_title + " Server Self-Test Report" + '\n'
+        s += "===============================" + '\n'
+
+        for i in range (0,self.mTestModel.rowCount()):
+            item = self.mTestModel.item(i)
+            s += '\n'
+            s += "Test " + str(i + 1) + ":  "
+
+            itemResultTypeRole = item.data(self.SelfTestRole.ResultTypeRole)
+
+            if (itemResultTypeRole == self.ResultType.Skip):
+                s += "SKIP"
+            elif (itemResultTypeRole == self.ResultType.Success):
+                s += "SUCCESS"
+            elif (itemResultTypeRole == self.ResultType.Warning):
+                s += "WARNING"
+            elif (itemResultTypeRole == self.ResultType.Error):
+                s += "ERROR"
+            else:
+                s += "ERROR"
+            s += '\n' + "--------" + '\n'
+            s += '\n'
+            s += str(item.data(self.SelfTestRole.SummaryRole)) + '\n'
+            s += "Details: " + str(item.data(self.SelfTestRole.DetailsRole)) + '\n'
+        '''
+            if (item->data(FileIncludeRole).isValid()) {
+                s << endl;
+                const QString fileName = item->data(FileIncludeRole).toString();
+                QFile f(fileName);
+                if (f.open(QFile::ReadOnly)) {
+                    s << "File content of '" << fileName << "':" << endl;
+                    s << f.readAll() << endl;
+                } else {
+                    s << "File '" << fileName << "' could not be opened" << endl;
+                }
+            }
+            if (item->data(ListDirectoryRole).isValid()) {
+                s << endl;
+                const QStringList pathList = item->data(ListDirectoryRole).toStringList();
+                if (pathList.isEmpty()) {
+                    s << "Directory list is empty." << endl;
+                }
+                for (const QString &path : pathList) {
+                    s << "Directory listing of '" << path << "':" << endl;
+                    QDir dir(path);
+                    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
+                    const QStringList listEntries(dir.entryList());
+                    for (const QString &entry : listEntries) {
+                        s << entry << endl;
+                    }
+                }
+            }
+            if (item->data(EnvVarRole).isValid()) {
+                s << endl;
+                const QByteArray envVarName = item->data(EnvVarRole).toByteArray();
+                const QByteArray envVarValue = qgetenv(envVarName.constData());
+                s << "Environment variable " << envVarName << " is set to '" << envVarValue << "'" << endl;
+            }
+        }
+        '''
+        s += '\n'
+        return (s)
+
+    def report(self, resulttype, summary, details):
+        item = QtGui.QStandardItem(str(summary))
+        if (resulttype == self.ResultType.Skip):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-ok.png'))
+        elif (resulttype == self.ResultType.Success):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-ok-apply.png'))
+        elif (resulttype == self.ResultType.Warning):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-warning.png'))
+        elif (resulttype == self.ResultType.Error):
+            item.setIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'dialog-error.png'))
+
+        item.setEditable(False)
+        item.setWhatsThis(str(details))
+        item.setData(resulttype, self.SelfTestRole.ResultTypeRole);
+        item.setData(summary, self.SelfTestRole.SummaryRole);
+        item.setData(details, self.SelfTestRole.DetailsRole);
+        self.mTestModel.appendRow(item);
+        return item;
+
+    def selectionChanged(self, index):
+        if (index.isValid()):
+            self.detailsLabel.setText(str(index.data(QtCore.Qt.WhatsThisRole)))
+            self.detailsGroup.setEnabled(True);
+        else:
+            self.detailsLabel.setText("")
+            self.detailsGroup.setEnabled(False);
+
+    def testSamunlock(self):
+        samunlock_binary='samunlock'
+        sudo_which = self.which('sudo')
+
+        proc = subprocess.Popen([sudo_which, "which", samunlock_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        samunlock_out, samunlock_err = proc.communicate()
+        samunlock_exitcode = proc.returncode
+
+        if (samunlock_exitcode == 0):
+            detailsOk = "Samunlock binary found at: " + samunlock_out
+            self.report(self.ResultType.Success, "samunlock found.", detailsOk)
+        else:
+            detailsWarning = "Samunlock binary was not found.\nYou might be missing Rescatux chntpw package.\nYou won't be able to unlock users in Windows options."
+            self.report(self.ResultType.Warning, "samunlock NOT found.", detailsWarning)
+
+    def testRescatuxLiveCD(self):
+        rescatux_startup_wizard_script_path = '/usr/bin/rescatux-startup-wizard.sh'
+        if (os.path.isfile(rescatux_startup_wizard_script_path)):
+            detailsOk = "Rescapp is running inside a Rescatux media."
+            self.report(self.ResultType.Success, "Running inside Rescatux.", detailsOk)
+        else:
+            detailsSkip = "Rescapp is not running in a Rescatux media. Results might not be optimal. Your experience might vary on the different live cd vendors."
+            self.report(self.ResultType.Skip, "Not running inside Rescatux.", detailsSkip)
+
+    def testSelinux(self):
+        getenforce_binary='getenforce'
+        sudo_which = self.which('sudo')
+
+        proc = subprocess.Popen([sudo_which, "which", getenforce_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        getenforce_which_out, getenforce_which_err = proc.communicate()
+        getenforce_which_exitcode = proc.returncode
+        if (len(getenforce_which_out.splitlines()) >= 1):
+            getenforce_complete_path=getenforce_which_out.splitlines()[0]
+
+        detailsWarningCommon = "You might be missing SELinux support.\nTrying to rescue Fedora/RHEL/CentOS systems will probably end on you having to recreate SELinux permissions manually thanks to a .autorelabel file which might take hours. It's probably better to use another live cd that supports SELinux such as Rescatux."
+
+        if (getenforce_which_exitcode == 0):
+            proc = subprocess.Popen([sudo_which, getenforce_complete_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            getenforce_out, getenforce_err = proc.communicate()
+            getenforce_exitcode = proc.returncode
+            getenforce_result = getenforce_out.splitlines()[0]
+
+            detailsGetEnforceFound = "Getenforce binary found at: " + getenforce_complete_path + '.'
+            detailsGetEnforceFoundOK = detailsGetEnforceFound + "SELinux is enabled either in permissive or enforced mode."
+            detailsGetEnforceFoundWarning = detailsGetEnforceFound + "However SELinux is not enabled.\n" + detailsWarningCommon
+
+            if ((getenforce_result == 'Permissive') or (getenforce_result == 'Enforcing')):
+                self.report(self.ResultType.Success, "SELinux support.", detailsGetEnforceFoundOK)
+            else:
+                self.report(self.ResultType.Warning, "No SELinux support.", detailsGetEnforceFoundWarning)
+        else:
+            detailsWarning = "Getenforce binary was not found.\n" + detailsWarningCommon
+            self.report(self.ResultType.Warning, "No SELinux support.", detailsWarning)
+
+    def testSecureBoot(self):
+        mokutil_binary='mokutil'
+        sudo_which = self.which('sudo')
+
+        proc = subprocess.Popen([sudo_which, "which", mokutil_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        mokutil_which_out, mokutil_which_err = proc.communicate()
+        mokutil_which_exitcode = proc.returncode
+        if (len(mokutil_which_out.splitlines()) >= 1):
+            mokutil_complete_path=mokutil_which_out.splitlines()[0]
+
+        detailsWarningCommon = "You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
+
+        if (mokutil_which_exitcode == 0):
+            proc = subprocess.Popen([sudo_which, mokutil_complete_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            mokutil_out, mokutil_err = proc.communicate()
+            mokutil_exitcode = proc.returncode
+            mokutil_result = mokutil_out.splitlines()[0]
+
+            detailsMokutilFound = "Mokutil binary found at: " + mokutil_complete_path + '.'
+            detailsMokutilFoundOK = detailsMokutilFound + "UEFI Secure Boot mode: On."
+            detailsMokutilFoundWarning = detailsMokutilFound + "However UEFI Secure Boot mode is Off.\n" + detailsWarningCommon
+
+            if (mokutil_result == 'SecureBoot enabled'):
+                self.report(self.ResultType.Skip, "UEFI Secure Boot mode: On.", detailsMokutilFoundOK)
+            else:
+                self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsMokutilFoundWarning)
+        else:
+            detailsWarning = "Mokutil binary was not found.\n" + detailsWarningCommon
+            self.report(self.ResultType.Warning, "UEFI Secure Boot mode: Off.", detailsWarning)
+
+    def testUEFIBoot(self):
+        uefi_detection_dir = '/sys/firmware/efi'
+        if (os.path.isdir(uefi_detection_dir)):
+            detailsSkip = "Rescapp has been boot in UEFI mode. If you are trying to fix boot on a BIOS booted installed system please make sure your media boots in BIOS mode instead of UEFI mode."
+            self.report(self.ResultType.Skip, "Booted in UEFI (non BIOS) mode.", detailsSkip)
+            self.testSecureBoot()
+        else:
+            detailsSkip = "Rescapp has been boot in BIOS mode. If you are trying to fix boot on a UEFI booted installed system please make sure your media boots in UEFI mode instead of BIOS mode."
+            self.report(self.ResultType.Skip, "Booted in BIOS (non UEFI) mode.", detailsSkip)
+            detailsSkip = "Rescapp has not been boot in UEFI Secure Boot mode. \n You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
+            self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsSkip)
+
+
+    def runTests(self):
+        self.testSamunlock()
+        self.testRescatuxLiveCD()
+        self.testSelinux()
+        self.testUEFIBoot()
+
+    def saveReportToLogFile(self):
+        try:
+            os.makedirs(self.rescapp_log_directory)
+        except OSError as exc:  # Python >2.5
+            if exc.errno == errno.EEXIST and os.path.isdir(self.rescapp_log_directory):
+                pass
+            else:
+                raise
+
+        file = open(self.selftest_log_file,"w")
+        file.write(self.createReport())
+        file.close()
+
+    def which(self, program):
+        def is_exe(fpath):
+            return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+        fpath, fname = os.path.split(program)
+        if fpath:
+            if is_exe(program):
+                return program
+        else:
+            for path in os.environ["PATH"].split(os.pathsep):
+                exe_file = os.path.join(path, program)
+                if is_exe(exe_file):
+                    return exe_file
+
+        return None
+
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        home_directory = os.path.expanduser('~')
+        self.rescapp_log_directory = home_directory + '/.rescapp/log'
+        self.selftest_log_file = self.rescapp_log_directory + '/selftest_log.txt'
+
+        self.introductionLabel = QtWidgets.QLabel("This is the self-test window from '"+rescapp_title+"'. It allows you to check if '"+rescapp_title+"' will work ok on your live system or not.")
+        self.introductionLabel.setWordWrap(True)
+
+        self.buttonBox = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Close)
+        '''
+        self.user1Button = QtWidgets.QPushButton()
+        self.user1Button.setText("Save Report...")
+
+        self.buttonBox.addButton(self.user1Button, QtWidgets.QDialogButtonBox.ActionRole)
+        self.user2Button = QtWidgets.QPushButton()
+        self.buttonBox.addButton(self.user2Button, QtWidgets.QDialogButtonBox.ActionRole)
+        self.user2Button.setText("Copy Report to Clipboard")
+        '''
+
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).clicked.connect(self.close)
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Close).setText('Start '+rescapp_title+' !!!')
+
+        self.mTestModel = QtGui.QStandardItemModel()
+        self.selftestView = QtWidgets.QTreeView()
+        self.selftestView.setRootIsDecorated(False)
+        self.selftestView.setHeaderHidden(True)
+        self.selftestView.setModel(self.mTestModel)
+
+        self.detailsLabel = QtWidgets.QLabel()
+        self.detailsLabel.setWordWrap(True)
+        self.detailsLabel.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByMouse)
+
+        self.verticalLayout=QtWidgets.QVBoxLayout()
+        self.verticalLayout.addWidget(self.detailsLabel)
+
+        self.detailsGroup = QtWidgets.QGroupBox()
+        self.detailsGroup.setEnabled(False)
+        self.detailsGroup.setTitle("Details")
+        self.detailsGroup.setLayout(self.verticalLayout)
+
+        self.bottomLabel = QtWidgets.QLabel("<p>For more troubleshooting tips please refer to <a href=\"https://www.rescatux.org\">https://www.rescatux.org</a> or ask in the chat.</p><p>Selftest log file will be found at: " + self.selftest_log_file + ". You will be able to share it thanks to the 'Share log' option." )
+        self.bottomLabel.setWordWrap(True)
+        self.bottomLabel.setOpenExternalLinks(True)
+        self.bottomLabel.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
+
+        self.selftestLayout = QtWidgets.QVBoxLayout()
+        self.selftestLayout.addWidget(self.introductionLabel)
+        self.selftestLayout.addWidget(self.selftestView)
+        self.selftestLayout.addWidget(self.detailsGroup)
+        self.selftestLayout.addWidget(self.bottomLabel)
+        self.selftestLayout.addWidget(self.buttonBox)
+
+        self.selftestView.selectionModel().currentChanged.connect(self.selectionChanged)
+        '''
+        connect(ui.detailsLabel, &QLabel::linkActivated, this, &SelfTestDialog::linkActivated);
+        connect(user1Button, &QPushButton::clicked, this, &SelfTestDialog::saveReport);
+        connect(user2Button, &QPushButton::clicked, this, &SelfTestDialog::copyReport);
+        '''
+
+        self.setLayout(self.selftestLayout)
+        self.runTests()
+        self.saveReportToLogFile()
 
 if __name__ == '__main__':
 
+    rescapp_title='Rescapp'
     rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
     rescapp_doc_path = rescapp_binary_path + '/../' \
         + 'share/doc/rescapp'
@@ -546,15 +864,27 @@ if __name__ == '__main__':
         execfile(rescapp_library_path + '/' + 'rescapp_afd_es.py')
         execfile(rescapp_library_path + '/' + 'rescapp_afd2_es.py')
 
-    app = QtWidgets.QApplication(sys.argv)
+    app_stw = QtWidgets.QApplication(sys.argv)
+
+    stw = SelftestWindow()
+    stw.setWindowTitle(rescapp_title + ' ' + rescapp_version + ' self-test')
+    stw.setWindowFlags(QtCore.Qt.Widget)
+    stw.show()
+
+    app_stw.exec_()
+    # Wait for self-test window application to end
+
+    print "DEBUG: start_rescapp_gui"
+    app_rescapp = QtWidgets.QApplication(sys.argv)
     url = QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/'
                       + help_support_option.getCode() + '/'
                       + offlinedoc_filename)
     mw = MainWindow(url)
-    mw.setWindowTitle('Rescatux ' + rescapp_version + ' Rescapp')
+    mw.setWindowTitle(rescapp_title + ' ' + rescapp_version)
 
     mw.selectSupportOption(main_menu_support_option)
     mw.show()
-    sys.exit(app.exec_())
 
-			
+    sys.exit(app_rescapp.exec_())
+
+
