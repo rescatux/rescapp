@@ -591,8 +591,6 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def testSamunlock(self):
         samunlock_binary='samunlock'
-        detailsOk = "Details from samunlock found"
-        detailsOk = "Details from samunlock found"
         sudo_which = self.which('sudo')
 
         proc = subprocess.Popen([sudo_which, "which", samunlock_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
