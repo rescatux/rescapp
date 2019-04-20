@@ -1,3 +1,16 @@
+rescapp (0.53b1-1) unstable; urgency=low
+
+  * Updated to 0.53b1 upstream version
+  * Added Selftest feature.
+  * New samunlock self test.
+  * New Rescatux Live CD self test.
+  * New SELinux self test.
+  * New UEFI Boot self test.
+  * New UEFI Secure Boot self test.
+  * Documented new mokutil package dependency
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 20 Apr 2019 14:32:00 +0000
+
 rescapp (0.52b6-1) unstable; urgency=low
 
   * Updated to 0.52b6 upstream version

@@ -45,6 +45,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,gawk
          ,extundelete
          ,os-prober
+         ,mokutil
 Description: Rescapp is a nice wizard that helps you in your rescue tasks.
  Rescapp is the Rescatux main program. It is a nice wizard that helps you in your rescue tasks.
  Boot options:
