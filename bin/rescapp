@@ -607,8 +607,13 @@ class SelftestWindow(QtWidgets.QWidget):
             self.report(self.ResultType.Warning, "samunlock NOT found.", detailsWarning)
 
     def testRescatuxLiveCD(self):
-        detailsOk = "Details from RescatuxLiveCD found"
-        self.report(self.ResultType.Error, "RescatuxLiveCD NOT found.", detailsOk)
+        rescatux_startup_wizard_script_path = '/usr/bin/rescatux-startup-wizard.sh'
+        if (os.path.isfile(rescatux_startup_wizard_script_path)):
+            detailsOk = "Rescapp is running inside a Rescatux media."
+            self.report(self.ResultType.Success, "Running inside Rescatux.", detailsOk)
+        else:
+            detailsSkip = "Rescapp is not running in a Rescatux media. Results might not be optimal. Your experience might vary on the different live cd vendors."
+            self.report(self.ResultType.Skip, "Not running inside Rescatux.", detailsSkip)
 
     def test2(self):
         detailsOk = "Details from 2"
