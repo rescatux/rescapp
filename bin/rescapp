@@ -643,10 +643,20 @@ class SelftestWindow(QtWidgets.QWidget):
             detailsWarning = "Getenforce binary was not found.\n" + detailsWarningCommon
             self.report(self.ResultType.Warning, "No SELinux support.", detailsWarning)
 
+    def testUEFIBoot(self):
+        uefi_detection_dir = '/sys/firmware/efi'
+        if (os.path.isdir(uefi_detection_dir)):
+            detailsSkip = "Rescapp has been boot in UEFI mode. If you are trying to fix boot on a BIOS booted installed system please make sure your media boots in BIOS mode instead of UEFI mode."
+            self.report(self.ResultType.Skip, "Booted in UEFI (non BIOS) mode.", detailsSkip)
+        else:
+            detailsSkip = "Rescapp has been boot in BIOS mode. If you are trying to fix boot on a UEFI booted installed system please make sure your media boots in UEFI mode instead of BIOS mode."
+            self.report(self.ResultType.Skip, "Booted in BIOS (non UEFI) mode.", detailsSkip)
+
     def runTests(self):
         self.testSamunlock()
         self.testRescatuxLiveCD()
         self.testSelinux()
+        self.testUEFIBoot()
 
     def saveReportToLogFile(self):
         try:
