@@ -643,14 +643,48 @@ class SelftestWindow(QtWidgets.QWidget):
             detailsWarning = "Getenforce binary was not found.\n" + detailsWarningCommon
             self.report(self.ResultType.Warning, "No SELinux support.", detailsWarning)
 
+    def testSecureBoot(self):
+        mokutil_binary='mokutil'
+        sudo_which = self.which('sudo')
+
+        proc = subprocess.Popen([sudo_which, "which", mokutil_binary], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        mokutil_which_out, mokutil_which_err = proc.communicate()
+        mokutil_which_exitcode = proc.returncode
+        if (len(mokutil_which_out.splitlines()) >= 1):
+            mokutil_complete_path=mokutil_which_out.splitlines()[0]
+
+        detailsWarningCommon = "You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
+
+        if (mokutil_which_exitcode == 0):
+            proc = subprocess.Popen([sudo_which, mokutil_complete_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            mokutil_out, mokutil_err = proc.communicate()
+            mokutil_exitcode = proc.returncode
+            mokutil_result = mokutil_out.splitlines()[0]
+
+            detailsMokutilFound = "Mokutil binary found at: " + mokutil_complete_path + '.'
+            detailsMokutilFoundOK = detailsMokutilFound + "UEFI Secure Boot mode: On."
+            detailsMokutilFoundWarning = detailsMokutilFound + "However UEFI Secure Boot mode is Off.\n" + detailsWarningCommon
+
+            if (mokutil_result == 'SecureBoot enabled'):
+                self.report(self.ResultType.Skip, "UEFI Secure Boot mode: On.", detailsMokutilFoundOK)
+            else:
+                self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsMokutilFoundWarning)
+        else:
+            detailsWarning = "Mokutil binary was not found.\n" + detailsWarningCommon
+            self.report(self.ResultType.Warning, "UEFI Secure Boot mode: Off.", detailsWarning)
+
     def testUEFIBoot(self):
         uefi_detection_dir = '/sys/firmware/efi'
         if (os.path.isdir(uefi_detection_dir)):
             detailsSkip = "Rescapp has been boot in UEFI mode. If you are trying to fix boot on a BIOS booted installed system please make sure your media boots in BIOS mode instead of UEFI mode."
             self.report(self.ResultType.Skip, "Booted in UEFI (non BIOS) mode.", detailsSkip)
+            self.testSecureBoot()
         else:
             detailsSkip = "Rescapp has been boot in BIOS mode. If you are trying to fix boot on a UEFI booted installed system please make sure your media boots in UEFI mode instead of BIOS mode."
             self.report(self.ResultType.Skip, "Booted in BIOS (non UEFI) mode.", detailsSkip)
+            detailsSkip = "Rescapp has not been boot in UEFI Secure Boot mode. \n You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
+            self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsSkip)
+
 
     def runTests(self):
         self.testSamunlock()
