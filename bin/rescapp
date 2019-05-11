@@ -685,9 +685,20 @@ class SelftestWindow(QtWidgets.QWidget):
             detailsSkip = "Rescapp has not been boot in UEFI Secure Boot mode. \n You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
             self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsSkip)
 
+    def testXterm(self):
+        xterm_binary='xterm'
+        xterm_which = self.which(xterm_binary)
+        if (xterm_which is not None):
+            detailsOk = "Xterm binary found at: " + xterm_which
+            self.report(self.ResultType.Success, "xterm found.", detailsOk)
+        else:
+            detailsWarning = "Xterm binary was not found.\nYou won't be able to open some external program from within Rescapp."
+            self.report(self.ResultType.Warning, "xterm NOT found.", detailsWarning)
+
 
     def runTests(self):
         self.testSamunlock()
+        self.testXterm()
         self.testRescatuxLiveCD()
         self.testSelinux()
         self.testUEFIBoot()
