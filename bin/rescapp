@@ -817,8 +817,7 @@ if __name__ == '__main__':
         rescapp_version = 'Unknown'
         print "DEBUG: Warning! Version not found. Using 'Unknown' instead"
 
-    mainmenu_icon_path = rescapp_icons_path + '/' + 'go-home.png'
-    back_icon_path = rescapp_icons_path + '/' + 'go-previous.png'
+    mainmenu_icon_path = rescapp_icons_path + '/' + 'go-previous.png'
     menu_icon_path = rescapp_icons_path + '/' + 'folder.png'
     support_icon_path = rescapp_icons_path + '/' + 'help-browser.png'
     rescue_icon_path = rescapp_icons_path + '/' + 'text-x-script.png'
