@@ -199,6 +199,7 @@ class MainWindow(QtWidgets.QWidget):
         for n_option in option_list:
             if n_option.getCode() == option_code:
                 self.selectOptionCommon(n_option)
+                break
 
     def selectSupportOption(self, support_RescappOption):
         print 'DEBUG: Selecting Support option (code): ' \
