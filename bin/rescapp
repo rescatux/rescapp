@@ -183,13 +183,11 @@ class MainWindow(QtWidgets.QWidget):
         global run_filename
         global beta_filename
         global offlinedoc_filename
-        global option_history_list
 
         self.selected_option = n_option
         self.selected_option_code = n_option.getCode()
         print 'DEBUG: selected_option_code in selectOptionCommon: ' \
             + self.selected_option_code
-        option_history_list.append(n_option)
         if self.selected_option_code == 'help-rescapp':
             self.parserescappmenues('rescatux.lis')
         self.drawMainWindows()
@@ -201,17 +199,7 @@ class MainWindow(QtWidgets.QWidget):
         for n_option in option_list:
             if n_option.getCode() == option_code:
                 self.selectOptionCommon(n_option)
-
-    def selectPreviousOption(self):
-        global option_history_list
-        print 'DEBUG: option_history_list contents: '
-        for debug_option in option_history_list:
-            print 'Debug content: ' + debug_option.getCode()
-        n_option = option_history_list.pop()
-        n_option = option_history_list.pop()
-        print 'DEBUG: Selecting previous option (code): ' \
-            + n_option.getCode()
-        self.selectSupportOption(n_option)
+                break
 
     def selectSupportOption(self, support_RescappOption):
         print 'DEBUG: Selecting Support option (code): ' \
@@ -303,11 +291,6 @@ class MainWindow(QtWidgets.QWidget):
         mainmenu_btn.setToolTip('Go back to the Main Menu')
         mainmenu_btn.setIcon(QtGui.QIcon(mainmenu_icon_path))
 
-        back_btn = QtWidgets.QPushButton('BACK', self)
-        back_btn.clicked.connect(self.selectPreviousOption)
-        back_btn.setToolTip('Go back to the previous option')
-        back_btn.setIcon(QtGui.QIcon(back_icon_path))
-
         self.rescue_btn = QtWidgets.QPushButton('Run !', self)
         self.rescue_btn.setToolTip('Run selected option!')
         self.rescue_btn.clicked.connect(self.runRescue)
@@ -355,11 +338,6 @@ class MainWindow(QtWidgets.QWidget):
             grid.addWidget(mainmenu_btn, 0, 0, 1, 1)
         else:
             mainmenu_btn.hide()
-        if len(option_history_list) > 1:
-            grid.addWidget(back_btn, 0, 1, 1, 1)
-        else:
-            grid.addWidget(back_btn, 0, 1, 1, 1)
-            back_btn.hide()
         grid.addWidget(self.chat_btn, 2, 2, 1, 1)
         grid.addWidget(self.share_log_btn, 2, 3, 1, 1)
         grid.addWidget(self.rescue_btn, 0, 3, 1, 1)
@@ -685,9 +663,20 @@ class SelftestWindow(QtWidgets.QWidget):
             detailsSkip = "Rescapp has not been boot in UEFI Secure Boot mode. \n You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
             self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsSkip)
 
+    def testXterm(self):
+        xterm_binary='xterm'
+        xterm_which = self.which(xterm_binary)
+        if (xterm_which is not None):
+            detailsOk = "Xterm binary found at: " + xterm_which
+            self.report(self.ResultType.Success, "xterm found.", detailsOk)
+        else:
+            detailsWarning = "Xterm binary was not found.\nYou won't be able to open some external program from within Rescapp."
+            self.report(self.ResultType.Warning, "xterm NOT found.", detailsWarning)
+
 
     def runTests(self):
         self.testSamunlock()
+        self.testXterm()
         self.testRescatuxLiveCD()
         self.testSelinux()
         self.testUEFIBoot()
@@ -809,7 +798,6 @@ if __name__ == '__main__':
     description_list = list()
     option_list = list()
     support_option_list = list()
-    option_history_list = list()
 
     name_filename = 'name'
     description_filename = 'description'
@@ -829,8 +817,7 @@ if __name__ == '__main__':
         rescapp_version = 'Unknown'
         print "DEBUG: Warning! Version not found. Using 'Unknown' instead"
 
-    mainmenu_icon_path = rescapp_icons_path + '/' + 'go-home.png'
-    back_icon_path = rescapp_icons_path + '/' + 'go-previous.png'
+    mainmenu_icon_path = rescapp_icons_path + '/' + 'go-previous.png'
     menu_icon_path = rescapp_icons_path + '/' + 'folder.png'
     support_icon_path = rescapp_icons_path + '/' + 'help-browser.png'
     rescue_icon_path = rescapp_icons_path + '/' + 'text-x-script.png'
