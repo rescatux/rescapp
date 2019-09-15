@@ -637,13 +637,12 @@ class SelftestWindow(QtWidgets.QWidget):
             proc = subprocess.Popen([sudo_which, mokutil_complete_path, "--sb-state"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             mokutil_out, mokutil_err = proc.communicate()
             mokutil_exitcode = proc.returncode
-            mokutil_result = mokutil_out.splitlines()[0]
 
             detailsMokutilFound = "Mokutil binary found at: " + mokutil_complete_path + '.'
             detailsMokutilFoundOK = detailsMokutilFound + "UEFI Secure Boot mode: On."
             detailsMokutilFoundWarning = detailsMokutilFound + "However UEFI Secure Boot mode is Off.\n" + detailsWarningCommon
 
-            if (mokutil_result == 'SecureBoot enabled'):
+            if (mokutil_exitcode == 0):
                 self.report(self.ResultType.Skip, "UEFI Secure Boot mode: On.", detailsMokutilFoundOK)
             else:
                 self.report(self.ResultType.Skip, "UEFI Secure Boot mode: Off.", detailsMokutilFoundWarning)
