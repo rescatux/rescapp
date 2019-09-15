@@ -1,3 +1,11 @@
+rescapp (0.53b3-1) unstable; urgency=low
+
+  * Added Xterm self test
+  * Remove back button and history
+  * Fixed: Non secure boot UEFI mode makes rescapp to crash before its menu is shown.
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 15 Sep 2019 15:02:00 +0000
+
 rescapp (0.53b2-1) unstable; urgency=low
 
   * Fixed UEFI Secure Boot self test.
