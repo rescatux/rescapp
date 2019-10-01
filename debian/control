@@ -12,8 +12,8 @@ Package: rescapp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 # Python
-         ,python-pyqt5
-         ,python-pyqt5.qtwebkit
+         ,python3-pyqt5
+         ,python3-pyqt5.qtwebkit
 # Raid
          ,dmraid
 # Lvm
@@ -28,7 +28,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 # Efibootmgr
          ,efibootmgr
 # Python-parted
-         ,python-parted
+         ,python3-parted
 # gddrescue
          ,gddrescue
 # myrescue
