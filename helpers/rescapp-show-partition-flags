@@ -29,8 +29,8 @@ flags_to_check = [ 'boot', 'bios_grub', 'root', 'swap', 'hidden', 'raid', 'lvm',
 
 
 if ((len(sys.argv)-1) != 1 ):
-        print 'Usage: ' + sys.argv[0] + ' ' + 'partition_device'
-        print 'E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2'
+        print ('Usage: ' + sys.argv[0] + ' ' + 'partition_device')
+        print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2')
         sys.exit(1)
 
 flag_partition_str=sys.argv[1]
@@ -57,7 +57,7 @@ for nflag in flags_to_check:
 
 
 if any_flag_found:
-  print flags_output
+  print (flags_output)
   sys.exit(0)
 else:
   sys.exit(2)

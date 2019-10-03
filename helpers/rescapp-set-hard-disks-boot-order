@@ -34,7 +34,7 @@ class MainWindow(QtWidgets.QWidget):
 	    sip.delete(old_layout)
 
     def refresh_harddisks(self):
-	#print "DEBUG: rh"
+	#print ("DEBUG: rh")
         while self.harddisks_tablewidget.rowCount(): 
             self.harddisks_tablewidget.removeRow(0)
         n = 0
@@ -169,8 +169,8 @@ if __name__ == "__main__":
     myargs = sys.argv[1:]
     # Parse number of columns
     column_number=int(sys.argv[1])
-    #print "Column number: " + str(column_number)
-    #print myargs
+    #print ("Column number: " + str(column_number))
+    #print (myargs)
     
     myargs.pop(0)
     
@@ -190,7 +190,7 @@ if __name__ == "__main__":
       label_list.append(label_descr)
       myargs.pop(0)
       ncolumn+=1
-    #print "labels: " + str(label_list)
+    #print ("labels: " + str(label_list))
     # Parse contents
     row=0
     while myargs:
@@ -204,7 +204,7 @@ if __name__ == "__main__":
       harddisks.append(new_harddisk)
       mw.refresh_harddisks()
       row+=1
-    #print harddisks
+    #print (harddisks)
     mw.harddisks_tablewidget.setHorizontalHeaderLabels(label_list)
     mw.setWindowTitle(window_title)
     
