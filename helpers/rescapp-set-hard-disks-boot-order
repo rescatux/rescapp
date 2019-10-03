@@ -30,8 +30,9 @@ class MainWindow(QtWidgets.QWidget):
         if self.layout() is not None:
             old_layout = self.layout()
             for i in reversed(range(old_layout.count())):
-                old_layout.itemAt(i).widget().setParent(None)
-            sip.delete(old_layout)
+                old_layout.itemAt(i).widget().deleteLater()
+            old_layout.deleteLater()
+            QtCore.QObjectCleanupHandler().add(old_layout)
 
     def refresh_harddisks(self):
         #print ("DEBUG: rh")
