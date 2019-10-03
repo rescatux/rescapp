@@ -122,13 +122,13 @@ class RescappOption:
                 + ndir + '/' + description_filename, 1)
         description_tmp = description_tmp.rstrip('\r\n')
 
-        print 'DEBUG: [Option] Directory (code) found: ' + ndir
+        print ('DEBUG: [Option] Directory (code) found: ' + ndir)
         code_list.append(ndir)
         self.setCode(ndir)
-        print 'DEBUG: [Option] Name found: ' + name_tmp
+        print ('DEBUG: [Option] Name found: ' + name_tmp)
         self.setName(name_tmp)
         name_list.append(name_tmp)
-        print 'DEBUG: [Option] Description found: ' + description_tmp
+        print ('DEBUG: [Option] Description found: ' + description_tmp)
         self.setDescription(description_tmp)
         description_list.append(description_tmp)
 
@@ -160,13 +160,13 @@ class RescappOption:
                 + ndir + '/' + description_filename, 1)
         description_tmp = description_tmp.rstrip('\r\n')
 
-        print 'DEBUG: [Menu] Directory (code) found: ' + ndir
+        print ('DEBUG: [Menu] Directory (code) found: ' + ndir)
         code_list.append(ndir)
         self.setCode(ndir)
-        print 'DEBUG: [Menu] Name found: ' + name_tmp
+        print ('DEBUG: [Menu] Name found: ' + name_tmp)
         self.setName(name_tmp)
         name_list.append(name_tmp)
-        print 'DEBUG: [Menu] Description found: ' + description_tmp
+        print ('DEBUG: [Menu] Description found: ' + description_tmp)
         self.setDescription(description_tmp)
         description_list.append(description_tmp)
 
@@ -186,8 +186,8 @@ class MainWindow(QtWidgets.QWidget):
 
         self.selected_option = n_option
         self.selected_option_code = n_option.getCode()
-        print 'DEBUG: selected_option_code in selectOptionCommon: ' \
-            + self.selected_option_code
+        print ('DEBUG: selected_option_code in selectOptionCommon: ' \
+            + self.selected_option_code)
         if self.selected_option_code == 'help-rescapp':
             self.parserescappmenues('rescatux.lis')
         self.drawMainWindows()
@@ -195,31 +195,31 @@ class MainWindow(QtWidgets.QWidget):
     def selectOption(self, option_code):
         global option_list
 
-        print 'DEBUG: Selecting option (code): ' + option_code
+        print ('DEBUG: Selecting option (code): ' + option_code)
         for n_option in option_list:
             if n_option.getCode() == option_code:
                 self.selectOptionCommon(n_option)
                 break
 
     def selectSupportOption(self, support_RescappOption):
-        print 'DEBUG: Selecting Support option (code): ' \
-            + support_RescappOption.getCode()
+        print ('DEBUG: Selecting Support option (code): ' \
+            + support_RescappOption.getCode())
         self.selectOptionCommon(support_RescappOption)
 
     def selectMenu(self, menuOption):
-        print 'DEBUG: Selecting Menu option (code): ' \
-            + menuOption.getCode()
+        print ('DEBUG: Selecting Menu option (code): ' \
+            + menuOption.getCode())
         self.selectOptionCommon(menuOption)
         self.parserescappmenues(menuOption.getCode() + '.lis')
 
     def runRescue(self):
-        print 'DEBUG: Running option (code) [BEGIN]: ' \
-            + self.selected_option_code
+        print ('DEBUG: Running option (code) [BEGIN]: ' \
+            + self.selected_option_code)
         run_status = subprocess.Popen([rescapp_binary_path + '/' + 'rescapp-launcher',
                 self.selected_option_code])
-        print 'DEBUG: Running option (code) [FINISH]: ' \
+        print ('DEBUG: Running option (code) [FINISH]: ' \
             + self.selected_option_code + ' with code: ' \
-            + str(run_status)
+            + str(run_status))
 
     def setLayout(self, layout):
         self.clearLayout()
@@ -252,7 +252,7 @@ class MainWindow(QtWidgets.QWidget):
         for mydir in f:
             ndir = mydir.rstrip('\r\n')
             dir_to_check = os.path.join(rescapp_menus_path, ndir)
-            print dir_to_check
+            print (dir_to_check)
             if os.path.isdir(dir_to_check):
                 new_option = RescappOption()
                 new_option.setMenuFromDir(dir_to_check, ndir)
@@ -262,7 +262,7 @@ class MainWindow(QtWidgets.QWidget):
                     ndir2 = mydir2.rstrip('\r\n')
                     dir_to_check2 = os.path.join(rescapp_plugins_path,
                             ndir2)
-                    print dir_to_check2
+                    print (dir_to_check2)
                     if os.path.isdir(dir_to_check2):
                         new_option2 = RescappOption()
                         new_option2.setOptionFromDir(dir_to_check2,
@@ -270,9 +270,9 @@ class MainWindow(QtWidgets.QWidget):
                         option_list.append(new_option2)
             else:
 
-                print 'DEBUG: Warning: ' + dir_to_check \
-                    + ' was ignored because it was not a directory!'
-        print 'DEBUG: menu_base: ' + menu_base
+                print ('DEBUG: Warning: ' + dir_to_check \
+                    + ' was ignored because it was not a directory!')
+        print ('DEBUG: menu_base: ' + menu_base)
         if menu_base == 'rescatux.lis':
             self.selected_option = help_support_option
         self.drawMainWindows()
@@ -350,17 +350,17 @@ class MainWindow(QtWidgets.QWidget):
 
         name_pos_x = 1
         name_pos_y = 0
-        print 'DEBUG: selected option code: ' \
-            + self.selected_option.getCode()
+        print ('DEBUG: selected option code: ' \
+            + self.selected_option.getCode())
         if self.selected_option.isMenu() == True \
             or self.selected_option.getCode() == 'main-menu':
             for n_option in option_list:
-                print 'DEBUG: n_option code: ' + n_option.getCode() \
-                    + ' was found'
+                print ('DEBUG: n_option code: ' + n_option.getCode() \
+                    + ' was found')
                 if n_option.getExecutable() == True \
                     or n_option.getHasOfflineDoc() == True:
-                    print 'DEBUG: n_option ' + n_option.getCode() \
-                        + ' has offlinedoc and it is executable'
+                    print ('DEBUG: n_option ' + n_option.getCode() \
+                        + ' has offlinedoc and it is executable')
                     if n_option.getBeta() == True:
                         tmp_name_button = \
                             QtWidgets.QPushButton(n_option.getName()
@@ -372,8 +372,8 @@ class MainWindow(QtWidgets.QWidget):
                             n_option.getCode())
                     tmp_name_button.clicked.connect(tmp_option_slot)
                 else:
-                    print 'DEBUG: n_option ' + n_option.getCode() \
-                        + ' is a menu'
+                    print ('DEBUG: n_option ' + n_option.getCode() \
+                        + ' is a menu')
                     tmp_name_button = QtWidgets.QLabel(n_option.getName(),
                             self)
                     tmp_name_button.setTextFormat(QtCore.Qt.RichText)
@@ -811,10 +811,10 @@ if __name__ == '__main__':
         rescapp_version = linecache.getline(rescapp_version_path + '/'
                 + version_filename, 1)
         rescapp_version = rescapp_version.rstrip('\r\n')
-        print 'DEBUG: Version ' + rescapp_version + ' found.'
+        print ('DEBUG: Version ' + rescapp_version + ' found.')
     else:
         rescapp_version = 'Unknown'
-        print "DEBUG: Warning! Version not found. Using 'Unknown' instead"
+        print ("DEBUG: Warning! Version not found. Using 'Unknown' instead")
 
     mainmenu_icon_path = rescapp_icons_path + '/' + 'go-previous.png'
     menu_icon_path = rescapp_icons_path + '/' + 'folder.png'
@@ -860,7 +860,7 @@ if __name__ == '__main__':
     app_stw.exec_()
     # Wait for self-test window application to end
 
-    print "DEBUG: start_rescapp_gui"
+    print ("DEBUG: start_rescapp_gui")
     app_rescapp = QtWidgets.QApplication(sys.argv)
     url = QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/'
                       + help_support_option.getCode() + '/'
