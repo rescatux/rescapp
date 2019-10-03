@@ -576,7 +576,7 @@ class SelftestWindow(QtWidgets.QWidget):
         samunlock_exitcode = proc.returncode
 
         if (samunlock_exitcode == 0):
-            detailsOk = "Samunlock binary found at: " + str(samunlock_out)
+            detailsOk = "Samunlock binary found at: " + samunlock_out.decode('utf-8')
             self.report(self.ResultType.Success, "samunlock found.", detailsOk)
         else:
             detailsWarning = "Samunlock binary was not found.\nYou might be missing Rescatux chntpw package.\nYou won't be able to unlock users in Windows options."
@@ -599,7 +599,7 @@ class SelftestWindow(QtWidgets.QWidget):
         getenforce_which_out, getenforce_which_err = proc.communicate()
         getenforce_which_exitcode = proc.returncode
         if (len(getenforce_which_out.splitlines()) >= 1):
-            getenforce_complete_path=getenforce_which_out.splitlines()[0]
+            getenforce_complete_path=(getenforce_which_out.splitlines()[0]).decode('utf-8')
 
         detailsWarningCommon = "You might be missing SELinux support.\nTrying to rescue Fedora/RHEL/CentOS systems will probably end on you having to recreate SELinux permissions manually thanks to a .autorelabel file which might take hours. It's probably better to use another live cd that supports SELinux such as Rescatux."
 
@@ -609,7 +609,7 @@ class SelftestWindow(QtWidgets.QWidget):
             getenforce_exitcode = proc.returncode
             getenforce_result = (getenforce_out.splitlines()[0]).decode('utf-8')
 
-            detailsGetEnforceFound = "Getenforce binary found at: " + str(getenforce_complete_path) + '.'
+            detailsGetEnforceFound = "Getenforce binary found at: " + getenforce_complete_path + '.'
             detailsGetEnforceFoundOK = detailsGetEnforceFound + "SELinux is enabled either in permissive or enforced mode."
             detailsGetEnforceFoundWarning = detailsGetEnforceFound + "However SELinux is not enabled.\n" + detailsWarningCommon
 
@@ -666,7 +666,7 @@ class SelftestWindow(QtWidgets.QWidget):
         xterm_binary='xterm'
         xterm_which = self.which(xterm_binary)
         if (xterm_which is not None):
-            detailsOk = "Xterm binary found at: " + str(xterm_which)
+            detailsOk = "Xterm binary found at: " + xterm_which
             self.report(self.ResultType.Success, "xterm found.", detailsOk)
         else:
             detailsWarning = "Xterm binary was not found.\nYou won't be able to open some external program from within Rescapp."
