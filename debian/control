@@ -18,6 +18,14 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,dmraid
 # Lvm
          ,lvm2
+# Filesystem
+         ,reiserfsprogs
+         ,reiser4progs
+         ,btrfs-tools
+         ,xfsprogs
+         ,xfsdump
+         ,ntfs-3g
+         ,dosfstools
 # Gdisk
          ,gdisk
 # Efibootmgr
