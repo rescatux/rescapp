@@ -18,9 +18,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,dmraid
 # Lvm
          ,lvm2
-         ,gparted
-         ,gpart
-         ,dosfstools
 # Gdisk
          ,gdisk
 # Efibootmgr
