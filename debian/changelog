@@ -1,3 +1,11 @@
+rescapp (0.54b1-1) unstable; urgency=low
+
+  * Do not mount neither root partition nor tmp partition (Improves Ubuntu grub fix)
+  * Moved from python2 to python3
+  * Removed gddrescue, myrescue and gparted dependencies
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 15 Sep 2019 15:02:00 +0000
+
 rescapp (0.53b3-1) unstable; urgency=low
 
   * Added Xterm self test
