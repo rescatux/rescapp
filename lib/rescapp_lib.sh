@@ -610,6 +610,8 @@ function rtux_make_tmp_fstab_payload() {
       print $1 " " $2 " " $3 " " $4 " " $5 " " $6;
   }
   ' \
+  | awk '$2 != "'"${TMP_MNT_PARTITION}"'"' \
+  | awk '$2 != "'"${TMP_MNT_PARTITION}"'/tmp"' \
   > "${TMP_FSTAB}"
 
   echo "${TMP_FSTAB}";

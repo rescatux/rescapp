@@ -66,9 +66,6 @@ You will find the needed Debian Jessie packages in the following list.
 PYTHON_PACKAGES="python-pyqt5 python-pyqt5.qtwebkit"
 RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
-GPARTED_PACKAGES="gparted gpart dosfstools"
-TESTDISK_PACKAGES="testdisk \
- "
 CRYPTSETUP_PACKAGES="cryptsetup \
  libcryptsetup4 \
  cryptsetup-bin \
@@ -79,6 +76,7 @@ FILESYSTEM_PACKAGES="reiserfsprogs \
  xfsprogs \
  xfsdump \
  ntfs-3g \
+ dosfstools \
  "
 
 GPT_PACKAGES="\
@@ -90,8 +88,6 @@ UEFI_PACKAGES="\
 "
 
 PYTHON_PARTED_PACKAGES="python-parted"
-GDDRESCUE_PACKAGES="gddrescue"
-MYRESCUE_PACKAGES="myrescue"
 
 CHNTPW_PACKAGES="\
  chntpw \
@@ -101,15 +97,11 @@ RESCAPP_PACKAGES=" \
  ${PYTHON_PACKAGES} \
  ${RAID_PACKAGES} \
  ${LVM_PACKAGES} \
- ${GPARTED_PACKAGES} \
- ${TESTDISK_PACKAGES} \
  ${CRYPTSETUP_PACKAGES} \
  ${FILESYSTEM_PACKAGES} \
  ${GPT_PACKAGES} \
  ${PYTHON_PARTED_PACKAGES} \
  ${UEFI_PACKAGES} \
- ${GDDRESCUE_PACKAGES} \
- ${MYRESCUE_PACKAGES} \
  ${CHNTPW_PACKAGES} \
  zenity \
  xdg-utils \
@@ -122,6 +114,14 @@ RESCAPP_PACKAGES=" \
  os-prober \
  mokutil \
  " # I add syslinux so that isohybrid command is recognised.
+
+Optional Debian Package Runtime Requirements
+==============================================
+gparted
+gpart
+testdisk
+
+
 
 SELinux support
 ===============
