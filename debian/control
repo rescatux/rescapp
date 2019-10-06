@@ -21,8 +21,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,gparted
          ,gpart
          ,dosfstools
-# Testdisk
-         ,testdisk
 # Gdisk
          ,gdisk
 # Efibootmgr
