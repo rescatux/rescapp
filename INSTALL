@@ -115,6 +115,14 @@ RESCAPP_PACKAGES=" \
  mokutil \
  " # I add syslinux so that isohybrid command is recognised.
 
+Optional Debian Package Runtime Requirements
+==============================================
+gparted
+gpart
+testdisk
+
+
+
 SELinux support
 ===============
 
