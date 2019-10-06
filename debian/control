@@ -29,10 +29,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,efibootmgr
 # Python-parted
          ,python3-parted
-# gddrescue
-         ,gddrescue
-# myrescue
-         ,myrescue
 # chntpw
          ,chntpw
 # misc
