@@ -67,8 +67,6 @@ PYTHON_PACKAGES="python-pyqt5 python-pyqt5.qtwebkit"
 RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
 GPARTED_PACKAGES="gparted gpart dosfstools"
-TESTDISK_PACKAGES="testdisk \
- "
 CRYPTSETUP_PACKAGES="cryptsetup \
  libcryptsetup4 \
  cryptsetup-bin \
@@ -100,7 +98,6 @@ RESCAPP_PACKAGES=" \
  ${RAID_PACKAGES} \
  ${LVM_PACKAGES} \
  ${GPARTED_PACKAGES} \
- ${TESTDISK_PACKAGES} \
  ${CRYPTSETUP_PACKAGES} \
  ${FILESYSTEM_PACKAGES} \
  ${GPT_PACKAGES} \
