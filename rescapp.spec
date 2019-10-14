@@ -1,5 +1,5 @@
 Name:           rescapp
-Version:        2.54b1
+Version:        3.54b1
 Release:        1%{?dist}
 Summary:        Rescapp is the Rescatux main program.
 
@@ -39,6 +39,15 @@ rm -rf $RPM_BUILD_ROOT
 %license  COPYING
 
 %changelog
+* Tue Oct 15 2019 Unknown name <christopher.gregory@mail.com> 3.54b1-1
+- 
+
+* Tue Oct 15 2019 Unknown name <christopher.gregory@mail.com>
+- 
+
+* Tue Oct 15 2019 Unknown name <christopher.gregory@mail.com>
+- 
+
 * Tue Oct 15 2019 Unknown name <christopher.gregory@mail.com> 2.54b1-1
 - 
 
