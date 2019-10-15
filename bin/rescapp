@@ -310,7 +310,8 @@ class MainWindow(QtWidgets.QWidget):
 
         rescapp_title_label = QtWidgets.QLabel('<b>'
                 + rescapp_title + ' ' + rescapp_version + '</b>' + ' - '
-                + 'Choose an option to read its manual.')
+                + '<img src='+ info_icon_path + '>'
+                + ' ' + 'Choose an option to read its manual.')
         rescapp_title_label.setWordWrap(True)
         rescapp_title_label.setAlignment(QtCore.Qt.AlignCenter)
 
@@ -411,7 +412,9 @@ class MainWindow(QtWidgets.QWidget):
                            + name_pos_x - 1, name_pos_y + 1, rows_per_option, 4)
 
             if self.selected_option.getExecutable() == True:
-                option_title_label = QtWidgets.QLabel('Read the manual below carefully and press the <b>Run !</b> button when ready.')
+                option_title_label = QtWidgets.QLabel(
+                    '<img src='+ info_icon_path + '>' +
+                    ' ' + 'Read the manual below carefully and press the <b>Run !</b> button when ready.')
             else:
                 option_title_label = QtWidgets.QLabel('')
             option_title_label.setWordWrap(True)
@@ -845,6 +848,7 @@ if __name__ == '__main__':
     menu_icon_path = rescapp_icons_path + '/' + 'folder.png'
     support_icon_path = rescapp_icons_path + '/' + 'help-browser.png'
     rescue_icon_path = rescapp_icons_path + '/' + 'text-x-script.png'
+    info_icon_path = rescapp_icons_path + '/' + 'dialog-information.png'
 
     chat_support_option = RescappOption()
     chat_support_option.setOptionFromDir(os.path.join(rescapp_plugins_path,
