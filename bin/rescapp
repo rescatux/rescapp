@@ -414,7 +414,7 @@ class MainWindow(QtWidgets.QWidget):
             if self.selected_option.getExecutable() == True:
                 option_title_label = QtWidgets.QLabel(
                     '<img src='+ info_icon_path + '>' +
-                    ' ' + 'Read the manual below carefully and press the <b>Run !</b> button when ready.')
+                    ' ' + 'Read the manual below carefully and press the '+'<img src='+ rescue_icon_path + '>'+'<b>Run !</b> button when ready.')
             else:
                 option_title_label = QtWidgets.QLabel('')
             option_title_label.setWordWrap(True)
