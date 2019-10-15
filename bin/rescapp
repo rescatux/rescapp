@@ -387,7 +387,7 @@ class MainWindow(QtWidgets.QWidget):
                             self)
                     tmp_name_button.setTextFormat(QtCore.Qt.RichText)
                     tmp_name_button.setText('<img src='
-                            + menu_icon_path + '>' + n_option.getName())
+                            + menu_icon_path + '>' + '<b>' + n_option.getName() + '</b>')
 
                 tmp_name_button.setToolTip(n_option.getDescription())
                 if n_option.isMenu():
