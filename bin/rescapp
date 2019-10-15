@@ -308,6 +308,12 @@ class MainWindow(QtWidgets.QWidget):
             if hasattr(self, 'rescue_btn') == True:
                 self.rescue_btn.hide()
 
+        rescapp_title_label = QtWidgets.QLabel('<b>'
+                + rescapp_title + ' ' + rescapp_version + '</b>' + ' - '
+                + 'Choose an option to read its manual.')
+        rescapp_title_label.setWordWrap(True)
+        rescapp_title_label.setAlignment(QtCore.Qt.AlignCenter)
+
         self.chat_btn = \
             QtWidgets.QPushButton(chat_support_option.getName(), self)
         self.chat_btn.clicked.connect(partial(self.selectSupportOption,
@@ -339,6 +345,7 @@ class MainWindow(QtWidgets.QWidget):
             grid.addWidget(mainmenu_btn, 0, 0, 1, 1)
         else:
             mainmenu_btn.hide()
+            grid.addWidget(rescapp_title_label, 1, 0, 1, 3)
         grid.addWidget(self.chat_btn, 2, 0, 1, 1)
         grid.addWidget(self.share_log_btn, 2, 1, 1, 1)
         grid.addWidget(self.rescue_btn, 0, 3, 1, 1)
