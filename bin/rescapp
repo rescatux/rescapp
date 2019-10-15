@@ -402,6 +402,13 @@ class MainWindow(QtWidgets.QWidget):
             tmp_description_label.setWordWrap(True)
             grid.addWidget(tmp_description_label, options_offset
                            + name_pos_x, name_pos_y, rows_per_option, 4)
+
+            tmp_name_label = QtWidgets.QLabel('<b>'
+                    + self.selected_option.getName().upper() + '</b>')
+            tmp_name_label.setWordWrap(True)
+            tmp_name_label.setAlignment(QtCore.Qt.AlignCenter)
+            grid.addWidget(tmp_name_label, 0, 1, 1, 2)
+
             name_pos_x = name_pos_x + 1
         if self.selected_option.getCode() != 'main-menu':
             bottom_start = options_offset + name_pos_x \
