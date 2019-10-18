@@ -432,13 +432,28 @@ class MainWindow(QtWidgets.QWidget):
         if self.selected_option.getCode() != 'main-menu':
             bottom_start = options_offset + name_pos_x \
                 * rows_per_option + 8
+
             webgrid = QtWidgets.QHBoxLayout()
             webgrid.addWidget(self.wb)
             frame = QtWidgets.QFrame()
             frame.setLayout(webgrid)
-            frame.setStyleSheet('margin:0px; border:10px solid rgb(124, 127, 126); '
-                                )
+            frame.setStyleSheet('margin:0px; border:10px solid rgb(124, 127, 126); ')
             grid.addWidget(frame, bottom_start + 5, 0, 5, 5)
+
+            self.messages_wb = QtWidgets.QTextBrowser()
+            self.messages_wb.setReadOnly(True)
+            self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+            self.messages_wb.ensureCursorVisible()
+            self.messages_wb.insertPlainText('This is a test')
+            self.messages_wb.setStyleSheet('margin:0px; border:0px solid rgb(77, 166, 255); ')
+
+            messages_grid = QtWidgets.QHBoxLayout()
+            messages_grid.addWidget(self.messages_wb)
+            messages_frame = QtWidgets.QFrame()
+            messages_frame.setLayout(messages_grid)
+            messages_frame.setStyleSheet('margin:0px; border:5px solid rgb(77, 166, 255); ')
+            grid.addWidget(messages_frame, bottom_start + 10, 0, 5, 5)
+
             if self.selected_option.getHasOfflineDoc():
                 self.wb.load(QtCore.QUrl('file:///'
                              + rescapp_plugins_doc_path + '/'
