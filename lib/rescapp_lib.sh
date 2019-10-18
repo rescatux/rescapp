@@ -1067,13 +1067,10 @@ function rtux_Run_Show_Progress () {
   local EXIT_VALUE=1 # Error by default
   local RUNNING_STR="$1"
   shift
-  "$@" \
-  | tee >(zenity ${ZENITY_COMMON_OPTIONS} \
-	--text "${RUNNING_STR}" \
-	--progress \
-	--pulsate \
-	--auto-close) >> /dev/stdout
-  EXIT_VALUE=${PIPESTATUS[0]}
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.Message" "string:${RUNNING_STR}"
+  "$@"
+  EXIT_VALUE=$?
   return ${EXIT_VALUE}
 
 } # rtux_Run_Show_Progress ()

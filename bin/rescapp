@@ -29,6 +29,31 @@ from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets
 from functools import partial
 from enum import Enum, IntEnum
 
+from gi.repository import GObject as gobject
+import dbus
+import dbus.service
+import dbus.mainloop.glib
+
+class MessageRescappException(dbus.DBusException):
+    _dbus_error_name = 'org.rescapp.RescappException'
+
+class MessageRescapp(dbus.service.Object):
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def Message(self, message):
+        print (str(message))
+        return ["Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='', out_signature='')
+    def RaiseException(self):
+        raise MessageRescappException('The RaiseException method does what you might '
+                            'expect')
+
+    def Exit(self):
+        mainloop.quit()
+
 
 class VerticalScrollArea(QtWidgets.QScrollArea):
 
@@ -217,6 +242,19 @@ class MainWindow(QtWidgets.QWidget):
             + self.selected_option_code)
         run_status = subprocess.Popen([rescapp_binary_path + '/' + 'rescapp-launcher',
                 self.selected_option_code])
+        #
+        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+
+        # Use SystemBus instead of SessionBus so that root user can connect to rescapp user process
+        system_bus = dbus.SystemBus()
+        name = dbus.service.BusName("org.rescapp.MessageService", system_bus)
+        object = MessageRescapp(system_bus, '/MessageRescapp')
+
+        mainloop = gobject.MainLoop()
+        print ("DEBUG: Rescapp DBUS service listening.")
+        mainloop.run()
+        #
+
         print ('DEBUG: Running option (code) [FINISH]: ' \
             + self.selected_option_code + ' with code: ' \
             + str(run_status))
