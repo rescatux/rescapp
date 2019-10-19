@@ -262,6 +262,8 @@ class MainWindow(QtWidgets.QWidget):
 
         if ( hasattr(self,'messageRescappObject') ):
             self.messageRescappObject.remove_from_connection()
+        self.messages_wb.clear()
+        self.messages_frame.show()
         # Use SystemBus instead of SessionBus so that root user can connect to rescapp user process
         system_bus = dbus.SystemBus()
         name = dbus.service.BusName("org.rescapp.MessageService", system_bus)
@@ -501,15 +503,15 @@ class MainWindow(QtWidgets.QWidget):
             self.messages_wb.setReadOnly(True)
             self.messages_wb.moveCursor(QtGui.QTextCursor.End)
             self.messages_wb.ensureCursorVisible()
-            #self.messages_wb.insertPlainText('This is a test')
             self.messages_wb.setStyleSheet('margin:0px; border:0px solid rgb(77, 166, 255); ')
 
             messages_grid = QtWidgets.QHBoxLayout()
             messages_grid.addWidget(self.messages_wb)
-            messages_frame = QtWidgets.QFrame()
-            messages_frame.setLayout(messages_grid)
-            messages_frame.setStyleSheet('margin:0px; border:5px solid rgb(77, 166, 255); ')
-            grid.addWidget(messages_frame, bottom_start + 10, 0, 5, 5)
+            self.messages_frame = QtWidgets.QFrame()
+            self.messages_frame.setLayout(messages_grid)
+            self.messages_frame.setStyleSheet('margin:0px; border:5px solid rgb(77, 166, 255); ')
+            grid.addWidget(self.messages_frame, bottom_start + 10, 0, 5, 5)
+            self.messages_frame.hide()
 
             if self.selected_option.getHasOfflineDoc():
                 self.wb.load(QtCore.QUrl('file:///'
