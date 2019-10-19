@@ -33,6 +33,7 @@ from gi.repository import GObject as gobject
 import dbus
 import dbus.service
 import dbus.mainloop.glib
+import threading
 
 class MessageRescappException(dbus.DBusException):
     _dbus_error_name = 'org.rescapp.RescappException'
@@ -42,7 +43,10 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def Message(self, message):
-        print (str(message))
+        self.messages_wb.insertPlainText(str(message) + '\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
         return ["Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -52,7 +56,17 @@ class MessageRescapp(dbus.service.Object):
                             'expect')
 
     def Exit(self):
-        mainloop.quit()
+        self.mainloop.quit()
+
+    @dbus.service.method("org.rescapp.MessageInterface")
+    def End(self):
+        self.mainloop.quit()
+
+    def setMessages_wb(self,messages_wb):
+        self.messages_wb = messages_wb
+
+    def setMainLoop(self,mainloop):
+        self.mainloop = mainloop
 
 
 class VerticalScrollArea(QtWidgets.QScrollArea):
@@ -245,12 +259,17 @@ class MainWindow(QtWidgets.QWidget):
         #
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
+
+        if ( hasattr(self,'messageRescappObject') ):
+            self.messageRescappObject.remove_from_connection()
         # Use SystemBus instead of SessionBus so that root user can connect to rescapp user process
         system_bus = dbus.SystemBus()
         name = dbus.service.BusName("org.rescapp.MessageService", system_bus)
-        object = MessageRescapp(system_bus, '/MessageRescapp')
+        self.messageRescappObject = MessageRescapp(system_bus, '/MessageRescapp')
+        self.messageRescappObject.setMessages_wb(self.messages_wb)
 
         mainloop = gobject.MainLoop()
+        self.messageRescappObject.setMainLoop(mainloop)
         print ("DEBUG: Rescapp DBUS service listening.")
         mainloop.run()
         #
@@ -482,7 +501,7 @@ class MainWindow(QtWidgets.QWidget):
             self.messages_wb.setReadOnly(True)
             self.messages_wb.moveCursor(QtGui.QTextCursor.End)
             self.messages_wb.ensureCursorVisible()
-            self.messages_wb.insertPlainText('This is a test')
+            #self.messages_wb.insertPlainText('This is a test')
             self.messages_wb.setStyleSheet('margin:0px; border:0px solid rgb(77, 166, 255); ')
 
             messages_grid = QtWidgets.QHBoxLayout()

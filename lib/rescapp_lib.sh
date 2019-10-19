@@ -1758,6 +1758,13 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
 
 } # function rtux_UEFI_Reinstall_Microsoft_Boot_Entries ()
 
+# Signal end of an option
+function rtux_Dbus_End () {
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.End"
+
+} # rtux_Run_Show_Progress ()
+
 # Rescatux lib main variables
 
 RESCATUX_URL="https://www.rescatux.org/"
