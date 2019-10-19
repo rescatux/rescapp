@@ -63,6 +63,7 @@ Debian Package Runtime Requirements
 You will find the needed Debian Jessie packages in the following list.
 
 
+PYTHON_DBUS_PACKAGES="python3-gi python3-dbus"
 PYTHON_PACKAGES="python-pyqt5 python-pyqt5.qtwebkit"
 RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
@@ -103,6 +104,7 @@ RESCAPP_PACKAGES=" \
  ${PYTHON_PARTED_PACKAGES} \
  ${UEFI_PACKAGES} \
  ${CHNTPW_PACKAGES} \
+ ${PYTHON_DBUS_PACKAGES}
  zenity \
  xdg-utils \
  hexchat \

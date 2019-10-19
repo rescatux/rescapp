@@ -11,6 +11,7 @@ librarytarget=$(target)/lib/rescapp
 menutarget=$(target)/share/rescapp/menus
 plugintarget=$(target)/share/rescapp/plugins
 versiontarget=$(target)/share/rescapp
+dbussystemconftarget=$(DESTDIR)/etc/dbus-1/system.d
 
 all:
 .PHONY	:	all
@@ -59,6 +60,7 @@ install:	install_documentation\
 	install_menus\
 	install_plugins\
 	install_version\
+	install_dbussystemconf\
 
 
 
@@ -1034,3 +1036,7 @@ winunlock_install_plugin:	plugins/winunlock/description\
 install_version:	VERSION
 	install -d $(versiontarget)
 	install -m 644 VERSION $(versiontarget)
+
+install_dbussystemconf:	system/dbus/conf/org.rescapp.MessageService.conf
+	install -d $(dbussystemconftarget)
+	install -m 644 system/dbus/conf/org.rescapp.MessageService.conf $(dbussystemconftarget)
