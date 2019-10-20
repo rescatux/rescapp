@@ -47,6 +47,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
+        self.option_status_label.setText('<b>Status: Running...</b>')
         return ["Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -251,15 +252,29 @@ class MainWindow(QtWidgets.QWidget):
         self.selectOptionCommon(menuOption)
         self.parserescappmenues(menuOption.getCode() + '.lis')
 
+    def blink_status_label(self):
+        while (self.blink_status_thread_active):
+            self.option_status_label.setStyleSheet('QLabel { background-color : white; color : black; }')
+            self.option_status_label.setText('<b>Status: Running.</b>')
+            time.sleep(1)
+            self.option_status_label.setStyleSheet('QLabel { background-color : black; color : white; }')
+            self.option_status_label.setText('<b>Status: Running.</b>')
+            time.sleep(1)
+
     def runRescue(self):
+        # Actual rescue plugin execution - start
         print ('DEBUG: Running option (code) [BEGIN]: ' \
             + self.selected_option_code)
         run_status = subprocess.Popen([rescapp_binary_path + '/' + 'rescapp-launcher',
                 self.selected_option_code])
-        #
+
+        # Status blink thread start
+        self.blink_status_thread_active = True
+        blinkStatusLabelThread = threading.Thread(target=self.blink_status_label)
+        blinkStatusLabelThread.start()
+
+        # Dbus handling
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-
-
         if ( hasattr(self,'messageRescappObject') ):
             self.messageRescappObject.remove_from_connection()
         self.messages_wb.clear()
@@ -269,13 +284,19 @@ class MainWindow(QtWidgets.QWidget):
         name = dbus.service.BusName("org.rescapp.MessageService", system_bus)
         self.messageRescappObject = MessageRescapp(system_bus, '/MessageRescapp')
         self.messageRescappObject.setMessages_wb(self.messages_wb)
-
         mainloop = gobject.MainLoop()
         self.messageRescappObject.setMainLoop(mainloop)
-        print ("DEBUG: Rescapp DBUS service listening.")
+        print ("DEBUG: Rescapp DBUS service started.")
         mainloop.run()
-        #
+        print ("DEBUG: Rescapp DBUS service ended.")
 
+        # Status blink thread end
+        self.blink_status_thread_active = False
+        blinkStatusLabelThread.join()
+        self.option_status_label.setStyleSheet('QLabel {}')
+        self.option_status_label.setText('<b>Status: <font color="green">Finished.</font></b>')
+
+        # Actual rescue plugin execution - end
         print ('DEBUG: Running option (code) [FINISH]: ' \
             + self.selected_option_code + ' with code: ' \
             + str(run_status))
@@ -479,12 +500,21 @@ class MainWindow(QtWidgets.QWidget):
             option_title_label.setWordWrap(True)
             option_title_label.setAlignment(QtCore.Qt.AlignCenter)
 
+            if self.selected_option.getExecutable() == True:
+                self.option_status_label = QtWidgets.QLabel(
+                    '<b>Status: <font color="green">Ready.</font></b>')
+            else:
+                self.option_status_label = QtWidgets.QLabel('')
+            self.option_status_label.setWordWrap(True)
+            self.option_status_label.setAlignment(QtCore.Qt.AlignCenter)
+
 
             tmp_name_label = QtWidgets.QLabel('<b>'
                     + self.selected_option.getName().upper() + '</b>')
             tmp_name_label.setWordWrap(True)
             tmp_name_label.setAlignment(QtCore.Qt.AlignCenter)
             grid.addWidget(option_title_label, 0, 0, 1, 5)
+            grid.addWidget(self.option_status_label, 3, 3, 1, 1)
             grid.addWidget(tmp_name_label, 1, 1, 1, 2)
 
             name_pos_x = name_pos_x + 2
