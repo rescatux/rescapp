@@ -91,6 +91,16 @@ class MessageRescapp(dbus.service.Object):
         return ["Error Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageInfo(self, message):
+        self.messages_wb.insertPlainText('[INFO]' + ' ' + str(message) + '\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.option_status_label.setText('<b>Status: Running...</b>')
+        return ["Info Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='', out_signature='')
     def RaiseException(self):
         raise MessageRescappException('The RaiseException method does what you might '
