@@ -43,7 +43,7 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def Message(self, message):
-        self.messages_wb.insertPlainText(str(message) + '\n')
+        self.messages_wb.insertPlainText('[DEBUG]' + ' ' + str(message) + '\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
