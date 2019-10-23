@@ -51,6 +51,46 @@ class MessageRescapp(dbus.service.Object):
         return ["Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageSkip(self, message):
+        self.messages_wb.insertPlainText('[SKIP]' + ' ' + str(message) + '\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.option_status_label.setText('<b>Status: Running...</b>')
+        return ["Skip Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageSuccess(self, message):
+        self.messages_wb.insertPlainText('[SUCCESS]' + ' ' + str(message) + '\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.option_status_label.setText('<b>Status: Running...</b>')
+        return ["Success Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageWarning(self, message):
+        self.messages_wb.insertPlainText('[WARNING]' + ' ' + str(message) + '\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.option_status_label.setText('<b>Status: Running...</b>')
+        return ["Warning Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageError(self, message):
+        self.messages_wb.insertPlainText('[ERROR]' + ' ' + str(message) + '\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.option_status_label.setText('<b>Status: Running...</b>')
+        return ["Error Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='', out_signature='')
     def RaiseException(self):
         raise MessageRescappException('The RaiseException method does what you might '
