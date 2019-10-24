@@ -299,19 +299,21 @@ function rtux_Choose_Hard_Disk () {
 # Let the user choose a partition
 # It outputs choosen partition
 function rtux_Choose_Partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_System_Partitions)
+  rtux_Abstract_Choose_Partition "Which partition?" $(rtux_Get_System_Partitions)
 } # function rtux_Choose_Partition ()
 
 # Let the user choose a partition
 # It outputs choosen partition
 function rtux_Choose_Primary_Partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_Primary_Partitions)
+  rtux_Abstract_Choose_Partition "Which primary partition?" $(rtux_Get_Primary_Partitions)
 } # function rtux_Choose_Primary_Partition ()
 
 # Let the user choose a partition
 # Every parametre are the source partitions
 # It outputs choosen partition
 function rtux_Abstract_Choose_Partition () {
+  local text_to_ask="$1"
+  shift
   local n=0
   local LIST_VALUES=""
   local DESC_VALUES=""
@@ -346,7 +348,7 @@ function rtux_Abstract_Choose_Partition () {
 
   choosen_partition=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
-	--text "${WHICH_PARTITION_STR}" \
+	--text "${text_to_ask}" \
 	--radiolist  \
 	--column "${SELECT_STR}" \
 	--column "${PARTITION_STR}" \
@@ -364,13 +366,13 @@ function rtux_Abstract_Choose_Partition () {
 # Let the user choose his main GNU/Linux partition
 # It outputs choosen partition
 function rtux_Choose_Linux_partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_Linux_Os_Partitions)
+  rtux_Abstract_Choose_Partition "Which GNU/Linux partition?" $(rtux_Get_Linux_Os_Partitions)
 } # function rtux_Choose_Linux_partition ()
 
 # Let the user choose his main Windows partition
 # It outputs choosen partition
 function rtux_Choose_Windows_partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_Windows_Os_Partitions)
+  rtux_Abstract_Choose_Partition "Which Windows partition?" $(rtux_Get_Windows_Os_Partitions)
 } # function rtux_Choose_Windows_partition ()
 
 # Let the user rename hard disks if they want to
@@ -1215,7 +1217,7 @@ function rtux_UEFI_Check_Is_EFI_System_Partition () {
 # Let the user choose his main EFI System partition
 # It outputs choosen partition
 function rtux_Choose_EFI_System_partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_EFI_System_Partitions)
+  rtux_Abstract_Choose_Partition "Which EFI System partition?" $(rtux_Get_EFI_System_Partitions)
 } # function rtux_Choose_EFI_System_partition ()
 
 function rtux_Get_EFI_System_Partitions() {
