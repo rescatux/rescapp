@@ -247,6 +247,22 @@ function rtux_Message_Failure () {
   dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageError" "string:${text_to_show}"
 } # function rtux_Message_Failure ()
 
+# Send Rescapp main program the question being asked
+# Every parametre is treated as the message to be shown to the user.
+function rtux_Message_Question () {
+  local text_to_show="$@"
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageQuestion" "string:${text_to_show}"
+} # function rtux_Message_Question ()
+
+# Send Rescapp main program the answer being asked
+# Every parametre is treated as the message to be shown to the user.
+function rtux_Message_Answer () {
+  local text_to_show="$@"
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageAnswer" "string:${text_to_show}"
+} # function rtux_Message_Answer ()
+
 # Return hard disk that the user chooses
 # Every parametre is treated as the question to be asked to the user.
 function rtux_Choose_Hard_Disk () {
