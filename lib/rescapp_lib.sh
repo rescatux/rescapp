@@ -299,13 +299,21 @@ function rtux_Choose_Hard_Disk () {
 # Let the user choose a partition
 # It outputs choosen partition
 function rtux_Choose_Partition () {
-  rtux_Abstract_Choose_Partition "Which partition?" $(rtux_Get_System_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_System_Partitions)
 } # function rtux_Choose_Partition ()
 
 # Let the user choose a partition
 # It outputs choosen partition
 function rtux_Choose_Primary_Partition () {
-  rtux_Abstract_Choose_Partition "Which primary partition?" $(rtux_Get_Primary_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which primary partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Primary_Partitions)
 } # function rtux_Choose_Primary_Partition ()
 
 # Let the user choose a partition
@@ -366,13 +374,21 @@ function rtux_Abstract_Choose_Partition () {
 # Let the user choose his main GNU/Linux partition
 # It outputs choosen partition
 function rtux_Choose_Linux_partition () {
-  rtux_Abstract_Choose_Partition "Which GNU/Linux partition?" $(rtux_Get_Linux_Os_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which GNU/Linux partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Linux_Os_Partitions)
 } # function rtux_Choose_Linux_partition ()
 
 # Let the user choose his main Windows partition
 # It outputs choosen partition
 function rtux_Choose_Windows_partition () {
-  rtux_Abstract_Choose_Partition "Which Windows partition?" $(rtux_Get_Windows_Os_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which Windows partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Windows_Os_Partitions)
 } # function rtux_Choose_Windows_partition ()
 
 # Let the user rename hard disks if they want to
