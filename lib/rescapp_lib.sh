@@ -109,22 +109,22 @@ function rtux_Get_Partition_Osprober_Longname_payload() {
 
 function rtux_Get_Etc_Issue_Content() {
   GET_ETC_ISSUE_CONTENT_RUNNING_STR="Parsing /etc/issue file."
-  rtux_Run_Show_Progress "${GET_ETC_ISSUE_CONTENT_RUNNING_STR}" rtux_Get_Etc_Issue_Content_payload "$@"
+  rtux_Run_Show_Progress "${GET_ETC_ISSUE_CONTENT_RUNNING_STR} ($@)" rtux_Get_Etc_Issue_Content_payload "$@"
 } # function rtux_Get_Etc_Issue_Content()
 
 function rtux_Get_Partition_Filesystem() {
   GET_PARTITION_FILESYSTEM_RUNNING_STR="Getting partition filesystem."
-  rtux_Run_Show_Progress "${GET_PARTITION_FILESYSTEM_RUNNING_STR}" rtux_Get_Partition_Filesystem_payload "$@"
+  rtux_Run_Show_Progress "${GET_PARTITION_FILESYSTEM_RUNNING_STR} ($@)" rtux_Get_Partition_Filesystem_payload "$@"
 } # function rtux_Get_Partition_Filesystem()
 
 function rtux_Get_Partition_Flags() {
   GET_PARTITION_FLAGS_RUNNING_STR="Getting partition flags."
-  rtux_Run_Show_Progress "${GET_PARTITION_FLAGS_RUNNING_STR}" rtux_Get_Partition_Flags_payload "$@"
+  rtux_Run_Show_Progress "${GET_PARTITION_FLAGS_RUNNING_STR} ($@)" rtux_Get_Partition_Flags_payload "$@"
 } # function rtux_Get_Partition_Flags()
 
 function rtux_Get_Partition_Osprober_Longname() {
   GET_PARTITION_OSPROBER_LONGNAME_RUNNING_STR="Getting os-prober long name."
-  rtux_Run_Show_Progress "${GET_PARTITION_OSPROBER_LONGNAME_RUNNING_STR}" rtux_Get_Partition_Osprober_Longname_payload "$@"
+  rtux_Run_Show_Progress "${GET_PARTITION_OSPROBER_LONGNAME_RUNNING_STR} ($@)" rtux_Get_Partition_Osprober_Longname_payload "$@"
 } # function rtux_Get_Partition_Osprober_Longname()
 
 # Return partitions detected on the system
