@@ -50,7 +50,7 @@ UEFIORDER_RUNNING_STR="Updating UEFI Boot order."
 
 UEFI_SYSTEM_NOT_DETECTED_STR="UEFI devices order skipped (Not an UEFI System)"
 
-SELECTED_PARTITION=$(rtux_Choose_Partition)
+SELECTED_PARTITION=$(rtux_Choose_Partition "Which GNU/Linux partition?")
 
 
 SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk ${WHICH_HARD_DISK_INSTALL_GRUB_STR});
