@@ -539,6 +539,8 @@ function rtux_File_Reordered_Device_Map_payload() {
       let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
     done
     DESIRED_ORDER=`${RESCAPP_BINARY_PATH}/rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
+    rtux_Message_Question "Order hard disks" "${ARGS_ARRAY[@]}"
+    rtux_Message_Answer "${DESIRED_ORDER}"
   else
     DESIRED_ORDER="${DETECTED_HARD_DISKS}"
   fi
