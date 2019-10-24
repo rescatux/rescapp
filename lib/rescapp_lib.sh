@@ -356,7 +356,7 @@ function rtux_Abstract_Choose_Partition () {
 	--column "${OSPROBER_LONGNAME_STR}" \
 	${LIST_VALUES} \
 	);
- rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}"
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${LIST_VALUES}"
  rtux_Message_Answer "${choosen_partition}"
  echo "${choosen_partition}"
 } # function rtux_Abstract_Choose_Partition ()
