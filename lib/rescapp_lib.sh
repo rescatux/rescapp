@@ -283,13 +283,16 @@ function rtux_Choose_Hard_Disk () {
     let n=n+1
   done
 
-  echo $(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_disk=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
 	--column "${SELECT_STR}" \
 	--column "${HARDDISK_STR}" \
-	--column "${SIZE_STR}" ${HD_LIST_VALUES}); 
+	--column "${SIZE_STR}" ${HD_LIST_VALUES});
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${HARDDISK_STR}" "${SIZE_STR}" ${HD_LIST_VALUES}
+ rtux_Message_Answer "${choosen_disk}"
+ echo "${choosen_disk}"
 
 } # function rtux_Choose_Hard_Disk ()
 
@@ -341,7 +344,7 @@ function rtux_Abstract_Choose_Partition () {
   let n=n+1
   done
 
-  echo "$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_partition=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${WHICH_PARTITION_STR}" \
 	--radiolist  \
@@ -352,7 +355,10 @@ function rtux_Abstract_Choose_Partition () {
 	--column "${FLAGS_STR}" \
 	--column "${OSPROBER_LONGNAME_STR}" \
 	${LIST_VALUES} \
-	)";
+	);
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}"
+ rtux_Message_Answer "${choosen_partition}"
+ echo "${choosen_partition}"
 } # function rtux_Abstract_Choose_Partition ()
 
 # Let the user choose his main GNU/Linux partition
@@ -492,7 +498,8 @@ function rtux_Choose_Hard_Disk_Position() {
 	  ${HD_LIST_VALUES}); 
 
     # Ask position - END
-    
+  rtux_Message_Question "${RIGHT_HD_POSITION_STR}" "${SELECT_STR}" "${POSITION_STR}" "${HARDDISK_STR}" "${SIZE_STR}" ${HD_LIST_VALUES}
+  rtux_Message_Answer "${SELECTED_POSITION}"
     echo "${SELECTED_POSITION}"
 
 } # rtux_Choose_Hard_Disk_Position()
@@ -578,13 +585,16 @@ function rtux_Choose_User () {
   let n=n+1
   done
 
-  echo "$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${WHICH_USER_STR}" \
 	--radiolist  \
 	--column "${SELECT_STR}" \
 	--column "${USER_STR}" \
-	${LIST_VALUES})";
+	${LIST_VALUES});
+  rtux_Message_Question "${WHICH_USER_STR}" "${SELECT_STR}" "${USER_STR}" ${LIST_VALUES}
+  rtux_Message_Answer "${choosen_user}"
+  echo "${choosen_user}"
 } # function rtux_Choose_User ()
 
 # 1 parametre = User to change password
@@ -594,10 +604,13 @@ function rtux_Enter_Pass() {
 
   local USER="$1"
 
-    zenity ${ZENITY_COMMON_OPTIONS} \
+    choosen_password=$(zenity ${ZENITY_COMMON_OPTIONS} \
 	  --entry  \
 	  --text "${ENTER_PASS_STR} (${USER})" \
-	  --hide-text
+	  --hide-text)
+  rtux_Message_Question "${ENTER_PASS_STR}" "(${USER})"
+  rtux_Message_Answer "${choosen_password}"
+  echo "${choosen_password}"
 
 } # rtux_Choose_Hard_Disk_Position()
 
@@ -689,7 +702,7 @@ function rtux_Choose_Sam_User () {
       sam_line_count=$((sam_line_count+1))
   done
 
-  echo $(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_sam_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
@@ -697,6 +710,10 @@ function rtux_Choose_Sam_User () {
 	--column "${SELECT_STR}" \
 	--column "${SAM_USER_STR}" \
 	"${SAM_LIST_VALUES[@]}");
+
+  rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${SAM_USER_STR}" "${SAM_LIST_VALUES[@]}"
+  rtux_Message_Answer "${choosen_sam_user}"
+  echo "${choosen_sam_user}"
 
 } # rtux_Choose_Sam_User ()
 
@@ -1294,6 +1311,8 @@ function rtux_UEFI_Choose_EFI_File () {
       ${UEFI_EFI_LIST_VALUES});
 
     umount ${TMP_MNT_PARTITION} > /dev/null 2>&1
+    rtux_Message_Question "${LOG_CHOOSE_STR}" "${SELECT_STR}" "${UEFI_FILE_STR}" "${UEFI_EFI_LIST_VALUES}"
+    rtux_Message_Answer "${SELECTED_FILE}"
     echo "${SELECTED_FILE}"
 
   fi
