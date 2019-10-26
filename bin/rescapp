@@ -703,42 +703,6 @@ class SelftestWindow(QtWidgets.QWidget):
             s += '\n'
             s += str(item.data(self.SelfTestRole.SummaryRole)) + '\n'
             s += "Details: " + str(item.data(self.SelfTestRole.DetailsRole)) + '\n'
-        '''
-            if (item->data(FileIncludeRole).isValid()) {
-                s << endl;
-                const QString fileName = item->data(FileIncludeRole).toString();
-                QFile f(fileName);
-                if (f.open(QFile::ReadOnly)) {
-                    s << "File content of '" << fileName << "':" << endl;
-                    s << f.readAll() << endl;
-                } else {
-                    s << "File '" << fileName << "' could not be opened" << endl;
-                }
-            }
-            if (item->data(ListDirectoryRole).isValid()) {
-                s << endl;
-                const QStringList pathList = item->data(ListDirectoryRole).toStringList();
-                if (pathList.isEmpty()) {
-                    s << "Directory list is empty." << endl;
-                }
-                for (const QString &path : pathList) {
-                    s << "Directory listing of '" << path << "':" << endl;
-                    QDir dir(path);
-                    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
-                    const QStringList listEntries(dir.entryList());
-                    for (const QString &entry : listEntries) {
-                        s << entry << endl;
-                    }
-                }
-            }
-            if (item->data(EnvVarRole).isValid()) {
-                s << endl;
-                const QByteArray envVarName = item->data(EnvVarRole).toByteArray();
-                const QByteArray envVarValue = qgetenv(envVarName.constData());
-                s << "Environment variable " << envVarName << " is set to '" << envVarValue << "'" << endl;
-            }
-        }
-        '''
         s += '\n'
         return (s)
 
