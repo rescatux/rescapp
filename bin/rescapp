@@ -43,7 +43,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def Message(self, message):
-        self.messages_wb.insertPlainText('[DEBUG]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml(' ' + '[DEBUG]' + ' ' + str(message))
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -53,7 +54,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageSkip(self, message):
-        self.messages_wb.insertPlainText('[SKIP]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-ok.png' + '">' + ' ' +  '<b>' + '[SKIP]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -63,7 +65,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageSuccess(self, message):
-        self.messages_wb.insertPlainText('[SUCCESS]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-ok-apply.png' + '">' + ' ' +  '<b>' + '[SUCCESS]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -73,7 +76,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageWarning(self, message):
-        self.messages_wb.insertPlainText('[WARNING]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-warning.png' + '">' + ' ' +  '<b>' + '[WARNING]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -83,7 +87,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageError(self, message):
-        self.messages_wb.insertPlainText('[ERROR]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-error.png' + '">' + ' ' +  '<b>' + '[ERROR]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -93,7 +98,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageInfo(self, message):
-        self.messages_wb.insertPlainText('[INFO]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-information.png' + '">' + ' ' +  '<b>' + '[INFO]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -103,7 +109,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageQuestion(self, message):
-        self.messages_wb.insertPlainText('[QUESTION]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'user-available-symbolic.symbolic.png' + '">' + ' ' +  '<b>' + '[QUESTION]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
@@ -113,7 +120,8 @@ class MessageRescapp(dbus.service.Object):
     @dbus.service.method("org.rescapp.MessageInterface",
                          in_signature='s', out_signature='as')
     def MessageAnswer(self, message):
-        self.messages_wb.insertPlainText('[ANSWER]' + ' ' + str(message) + '\n')
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'user-available.png' + '">' + ' ' +  '<b>' + '[ANSWER]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
