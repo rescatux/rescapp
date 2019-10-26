@@ -848,9 +848,9 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def saveReportToLogFile(self):
         try:
-            os.makedirs(self.rescapp_log_directory)
+            os.makedirs(rescapp_log_directory)
         except OSError as exc:  # Python >2.5
-            if exc.errno == errno.EEXIST and os.path.isdir(self.rescapp_log_directory):
+            if exc.errno == errno.EEXIST and os.path.isdir(rescapp_log_directory):
                 pass
             else:
                 raise
@@ -877,9 +877,7 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
-        home_directory = os.path.expanduser('~')
-        self.rescapp_log_directory = home_directory + '/.rescapp/log'
-        self.selftest_log_file = self.rescapp_log_directory + '/selftest_log.txt'
+        self.selftest_log_file = rescapp_log_directory + '/selftest_log.txt'
 
         self.introductionLabel = QtWidgets.QLabel("This is the self-test window from '"+rescapp_title+"'. It allows you to check if '"+rescapp_title+"' will work ok on your live system or not.")
         self.introductionLabel.setWordWrap(True)
@@ -957,6 +955,10 @@ if __name__ == '__main__':
     rescapp_plugins_path = rescapp_binary_path + '/../' \
         + 'share/rescapp/plugins'
     rescapp_version_path = rescapp_share_path
+
+    home_directory = os.path.expanduser('~')
+    rescapp_log_directory = home_directory + '/.rescapp/log'
+
     mainmenu_filename = 'rescatux.lis'
     code_list = list()
     name_list = list()
