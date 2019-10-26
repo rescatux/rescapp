@@ -109,22 +109,22 @@ function rtux_Get_Partition_Osprober_Longname_payload() {
 
 function rtux_Get_Etc_Issue_Content() {
   GET_ETC_ISSUE_CONTENT_RUNNING_STR="Parsing /etc/issue file."
-  rtux_Run_Show_Progress "${GET_ETC_ISSUE_CONTENT_RUNNING_STR}" rtux_Get_Etc_Issue_Content_payload "$@"
+  rtux_Run_Show_Progress "${GET_ETC_ISSUE_CONTENT_RUNNING_STR} ($@)" rtux_Get_Etc_Issue_Content_payload "$@"
 } # function rtux_Get_Etc_Issue_Content()
 
 function rtux_Get_Partition_Filesystem() {
   GET_PARTITION_FILESYSTEM_RUNNING_STR="Getting partition filesystem."
-  rtux_Run_Show_Progress "${GET_PARTITION_FILESYSTEM_RUNNING_STR}" rtux_Get_Partition_Filesystem_payload "$@"
+  rtux_Run_Show_Progress "${GET_PARTITION_FILESYSTEM_RUNNING_STR} ($@)" rtux_Get_Partition_Filesystem_payload "$@"
 } # function rtux_Get_Partition_Filesystem()
 
 function rtux_Get_Partition_Flags() {
   GET_PARTITION_FLAGS_RUNNING_STR="Getting partition flags."
-  rtux_Run_Show_Progress "${GET_PARTITION_FLAGS_RUNNING_STR}" rtux_Get_Partition_Flags_payload "$@"
+  rtux_Run_Show_Progress "${GET_PARTITION_FLAGS_RUNNING_STR} ($@)" rtux_Get_Partition_Flags_payload "$@"
 } # function rtux_Get_Partition_Flags()
 
 function rtux_Get_Partition_Osprober_Longname() {
   GET_PARTITION_OSPROBER_LONGNAME_RUNNING_STR="Getting os-prober long name."
-  rtux_Run_Show_Progress "${GET_PARTITION_OSPROBER_LONGNAME_RUNNING_STR}" rtux_Get_Partition_Osprober_Longname_payload "$@"
+  rtux_Run_Show_Progress "${GET_PARTITION_OSPROBER_LONGNAME_RUNNING_STR} ($@)" rtux_Get_Partition_Osprober_Longname_payload "$@"
 } # function rtux_Get_Partition_Osprober_Longname()
 
 # Return partitions detected on the system
@@ -227,31 +227,41 @@ function rtux_Get_System_HardDisks () {
 # Every parametre is treated as the message to be shown to the user.
 function rtux_Message_Success () {
   local text_to_show="$@"
-  zenity ${ZENITY_COMMON_OPTIONS} \
-    --info \
-    --title="${SUCCESS_STR}" \
-    --text="${text_to_show}";
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageSuccess" "string:${text_to_show}"
 } # function rtux_Message_Success ()
 
 # Informs the user about anything
 # Every parametre is treated as the message to be shown to the user.
 function rtux_Message_Info () {
   local text_to_show="$@"
-  zenity ${ZENITY_COMMON_OPTIONS} \
-    --info \
-    --title="${INFO_STR}" \
-    --text="${text_to_show}";
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageInfo" "string:${text_to_show}"
 } # function rtux_Message_Info ()
 
 # Informs the user about an operation that has been not successful
 # Every parametre is treated as the message to be shown to the user.
 function rtux_Message_Failure () {
   local text_to_show="$@"
-  zenity ${ZENITY_COMMON_OPTIONS} \
-    --error \
-    --title="${FAILURE_STR}" \
-    --text="${text_to_show}";
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageError" "string:${text_to_show}"
 } # function rtux_Message_Failure ()
+
+# Send Rescapp main program the question being asked
+# Every parametre is treated as the message to be shown to the user.
+function rtux_Message_Question () {
+  local text_to_show="$@"
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" 2>/dev/null | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageQuestion" "string:${text_to_show}" 2>/dev/null
+} # function rtux_Message_Question ()
+
+# Send Rescapp main program the answer being asked
+# Every parametre is treated as the message to be shown to the user.
+function rtux_Message_Answer () {
+  local text_to_show="$@"
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" 2>/dev/null | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageAnswer" "string:${text_to_show}" 2>/dev/null
+} # function rtux_Message_Answer ()
 
 # Return hard disk that the user chooses
 # Every parametre is treated as the question to be asked to the user.
@@ -273,32 +283,45 @@ function rtux_Choose_Hard_Disk () {
     let n=n+1
   done
 
-  echo $(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_disk=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
 	--column "${SELECT_STR}" \
 	--column "${HARDDISK_STR}" \
-	--column "${SIZE_STR}" ${HD_LIST_VALUES}); 
+	--column "${SIZE_STR}" ${HD_LIST_VALUES});
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${HARDDISK_STR}" "${SIZE_STR}" ${HD_LIST_VALUES}
+ rtux_Message_Answer "${choosen_disk}"
+ echo "${choosen_disk}"
 
 } # function rtux_Choose_Hard_Disk ()
 
 # Let the user choose a partition
 # It outputs choosen partition
 function rtux_Choose_Partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_System_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_System_Partitions)
 } # function rtux_Choose_Partition ()
 
 # Let the user choose a partition
 # It outputs choosen partition
 function rtux_Choose_Primary_Partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_Primary_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which primary partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Primary_Partitions)
 } # function rtux_Choose_Primary_Partition ()
 
 # Let the user choose a partition
 # Every parametre are the source partitions
 # It outputs choosen partition
 function rtux_Abstract_Choose_Partition () {
+  local text_to_ask="$1"
+  shift
   local n=0
   local LIST_VALUES=""
   local DESC_VALUES=""
@@ -331,9 +354,9 @@ function rtux_Abstract_Choose_Partition () {
   let n=n+1
   done
 
-  echo "$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_partition=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
-	--text "${WHICH_PARTITION_STR}" \
+	--text "${text_to_ask}" \
 	--radiolist  \
 	--column "${SELECT_STR}" \
 	--column "${PARTITION_STR}" \
@@ -342,19 +365,30 @@ function rtux_Abstract_Choose_Partition () {
 	--column "${FLAGS_STR}" \
 	--column "${OSPROBER_LONGNAME_STR}" \
 	${LIST_VALUES} \
-	)";
+	);
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${LIST_VALUES}"
+ rtux_Message_Answer "${choosen_partition}"
+ echo "${choosen_partition}"
 } # function rtux_Abstract_Choose_Partition ()
 
 # Let the user choose his main GNU/Linux partition
 # It outputs choosen partition
 function rtux_Choose_Linux_partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_Linux_Os_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which GNU/Linux partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Linux_Os_Partitions)
 } # function rtux_Choose_Linux_partition ()
 
 # Let the user choose his main Windows partition
 # It outputs choosen partition
 function rtux_Choose_Windows_partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_Windows_Os_Partitions)
+  custom_question="$1"
+  if [ "${custom_question}" -eq "" ] ; then
+    custom_question="Which Windows partition?"
+  fi
+  rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Windows_Os_Partitions)
 } # function rtux_Choose_Windows_partition ()
 
 # Let the user rename hard disks if they want to
@@ -482,7 +516,8 @@ function rtux_Choose_Hard_Disk_Position() {
 	  ${HD_LIST_VALUES}); 
 
     # Ask position - END
-    
+  rtux_Message_Question "${RIGHT_HD_POSITION_STR}" "${SELECT_STR}" "${POSITION_STR}" "${HARDDISK_STR}" "${SIZE_STR}" ${HD_LIST_VALUES}
+  rtux_Message_Answer "${SELECTED_POSITION}"
     echo "${SELECTED_POSITION}"
 
 } # rtux_Choose_Hard_Disk_Position()
@@ -522,6 +557,8 @@ function rtux_File_Reordered_Device_Map_payload() {
       let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
     done
     DESIRED_ORDER=`${RESCAPP_BINARY_PATH}/rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
+    rtux_Message_Question "Order hard disks" "${ARGS_ARRAY[@]}"
+    rtux_Message_Answer "${DESIRED_ORDER}"
   else
     DESIRED_ORDER="${DETECTED_HARD_DISKS}"
   fi
@@ -568,13 +605,16 @@ function rtux_Choose_User () {
   let n=n+1
   done
 
-  echo "$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${WHICH_USER_STR}" \
 	--radiolist  \
 	--column "${SELECT_STR}" \
 	--column "${USER_STR}" \
-	${LIST_VALUES})";
+	${LIST_VALUES});
+  rtux_Message_Question "${WHICH_USER_STR}" "${SELECT_STR}" "${USER_STR}" ${LIST_VALUES}
+  rtux_Message_Answer "${choosen_user}"
+  echo "${choosen_user}"
 } # function rtux_Choose_User ()
 
 # 1 parametre = User to change password
@@ -584,10 +624,13 @@ function rtux_Enter_Pass() {
 
   local USER="$1"
 
-    zenity ${ZENITY_COMMON_OPTIONS} \
+    choosen_password=$(zenity ${ZENITY_COMMON_OPTIONS} \
 	  --entry  \
 	  --text "${ENTER_PASS_STR} (${USER})" \
-	  --hide-text
+	  --hide-text)
+  rtux_Message_Question "${ENTER_PASS_STR}" "(${USER})"
+  rtux_Message_Answer "${choosen_password}"
+  echo "${choosen_password}"
 
 } # rtux_Choose_Hard_Disk_Position()
 
@@ -679,7 +722,7 @@ function rtux_Choose_Sam_User () {
       sam_line_count=$((sam_line_count+1))
   done
 
-  echo $(zenity ${ZENITY_COMMON_OPTIONS}  \
+  choosen_sam_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
@@ -687,6 +730,10 @@ function rtux_Choose_Sam_User () {
 	--column "${SELECT_STR}" \
 	--column "${SAM_USER_STR}" \
 	"${SAM_LIST_VALUES[@]}");
+
+  rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${SAM_USER_STR}" "${SAM_LIST_VALUES[@]}"
+  rtux_Message_Answer "${choosen_sam_user}"
+  echo "${choosen_sam_user}"
 
 } # rtux_Choose_Sam_User ()
 
@@ -1186,7 +1233,7 @@ function rtux_UEFI_Check_Is_EFI_System_Partition () {
 # Let the user choose his main EFI System partition
 # It outputs choosen partition
 function rtux_Choose_EFI_System_partition () {
-  rtux_Abstract_Choose_Partition $(rtux_Get_EFI_System_Partitions)
+  rtux_Abstract_Choose_Partition "Which EFI System partition?" $(rtux_Get_EFI_System_Partitions)
 } # function rtux_Choose_EFI_System_partition ()
 
 function rtux_Get_EFI_System_Partitions() {
@@ -1284,6 +1331,8 @@ function rtux_UEFI_Choose_EFI_File () {
       ${UEFI_EFI_LIST_VALUES});
 
     umount ${TMP_MNT_PARTITION} > /dev/null 2>&1
+    rtux_Message_Question "${LOG_CHOOSE_STR}" "${SELECT_STR}" "${UEFI_FILE_STR}" "${UEFI_EFI_LIST_VALUES}"
+    rtux_Message_Answer "${SELECTED_FILE}"
     echo "${SELECTED_FILE}"
 
   fi
@@ -1757,6 +1806,13 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
   return ${EXIT_VALUE}
 
 } # function rtux_UEFI_Reinstall_Microsoft_Boot_Entries ()
+
+# Signal end of an option
+function rtux_Dbus_End () {
+  dbus_destination=$(dbus-send --print-reply --system --dest="org.freedesktop.DBus" "/org/freedesktop/DBus" "org.freedesktop.DBus.GetNameOwner" "string:org.rescapp.MessageService" | grep string | awk -F '"' '{print $2}')
+  dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.End"
+
+} # rtux_Run_Show_Progress ()
 
 # Rescatux lib main variables
 
