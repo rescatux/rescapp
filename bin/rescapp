@@ -47,7 +47,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[DEBUG]' + ' ' + str(message) + '\n')
         return ["Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -57,7 +57,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[SKIP]' + ' ' + str(message) + '\n')
         return ["Skip Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -67,7 +67,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[SUCCESS]' + ' ' + str(message) + '\n')
         return ["Success Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -77,7 +77,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[WARNING]' + ' ' + str(message) + '\n')
         return ["Warning Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -87,7 +87,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[ERROR]' + ' ' + str(message) + '\n')
         return ["Error Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -97,7 +97,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[INFO]' + ' ' + str(message) + '\n')
         return ["Info Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -107,7 +107,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[QUESTION]' + ' ' + str(message) + '\n')
         return ["Question Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -117,7 +117,7 @@ class MessageRescapp(dbus.service.Object):
         self.messages_wb.setReadOnly(True)
         self.messages_wb.moveCursor(QtGui.QTextCursor.End)
         self.messages_wb.ensureCursorVisible()
-        self.option_status_label.setText('<b>Status: Running...</b>')
+        self.selected_option.writeToSimpleLog('[ANSWER]' + ' ' + str(message) + '\n')
         return ["Answer Message received. Thank you."]
 
     @dbus.service.method("org.rescapp.MessageInterface",
@@ -133,8 +133,10 @@ class MessageRescapp(dbus.service.Object):
     def End(self):
         self.mainloop.quit()
 
-    def setMessages_wb(self,messages_wb):
+    # TODO: Use a proper constructor instead of a custom method
+    def Init(self, messages_wb, selected_option):
         self.messages_wb = messages_wb
+        self.selected_option = selected_option
 
     def setMainLoop(self,mainloop):
         self.mainloop = mainloop
@@ -175,6 +177,7 @@ class RescappOption:
 
     def setCode(self, code):
         self.code = code
+        self.simple_log_file_path = rescapp_log_directory + '/' + self.code + '_' + 'simple' + '_log.txt'
 
     def setName(self, name):
         self.name = name
@@ -214,6 +217,15 @@ class RescappOption:
 
     def getBeta(self):
         return self.beta
+
+    def openSimpleLog(self):
+        self.simple_log_file = open(self.simple_log_file_path,"w")
+
+    def writeToSimpleLog(self, text):
+        self.simple_log_file.write(text)
+
+    def closeSimpleLog(self):
+        self.simple_log_file.close()
 
     def setOptionFromDir(self, dir_to_check, ndir):
         global rescapp_plugins_doc_path
@@ -338,6 +350,9 @@ class MainWindow(QtWidgets.QWidget):
         run_status = subprocess.Popen([rescapp_binary_path + '/' + 'rescapp-launcher',
                 self.selected_option_code])
 
+        # Open Simple Log
+        self.selected_option.openSimpleLog()
+
         # Status blink thread start
         self.blink_status_thread_active = True
         blinkStatusLabelThread = threading.Thread(target=self.blink_status_label)
@@ -353,7 +368,7 @@ class MainWindow(QtWidgets.QWidget):
         system_bus = dbus.SystemBus()
         name = dbus.service.BusName("org.rescapp.MessageService", system_bus)
         self.messageRescappObject = MessageRescapp(system_bus, '/MessageRescapp')
-        self.messageRescappObject.setMessages_wb(self.messages_wb)
+        self.messageRescappObject.Init(self.messages_wb, self.selected_option)
         mainloop = gobject.MainLoop()
         self.messageRescappObject.setMainLoop(mainloop)
         print ("DEBUG: Rescapp DBUS service started.")
@@ -365,6 +380,9 @@ class MainWindow(QtWidgets.QWidget):
         blinkStatusLabelThread.join()
         self.option_status_label.setStyleSheet('QLabel {}')
         self.option_status_label.setText('<b>Status: <font color="green">Finished.</font></b>')
+
+        # Close Simple Log
+        self.selected_option.closeSimpleLog()
 
         # Actual rescue plugin execution - end
         print ('DEBUG: Running option (code) [FINISH]: ' \
