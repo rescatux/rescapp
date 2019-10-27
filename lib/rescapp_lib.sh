@@ -1171,6 +1171,8 @@ function rtux_Choose_UEFI_Boot_Order_Update () {
 
     done < <( ${EFIBOOTMGR_BINARY} --verbose | grep -E '^Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]' )
     TMP_DESIRED_ORDER=`${RESCAPP_BINARY_PATH}/rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
+    rtux_Message_Question "Order UEFI boot entries" "${ARGS_ARRAY[@]}"
+    rtux_Message_Answer "${TMP_DESIRED_ORDER}"
     # Put commas in place - Begin
     FIRST_ENTRY_FOUND='true'
     DESIRED_ORDER=""
