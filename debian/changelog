@@ -1,3 +1,15 @@
+rescapp (0.54b2-1) unstable; urgency=low
+
+  * More compact UI
+  * Added rescapp title and version to the main UI
+  * Advice to choose an option to read its manual
+  * After selecting an option it shows its name in the option screen
+  * Advice to read the manual before hitting run on the option screen
+  * New status label shows the option being ready to run, running or finished
+  * New messages box that show the actions the option is performing
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 27 Oct 2019 10:00:00 +0000
+
 rescapp (0.54b1-1) unstable; urgency=low
 
   * Do not mount neither root partition nor tmp partition (Improves Ubuntu grub fix)
