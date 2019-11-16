@@ -47,7 +47,8 @@ install_documentation:	about-rescapp_install_documentation\
 	winmbr_install_documentation\
 	winpass_install_documentation\
 	winpromote_install_documentation\
-	winunlock_install_documentation
+	winunlock_install_documentation\
+	not-documented_install_documentation
 
 
 install:	install_documentation\
@@ -230,6 +231,9 @@ help-rescapp_install_documentation:	plugins/help-rescapp/*html	$(help-rescapp_in
 
 
 
+not-documented_install_documentation:	plugins/not-documented/*html
+	install -d $(doctarget)/plugins/not-documented/
+	install -m 644 plugins/not-documented/*html $(doctarget)/plugins/not-documented/
 
 
 photorec_installdocimages_directory = $(subst /,_,$(wildcard plugins/photorec/images))
