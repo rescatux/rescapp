@@ -37,6 +37,23 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
          ,python3-parted
 # chntpw
          ,chntpw
+# inxi
+         ,inxi
+         ,dmidecode
+         ,file
+         ,kmod
+         ,sudo
+         ,tree
+         ,usbutils
+         ,mesa-utils
+         ,x11-utils
+         ,x11-xserver-utils
+# inxi - Non used options
+#        ,dnsutils
+#        ,hddtemp
+#        ,iproute2
+#        ,lm-sensors
+#
 # misc
          ,zenity
          ,xdg-utils
@@ -83,3 +100,4 @@ Description: Rescapp is a nice wizard that helps you in your rescue tasks.
   Share log
   Share log on forum
   Boot Info Script
+  System Info Script (Inxi)
