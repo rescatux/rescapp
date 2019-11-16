@@ -15,5 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 
-gparted &
+source ${RESCAPP_LIB_FILE}
+set -x
+set -v
+
+GPARTED_OK_STR="Gparted was run at the background."
+GPARTED_KO_STR="Rescapp was not unable to start Gparted."
+
+GPARTED_FULL_PATH="$(which gparted)"
+if [ -x "${GPARTED_FULL_PATH}" ] ; then
+    "${GPARTED_FULL_PATH}" &
+    rtux_Message_Success ${GPARTED_OK_STR}
+else
+    rtux_Message_Failure ${GPARTED_KO_STR}
+fi
 
