@@ -1,3 +1,12 @@
+rescapp (0.54b3-1) unstable; urgency=low
+
+  * Gparted, Photorec and Testdisk are now checked before running them
+  * Add an specific non-documented documentation page.
+  * Added System Info Script (Inxi) option
+  * bootinfoscript was updated to use system's installed bootinfoscript
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 17 Nov 2019 17:59:00 +0000
+
 rescapp (0.54b2-1) unstable; urgency=low
 
   * More compact UI
