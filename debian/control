@@ -54,6 +54,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 #        ,iproute2
 #        ,lm-sensors
 #
+# bootinfoscript
+         ,boot-info-script
 # misc
          ,zenity
          ,xdg-utils
