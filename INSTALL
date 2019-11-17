@@ -98,6 +98,10 @@ INXI_PACKAGES="\
  inxi \
 "
 
+BOOTINFOSCRIPT_PACKAGES="\
+ boot-info-script \
+"
+
 RESCAPP_PACKAGES=" \
  ${PYTHON_PACKAGES} \
  ${RAID_PACKAGES} \
@@ -109,7 +113,8 @@ RESCAPP_PACKAGES=" \
  ${UEFI_PACKAGES} \
  ${CHNTPW_PACKAGES} \
  ${PYTHON_DBUS_PACKAGES} \
- ${INXI_PACKAGES}
+ ${INXI_PACKAGES} \
+ ${BOOTINFOSCRIPT_PACKAGES} \
  zenity \
  xdg-utils \
  hexchat \
