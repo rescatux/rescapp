@@ -47,7 +47,9 @@ install_documentation:	about-rescapp_install_documentation\
 	winmbr_install_documentation\
 	winpass_install_documentation\
 	winpromote_install_documentation\
-	winunlock_install_documentation
+	winunlock_install_documentation\
+	not-documented_install_documentation\
+	inxi_install_documentation
 
 
 install:	install_documentation\
@@ -230,6 +232,13 @@ help-rescapp_install_documentation:	plugins/help-rescapp/*html	$(help-rescapp_in
 
 
 
+not-documented_install_documentation:	plugins/not-documented/*html
+	install -d $(doctarget)/plugins/not-documented/
+	install -m 644 plugins/not-documented/*html $(doctarget)/plugins/not-documented/
+
+inxi_install_documentation:	plugins/inxi/*html
+	install -d $(doctarget)/plugins/inxi/
+	install -m 644 plugins/inxi/*html $(doctarget)/plugins/inxi/
 
 
 photorec_installdocimages_directory = $(subst /,_,$(wildcard plugins/photorec/images))
@@ -613,6 +622,7 @@ install_plugins:	about-rescapp_install_plugin\
 	grubeasy_install_plugin\
 	grub-install_install_plugin\
 	help-rescapp_install_plugin\
+	inxi_install_plugin\
 	photorec_install_plugin\
 	share_log_install_plugin\
 	share_log_forum_install_plugin\
@@ -646,14 +656,12 @@ about-rescapp_install_plugin:	plugins/about-rescapp/description\
 bootinfoscript_install_plugin:	plugins/bootinfoscript/description\
 	plugins/bootinfoscript/name\
 	plugins/bootinfoscript/run\
-	plugins/bootinfoscript/sudo\
-	plugins/bootinfoscript/bootinfoscript
+	plugins/bootinfoscript/sudo
 	install -d $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/description $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/name $(plugintarget)/bootinfoscript/
 	install -m 755 plugins/bootinfoscript/run $(plugintarget)/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/sudo $(plugintarget)/bootinfoscript/
-	install -m 755 plugins/bootinfoscript/bootinfoscript $(plugintarget)/bootinfoscript/
 
 
 
@@ -779,6 +787,18 @@ help-rescapp_install_plugin:	plugins/help-rescapp/description\
 	install -m 644 plugins/help-rescapp/description $(plugintarget)/help-rescapp/
 	install -m 644 plugins/help-rescapp/name $(plugintarget)/help-rescapp/
 
+
+
+
+inxi_install_plugin:	plugins/inxi/description\
+	plugins/inxi/name\
+	plugins/inxi/run\
+	plugins/inxi/sudo
+	install -d $(plugintarget)/inxi/
+	install -m 644 plugins/inxi/description $(plugintarget)/inxi/
+	install -m 644 plugins/inxi/name $(plugintarget)/inxi/
+	install -m 755 plugins/inxi/run $(plugintarget)/inxi/
+	install -m 644 plugins/inxi/sudo $(plugintarget)/inxi/
 
 
 

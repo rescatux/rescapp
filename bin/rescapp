@@ -645,6 +645,11 @@ class MainWindow(QtWidgets.QWidget):
                              + rescapp_plugins_doc_path + '/'
                              + self.selected_option.getCode() + '/'
                              + offlinedoc_filename))
+            else:
+                self.wb.load(QtCore.QUrl('file:///'
+                             + rescapp_plugins_doc_path + '/'
+                             + 'not-documented' + '/'
+                             + offlinedoc_filename))
             self.setLayout(grid)
         else:
             scrollArea = VerticalScrollArea()
