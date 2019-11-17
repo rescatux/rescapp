@@ -29,6 +29,7 @@ inxi \
  --color 0 \
  --extra 3 \
  --admin \
+ --tty \
          \
  --audio \
  --battery \
