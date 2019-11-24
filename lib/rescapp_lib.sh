@@ -326,6 +326,9 @@ function rtux_Abstract_Choose_Partition () {
   local LIST_VALUES=""
   local DESC_VALUES=""
   local SBIN_GRUB_PARTITIONS="$@"
+  if [ "x${SBIN_GRUB_PARTITIONS}" = "x" ] ; then
+    return
+  fi
   for n_partition in ${SBIN_GRUB_PARTITIONS}; do
     local issue_value=`rtux_Get_Etc_Issue_Content ${n_partition}`
     issue_value=$(echo $issue_value | sed 's/\ /\-/g')
