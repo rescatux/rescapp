@@ -270,6 +270,9 @@ function rtux_Choose_Hard_Disk () {
   local n=0
   local HD_LIST_VALUES=""
   local DETECTED_HARD_DISKS=$(rtux_Get_System_HardDisks);
+  if [ "x${DETECTED_HARD_DISKS}" = "x" ] ; then
+    return
+  fi
   for n_hard_disk in ${DETECTED_HARD_DISKS}; do
     if [[ ${n} -eq 0 ]] ; then
       local HD_LIST_VALUES="TRUE ${n_hard_disk} `${FDISK_COMMAND} -l \
