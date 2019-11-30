@@ -536,44 +536,48 @@ function rtux_File_Reordered_Device_Map_payload() {
 
 
   local DETECTED_HARD_DISKS=$(rtux_Get_System_HardDisks);
-  local COLUMN_NUMBER=2 # Determine Hard disk column and Size column
-  local HARD_DISK_NUMBER=0
-  for n_hard_disk in ${DETECTED_HARD_DISKS}; do
-    let HARD_DISK_NUMBER=HARD_DISK_NUMBER+1
-  done
-
-  if [ ${HARD_DISK_NUMBER} -gt 1 ] ; then
-    ARGS_ARRAY_INDEX=0
-    ARGS_ARRAY[ARGS_ARRAY_INDEX]=${COLUMN_NUMBER}
-    let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
-    ARGS_ARRAY[ARGS_ARRAY_INDEX]="${ORDER_HDS_WTITLE}"
-    let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
-    ARGS_ARRAY[ARGS_ARRAY_INDEX]="${ORDER_HDS_STR}"
-    let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
-    ARGS_ARRAY[ARGS_ARRAY_INDEX]="Hard disk"
-    let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
-    ARGS_ARRAY[ARGS_ARRAY_INDEX]="Size"
-    let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+  if [ "x${DETECTED_HARD_DISKS}" != "x" ] ; then
+    local COLUMN_NUMBER=2 # Determine Hard disk column and Size column
+    local HARD_DISK_NUMBER=0
     for n_hard_disk in ${DETECTED_HARD_DISKS}; do
-      ARGS_ARRAY[ARGS_ARRAY_INDEX]="${n_hard_disk}"
-      let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
-      ARGS_ARRAY[ARGS_ARRAY_INDEX]="`/sbin/fdisk -l /dev/${n_hard_disk} \
-		    | egrep 'Disk.*bytes' \
-		    | awk '{ sub(/,/,"");  print $3 "-" $4 }'`"
-      let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        let HARD_DISK_NUMBER=HARD_DISK_NUMBER+1
     done
-    DESIRED_ORDER=`${RESCAPP_BINARY_PATH}/rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
-    rtux_Message_Question "Order hard disks" "${ARGS_ARRAY[@]}"
-    rtux_Message_Answer "${DESIRED_ORDER}"
-  else
-    DESIRED_ORDER="${DETECTED_HARD_DISKS}"
-  fi
 
-  local n=0
-  for n_hard_disk in ${DESIRED_ORDER} ; do
-    echo -e -n "(hd${n}) /dev/${n_hard_disk}\n"
-    let n=n+1
-  done
+    if [ ${HARD_DISK_NUMBER} -gt 1 ] ; then
+        ARGS_ARRAY_INDEX=0
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]=${COLUMN_NUMBER}
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]="${ORDER_HDS_WTITLE}"
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]="${ORDER_HDS_STR}"
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]="Hard disk"
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]="Size"
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        for n_hard_disk in ${DETECTED_HARD_DISKS}; do
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]="${n_hard_disk}"
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        ARGS_ARRAY[ARGS_ARRAY_INDEX]="`/sbin/fdisk -l /dev/${n_hard_disk} \
+                | egrep 'Disk.*bytes' \
+                | awk '{ sub(/,/,"");  print $3 "-" $4 }'`"
+        let ARGS_ARRAY_INDEX=${ARGS_ARRAY_INDEX}+1
+        done
+        DESIRED_ORDER=`${RESCAPP_BINARY_PATH}/rescapp-set-hard-disks-boot-order "${ARGS_ARRAY[@]}"`
+        rtux_Message_Question "Order hard disks" "${ARGS_ARRAY[@]}"
+        rtux_Message_Answer "${DESIRED_ORDER}"
+    else
+        DESIRED_ORDER="${DETECTED_HARD_DISKS}"
+    fi
+
+    local n=0
+    for n_hard_disk in ${DESIRED_ORDER} ; do
+        echo -e -n "(hd${n}) /dev/${n_hard_disk}\n"
+        let n=n+1
+    done
+  else
+    echo ""
+  fi
 
 } # rtux_File_Reordered_Device_Map_payload()
 
