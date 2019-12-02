@@ -1,3 +1,11 @@
+rescapp (0.54b4-1) unstable; urgency=low
+
+  * Minor inxi improvements
+  * Check for Hexchat binary
+  * Handle non found devices properly on many options
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Mon, 02 Dec 2019 21:13:00 +0000
+
 rescapp (0.54b3-1) unstable; urgency=low
 
   * Gparted, Photorec and Testdisk are now checked before running them
