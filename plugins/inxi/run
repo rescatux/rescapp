@@ -29,6 +29,8 @@ inxi \
  --color 0 \
  --extra 3 \
  --admin \
+ --tty \
+ --filter \
          \
  --audio \
  --battery \
@@ -48,7 +50,6 @@ inxi \
  --system \
  --usb \
  --uuid \
- --filter-override \
 "
 
 # Inxi non used options on purpose:
