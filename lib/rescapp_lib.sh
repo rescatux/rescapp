@@ -56,9 +56,8 @@ function rtux_Get_Partition_Filesystem_payload() {
   local TMP_DEV_PARTITION=/dev/${n_partition}
   local partition_filesystem
 
-  partition_filesystem="$(${RESCAPP_BINARY_PATH}/rescapp-show-partition-filesystem ${TMP_DEV_PARTITION})"
-  SHOW_PARTITION_FILESYSTEM_EXIT_VALUE=$?
-  if [ $SHOW_PARTITION_FILESYSTEM_EXIT_VALUE -eq 0 ] ; then
+  partition_filesystem="$(lsblk -o KNAME,FSTYPE | awk '$1 == "'"${n_partition}"'" {print $2}')"
+  if [ "${partition_filesystem}x" != "x" ] ; then
     echo "${partition_filesystem}" |\
         sed -e 's/\\. //g' -e 's/\\.//g' -e 's/^[ \t]*//' -e 's/\ /_/g' -e 's/\ \ /_/g' -e 's/\n/_/g' -e 's/--/_/g'
   else
