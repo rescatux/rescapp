@@ -90,15 +90,15 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
                 rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
             fi
         else
-            rtux_Message_Info ${PASSWD_PASS_NOT_FOUND}
+            rtux_Message_Warning ${PASSWD_PASS_NOT_FOUND}
             rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
         fi
     else
-        rtux_Message_Info ${PASSWD_LINUX_USERS_NOT_FOUND}
+        rtux_Message_Warning ${PASSWD_LINUX_USERS_NOT_FOUND}
         rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
     fi
 else
-    rtux_Message_Info ${PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND}
+    rtux_Message_Warning ${PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND}
     rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
 fi
 
