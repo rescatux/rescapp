@@ -56,7 +56,7 @@ function rtux_Get_Partition_Filesystem_payload() {
   local TMP_DEV_PARTITION=/dev/${n_partition}
   local partition_filesystem
 
-  partition_filesystem="$(lsblk -o KNAME,FSTYPE | awk '$1 == "'"${n_partition}"'" {print $2}')"
+  partition_filesystem="$(lsblk -o KNAME,FSTYPE --list | awk '$1 == "'"${n_partition}"'" {print $2}')"
   if [ "${partition_filesystem}x" != "x" ] ; then
     echo "${partition_filesystem}" |\
         sed -e 's/\\. //g' -e 's/\\.//g' -e 's/^[ \t]*//' -e 's/\ /_/g' -e 's/\ \ /_/g' -e 's/\n/_/g' -e 's/--/_/g'
@@ -65,6 +65,25 @@ function rtux_Get_Partition_Filesystem_payload() {
   fi
 
 } # function rtux_Get_Partition_Filesystem_payload()
+
+# Given a partition it returns its alternate name
+# Format is modified so that zenity does not complain
+function rtux_Get_Partition_Alternatename_payload() {
+  local PARTITION_TO_MOUNT=$1
+  local n_partition=${PARTITION_TO_MOUNT}
+
+  local TMP_DEV_PARTITION=/dev/${n_partition}
+  local partition_alternatename
+
+  partition_alternatename="$(lsblk -o KNAME,NAME --list | awk '$1 == "'"${n_partition}"'" {print $2}')"
+  if [ "${partition_alternatename}x" != "x" ] ; then
+    echo "${partition_alternatename}" |\
+        sed -e 's/\\. //g' -e 's/\\.//g' -e 's/^[ \t]*//' -e 's/\ /_/g' -e 's/\ \ /_/g' -e 's/\n/_/g' -e 's/--/_/g'
+  else
+    echo "${NO_ALTERNATENAME_STR}"
+  fi
+
+} # function rtux_Get_Partition_Alternatename_payload()
 
 # Given a partition it returns its flags
 # Format is modified so that zenity does not complain
@@ -115,6 +134,11 @@ function rtux_Get_Partition_Filesystem() {
   GET_PARTITION_FILESYSTEM_RUNNING_STR="Getting partition filesystem."
   rtux_Run_Show_Progress "${GET_PARTITION_FILESYSTEM_RUNNING_STR} ($@)" rtux_Get_Partition_Filesystem_payload "$@"
 } # function rtux_Get_Partition_Filesystem()
+
+function rtux_Get_Partition_Alternatename() {
+  GET_PARTITION_ALTERNATENAME_RUNNING_STR="Getting alternate name."
+  rtux_Run_Show_Progress "${GET_PARTITION_ALTERNATENAME_RUNNING_STR} ($@)" rtux_Get_Partition_Alternatename_payload "$@"
+} # function rtux_Get_Partition_Alternatename()
 
 function rtux_Get_Partition_Flags() {
   GET_PARTITION_FLAGS_RUNNING_STR="Getting partition flags."
@@ -351,6 +375,10 @@ function rtux_Abstract_Choose_Partition () {
     partition_filesystem=$(echo $partition_filesystem | sed 's/\ /\-/g')
     partition_filesystem=$(echo $partition_filesystem | sed 's/ /\-/g')
 
+    local partition_alternate_name="$(rtux_Get_Partition_Alternatename ${n_partition})"
+    partition_alternate_name=$(echo ${partition_alternate_name} | sed 's/\ /\-/g')
+    partition_alternate_name=$(echo ${partition_alternate_name} | sed 's/ /\-/g')
+
     local partition_flags="$(rtux_Get_Partition_Flags ${n_partition})"
     partition_flags=$(echo $partition_flags | sed 's/\ /\-/g')
     partition_flags=$(echo $partition_flags | sed 's/ /\-/g')
@@ -360,9 +388,9 @@ function rtux_Abstract_Choose_Partition () {
     partition_osprober_longname=$(echo $partition_osprober_longname | sed 's/ /\-/g')
     
     if [[ n -eq 0 ]] ; then
-      LIST_VALUES="TRUE ${n_partition} ${issue_value} ${partition_filesystem} ${partition_flags} ${partition_osprober_longname}"
+      LIST_VALUES="TRUE ${n_partition} ${issue_value} ${partition_filesystem} ${partition_flags} ${partition_osprober_longname} ${partition_alternate_name}"
     else
-      LIST_VALUES="${LIST_VALUES} FALSE ${n_partition} ${issue_value} ${partition_filesystem} ${partition_flags} ${partition_osprober_longname}"
+      LIST_VALUES="${LIST_VALUES} FALSE ${n_partition} ${issue_value} ${partition_filesystem} ${partition_flags} ${partition_osprober_longname} ${partition_alternate_name}"
     fi
   let n=n+1
   done
@@ -377,9 +405,10 @@ function rtux_Abstract_Choose_Partition () {
 	--column "${FILESYSTEM_STR}" \
 	--column "${FLAGS_STR}" \
 	--column "${OSPROBER_LONGNAME_STR}" \
+	--column "${ALTERNATENAME_STR}" \
 	${LIST_VALUES} \
 	);
- rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${LIST_VALUES}"
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${ALTERNATENAME_STR}" "${LIST_VALUES}"
  rtux_Message_Answer "${choosen_partition}"
  echo "${choosen_partition}"
 } # function rtux_Abstract_Choose_Partition ()
@@ -1868,9 +1897,11 @@ ENTER_PASS_STR="Enter password"
 PARTITION_STR="Partition"
 FILESYSTEM_STR="File system"
 NO_FILESYSTEM_STR="No file system"
+NO_ALTERNATENAME_STR="No alternate name"
 FLAGS_STR="Flags"
 NO_FLAGS_STR="No flags"
 OSPROBER_LONGNAME_STR="Guessed long name"
+ALTERNATENAME_STR="Alternate name"
 NO_OSPROBER_LONGNAME_STR="No long name guessed"
 USER_STR="User"
 POSITION_STR="Position"
