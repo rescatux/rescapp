@@ -672,8 +672,7 @@ function rtux_Enter_Pass() {
 
     choosen_password=$(zenity ${ZENITY_COMMON_OPTIONS} \
 	  --entry  \
-	  --text "${ENTER_PASS_STR} (${USER})" \
-	  --hide-text)
+	  --text "${ENTER_PASS_STR} (${USER})")
   rtux_Message_Question "${ENTER_PASS_STR}" "(${USER})"
   rtux_Message_Answer "${choosen_password}"
   echo "${choosen_password}"
