@@ -52,6 +52,8 @@ UEFI_SYSTEM_NOT_DETECTED_STR="UEFI devices order skipped (Not an UEFI System)"
 
 SELECTED_PARTITION=$(rtux_Choose_Partition "Which GNU/Linux partition?")
 
+GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
+
 
 SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk ${WHICH_HARD_DISK_INSTALL_GRUB_STR});
 
@@ -71,10 +73,15 @@ fi
 
 EXIT_SUM=0
 
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 if ( rtux_Run_Show_Progress "${FSCK_FORCED_RUNNING_STR}" rtux_Fsck_Forced ${SELECTED_PARTITION} ) ; then
   rtux_Message_Success ${FSCK_FORCED_OK_STR}
 else
   rtux_Message_Failure ${FSCK_FORCED_KO_STR}
+  false
+fi
+else
+  rtux_Message_Warning ${GRUBEASY_PARTITIONS_NOT_FOUND}
   false
 fi
 
