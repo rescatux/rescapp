@@ -53,10 +53,13 @@ UEFI_SYSTEM_NOT_DETECTED_STR="UEFI devices order skipped (Not an UEFI System)"
 SELECTED_PARTITION=$(rtux_Choose_Partition "Which GNU/Linux partition?")
 
 GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
+GRUBEASY_HARDDISKS_NOT_FOUND="No hard disks were found or choosen."
 
 if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
   SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk ${WHICH_HARD_DISK_INSTALL_GRUB_STR});
+
+  if [ "x${SELECTED_HARD_DISK}" != "x" ] ; then
 
   DEVICE_MAP_RESCATUX_FILE_TMP_PATH=$(rtux_Order_Hard_Disks)
 
@@ -118,6 +121,11 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
     UEFIORDER_EXIT_VALUE=$?
     EXIT_SUM=$((EXIT_SUM+UEFIORDER_EXIT_VALUE))
 
+  fi
+  else
+    rtux_Message_Warning ${GRUBEASY_HARDDISKS_NOT_FOUND}
+    EXIT_SUM=1
+    false
   fi
 
 else
