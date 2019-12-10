@@ -74,12 +74,12 @@ fi
 EXIT_SUM=0
 
 if [ "x${SELECTED_PARTITION}" != "x" ] ; then
-if ( rtux_Run_Show_Progress "${FSCK_FORCED_RUNNING_STR}" rtux_Fsck_Forced ${SELECTED_PARTITION} ) ; then
-  rtux_Message_Success ${FSCK_FORCED_OK_STR}
-else
-  rtux_Message_Failure ${FSCK_FORCED_KO_STR}
-  false
-fi
+  if ( rtux_Run_Show_Progress "${FSCK_FORCED_RUNNING_STR}" rtux_Fsck_Forced ${SELECTED_PARTITION} ) ; then
+    rtux_Message_Success ${FSCK_FORCED_OK_STR}
+  else
+    rtux_Message_Failure ${FSCK_FORCED_KO_STR}
+    false
+  fi
 else
   rtux_Message_Warning ${GRUBEASY_PARTITIONS_NOT_FOUND}
   false
