@@ -19,6 +19,7 @@ source ${RESCAPP_LIB_FILE}
 SHARELOG_OK_STR="Log was shared OK! :)"
 SHARELOG_KO_STR="Log sharing went wrong! :("
 SHARELOG_FILES_NOT_FOUND="No files to share were found or choosen."
+SHARELOG_URL_NOT_FOUND="Log could not be shared online."
 
 # 1 parametre = Selected file
 function rtux_share_log () {
@@ -61,6 +62,7 @@ SELECTED_FILE=$(zenity ${ZENITY_COMMON_OPTIONS} \
 if [ "x${SELECTED_FILE}" != "x" ] ; then
 
   PASTEBIN_URL=$(rtux_Run_Show_Progress "${SHARE_LOG_RUNNING_STR}" rtux_share_log "${SELECTED_FILE}")
+  if [ "x${PASTEBIN_URL}" != "x" ] ; then
 
   zenity ${ZENITY_COMMON_OPTIONS} \
     --entry \
@@ -68,6 +70,10 @@ if [ "x${SELECTED_FILE}" != "x" ] ; then
     --entry-text="${PASTEBIN_URL}"
 
   rtux_Message_Success ${SHARELOG_OK_STR}
+  else
+    rtux_Message_Warning ${SHARELOG_URL_NOT_FOUND}
+    rtux_Message_Failure ${SHARELOG_KO_STR}
+  fi
 else
   rtux_Message_Warning ${SHARELOG_FILES_NOT_FOUND}
   rtux_Message_Failure ${SHARELOG_KO_STR}
