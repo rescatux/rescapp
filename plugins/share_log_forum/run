@@ -33,6 +33,10 @@ SHARE_FORUM_DEFAULT_THANKS_DESCRIPTION="Thank you very much for your help!"
 SHARE_FORUM_SIGNATURE_HINT="Just an optional signature to let your helpers who you are."
 SHARE_FORUM_DEFAULT_SIGNATURE_DESCRIPTION="The ultimate noob! (You are supposed to change this)"
 
+SHARE_FORUM_FILES_NOT_FOUND="No files to share were found or choosen."
+SHARE_FORUM_OK_STR="Log was shared (forum) OK! :)"
+SHARE_FORUM_KO_STR="Log sharing (forum) went wrong! :("
+
 
 RANDOM_SHARE_FORUM_FILE="${TMP_FOLDER}/$$.text"
 
@@ -55,6 +59,8 @@ SELECTED_FILE=$(zenity ${ZENITY_COMMON_OPTIONS} \
 	  --column "${SELECT_STR}" \
 	  --column "${LOG_STR}" \
 	  ${LOG_LIST_VALUES});
+
+if [ "x${SELECTED_FILE}" != "x" ] ; then
 
 echo "" > ${RANDOM_SHARE_FORUM_FILE} # Initiate the file
 
@@ -134,3 +140,8 @@ TRUE "http://www.ubuntuforums.org" "Ubuntu forums" \
 FALSE "http://www.google.com" "Google" \
 ) &disown
 
+rtux_Message_Success ${SHARE_FORUM_OK_STR}
+else
+  rtux_Message_Warning ${SHARE_FORUM_FILES_NOT_FOUND}
+  rtux_Message_Failure ${SHARE_FORUM_KO_STR}
+fi
