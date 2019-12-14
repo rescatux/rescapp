@@ -72,8 +72,11 @@ SUDOERS_CHANGED_OK_STR="Success! Sudoers was changed OK! :)"
 SUDOERS_NOT_CHANGED_STR="Failure! Sudoers was not changed. Something went wrong! :("
 SUDOERS_RUNNING_STR="Regenerating Sudoers file."
 WHICH_USER_SUDOERS_STR="Which user to be the sudo admin?"
+SUDOERS_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
+
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
 TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${SELECTED_PARTITION}
 TMP_DEV_PARTITION=/dev/${SELECTED_PARTITION}
@@ -89,5 +92,8 @@ if rtux_Run_Show_Progress "${SUDOERS_RUNNING_STR}" rtux_Sudoers ${SELECTED_PARTI
 else
   rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
 fi
-
+else
+  rtux_Message_Warning ${SUDOERS_PARTITIONS_NOT_FOUND}
+  rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
+fi
 
