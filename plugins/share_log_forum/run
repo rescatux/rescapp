@@ -122,9 +122,9 @@ ${SHARE_FORUM_SIGNATURE_DESCRIPTION}
 EOF
 
 
-${GEDIT_COMMAND} ${RANDOM_SHARE_FORUM_FILE} &disown
+nohup ${GEDIT_COMMAND} ${RANDOM_SHARE_FORUM_FILE} &disown
 
-${FIREFOX_COMMAND} $(zenity ${ZENITY_COMMON_OPTIONS} --list  \
+nohup ${FIREFOX_COMMAND} $(zenity ${ZENITY_COMMON_OPTIONS} --list  \
   --text "Choose URL to open?" \
   --radiolist  \
   --column "Choose" \
@@ -132,5 +132,5 @@ ${FIREFOX_COMMAND} $(zenity ${ZENITY_COMMON_OPTIONS} --list  \
   --column "Description" \
 TRUE "http://www.ubuntuforums.org" "Ubuntu forums" \
 FALSE "http://www.google.com" "Google" \
-)
+) &disown
 
