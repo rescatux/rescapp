@@ -87,12 +87,11 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
   SELECTED_USER=$(rtux_Choose_User ${SYSTEM_USERS});
   if [ "x${SELECTED_USER}" != "x" ] ; then
-
-  if rtux_Run_Show_Progress "${SUDOERS_RUNNING_STR}" rtux_Sudoers ${SELECTED_PARTITION} ${SELECTED_USER}; then
-    rtux_Message_Success ${SUDOERS_CHANGED_OK_STR}
-  else
-    rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
-  fi
+    if rtux_Run_Show_Progress "${SUDOERS_RUNNING_STR}" rtux_Sudoers ${SELECTED_PARTITION} ${SELECTED_USER}; then
+      rtux_Message_Success ${SUDOERS_CHANGED_OK_STR}
+    else
+      rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
+    fi
   else
     rtux_Message_Warning ${SUDOERS_USERS_NOT_FOUND}
     rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
