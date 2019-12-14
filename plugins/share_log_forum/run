@@ -61,86 +61,85 @@ SELECTED_FILE=$(zenity ${ZENITY_COMMON_OPTIONS} \
 	  ${LOG_LIST_VALUES});
 
 if [ "x${SELECTED_FILE}" != "x" ] ; then
+  echo "" > ${RANDOM_SHARE_FORUM_FILE} # Initiate the file
 
-echo "" > ${RANDOM_SHARE_FORUM_FILE} # Initiate the file
-
-# Header
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-This is a semi-automated message generated from [url="http://www.supergrubdisk.org"]Rescatux live cd[/url].
-EOF
-
-
-# Description of your system as far as you know (Operating system, hard disks,...)
-SHARE_FORUM_SYSTEM_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
-	--entry \
-	--text "${SHARE_FORUM_SYSTEM_HINT}" \
-	--entry-text="${SHARE_FORUM_DEFAULT_SYSTEM_DESCRIPTION}")"
-
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-My description of my system is:
-${SHARE_FORUM_SYSTEM_DESCRIPTION}
-EOF
+  # Header
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  This is a semi-automated message generated from [url="http://www.supergrubdisk.org"]Rescatux live cd[/url].
+  EOF
 
 
-# My problem is:
-SHARE_FORUM_PROBLEM_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
-	--entry \
-	--text "${SHARE_FORUM_PROBLEM_HINT}" \
-	--entry-text="${SHARE_FORUM_DEFAULT_PROBLEM_DESCRIPTION}")"
+  # Description of your system as far as you know (Operating system, hard disks,...)
+  SHARE_FORUM_SYSTEM_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
+    --entry \
+    --text "${SHARE_FORUM_SYSTEM_HINT}" \
+    --entry-text="${SHARE_FORUM_DEFAULT_SYSTEM_DESCRIPTION}")"
 
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-My problem is:
-${SHARE_FORUM_PROBLEM_DESCRIPTION}
-EOF
-
-
-# Here there is the log from this Rescatux option
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-I join the Rescatux output for ${SELECTED_FILE} :
-[CODE]
-EOF
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  My description of my system is:
+  ${SHARE_FORUM_SYSTEM_DESCRIPTION}
+  EOF
 
 
-cat ${RESCAPP_LOG_DIRECTORY}\
-/${SELECTED_FILE} >> ${RANDOM_SHARE_FORUM_FILE}
+  # My problem is:
+  SHARE_FORUM_PROBLEM_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
+    --entry \
+    --text "${SHARE_FORUM_PROBLEM_HINT}" \
+    --entry-text="${SHARE_FORUM_DEFAULT_PROBLEM_DESCRIPTION}")"
 
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-[/CODE]
-EOF
-# Thank you
-SHARE_FORUM_THANKS_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
-	--entry \
-	--text "${SHARE_FORUM_THANKS_HINT}" \
-	--entry-text="${SHARE_FORUM_DEFAULT_THANKS_DESCRIPTION}")"
-
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-${SHARE_FORUM_THANKS_DESCRIPTION}
-EOF
-
-# Signature
-SHARE_FORUM_SIGNATURE_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
-	--entry \
-	--text "${SHARE_FORUM_SIGNATURE_HINT}" \
-	--entry-text="${SHARE_FORUM_DEFAULT_SIGNATURE_DESCRIPTION}")"
-
-cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
-${SHARE_FORUM_SIGNATURE_DESCRIPTION}
-EOF
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  My problem is:
+  ${SHARE_FORUM_PROBLEM_DESCRIPTION}
+  EOF
 
 
-nohup ${GEDIT_COMMAND} ${RANDOM_SHARE_FORUM_FILE} &disown
+  # Here there is the log from this Rescatux option
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  I join the Rescatux output for ${SELECTED_FILE} :
+  [CODE]
+  EOF
 
-nohup ${FIREFOX_COMMAND} $(zenity ${ZENITY_COMMON_OPTIONS} --list  \
-  --text "Choose URL to open?" \
-  --radiolist  \
-  --column "Choose" \
-  --column "Url" \
-  --column "Description" \
-TRUE "http://www.ubuntuforums.org" "Ubuntu forums" \
-FALSE "http://www.google.com" "Google" \
-) &disown
 
-rtux_Message_Success ${SHARE_FORUM_OK_STR}
+  cat ${RESCAPP_LOG_DIRECTORY}\
+  /${SELECTED_FILE} >> ${RANDOM_SHARE_FORUM_FILE}
+
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  [/CODE]
+  EOF
+  # Thank you
+  SHARE_FORUM_THANKS_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
+    --entry \
+    --text "${SHARE_FORUM_THANKS_HINT}" \
+    --entry-text="${SHARE_FORUM_DEFAULT_THANKS_DESCRIPTION}")"
+
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  ${SHARE_FORUM_THANKS_DESCRIPTION}
+  EOF
+
+  # Signature
+  SHARE_FORUM_SIGNATURE_DESCRIPTION="$(zenity ${ZENITY_COMMON_OPTIONS} \
+    --entry \
+    --text "${SHARE_FORUM_SIGNATURE_HINT}" \
+    --entry-text="${SHARE_FORUM_DEFAULT_SIGNATURE_DESCRIPTION}")"
+
+  cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
+  ${SHARE_FORUM_SIGNATURE_DESCRIPTION}
+  EOF
+
+
+  nohup ${GEDIT_COMMAND} ${RANDOM_SHARE_FORUM_FILE} &disown
+
+  nohup ${FIREFOX_COMMAND} $(zenity ${ZENITY_COMMON_OPTIONS} --list  \
+    --text "Choose URL to open?" \
+    --radiolist  \
+    --column "Choose" \
+    --column "Url" \
+    --column "Description" \
+  TRUE "http://www.ubuntuforums.org" "Ubuntu forums" \
+  FALSE "http://www.google.com" "Google" \
+  ) &disown
+
+  rtux_Message_Success ${SHARE_FORUM_OK_STR}
 else
   rtux_Message_Warning ${SHARE_FORUM_FILES_NOT_FOUND}
   rtux_Message_Failure ${SHARE_FORUM_KO_STR}
