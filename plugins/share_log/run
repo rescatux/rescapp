@@ -63,13 +63,12 @@ if [ "x${SELECTED_FILE}" != "x" ] ; then
 
   PASTEBIN_URL=$(rtux_Run_Show_Progress "${SHARE_LOG_RUNNING_STR}" rtux_share_log "${SELECTED_FILE}")
   if [ "x${PASTEBIN_URL}" != "x" ] ; then
+    zenity ${ZENITY_COMMON_OPTIONS} \
+      --entry \
+      --text "${PASTEBIN_HINT}" \
+      --entry-text="${PASTEBIN_URL}"
 
-  zenity ${ZENITY_COMMON_OPTIONS} \
-    --entry \
-    --text "${PASTEBIN_HINT}" \
-    --entry-text="${PASTEBIN_URL}"
-
-  rtux_Message_Success ${SHARELOG_OK_STR}
+    rtux_Message_Success ${SHARELOG_OK_STR}
   else
     rtux_Message_Warning ${SHARELOG_URL_NOT_FOUND}
     rtux_Message_Failure ${SHARELOG_KO_STR}
