@@ -25,13 +25,20 @@ UEFICREATE_OK_STR="New UEFI Boot entry was added OK! :)"
 UEFICREATE_KO_STR="New UEFI Boot entry addition went wrong! :("
 UEFICREATE_RUNNING_STR="Adding new UEFI Boot entry."
 UEFICREATE_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
+UEFICREATE_EFI_FILE_NOT_FOUND="No EFI files were found or choosen."
 
 SELECTED_EFI_PARTITION="$(rtux_Choose_EFI_System_partition)"
-if [ "x${SELECTED_PARTITION}" != "x" ] ; then
-  if rtux_Run_Show_Progress "${UEFICREATE_RUNNING_STR}" rtux_UEFI_Add_Boot_Entry "${SELECTED_EFI_PARTITION}" "$(rtux_UEFI_Choose_EFI_File ${SELECTED_EFI_PARTITION})";
+if [ "x${SELECTED_EFI_PARTITION}" != "x" ] ; then
+  SELECTED_EFI_FILE="$(rtux_UEFI_Choose_EFI_File ${SELECTED_EFI_PARTITION})"
+  if [ "x${SELECTED_EFI_FILE}" != "x" ] ; then
+  if rtux_Run_Show_Progress "${UEFICREATE_RUNNING_STR}" rtux_UEFI_Add_Boot_Entry "${SELECTED_EFI_PARTITION}" "${SELECTED_EFI_FILE}";
   then
     rtux_Message_Success ${UEFICREATE_OK_STR}
   else
+    rtux_Message_Failure ${UEFICREATE_KO_STR}
+  fi
+  else
+    rtux_Message_Warning ${UEFICREATE_EFI_FILE_NOT_FOUND}
     rtux_Message_Failure ${UEFICREATE_KO_STR}
   fi
 else
