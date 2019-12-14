@@ -83,53 +83,53 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
       if [[ ! ( "${UEFI_SYSTEM_DETECTED}" == "TRUE" && "x${UEFI_DESIRED_ORDER}" == "x" ) ]] ; then
 
-      EXIT_SUM=0
+        EXIT_SUM=0
 
 
-      if ( rtux_Run_Show_Progress "${FSCK_FORCED_RUNNING_STR}" rtux_Fsck_Forced ${SELECTED_PARTITION} ) ; then
-        rtux_Message_Success ${FSCK_FORCED_OK_STR}
-      else
-        rtux_Message_Failure ${FSCK_FORCED_KO_STR}
-        false
-      fi
-
-      GRUBFSCK_EXIT_VALUE=$?
-      EXIT_SUM=$((EXIT_SUM+GRUBFSCK_EXIT_VALUE))
-
-      if rtux_Run_Show_Progress "${UPDATE_GRUB_RUNNING_STR}" rtux_Grub_Update_Config ${SELECTED_PARTITION} ${DEVICE_MAP_RESCATUX_FILE_TMP_PATH} ; then
-        rtux_Message_Success ${UPDATE_GRUB_OK_STR}
-      else
-        rtux_Message_Failure ${UPDATE_GRUB_KO_STR}
-        false
-      fi
-
-      GRUBUPDATE_EXIT_VALUE=$?
-      EXIT_SUM=$((EXIT_SUM+GRUBUPDATE_EXIT_VALUE))
-
-      if rtux_Run_Show_Progress "${GRUB_INSTALLED_RUNNING_STR}" rtux_Grub_Install ${SELECTED_HARD_DISK} ${SELECTED_PARTITION} ${DEVICE_MAP_RESCATUX_FILE_TMP_PATH} ; then
-        rtux_Message_Success ${GRUB_INSTALLED_OK_STR}
-      else
-        rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
-        false
-      fi
-
-      GRUBINSTALL_EXIT_VALUE=$?
-      EXIT_SUM=$((EXIT_SUM+GRUBINSTALL_EXIT_VALUE))
-
-      if [ "${UEFI_SYSTEM_DETECTED}" == "TRUE" ] ; then
-
-        if rtux_Run_Show_Progress "${UEFIORDER_RUNNING_STR}" rtux_UEFI_Boot_Order_Update ${UEFI_DESIRED_ORDER};
-        then
-          rtux_Message_Success ${UEFIORDER_OK_STR}
+        if ( rtux_Run_Show_Progress "${FSCK_FORCED_RUNNING_STR}" rtux_Fsck_Forced ${SELECTED_PARTITION} ) ; then
+          rtux_Message_Success ${FSCK_FORCED_OK_STR}
         else
-          rtux_Message_Failure ${UEFIORDER_KO_STR}
+          rtux_Message_Failure ${FSCK_FORCED_KO_STR}
           false
         fi
 
-        UEFIORDER_EXIT_VALUE=$?
-        EXIT_SUM=$((EXIT_SUM+UEFIORDER_EXIT_VALUE))
+        GRUBFSCK_EXIT_VALUE=$?
+        EXIT_SUM=$((EXIT_SUM+GRUBFSCK_EXIT_VALUE))
 
-      fi
+        if rtux_Run_Show_Progress "${UPDATE_GRUB_RUNNING_STR}" rtux_Grub_Update_Config ${SELECTED_PARTITION} ${DEVICE_MAP_RESCATUX_FILE_TMP_PATH} ; then
+          rtux_Message_Success ${UPDATE_GRUB_OK_STR}
+        else
+          rtux_Message_Failure ${UPDATE_GRUB_KO_STR}
+          false
+        fi
+
+        GRUBUPDATE_EXIT_VALUE=$?
+        EXIT_SUM=$((EXIT_SUM+GRUBUPDATE_EXIT_VALUE))
+
+        if rtux_Run_Show_Progress "${GRUB_INSTALLED_RUNNING_STR}" rtux_Grub_Install ${SELECTED_HARD_DISK} ${SELECTED_PARTITION} ${DEVICE_MAP_RESCATUX_FILE_TMP_PATH} ; then
+          rtux_Message_Success ${GRUB_INSTALLED_OK_STR}
+        else
+          rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
+          false
+        fi
+
+        GRUBINSTALL_EXIT_VALUE=$?
+        EXIT_SUM=$((EXIT_SUM+GRUBINSTALL_EXIT_VALUE))
+
+        if [ "${UEFI_SYSTEM_DETECTED}" == "TRUE" ] ; then
+
+          if rtux_Run_Show_Progress "${UEFIORDER_RUNNING_STR}" rtux_UEFI_Boot_Order_Update ${UEFI_DESIRED_ORDER};
+          then
+            rtux_Message_Success ${UEFIORDER_OK_STR}
+          else
+            rtux_Message_Failure ${UEFIORDER_KO_STR}
+            false
+          fi
+
+          UEFIORDER_EXIT_VALUE=$?
+          EXIT_SUM=$((EXIT_SUM+UEFIORDER_EXIT_VALUE))
+
+        fi
       else
         rtux_Message_Warning ${UEFI_ORDER_NOT_FOUND}
         EXIT_SUM=1
