@@ -50,6 +50,8 @@ UEFIORDER_RUNNING_STR="Updating UEFI Boot order."
 
 UEFI_SYSTEM_NOT_DETECTED_STR="UEFI devices order skipped (Not an UEFI System)"
 
+UEFI_SYSTEM_DETECTED_STR="UEFI System detected"
+
 SELECTED_PARTITION=$(rtux_Choose_Partition "Which GNU/Linux partition?")
 
 GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
@@ -72,6 +74,7 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
       fi
 
       if [ "${UEFI_SYSTEM_DETECTED}" == "TRUE" ] ; then
+        rtux_Message_Info ${UEFI_SYSTEM_DETECTED_STR}
         UEFI_DESIRED_ORDER=$(rtux_Choose_UEFI_Boot_Order_Update)
       else
         rtux_Message_Info ${UEFI_SYSTEM_NOT_DETECTED_STR}
