@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Rescapp main script
 # Copyright (C) 2016, 2017 Adrian Gibanel Lopez
 #
@@ -24,8 +24,8 @@ import sys
 import re
 
 if ((len(sys.argv)-1) != 2 ):
-        print 'Usage: ' + sys.argv[0] + ' ' + 'partition_device' + ' ' + 'disktype_to_check'
-        print 'E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2' + ' ' + 'gpt'
+        print ('Usage: ' + sys.argv[0] + ' ' + 'partition_device' + ' ' + 'disktype_to_check')
+        print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2' + ' ' + 'gpt')
         sys.exit(1)
 
 disktype_partition_str=sys.argv[1]
@@ -39,9 +39,9 @@ disktype_disk = parted.Disk(disktype_device,None)
 disktype_disk_type = disktype_disk.type
 
 if (disktype_disk_type == disktype_to_check_str):
-        print disktype_partition_str+ ' disk type is ' + disktype_to_check_str
+        print (disktype_partition_str+ ' disk type is ' + disktype_to_check_str)
         sys.exit(0)
 else:
-        print disktype_partition_str+ ' disk type is not ' + disktype_to_check_str + ' but '+ disktype_disk_type
+        print (disktype_partition_str+ ' disk type is not ' + disktype_to_check_str + ' but '+ disktype_disk_type)
         sys.exit(2)
 

@@ -15,5 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 
-xterm -geometry 80x26 -e testdisk &
+source ${RESCAPP_LIB_FILE}
+set -x
+set -v
+
+TESTDISK_OK_STR="Testdisk was run at the background."
+TESTDISK_KO_STR="Rescapp was not unable to start Testdisk via xterm."
+
+TESTDISK_FULL_PATH="$(which testdisk)"
+XTERM_FULL_PATH="$(which xterm)"
+
+if [ -x "${TESTDISK_FULL_PATH}" -a -x "${XTERM_FULL_PATH}" ] ; then
+    "${XTERM_FULL_PATH}" -geometry 80x26 -e "${TESTDISK_FULL_PATH}" &
+    rtux_Message_Success ${TESTDISK_OK_STR}
+else
+    rtux_Message_Failure ${TESTDISK_KO_STR}
+fi
 

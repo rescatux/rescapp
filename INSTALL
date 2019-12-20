@@ -63,12 +63,10 @@ Debian Package Runtime Requirements
 You will find the needed Debian Jessie packages in the following list.
 
 
+PYTHON_DBUS_PACKAGES="python3-gi python3-dbus"
 PYTHON_PACKAGES="python-pyqt5 python-pyqt5.qtwebkit"
 RAID_PACKAGES="dmraid"
 LVM_PACKAGES="lvm2"
-GPARTED_PACKAGES="gparted gpart dosfstools"
-TESTDISK_PACKAGES="testdisk \
- "
 CRYPTSETUP_PACKAGES="cryptsetup \
  libcryptsetup4 \
  cryptsetup-bin \
@@ -79,6 +77,7 @@ FILESYSTEM_PACKAGES="reiserfsprogs \
  xfsprogs \
  xfsdump \
  ntfs-3g \
+ dosfstools \
  "
 
 GPT_PACKAGES="\
@@ -90,27 +89,32 @@ UEFI_PACKAGES="\
 "
 
 PYTHON_PARTED_PACKAGES="python-parted"
-GDDRESCUE_PACKAGES="gddrescue"
-MYRESCUE_PACKAGES="myrescue"
 
 CHNTPW_PACKAGES="\
  chntpw \
+"
+
+INXI_PACKAGES="\
+ inxi \
+"
+
+BOOTINFOSCRIPT_PACKAGES="\
+ boot-info-script \
 "
 
 RESCAPP_PACKAGES=" \
  ${PYTHON_PACKAGES} \
  ${RAID_PACKAGES} \
  ${LVM_PACKAGES} \
- ${GPARTED_PACKAGES} \
- ${TESTDISK_PACKAGES} \
  ${CRYPTSETUP_PACKAGES} \
  ${FILESYSTEM_PACKAGES} \
  ${GPT_PACKAGES} \
  ${PYTHON_PARTED_PACKAGES} \
  ${UEFI_PACKAGES} \
- ${GDDRESCUE_PACKAGES} \
- ${MYRESCUE_PACKAGES} \
  ${CHNTPW_PACKAGES} \
+ ${PYTHON_DBUS_PACKAGES} \
+ ${INXI_PACKAGES} \
+ ${BOOTINFOSCRIPT_PACKAGES} \
  zenity \
  xdg-utils \
  hexchat \
@@ -122,6 +126,14 @@ RESCAPP_PACKAGES=" \
  os-prober \
  mokutil \
  " # I add syslinux so that isohybrid command is recognised.
+
+Optional Debian Package Runtime Requirements
+==============================================
+gparted
+gpart
+testdisk
+
+
 
 SELinux support
 ===============

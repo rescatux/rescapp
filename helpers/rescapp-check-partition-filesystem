@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Rescapp main script
 # Copyright (C) 2016, 2017 Adrian Gibanel Lopez
 #
@@ -25,8 +25,8 @@ import sys
 import re
 
 if ((len(sys.argv)-1) != 2 ):
-        print 'Usage: ' + sys.argv[0] + ' ' + 'partition_device' + ' ' + 'filesystem_to_check'
-        print 'E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2' + ' ' + 'fat32'
+        print ('Usage: ' + sys.argv[0] + ' ' + 'partition_device' + ' ' + 'filesystem_to_check')
+        print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2' + ' ' + 'fat32')
         sys.exit(1)
 
 filesystem_partition_str=sys.argv[1]
@@ -41,9 +41,9 @@ filesystem_partition = filesystem_disk.getPartitionByPath(filesystem_partition_s
 filesystem_partition_type=filesystem_partition.fileSystem.type
 
 if (filesystem_partition_type == filesystem_to_check_str):
-        print filesystem_partition_str+ ' partition type is ' + filesystem_to_check_str
+        print (filesystem_partition_str+ ' partition type is ' + filesystem_to_check_str)
         sys.exit(0)
 else:
-        print filesystem_partition_str+ ' partition type is not ' + filesystem_to_check_str + ' but '+ filesystem_partition_type
+        print (filesystem_partition_str+ ' partition type is not ' + filesystem_to_check_str + ' but '+ filesystem_partition_type)
         sys.exit(2)
 

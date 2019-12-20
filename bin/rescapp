@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Rescapp main script
@@ -28,6 +28,126 @@ import errno
 from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets
 from functools import partial
 from enum import Enum, IntEnum
+
+from gi.repository import GObject as gobject
+import dbus
+import dbus.service
+import dbus.mainloop.glib
+import threading
+
+class MessageRescappException(dbus.DBusException):
+    _dbus_error_name = 'org.rescapp.RescappException'
+
+class MessageRescapp(dbus.service.Object):
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def Message(self, message):
+        self.messages_wb.insertHtml(' ' + '[DEBUG]' + ' ' + str(message))
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[DEBUG]' + ' ' + str(message) + '\n')
+        return ["Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageSkip(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-ok.png' + '">' + ' ' +  '<b>' + '[SKIP]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[SKIP]' + ' ' + str(message) + '\n')
+        return ["Skip Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageSuccess(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-ok-apply.png' + '">' + ' ' +  '<b>' + '[SUCCESS]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[SUCCESS]' + ' ' + str(message) + '\n')
+        return ["Success Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageWarning(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-warning.png' + '">' + ' ' +  '<b>' + '[WARNING]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[WARNING]' + ' ' + str(message) + '\n')
+        return ["Warning Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageError(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-error.png' + '">' + ' ' +  '<b>' + '[ERROR]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[ERROR]' + ' ' + str(message) + '\n')
+        return ["Error Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageInfo(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'dialog-information.png' + '">' + ' ' +  '<b>' + '[INFO]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[INFO]' + ' ' + str(message) + '\n')
+        return ["Info Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageQuestion(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'user-available-symbolic.symbolic.png' + '">' + ' ' +  '<b>' + '[QUESTION]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[QUESTION]' + ' ' + str(message) + '\n')
+        return ["Question Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='s', out_signature='as')
+    def MessageAnswer(self, message):
+        self.messages_wb.insertHtml('<img src="' + rescapp_icons_path + '/' + 'user-available.png' + '">' + ' ' +  '<b>' + '[ANSWER]' + ' ' + str(message) + '</b>')
+        self.messages_wb.insertPlainText('\n')
+        self.messages_wb.setReadOnly(True)
+        self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+        self.messages_wb.ensureCursorVisible()
+        self.selected_option.writeToSimpleLog('[ANSWER]' + ' ' + str(message) + '\n')
+        return ["Answer Message received. Thank you."]
+
+    @dbus.service.method("org.rescapp.MessageInterface",
+                         in_signature='', out_signature='')
+    def RaiseException(self):
+        raise MessageRescappException('The RaiseException method does what you might '
+                            'expect')
+
+    def Exit(self):
+        self.mainloop.quit()
+
+    @dbus.service.method("org.rescapp.MessageInterface")
+    def End(self):
+        self.mainloop.quit()
+
+    # TODO: Use a proper constructor instead of a custom method
+    def Init(self, messages_wb, selected_option):
+        self.messages_wb = messages_wb
+        self.selected_option = selected_option
+
+    def setMainLoop(self,mainloop):
+        self.mainloop = mainloop
 
 
 class VerticalScrollArea(QtWidgets.QScrollArea):
@@ -65,6 +185,7 @@ class RescappOption:
 
     def setCode(self, code):
         self.code = code
+        self.simple_log_file_path = rescapp_log_directory + '/' + self.code + '_' + 'simple' + '_log.txt'
 
     def setName(self, name):
         self.name = name
@@ -105,6 +226,15 @@ class RescappOption:
     def getBeta(self):
         return self.beta
 
+    def openSimpleLog(self):
+        self.simple_log_file = open(self.simple_log_file_path,"w")
+
+    def writeToSimpleLog(self, text):
+        self.simple_log_file.write(text)
+
+    def closeSimpleLog(self):
+        self.simple_log_file.close()
+
     def setOptionFromDir(self, dir_to_check, ndir):
         global rescapp_plugins_doc_path
         global rescapp_plugins_path
@@ -122,13 +252,13 @@ class RescappOption:
                 + ndir + '/' + description_filename, 1)
         description_tmp = description_tmp.rstrip('\r\n')
 
-        print 'DEBUG: [Option] Directory (code) found: ' + ndir
+        print ('DEBUG: [Option] Directory (code) found: ' + ndir)
         code_list.append(ndir)
         self.setCode(ndir)
-        print 'DEBUG: [Option] Name found: ' + name_tmp
+        print ('DEBUG: [Option] Name found: ' + name_tmp)
         self.setName(name_tmp)
         name_list.append(name_tmp)
-        print 'DEBUG: [Option] Description found: ' + description_tmp
+        print ('DEBUG: [Option] Description found: ' + description_tmp)
         self.setDescription(description_tmp)
         description_list.append(description_tmp)
 
@@ -160,13 +290,13 @@ class RescappOption:
                 + ndir + '/' + description_filename, 1)
         description_tmp = description_tmp.rstrip('\r\n')
 
-        print 'DEBUG: [Menu] Directory (code) found: ' + ndir
+        print ('DEBUG: [Menu] Directory (code) found: ' + ndir)
         code_list.append(ndir)
         self.setCode(ndir)
-        print 'DEBUG: [Menu] Name found: ' + name_tmp
+        print ('DEBUG: [Menu] Name found: ' + name_tmp)
         self.setName(name_tmp)
         name_list.append(name_tmp)
-        print 'DEBUG: [Menu] Description found: ' + description_tmp
+        print ('DEBUG: [Menu] Description found: ' + description_tmp)
         self.setDescription(description_tmp)
         description_list.append(description_tmp)
 
@@ -186,8 +316,8 @@ class MainWindow(QtWidgets.QWidget):
 
         self.selected_option = n_option
         self.selected_option_code = n_option.getCode()
-        print 'DEBUG: selected_option_code in selectOptionCommon: ' \
-            + self.selected_option_code
+        print ('DEBUG: selected_option_code in selectOptionCommon: ' \
+            + self.selected_option_code)
         if self.selected_option_code == 'help-rescapp':
             self.parserescappmenues('rescatux.lis')
         self.drawMainWindows()
@@ -195,31 +325,78 @@ class MainWindow(QtWidgets.QWidget):
     def selectOption(self, option_code):
         global option_list
 
-        print 'DEBUG: Selecting option (code): ' + option_code
+        print ('DEBUG: Selecting option (code): ' + option_code)
         for n_option in option_list:
             if n_option.getCode() == option_code:
                 self.selectOptionCommon(n_option)
                 break
 
     def selectSupportOption(self, support_RescappOption):
-        print 'DEBUG: Selecting Support option (code): ' \
-            + support_RescappOption.getCode()
+        print ('DEBUG: Selecting Support option (code): ' \
+            + support_RescappOption.getCode())
         self.selectOptionCommon(support_RescappOption)
 
     def selectMenu(self, menuOption):
-        print 'DEBUG: Selecting Menu option (code): ' \
-            + menuOption.getCode()
+        print ('DEBUG: Selecting Menu option (code): ' \
+            + menuOption.getCode())
         self.selectOptionCommon(menuOption)
         self.parserescappmenues(menuOption.getCode() + '.lis')
 
+    def blink_status_label(self):
+        while (self.blink_status_thread_active):
+            self.option_status_label.setStyleSheet('QLabel { background-color : white; color : black; }')
+            self.option_status_label.setText('<b>Status: Running.</b>')
+            time.sleep(1)
+            self.option_status_label.setStyleSheet('QLabel { background-color : black; color : white; }')
+            self.option_status_label.setText('<b>Status: Running.</b>')
+            time.sleep(1)
+
     def runRescue(self):
-        print 'DEBUG: Running option (code) [BEGIN]: ' \
-            + self.selected_option_code
+        # Actual rescue plugin execution - start
+        print ('DEBUG: Running option (code) [BEGIN]: ' \
+            + self.selected_option_code)
         run_status = subprocess.Popen([rescapp_binary_path + '/' + 'rescapp-launcher',
                 self.selected_option_code])
-        print 'DEBUG: Running option (code) [FINISH]: ' \
+
+        # Open Simple Log
+        self.selected_option.openSimpleLog()
+
+        # Status blink thread start
+        self.blink_status_thread_active = True
+        blinkStatusLabelThread = threading.Thread(target=self.blink_status_label)
+        blinkStatusLabelThread.start()
+
+        # Dbus handling
+        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+        if ( hasattr(self,'messageRescappObject') ):
+            self.messageRescappObject.remove_from_connection()
+        self.help_frame.hide()
+        self.messages_wb.clear()
+        self.messages_frame.show()
+        # Use SystemBus instead of SessionBus so that root user can connect to rescapp user process
+        system_bus = dbus.SystemBus()
+        name = dbus.service.BusName("org.rescapp.MessageService", system_bus)
+        self.messageRescappObject = MessageRescapp(system_bus, '/MessageRescapp')
+        self.messageRescappObject.Init(self.messages_wb, self.selected_option)
+        mainloop = gobject.MainLoop()
+        self.messageRescappObject.setMainLoop(mainloop)
+        print ("DEBUG: Rescapp DBUS service started.")
+        mainloop.run()
+        print ("DEBUG: Rescapp DBUS service ended.")
+
+        # Status blink thread end
+        self.blink_status_thread_active = False
+        blinkStatusLabelThread.join()
+        self.option_status_label.setStyleSheet('QLabel {}')
+        self.option_status_label.setText('<b>Status: <font color="green">Finished.</font></b>')
+
+        # Close Simple Log
+        self.selected_option.closeSimpleLog()
+
+        # Actual rescue plugin execution - end
+        print ('DEBUG: Running option (code) [FINISH]: ' \
             + self.selected_option_code + ' with code: ' \
-            + str(run_status)
+            + str(run_status))
 
     def setLayout(self, layout):
         self.clearLayout()
@@ -229,8 +406,9 @@ class MainWindow(QtWidgets.QWidget):
         if self.layout() is not None:
             old_layout = self.layout()
             for i in reversed(range(old_layout.count())):
-                old_layout.itemAt(i).widget().setParent(None)
-            sip.delete(old_layout)
+                old_layout.itemAt(i).widget().deleteLater()
+            old_layout.deleteLater()
+            QtCore.QObjectCleanupHandler().add(old_layout)
 
     def parserescappmenues(self, menu_base):
 
@@ -252,7 +430,7 @@ class MainWindow(QtWidgets.QWidget):
         for mydir in f:
             ndir = mydir.rstrip('\r\n')
             dir_to_check = os.path.join(rescapp_menus_path, ndir)
-            print dir_to_check
+            print (dir_to_check)
             if os.path.isdir(dir_to_check):
                 new_option = RescappOption()
                 new_option.setMenuFromDir(dir_to_check, ndir)
@@ -262,7 +440,7 @@ class MainWindow(QtWidgets.QWidget):
                     ndir2 = mydir2.rstrip('\r\n')
                     dir_to_check2 = os.path.join(rescapp_plugins_path,
                             ndir2)
-                    print dir_to_check2
+                    print (dir_to_check2)
                     if os.path.isdir(dir_to_check2):
                         new_option2 = RescappOption()
                         new_option2.setOptionFromDir(dir_to_check2,
@@ -270,9 +448,9 @@ class MainWindow(QtWidgets.QWidget):
                         option_list.append(new_option2)
             else:
 
-                print 'DEBUG: Warning: ' + dir_to_check \
-                    + ' was ignored because it was not a directory!'
-        print 'DEBUG: menu_base: ' + menu_base
+                print ('DEBUG: Warning: ' + dir_to_check \
+                    + ' was ignored because it was not a directory!')
+        print ('DEBUG: menu_base: ' + menu_base)
         if menu_base == 'rescatux.lis':
             self.selected_option = help_support_option
         self.drawMainWindows()
@@ -307,6 +485,13 @@ class MainWindow(QtWidgets.QWidget):
             if hasattr(self, 'rescue_btn') == True:
                 self.rescue_btn.hide()
 
+        rescapp_title_label = QtWidgets.QLabel('<b>'
+                + rescapp_title + ' ' + rescapp_version + '</b>' + ' - '
+                + '<img src='+ info_icon_path + '>'
+                + ' ' + 'Choose an option to read its manual.')
+        rescapp_title_label.setWordWrap(True)
+        rescapp_title_label.setAlignment(QtCore.Qt.AlignCenter)
+
         self.chat_btn = \
             QtWidgets.QPushButton(chat_support_option.getName(), self)
         self.chat_btn.clicked.connect(partial(self.selectSupportOption,
@@ -335,32 +520,33 @@ class MainWindow(QtWidgets.QWidget):
         grid.setSpacing(10)
 
         if self.selected_option.getCode() != 'main-menu':
-            grid.addWidget(mainmenu_btn, 0, 0, 1, 1)
+            grid.addWidget(mainmenu_btn, 1, 0, 1, 1)
         else:
             mainmenu_btn.hide()
-        grid.addWidget(self.chat_btn, 2, 2, 1, 1)
-        grid.addWidget(self.share_log_btn, 2, 3, 1, 1)
-        grid.addWidget(self.rescue_btn, 0, 3, 1, 1)
-        grid.addWidget(self.help_btn, 2, 4, 1, 1)
+            grid.addWidget(rescapp_title_label, 1, 0, 1, 3)
+        grid.addWidget(self.chat_btn, 3, 0, 1, 1)
+        grid.addWidget(self.share_log_btn, 3, 1, 1, 1)
+        grid.addWidget(self.rescue_btn, 1, 3, 1, 1)
+        grid.addWidget(self.help_btn, 3, 2, 1, 1)
 
-        options_offset = -1 + title_offset
+        options_offset = 1 + title_offset
 
         options_slot_list = list()
         x_grid_position = 1
 
         name_pos_x = 1
         name_pos_y = 0
-        print 'DEBUG: selected option code: ' \
-            + self.selected_option.getCode()
+        print ('DEBUG: selected option code: ' \
+            + self.selected_option.getCode())
         if self.selected_option.isMenu() == True \
             or self.selected_option.getCode() == 'main-menu':
             for n_option in option_list:
-                print 'DEBUG: n_option code: ' + n_option.getCode() \
-                    + ' was found'
+                print ('DEBUG: n_option code: ' + n_option.getCode() \
+                    + ' was found')
                 if n_option.getExecutable() == True \
                     or n_option.getHasOfflineDoc() == True:
-                    print 'DEBUG: n_option ' + n_option.getCode() \
-                        + ' has offlinedoc and it is executable'
+                    print ('DEBUG: n_option ' + n_option.getCode() \
+                        + ' has offlinedoc and it is executable')
                     if n_option.getBeta() == True:
                         tmp_name_button = \
                             QtWidgets.QPushButton(n_option.getName()
@@ -372,13 +558,13 @@ class MainWindow(QtWidgets.QWidget):
                             n_option.getCode())
                     tmp_name_button.clicked.connect(tmp_option_slot)
                 else:
-                    print 'DEBUG: n_option ' + n_option.getCode() \
-                        + ' is a menu'
+                    print ('DEBUG: n_option ' + n_option.getCode() \
+                        + ' is a menu')
                     tmp_name_button = QtWidgets.QLabel(n_option.getName(),
                             self)
                     tmp_name_button.setTextFormat(QtCore.Qt.RichText)
                     tmp_name_button.setText('<img src='
-                            + menu_icon_path + '>' + n_option.getName())
+                            + menu_icon_path + '>' + '<b>' + n_option.getName() + '</b>')
 
                 tmp_name_button.setToolTip(n_option.getDescription())
                 if n_option.isMenu():
@@ -400,22 +586,69 @@ class MainWindow(QtWidgets.QWidget):
                     + self.selected_option.getDescription() + '</b>')
             tmp_description_label.setWordWrap(True)
             grid.addWidget(tmp_description_label, options_offset
-                           + name_pos_x, name_pos_y, rows_per_option, 4)
-            name_pos_x = name_pos_x + 1
+                           + name_pos_x - 1, name_pos_y + 1, rows_per_option, 4)
+
+            if self.selected_option.getExecutable() == True:
+                option_title_label = QtWidgets.QLabel(
+                    '<img src='+ info_icon_path + '>' +
+                    ' ' + 'Read the manual below carefully and press the '+'<img src='+ rescue_icon_path + '>'+'<b>Run !</b> button when ready.')
+            else:
+                option_title_label = QtWidgets.QLabel('')
+            option_title_label.setWordWrap(True)
+            option_title_label.setAlignment(QtCore.Qt.AlignCenter)
+
+            if self.selected_option.getExecutable() == True:
+                self.option_status_label = QtWidgets.QLabel(
+                    '<b>Status: <font color="green">Ready.</font></b>')
+            else:
+                self.option_status_label = QtWidgets.QLabel('')
+            self.option_status_label.setWordWrap(True)
+            self.option_status_label.setAlignment(QtCore.Qt.AlignCenter)
+
+
+            tmp_name_label = QtWidgets.QLabel('<b>'
+                    + self.selected_option.getName().upper() + '</b>')
+            tmp_name_label.setWordWrap(True)
+            tmp_name_label.setAlignment(QtCore.Qt.AlignCenter)
+            grid.addWidget(option_title_label, 0, 0, 1, 5)
+            grid.addWidget(self.option_status_label, 3, 3, 1, 1)
+            grid.addWidget(tmp_name_label, 1, 1, 1, 2)
+
+            name_pos_x = name_pos_x + 2
         if self.selected_option.getCode() != 'main-menu':
             bottom_start = options_offset + name_pos_x \
                 * rows_per_option + 8
+
             webgrid = QtWidgets.QHBoxLayout()
             webgrid.addWidget(self.wb)
-            frame = QtWidgets.QFrame()
-            frame.setLayout(webgrid)
-            frame.setStyleSheet('margin:0px; border:10px solid rgb(124, 127, 126); '
-                                )
-            grid.addWidget(frame, bottom_start + 5, 0, 5, 5)
+            self.help_frame = QtWidgets.QFrame()
+            self.help_frame.setLayout(webgrid)
+            self.help_frame.setStyleSheet('margin:0px; border:10px solid rgb(124, 127, 126); ')
+            grid.addWidget(self.help_frame, bottom_start + 5, 0, 5, 5)
+
+            self.messages_wb = QtWidgets.QTextBrowser()
+            self.messages_wb.setReadOnly(True)
+            self.messages_wb.moveCursor(QtGui.QTextCursor.End)
+            self.messages_wb.ensureCursorVisible()
+            self.messages_wb.setStyleSheet('margin:0px; border:0px solid rgb(77, 166, 255); ')
+
+            messages_grid = QtWidgets.QHBoxLayout()
+            messages_grid.addWidget(self.messages_wb)
+            self.messages_frame = QtWidgets.QFrame()
+            self.messages_frame.setLayout(messages_grid)
+            self.messages_frame.setStyleSheet('margin:0px; border:5px solid rgb(77, 166, 255); ')
+            grid.addWidget(self.messages_frame, bottom_start + 5, 0, 5, 5)
+            self.messages_frame.hide()
+
             if self.selected_option.getHasOfflineDoc():
                 self.wb.load(QtCore.QUrl('file:///'
                              + rescapp_plugins_doc_path + '/'
                              + self.selected_option.getCode() + '/'
+                             + offlinedoc_filename))
+            else:
+                self.wb.load(QtCore.QUrl('file:///'
+                             + rescapp_plugins_doc_path + '/'
+                             + 'not-documented' + '/'
                              + offlinedoc_filename))
             self.setLayout(grid)
         else:
@@ -466,8 +699,9 @@ class SelftestWindow(QtWidgets.QWidget):
         if self.layout() is not None:
             old_layout = self.layout()
             for i in reversed(range(old_layout.count())):
-                old_layout.itemAt(i).widget().setParent(None)
-            sip.delete(old_layout)
+                old_layout.itemAt(i).widget().deleteLater()
+            old_layout.deleteLater()
+            QtCore.QObjectCleanupHandler().add(old_layout)
 
     def initActions(self):
         self.exitAction = QtWidgets.QAction('Quit', self)
@@ -501,42 +735,6 @@ class SelftestWindow(QtWidgets.QWidget):
             s += '\n'
             s += str(item.data(self.SelfTestRole.SummaryRole)) + '\n'
             s += "Details: " + str(item.data(self.SelfTestRole.DetailsRole)) + '\n'
-        '''
-            if (item->data(FileIncludeRole).isValid()) {
-                s << endl;
-                const QString fileName = item->data(FileIncludeRole).toString();
-                QFile f(fileName);
-                if (f.open(QFile::ReadOnly)) {
-                    s << "File content of '" << fileName << "':" << endl;
-                    s << f.readAll() << endl;
-                } else {
-                    s << "File '" << fileName << "' could not be opened" << endl;
-                }
-            }
-            if (item->data(ListDirectoryRole).isValid()) {
-                s << endl;
-                const QStringList pathList = item->data(ListDirectoryRole).toStringList();
-                if (pathList.isEmpty()) {
-                    s << "Directory list is empty." << endl;
-                }
-                for (const QString &path : pathList) {
-                    s << "Directory listing of '" << path << "':" << endl;
-                    QDir dir(path);
-                    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
-                    const QStringList listEntries(dir.entryList());
-                    for (const QString &entry : listEntries) {
-                        s << entry << endl;
-                    }
-                }
-            }
-            if (item->data(EnvVarRole).isValid()) {
-                s << endl;
-                const QByteArray envVarName = item->data(EnvVarRole).toByteArray();
-                const QByteArray envVarValue = qgetenv(envVarName.constData());
-                s << "Environment variable " << envVarName << " is set to '" << envVarValue << "'" << endl;
-            }
-        }
-        '''
         s += '\n'
         return (s)
 
@@ -576,7 +774,7 @@ class SelftestWindow(QtWidgets.QWidget):
         samunlock_exitcode = proc.returncode
 
         if (samunlock_exitcode == 0):
-            detailsOk = "Samunlock binary found at: " + samunlock_out
+            detailsOk = "Samunlock binary found at: " + samunlock_out.decode('utf-8')
             self.report(self.ResultType.Success, "samunlock found.", detailsOk)
         else:
             detailsWarning = "Samunlock binary was not found.\nYou might be missing Rescatux chntpw package.\nYou won't be able to unlock users in Windows options."
@@ -599,7 +797,7 @@ class SelftestWindow(QtWidgets.QWidget):
         getenforce_which_out, getenforce_which_err = proc.communicate()
         getenforce_which_exitcode = proc.returncode
         if (len(getenforce_which_out.splitlines()) >= 1):
-            getenforce_complete_path=getenforce_which_out.splitlines()[0]
+            getenforce_complete_path=(getenforce_which_out.splitlines()[0]).decode('utf-8')
 
         detailsWarningCommon = "You might be missing SELinux support.\nTrying to rescue Fedora/RHEL/CentOS systems will probably end on you having to recreate SELinux permissions manually thanks to a .autorelabel file which might take hours. It's probably better to use another live cd that supports SELinux such as Rescatux."
 
@@ -607,7 +805,7 @@ class SelftestWindow(QtWidgets.QWidget):
             proc = subprocess.Popen([sudo_which, getenforce_complete_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             getenforce_out, getenforce_err = proc.communicate()
             getenforce_exitcode = proc.returncode
-            getenforce_result = getenforce_out.splitlines()[0]
+            getenforce_result = (getenforce_out.splitlines()[0]).decode('utf-8')
 
             detailsGetEnforceFound = "Getenforce binary found at: " + getenforce_complete_path + '.'
             detailsGetEnforceFoundOK = detailsGetEnforceFound + "SELinux is enabled either in permissive or enforced mode."
@@ -629,7 +827,7 @@ class SelftestWindow(QtWidgets.QWidget):
         mokutil_which_out, mokutil_which_err = proc.communicate()
         mokutil_which_exitcode = proc.returncode
         if (len(mokutil_which_out.splitlines()) >= 1):
-            mokutil_complete_path=mokutil_which_out.splitlines()[0]
+            mokutil_complete_path=(mokutil_which_out.splitlines()[0]).decode('utf-8')
 
         detailsWarningCommon = "You might be missing Secure Boot mode.\nTo boot into Secure Boot mode is not strictly necessary but it helps on some restricted computers."
 
@@ -682,9 +880,9 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def saveReportToLogFile(self):
         try:
-            os.makedirs(self.rescapp_log_directory)
+            os.makedirs(rescapp_log_directory)
         except OSError as exc:  # Python >2.5
-            if exc.errno == errno.EEXIST and os.path.isdir(self.rescapp_log_directory):
+            if exc.errno == errno.EEXIST and os.path.isdir(rescapp_log_directory):
                 pass
             else:
                 raise
@@ -711,9 +909,7 @@ class SelftestWindow(QtWidgets.QWidget):
 
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
-        home_directory = os.path.expanduser('~')
-        self.rescapp_log_directory = home_directory + '/.rescapp/log'
-        self.selftest_log_file = self.rescapp_log_directory + '/selftest_log.txt'
+        self.selftest_log_file = rescapp_log_directory + '/selftest_log.txt'
 
         self.introductionLabel = QtWidgets.QLabel("This is the self-test window from '"+rescapp_title+"'. It allows you to check if '"+rescapp_title+"' will work ok on your live system or not.")
         self.introductionLabel.setWordWrap(True)
@@ -791,6 +987,10 @@ if __name__ == '__main__':
     rescapp_plugins_path = rescapp_binary_path + '/../' \
         + 'share/rescapp/plugins'
     rescapp_version_path = rescapp_share_path
+
+    home_directory = os.path.expanduser('~')
+    rescapp_log_directory = home_directory + '/.rescapp/log'
+
     mainmenu_filename = 'rescatux.lis'
     code_list = list()
     name_list = list()
@@ -811,15 +1011,16 @@ if __name__ == '__main__':
         rescapp_version = linecache.getline(rescapp_version_path + '/'
                 + version_filename, 1)
         rescapp_version = rescapp_version.rstrip('\r\n')
-        print 'DEBUG: Version ' + rescapp_version + ' found.'
+        print ('DEBUG: Version ' + rescapp_version + ' found.')
     else:
         rescapp_version = 'Unknown'
-        print "DEBUG: Warning! Version not found. Using 'Unknown' instead"
+        print ("DEBUG: Warning! Version not found. Using 'Unknown' instead")
 
     mainmenu_icon_path = rescapp_icons_path + '/' + 'go-previous.png'
     menu_icon_path = rescapp_icons_path + '/' + 'folder.png'
     support_icon_path = rescapp_icons_path + '/' + 'help-browser.png'
     rescue_icon_path = rescapp_icons_path + '/' + 'text-x-script.png'
+    info_icon_path = rescapp_icons_path + '/' + 'dialog-information.png'
 
     chat_support_option = RescappOption()
     chat_support_option.setOptionFromDir(os.path.join(rescapp_plugins_path,
@@ -860,7 +1061,7 @@ if __name__ == '__main__':
     app_stw.exec_()
     # Wait for self-test window application to end
 
-    print "DEBUG: start_rescapp_gui"
+    print ("DEBUG: start_rescapp_gui")
     app_rescapp = QtWidgets.QApplication(sys.argv)
     url = QtCore.QUrl('file:///' + rescapp_plugins_doc_path + '/'
                       + help_support_option.getCode() + '/'
