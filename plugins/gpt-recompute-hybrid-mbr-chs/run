@@ -55,7 +55,7 @@ if [ "x${SELECTED_HARD_DISK}" != "x" ] ; then
     rtux_Message_Failure ${GPT_HYBRID_CHS_NOT_COMPUTED_STR}
   fi
 else
-  rtux_Message_Info ${GPT_HYBRID_CHS_HARD_DISK_NOT_FOUND}
+  rtux_Message_Warning ${GPT_HYBRID_CHS_HARD_DISK_NOT_FOUND}
   rtux_Message_Failure ${GPT_HYBRID_CHS_NOT_COMPUTED_STR}
 fi
 

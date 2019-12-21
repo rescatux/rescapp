@@ -62,6 +62,7 @@ Debian Package Runtime Requirements
 
 You will find the needed Debian Jessie packages in the following list.
 
+util-linux (from essential) for the lsblk command.
 
 PYTHON_DBUS_PACKAGES="python3-gi python3-dbus"
 PYTHON_PACKAGES="python-pyqt5 python-pyqt5.qtwebkit"
