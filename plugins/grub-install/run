@@ -29,16 +29,32 @@ GRUB_INSTALLED_OK_STR="Grub was installed OK! :)"
 GRUB_NOT_INSTALLED_STR="Grub was not installed. Something went wrong! :("
 WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard disk to install Grub on?"
 GRUB_INSTALLED_RUNNING_STR="Installing Grub."
+GRUB_INSTALL_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or choosen."
+GRUB_INSTALL_HARD_DISK_NOT_FOUND="No disks were found or choosen."
+GRUB_INSTALL_HARD_DISKS_ORDER_NOT_FOUND="Hard disks order was not set properly."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
 
-
-
-SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk ${WHICH_HARD_DISK_INSTALL_GRUB_STR});
-
-if rtux_Run_Show_Progress "${GRUB_INSTALLED_RUNNING_STR}" rtux_Grub_Install ${SELECTED_HARD_DISK} ${SELECTED_PARTITION} $(rtux_Order_Hard_Disks) ; then
-  rtux_Message_Success ${GRUB_INSTALLED_OK_STR}
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
+  SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk ${WHICH_HARD_DISK_INSTALL_GRUB_STR});
+  if [ "x${SELECTED_HARD_DISK}" != "x" ] ; then
+    SELECTED_HARD_DISKS_ORDER=$(rtux_Order_Hard_Disks)
+    if [ "x${SELECTED_HARD_DISKS_ORDER}" != "x" ] ; then
+      if rtux_Run_Show_Progress "${GRUB_INSTALLED_RUNNING_STR}" rtux_Grub_Install ${SELECTED_HARD_DISK} ${SELECTED_PARTITION} ${SELECTED_HARD_DISKS_ORDER} ; then
+        rtux_Message_Success ${GRUB_INSTALLED_OK_STR}
+      else
+        rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
+      fi
+    else
+      rtux_Message_Info ${GRUB_INSTALL_HARD_DISKS_ORDER_NOT_FOUND}
+      rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
+    fi
+  else
+    rtux_Message_Info ${GRUB_INSTALL_HARD_DISK_NOT_FOUND}
+    rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
+  fi
 else
+  rtux_Message_Info ${GRUB_INSTALL_GNU_LINUX_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
 fi
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Rescapp main script
 # Copyright (C) 2016, 2017 Adrian Gibanel Lopez
 #
@@ -23,8 +23,8 @@ import sys
 import re
 
 if ((len(sys.argv)-1) != 1 ):
-        print 'Usage: ' + sys.argv[0] + ' ' + 'disk_device'
-        print 'E.g.: ' + sys.argv[0] + ' ' + '/dev/sda'
+        print ('Usage: ' + sys.argv[0] + ' ' + 'disk_device')
+        print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/sda')
         sys.exit(1)
 
 disk_str=sys.argv[1]
@@ -36,7 +36,7 @@ disk = parted.Disk(device,None)
 
 if (disk is not None):
         disk_type=disk.type
-        print disk_type
+        print (disk_type)
         sys.exit(0)
 else:
         sys.exit(2)

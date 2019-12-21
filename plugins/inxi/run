@@ -1,0 +1,81 @@
+#!/bin/bash
+# Rescapp Inxi run script
+# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+#
+# Rescapp is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Rescapp is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
+
+source ${RESCAPP_LIB_FILE}
+
+set +x
+set +v
+# Exceptionally we remove verbose
+
+# MAIN PROGRAM
+
+
+INXI_BINARY="\
+inxi \
+ --color 0 \
+ --extra 3 \
+ --admin \
+ --tty \
+ --filter \
+         \
+ --audio \
+ --battery \
+ --cpu \
+ --disk-full \
+ -D \
+ --flags \
+ --graphics \
+ --label \
+ --memory \
+ --machine \
+ --unmounted \
+ -p \
+ --partitions \
+ --repos \
+ --raid \
+ --system \
+ --usb \
+ --uuid \
+"
+
+# Inxi non used options on purpose:
+# --ip # Too private data
+# --info # No need to show processes for asking for help
+# --network-advanced # Too private data
+# --network # Too private data
+# --sensors # Not sure it would be useful at all
+# --slots # PCI slots seem too low hardware level
+# --processes # No need to show processes for asking for help
+
+
+
+
+INXI_OK_STR="Inxi was run OK! :)"
+INXI_KO_STR="Inxi had a problem. Something went wrong! :("
+
+INXI_EXPLANATION="Check the Support menu in order to see how you can show, share, share on forums, etc. the Inxi log."
+INXI_STR="Generating System Info (Inxi) File."
+
+
+if rtux_Run_Show_Progress "${INXI_STR}" ${INXI_BINARY} ; then
+  rtux_Message_Success ${INXI_OK_STR}
+  rtux_Message_Success ${INXI_EXPLANATION}
+else
+  rtux_Message_Failure ${INXI_KO_STR}
+fi
+
+

@@ -24,7 +24,7 @@ set +v
 # Run Boot Info script
 function rtux_Boot_Info_Script () {
   
-  if  $(dirname ${0})/${BOOT_INFO_SCRIPT_BINARY} --stdout; then    
+  if  ${BOOT_INFO_SCRIPT_BINARY} --stdout; then
     return 0; # Ok
   else
     return 1; # Error

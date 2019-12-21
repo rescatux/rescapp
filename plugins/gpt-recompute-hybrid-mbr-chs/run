@@ -44,12 +44,18 @@ GPT_HYBRID_CHS_COMPUTED_OK_STR="Hybrid MBR CHS was recomputed OK! :)"
 GPT_HYBRID_CHS_NOT_COMPUTED_STR="Hybrid MBR was not recomputed. Something went wrong! :("
 GPT_HYBRID_CHS_COMPUTED_RUNNING_STR="Recomputing Hybrid MBR CHS"
 WHICH_HARD_DISK_CHS_COMPUTE_HYBRIDMBR_STR="Which hard disk to recompute its hybrid MBR CHS on?"
+GPT_HYBRID_CHS_HARD_DISK_NOT_FOUND="No disks were found or choosen."
 
 SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk "${WHICH_HARD_DISK_CHS_COMPUTE_HYBRIDMBR_STR}");
 
-if rtux_Run_Show_Progress "${GPT_HYBRID_CHS_COMPUTED_RUNNING_STR}" rtux_Hybridmbr_CHS_Compute ${SELECTED_HARD_DISK} ; then
-  rtux_Message_Success ${GPT_HYBRID_CHS_COMPUTED_OK_STR}
+if [ "x${SELECTED_HARD_DISK}" != "x" ] ; then
+  if rtux_Run_Show_Progress "${GPT_HYBRID_CHS_COMPUTED_RUNNING_STR}" rtux_Hybridmbr_CHS_Compute ${SELECTED_HARD_DISK} ; then
+    rtux_Message_Success ${GPT_HYBRID_CHS_COMPUTED_OK_STR}
+  else
+    rtux_Message_Failure ${GPT_HYBRID_CHS_NOT_COMPUTED_STR}
+  fi
 else
+  rtux_Message_Info ${GPT_HYBRID_CHS_HARD_DISK_NOT_FOUND}
   rtux_Message_Failure ${GPT_HYBRID_CHS_NOT_COMPUTED_STR}
 fi
 
