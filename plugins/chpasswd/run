@@ -24,6 +24,66 @@ set -v
 # 1 parametre = Selected partition
 # 2 parametre = Selected user
 # 3 parametre = Choosen password
+function rtux_Passwd () {
+
+  local EXIT_VALUE=1 # Error by default
+  local SELECTED_PARTITION="$1"
+  local SELECTED_USER="$2"
+  local CHOOSEN_PASS="$3"
+
+  local n_partition=${SELECTED_PARTITION}
+
+  local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
+  local TMP_DEV_PARTITION=/dev/${n_partition}
+  mkdir --parents ${TMP_MNT_PARTITION}
+  if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
+    then
+    mount -o bind /dev ${TMP_MNT_PARTITION}/dev
+    mount -o bind /proc ${TMP_MNT_PARTITION}/proc
+    mount -o bind /sys ${TMP_MNT_PARTITION}/sys
+
+    if [[ -e ${TMP_MNT_PARTITION}${LINUX_OS_DETECTOR} ]] ; then
+
+      chroot ${TMP_MNT_PARTITION} passwd ${SELECTED_USER} <<EOF
+${CHOOSEN_PASS}
+${CHOOSEN_PASS}
+EOF
+      EXIT_VALUE=$?
+
+    fi # Linux detector was found
+    umount ${TMP_MNT_PARTITION}/sys
+    umount ${TMP_MNT_PARTITION}/proc
+    umount ${TMP_MNT_PARTITION}/dev
+    umount ${TMP_MNT_PARTITION};
+  fi # Partition was mounted ok
+
+  return ${EXIT_VALUE}
+
+} # function rtux_Passwd ()
+
+# Change selected user's password from the choosen Linux partition
+# 1 parametre = Selected partition
+# 2 parametre = Selected user
+# 3 parametre = Choosen password
+function rtux_MetaChpasswd () {
+
+  local EXIT_VALUE=1 # Error by default
+  local SELECTED_PARTITION="$1"
+  local SELECTED_USER="$2"
+  local CHOOSEN_PASS="$3"
+
+  if ! rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (ChPasswd)" rtux_ChPasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}; then
+    rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (Passwd)" rtux_Passwd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}
+  else
+    return 0
+  fi
+
+} # function rtux_MetaChpasswd ()
+
+# Change selected user's password from the choosen Linux partition
+# 1 parametre = Selected partition
+# 2 parametre = Selected user
+# 3 parametre = Choosen password
 function rtux_Chpasswd () {
 
   local EXIT_VALUE=1 # Error by default
@@ -84,21 +144,21 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
     if [ "x${SELECTED_USER}" != "x" ] ; then
         CHOOSEN_PASS=$(rtux_Enter_Pass ${SELECTED_USER})
         if [ "x${CHOOSEN_PASS}" != "x" ] ; then
-            if rtux_Run_Show_Progress "${PASSWD_RUNNING_STR}" rtux_Chpasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}; then
+            if rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (Meta)" rtux_MetaChpasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}; then
                 rtux_Message_Success ${PASSWD_CHANGED_OK_STR}
             else
                 rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
             fi
         else
-            rtux_Message_Info ${PASSWD_PASS_NOT_FOUND}
+            rtux_Message_Warning ${PASSWD_PASS_NOT_FOUND}
             rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
         fi
     else
-        rtux_Message_Info ${PASSWD_LINUX_USERS_NOT_FOUND}
+        rtux_Message_Warning ${PASSWD_LINUX_USERS_NOT_FOUND}
         rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
     fi
 else
-    rtux_Message_Info ${PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND}
+    rtux_Message_Warning ${PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND}
     rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}
 fi
 

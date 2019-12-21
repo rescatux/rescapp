@@ -37,6 +37,6 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
         rtux_Message_Failure ${FSCK_FORCED_KO_STR}
     fi
 else
-    rtux_Message_Info ${FSCK_PARTITIONS_NOT_FOUND}
+    rtux_Message_Warning ${FSCK_PARTITIONS_NOT_FOUND}
     rtux_Message_Failure ${FSCK_FORCED_KO_STR}
 fi
