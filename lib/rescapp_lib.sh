@@ -286,7 +286,7 @@ function rtux_Choose_Hard_Disk () {
     let n=n+1
   done
 
-  choosen_disk=$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  chosen_disk=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
@@ -294,13 +294,13 @@ function rtux_Choose_Hard_Disk () {
 	--column "${HARDDISK_STR}" \
 	--column "${SIZE_STR}" ${HD_LIST_VALUES});
  rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${HARDDISK_STR}" "${SIZE_STR}" ${HD_LIST_VALUES}
- rtux_Message_Answer "${choosen_disk}"
- echo "${choosen_disk}"
+ rtux_Message_Answer "${chosen_disk}"
+ echo "${chosen_disk}"
 
 } # function rtux_Choose_Hard_Disk ()
 
 # Let the user choose a partition
-# It outputs choosen partition
+# It outputs chosen partition
 function rtux_Choose_Partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -310,7 +310,7 @@ function rtux_Choose_Partition () {
 } # function rtux_Choose_Partition ()
 
 # Let the user choose a partition
-# It outputs choosen partition
+# It outputs chosen partition
 function rtux_Choose_Primary_Partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -321,7 +321,7 @@ function rtux_Choose_Primary_Partition () {
 
 # Let the user choose a partition
 # Every parametre are the source partitions
-# It outputs choosen partition
+# It outputs chosen partition
 function rtux_Abstract_Choose_Partition () {
   local text_to_ask="$1"
   shift
@@ -360,7 +360,7 @@ function rtux_Abstract_Choose_Partition () {
   let n=n+1
   done
 
-  choosen_partition=$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  chosen_partition=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
@@ -373,12 +373,12 @@ function rtux_Abstract_Choose_Partition () {
 	${LIST_VALUES} \
 	);
  rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${LIST_VALUES}"
- rtux_Message_Answer "${choosen_partition}"
- echo "${choosen_partition}"
+ rtux_Message_Answer "${chosen_partition}"
+ echo "${chosen_partition}"
 } # function rtux_Abstract_Choose_Partition ()
 
 # Let the user choose his main GNU/Linux partition
-# It outputs choosen partition
+# It outputs chosen partition
 function rtux_Choose_Linux_partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -388,7 +388,7 @@ function rtux_Choose_Linux_partition () {
 } # function rtux_Choose_Linux_partition ()
 
 # Let the user choose his main Windows partition
-# It outputs choosen partition
+# It outputs chosen partition
 function rtux_Choose_Windows_partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -425,7 +425,7 @@ function rtux_Choose_HardDisk_Renaming () {
   done
 
 
-  # We are going to redefine TARGET_PARTITIONS with user choosen hard disks
+  # We are going to redefine TARGET_PARTITIONS with user chosen hard disks
   local TARGET_PARTITIONS=""
   # Let's move some partitions
   for n_partition in /dev/new/* ; do
@@ -600,7 +600,7 @@ function rtux_User_List() {
 
 # Let the user choose an user
 # Every parametre are the users
-# It outputs choosen user
+# It outputs chosen user
 function rtux_Choose_User () {
   local n=0
   local LIST_VALUES=""
@@ -615,7 +615,7 @@ function rtux_Choose_User () {
   let n=n+1
   done
 
-  choosen_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  chosen_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${WHICH_USER_STR}" \
 	--radiolist  \
@@ -623,24 +623,24 @@ function rtux_Choose_User () {
 	--column "${USER_STR}" \
 	${LIST_VALUES});
   rtux_Message_Question "${WHICH_USER_STR}" "${SELECT_STR}" "${USER_STR}" ${LIST_VALUES}
-  rtux_Message_Answer "${choosen_user}"
-  echo "${choosen_user}"
+  rtux_Message_Answer "${chosen_user}"
+  echo "${chosen_user}"
 } # function rtux_Choose_User ()
 
 # 1 parametre = User to change password
 # User is asked to write temp password
-# Outputs choosen password
+# Outputs chosen password
 function rtux_Enter_Pass() {
 
   local USER="$1"
 
-    choosen_password=$(zenity ${ZENITY_COMMON_OPTIONS} \
+    chosen_password=$(zenity ${ZENITY_COMMON_OPTIONS} \
 	  --entry  \
 	  --text "${ENTER_PASS_STR} (${USER})" \
 	  --hide-text)
   rtux_Message_Question "${ENTER_PASS_STR}" "(${USER})"
-  rtux_Message_Answer "${choosen_password}"
-  echo "${choosen_password}"
+  rtux_Message_Answer "${chosen_password}"
+  echo "${chosen_password}"
 
 } # rtux_Choose_Hard_Disk_Position()
 
@@ -732,7 +732,7 @@ function rtux_Choose_Sam_User () {
       sam_line_count=$((sam_line_count+1))
   done
 
-  choosen_sam_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
+  chosen_sam_user=$(zenity ${ZENITY_COMMON_OPTIONS}  \
 	--list  \
 	--text "${text_to_ask}" \
 	--radiolist  \
@@ -742,20 +742,20 @@ function rtux_Choose_Sam_User () {
 	"${SAM_LIST_VALUES[@]}");
 
   rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${SAM_USER_STR}" "${SAM_LIST_VALUES[@]}"
-  rtux_Message_Answer "${choosen_sam_user}"
-  echo "${choosen_sam_user}"
+  rtux_Message_Answer "${chosen_sam_user}"
+  echo "${chosen_sam_user}"
 
 } # rtux_Choose_Sam_User ()
 
 # Reset windows password payload
 # 1 parametre = Selected partition
 # 2 parametre = SAM file
-# 3 parametre = Choosen user
+# 3 parametre = Chosen user
 function rtux_winpass_reset_payload () {
 
   local SELECTED_PARTITION="$1"
   local SAM_FILE="$2"
-  local CHOOSEN_USER="$3"
+  local CHOSEN_USER="$3"
 
   local EXIT_VALUE=1 # Error by default
   # Mount the partition
@@ -766,7 +766,7 @@ function rtux_winpass_reset_payload () {
   if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
     then
   # Run chntpw -L sam-file security-file
-	sampasswd -E -r -u "0x${CHOOSEN_USER}" ${SAM_FILE};
+	sampasswd -E -r -u "0x${CHOSEN_USER}" ${SAM_FILE};
 	EXIT_VALUE=$?
   # Umount the partition
 
@@ -787,10 +787,10 @@ function rtux_winpass_reset () {
   # Backup of the files in a temporal folder
   rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
   # Ask the user which password to reset
-  CHOOSEN_USER=$(rtux_Choose_Sam_User \
+  CHOSEN_USER=$(rtux_Choose_Sam_User \
     "Choose Windows user to reset its password")
   local PAYLOAD_EXIT_VALUE=1;
-  rtux_Run_Show_Progress "${WINPASS_RESET_RUNNING_STR}" rtux_winpass_reset_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOOSEN_USER};
+  rtux_Run_Show_Progress "${WINPASS_RESET_RUNNING_STR}" rtux_winpass_reset_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER};
   PAYLOAD_EXIT_VALUE=$?
   return ${PAYLOAD_EXIT_VALUE};
 
@@ -799,12 +799,12 @@ function rtux_winpass_reset () {
 # Promote windows user payload
 # 1 parametre = Selected partition
 # 2 parametre = SAM file
-# 3 parametre = Choosen user
+# 3 parametre = Chosen user
 function rtux_winpromote_payload () {
 
   local SELECTED_PARTITION="$1"
   local SAM_FILE="$2"
-  local CHOOSEN_USER="$3"
+  local CHOSEN_USER="$3"
 
   local EXIT_VALUE=1 # Error by default
 
@@ -826,10 +826,10 @@ function rtux_winpromote_payload () {
   # it may forbid logins.
 
   # Run chntpw -L sam-file security-file
-	samusrgrp -E -a -u "0x${CHOOSEN_USER}" -g ${WINDOWS_ADMIN_GROUP_HEX} ${SAM_FILE};
+	samusrgrp -E -a -u "0x${CHOSEN_USER}" -g ${WINDOWS_ADMIN_GROUP_HEX} ${SAM_FILE};
 	EXIT_VALUE=$?
-	samusrgrp -E -a -u "0x${CHOOSEN_USER}" -g ${WINDOWS_USERS_GROUP_HEX} ${SAM_FILE};
-	samusrgrp -E -r -u "0x${CHOOSEN_USER}" -g ${WINDOWS_GUESTS_GROUP_HEX} ${SAM_FILE};
+	samusrgrp -E -a -u "0x${CHOSEN_USER}" -g ${WINDOWS_USERS_GROUP_HEX} ${SAM_FILE};
+	samusrgrp -E -r -u "0x${CHOSEN_USER}" -g ${WINDOWS_GUESTS_GROUP_HEX} ${SAM_FILE};
   # Umount the partition
 
     umount ${TMP_MNT_PARTITION};
@@ -849,11 +849,11 @@ function rtux_winpromote () {
   # Backup of the files in a temporal folder
   rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
   # Ask the user which password to reset
-  CHOOSEN_USER=$(rtux_Choose_Sam_User \
+  CHOSEN_USER=$(rtux_Choose_Sam_User \
     "Choose Windows user to promote to Admin")
 
   local PAYLOAD_EXIT_VALUE=1;
-  rtux_Run_Show_Progress "${WINPROMOTE_RUNNING_STR}" rtux_winpromote_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOOSEN_USER};
+  rtux_Run_Show_Progress "${WINPROMOTE_RUNNING_STR}" rtux_winpromote_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER};
   PAYLOAD_EXIT_VALUE=$?
   return ${PAYLOAD_EXIT_VALUE};
 
@@ -862,12 +862,12 @@ function rtux_winpromote () {
 # Unlock windows user payload
 # 1 parametre = Selected partition
 # 2 parametre = SAM file
-# 3 parametre = Choosen user
+# 3 parametre = chosen user
 function rtux_winunlock_payload () {
 
   local SELECTED_PARTITION="$1"
   local SAM_FILE="$2"
-  local CHOOSEN_USER="$3"
+  local CHOSEN_USER="$3"
 
   local EXIT_VALUE=1 # Error by default
 
@@ -879,7 +879,7 @@ function rtux_winunlock_payload () {
   if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
     then
   # Run chntpw -L sam-file security-file
-	samunlock -E -U -u "0x${CHOOSEN_USER}" ${SAM_FILE};
+	samunlock -E -U -u "0x${CHOSEN_USER}" ${SAM_FILE};
 	EXIT_VALUE=$?
   # Umount the partition
 
@@ -900,11 +900,11 @@ function rtux_winunlock () {
   # Backup of the files in a temporal folder
   rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
   # Ask the user which password to reset
-  CHOOSEN_USER=$(rtux_Choose_Sam_User \
+  CHOSEN_USER=$(rtux_Choose_Sam_User \
     "Choose Windows user to unlock")
 
   local PAYLOAD_EXIT_VALUE=1;
-  rtux_Run_Show_Progress "${WINUNLOCK_RUNNING_STR}" rtux_winunlock_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOOSEN_USER};
+  rtux_Run_Show_Progress "${WINUNLOCK_RUNNING_STR}" rtux_winunlock_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER};
   PAYLOAD_EXIT_VALUE=$?
   return ${PAYLOAD_EXIT_VALUE};
 
@@ -978,7 +978,7 @@ function rtux_Order_Hard_Disks () {
 
 } # function rtux_Order_Hard_Disks ()
 
-# Install Grub from the choosen Linux partition to the choosen hard disk
+# Install Grub from the chosen Linux partition to the chosen hard disk
 # 1 parametre = Selected hard disk
 # 2 parametre = Selected partition
 # 3 parametre = Rescatux Device Map File Path
@@ -1041,7 +1041,7 @@ function rtux_Grub_Install () {
 
 } # function rtux_Grub_Install ()
 
-# Update Grub configuration file from the choosen Linux partition
+# Update Grub configuration file from the chosen Linux partition
 # 1 parametre = Selected partition
 # 2 parametre = Rescatux Device Map File Path
 # While it is being run user is shown the hard disks
@@ -1243,7 +1243,7 @@ function rtux_UEFI_Check_Is_EFI_System_Partition () {
 } # function rtux_UEFI_Check_Is_EFI_System_Partition ()
 
 # Let the user choose his main EFI System partition
-# It outputs choosen partition
+# It outputs chosen partition
 function rtux_Choose_EFI_System_partition () {
   rtux_Abstract_Choose_Partition "Which EFI System partition?" $(rtux_Get_EFI_System_Partitions)
 } # function rtux_Choose_EFI_System_partition ()
@@ -1484,7 +1484,7 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
 
   # TODO: Check if we are in UEFI system and warn the user
 
-  # Step 2: Overwrite default files with the ones we have choosen
+  # Step 2: Overwrite default files with the ones we have chosen
 
   local n_partition=${UEFI_EFI_PARTITION}
   local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1633,7 +1633,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
 
   # TODO: Check if we are in UEFI system and warn the user
 
-  # Step 2: Overwrite default files with the ones we have choosen
+  # Step 2: Overwrite default files with the ones we have chosen
 
   local n_partition=${UEFI_EFI_PARTITION}
   local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1641,7 +1641,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
   mkdir --parents ${TMP_MNT_PARTITION}
   if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
     then
-      # Step 2.A: Overwrite default files with the ones we have choosen
+      # Step 2.A: Overwrite default files with the ones we have chosen
 
       TMP_CHECK_AND_CREATE_DIRECTORY="$(dirname ${TMP_MNT_PARTITION}/${DEFAULT_UEFI_BOOT_ENTRY_RELATIVE_PATH})"
       if [ ! -d "${TMP_CHECK_AND_CREATE_DIRECTORY}" ] ; then

@@ -27,10 +27,10 @@ set -v
 
 GRUB_INSTALLED_OK_STR="Grub was installed OK! :)"
 GRUB_NOT_INSTALLED_STR="Grub was not installed. Something went wrong! :("
-WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard disk to install Grub on?"
+WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard drive do you wish to install Grub on?"
 GRUB_INSTALLED_RUNNING_STR="Installing Grub."
-GRUB_INSTALL_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or choosen."
-GRUB_INSTALL_HARD_DISK_NOT_FOUND="No disks were found or choosen."
+GRUB_INSTALL_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or selected."
+GRUB_INSTALL_HARD_DISK_NOT_FOUND="No drives were found or selected."
 GRUB_INSTALL_HARD_DISKS_ORDER_NOT_FOUND="Hard disks order was not set properly."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);

@@ -67,7 +67,7 @@ inxi \
 INXI_OK_STR="Inxi was run OK! :)"
 INXI_KO_STR="Inxi had a problem. Something went wrong! :("
 
-INXI_EXPLANATION="Check the Support menu in order to see how you can show, share, share on forums, etc. the Inxi log."
+INXI_EXPLANATION="Check the Support menu in order to see how you can display, or share on the forums the Inxi log."
 INXI_STR="Generating System Info (Inxi) File."
 
 

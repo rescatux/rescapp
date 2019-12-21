@@ -19,8 +19,8 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-GPARTED_OK_STR="Gparted was run at the background."
-GPARTED_KO_STR="Rescapp was not unable to start Gparted."
+GPARTED_OK_STR="Gparted was run in the background."
+GPARTED_KO_STR="Rescapp was not able to start Gparted."
 
 GPARTED_FULL_PATH="$(which gparted)"
 if [ -x "${GPARTED_FULL_PATH}" ] ; then

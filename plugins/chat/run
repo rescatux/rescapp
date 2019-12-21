@@ -18,8 +18,8 @@
 source ${RESCAPP_LIB_FILE}
 
 
-XCHAT_OK_STR="Hexchat was run at the background."
-XCHAT_KO_STR="Rescapp was not unable to start Hexchat."
+XCHAT_OK_STR="Hexchat was run in the background."
+XCHAT_KO_STR="Rescapp was not able to start Hexchat."
 
 # Top right corner
 WIDTH=600

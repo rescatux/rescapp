@@ -20,12 +20,12 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-# Install Windows MBR so that it boots choosen Windows partition
-# From the choosen hard disk
+# Install Windows MBR so that it boots chosen Windows partition
+# From the chosen hard disk
 # 1 parametre = Selected hard disk
 # 2 parametre = Selected partition
 # 3 parametre = Hard Disk position
-# While it is being run user is shown the hard disks
+# While it is being run user is shown the hard drives
 # and it is asked to order them
 function rtux_Winmbr_Install () {
 

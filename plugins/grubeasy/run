@@ -26,13 +26,13 @@ set -v
 
 GRUB_INSTALLED_OK_STR="Grub was installed OK! :)"
 GRUB_NOT_INSTALLED_STR="Grub was not installed. Something went wrong! :("
-WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard disk to install Grub on?"
+WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard drive do you wish to install Grub on?"
 
 UPDATE_GRUB_OK_STR="Grub configuration was updated OK! :)"
 UPDATE_GRUB_KO_STR="Grub configuration update went wrong! :("
 
 FSCK_FORCED_OK_STR="Filesystem check with automatic fix was OK! :)"
-FSCK_FORCED_KO_STR="Filesystem check with automatic fix went wrong! :("
+FSCK_FORCED_KO_STR="Filesystem check with automatic fix was not successful! :("
 
 GRUBEASY_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries) was OK! :)"
 GRUBEASY_NOT_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries) was not fully completed. Something went wrong! :("

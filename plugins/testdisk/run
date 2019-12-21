@@ -19,7 +19,7 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-TESTDISK_OK_STR="Testdisk was run at the background."
+TESTDISK_OK_STR="Testdisk was run in the background."
 TESTDISK_KO_STR="Rescapp was not unable to start Testdisk via xterm."
 
 TESTDISK_FULL_PATH="$(which testdisk)"

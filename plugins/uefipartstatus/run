@@ -45,8 +45,8 @@ UEFIPARTCHECK_UEFI_FILESYSTEM_OK_STR="EFI partition has a valid uefi filesystem 
 UEFIPARTCHECK_UEFI_FILESYSTEM_KO_STR="EFI partition does not have a valid uefi filesystem. :("
 UEFIPARTCHECK_UEFI_FILESYSTEM_RUNNING_STR="Performing EFI partition valid uefi filesystem check"
 
-UEFIPARTCHECK_PARTITION_MOUNT_OK_STR="EFI partition can be mount :)"
-UEFIPARTCHECK_PARTITION_MOUNT_KO_STR="EFI partition cannot be mount. :("
+UEFIPARTCHECK_PARTITION_MOUNT_OK_STR="EFI partition can be mounted :)"
+UEFIPARTCHECK_PARTITION_MOUNT_KO_STR="EFI partition cannot be mounted. :("
 UEFIPARTCHECK_PARTITION_MOUNT_RUNNING_STR="Performing EFI partition mount check"
 
 UEFIPARTCHECK_DISK_TYPE_IS_GPT_OK_STR="EFI partition disk type is either gpt or msdos :)"
