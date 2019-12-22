@@ -442,7 +442,7 @@ function rtux_Choose_HardDisk_Renaming () {
 
   mkdir /dev/new
 
-  # Let's loop on detected hard drives so that user can rename them
+  # Let's loop on detected hard drives so that the user can rename them
   for n_hard_disk in ${DETECTED_HARD_DISKS} ; do
 
     local new_hard_disk_name=$(zenity ${ZENITY_COMMON_OPTIONS}  \
@@ -1252,7 +1252,7 @@ function rtux_UEFI_Boot_Order_Update () {
 
   local DESIRED_ORDER="$1"
 
-  # TODO: Check if we are in UEFI system and warn the user
+  # TODO: Check if we are in a UEFI system and warn the user
 
   ${EFIBOOTMGR_BINARY} -o ${DESIRED_ORDER}
   EXIT_VALUE=$?
@@ -1519,7 +1519,7 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
     return 1;
   fi
 
-  # TODO: Check if we are in UEFI system and warn the user
+  # TODO: Check if we are in a UEFI system and warn the user
 
   # Step 2: Overwrite default files with the ones we have chosen
 
@@ -1911,14 +1911,14 @@ SIZE_STR="Size"
 
 ORDER_HDS_WTITLE="Order hard drives"
 ORDER_HDS_STR="Order hard drives according to the boot order. Press OK to continue."
-RIGHT_HD_POSITION_STR="Which is the correct position for this hard drive?"
+RIGHT_HD_POSITION_STR="What is the correct position for this hard drive?"
 SUCCESS_STR="Success!"
 INFO_STR="Information"
 FAILURE_STR="Failure!"
 NOT_DETECTED_STR="Windows / Data / Other"
 EFI_SYSTEM_STR="EFI System"
 CANT_MOUNT_STR="Cannot mount"
-RUNNING_STR="Running process... Please wait untill the finish message appears."
+RUNNING_STR="Running process... Please wait untill the finished message appears."
 
 UEFIORDER_WTITLE="Order UEFI boot entries"
 ORDER_UEFIORDER_STR="Order UEFI boot entries in the order that you want. Press OK to continue."
