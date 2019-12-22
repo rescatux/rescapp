@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 
-# Given a partition it returns its etc issue content
+# Given a partition it returns the etc issue content
 # Format is modified so that zenity does not complain
 function rtux_Get_Etc_Issue_Content_payload() {
   local PARTITION_TO_MOUNT=$1
@@ -47,8 +47,8 @@ function rtux_Get_Etc_Issue_Content_payload() {
   fi
 } # function rtux_Get_Etc_Issue_Content_payload()
 
-# Given a partition it returns its filesystem type
-# Format is modified so that zenity does not complain
+# Given a partition it returns the filesystem type
+# The format is modified so that zenity does not complain
 function rtux_Get_Partition_Filesystem_payload() {
   local PARTITION_TO_MOUNT=$1
   local n_partition=${PARTITION_TO_MOUNT}
@@ -67,7 +67,7 @@ function rtux_Get_Partition_Filesystem_payload() {
 } # function rtux_Get_Partition_Filesystem_payload()
 
 # Given a partition it returns its alternate name
-# Format is modified so that zenity does not complain
+# The format is modified so that zenity does not complain
 function rtux_Get_Partition_Alternatename_payload() {
   local PARTITION_TO_MOUNT=$1
   local n_partition=${PARTITION_TO_MOUNT}
@@ -85,8 +85,8 @@ function rtux_Get_Partition_Alternatename_payload() {
 
 } # function rtux_Get_Partition_Alternatename_payload()
 
-# Given a partition it returns its flags
-# Format is modified so that zenity does not complain
+# Given a partition it returns the flags
+# The format is modified so that zenity does not complain
 function rtux_Get_Partition_Flags_payload() {
   local PARTITION_TO_MOUNT=$1
   local n_partition=${PARTITION_TO_MOUNT}
@@ -106,7 +106,7 @@ function rtux_Get_Partition_Flags_payload() {
 } # function rtux_Get_Partition_Flags_payload()
 
 # Given a partition it returns its os-prober long name
-# Format is modified so that zenity does not complain
+# The format is modified so that zenity does not complain
 function rtux_Get_Partition_Osprober_Longname_payload() {
   local PARTITION_TO_MOUNT=$1
   local n_partition=${PARTITION_TO_MOUNT}
@@ -174,7 +174,7 @@ function rtux_Get_Primary_Partitions() {
   rtux_Run_Show_Progress "${GET_PRIMARY_PARTITIONS_RUNNING_STR}" rtux_Get_Primary_Partitions_payload "$@"
 } # function rtux_Get_Primary_Partitions ()
 
-# Return partitions which have Linux os detector on them
+# Return the partitions which have Linux os detector on them
 function rtux_Get_Linux_Os_Partitions_payload() {
   local TARGET_PARTITIONS=$(rtux_Get_System_Partitions)
   local SBIN_GRUB_PARTITIONS=""
@@ -254,7 +254,7 @@ function rtux_Message_Success () {
   dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageSuccess" "string:${text_to_show}"
 } # function rtux_Message_Success ()
 
-# Informs the user about anything
+# Informs the user about everything
 # Every parametre is treated as the message to be shown to the user.
 function rtux_Message_Info () {
   local text_to_show="$@"
@@ -262,7 +262,7 @@ function rtux_Message_Info () {
   dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageInfo" "string:${text_to_show}"
 } # function rtux_Message_Info ()
 
-# Informs the user about an operation that has been not successful
+# Informs the user about an operation that has not been successful
 # Every parametre is treated as the message to be shown to the user.
 function rtux_Message_Failure () {
   local text_to_show="$@"
@@ -286,7 +286,7 @@ function rtux_Message_Answer () {
   dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageAnswer" "string:${text_to_show}" 2>/dev/null
 } # function rtux_Message_Answer ()
 
-# Informs the user about warning
+# Informs the user about warnings
 # Every parametre is treated as the message to be shown to the user.
 function rtux_Message_Warning () {
   local text_to_show="$@"
@@ -294,7 +294,7 @@ function rtux_Message_Warning () {
   dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageWarning" "string:${text_to_show}"
 } # function rtux_Message_Warning ()
 
-# Return hard disk that the user chooses
+# Return the hard disk that the user chooses
 # Every parametre is treated as the question to be asked to the user.
 function rtux_Choose_Hard_Disk () {
   local text_to_ask="$@"
@@ -415,7 +415,7 @@ function rtux_Abstract_Choose_Partition () {
 
 } # function rtux_Abstract_Choose_Partition ()
 
-# Let the user choose his main GNU/Linux partition
+# Let the user choose their main GNU/Linux partition
 # It outputs chosen partition
 function rtux_Choose_Linux_partition () {
   custom_question="$1"
@@ -425,7 +425,7 @@ function rtux_Choose_Linux_partition () {
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Linux_Os_Partitions)
 } # function rtux_Choose_Linux_partition ()
 
-# Let the user choose his main Windows partition
+# Let the user choose their main Windows partition
 # It outputs chosen partition
 function rtux_Choose_Windows_partition () {
   custom_question="$1"
@@ -463,7 +463,7 @@ function rtux_Choose_HardDisk_Renaming () {
   done
 
 
-  # We are going to redefine TARGET_PARTITIONS with user chosen hard disks
+  # We are going to redefine TARGET_PARTITIONS with user chosen hard drives
   local TARGET_PARTITIONS=""
   # Let's move some partitions
   for n_partition in /dev/new/* ; do
@@ -490,7 +490,7 @@ function rtux_Get_Desktop_Width () {
 # Actually they are defined because they come with rescatux lib
 # Parametres: Main command line that has to be run.
 # Outputs the file to be run as a script inside chroot
-# It swaps current device.map with a temporal one
+# It swaps current device.map with a temporary one
 function rtux_File_Chroot_Script_Device_Map() {
 local command_line_to_run="$@"
   cat << EOF > ${TMP_MNT_PARTITION}${TMP_SCRIPT}
@@ -503,9 +503,9 @@ local command_line_to_run="$@"
     cp \${BOOT_GRUB_DIR}/device.map \${BOOT_GRUB_DIR}/${DEVICE_MAP_BACKUP_STR}
     # Backup current device.map file (inside chroot) - TODO - END
 
-    # Overwrite current device.map file with temporal device.map (inside chroot) - TODO - BEGIN
+    # Overwrite current device.map file with temporary device.map (inside chroot) - TODO - BEGIN
     cp /${DEVICE_MAP_RESCATUX_STR} \${BOOT_GRUB_DIR}/device.map
-    # Overwrite current device.map file with temporal device.map (inside chroot) - TODO - END
+    # Overwrite current device.map file with temporary device.map (inside chroot) - TODO - END
 
     ${command_line_to_run}
     UPDATE_GRUB_OUTPUT=\$?
@@ -513,10 +513,10 @@ local command_line_to_run="$@"
     # Restore current device.map file - BEGIN
     cp \${BOOT_GRUB_DIR}/${DEVICE_MAP_BACKUP_STR} \${BOOT_GRUB_DIR}/device.map
     # Restore current device.map file - END
-    # Delete temporal and backup device.map files- TODO - BEGIN
+    # Delete temporary and backup device.map files- TODO - BEGIN
     rm \${BOOT_GRUB_DIR}/${DEVICE_MAP_BACKUP_STR}
     rm /${DEVICE_MAP_RESCATUX_STR}
-    # Delete temporal and backup device.map files- TODO - END
+    # Delete temporary and backup device.map files- TODO - END
     exit \${UPDATE_GRUB_OUTPUT}
 EOF
 }
@@ -567,7 +567,7 @@ function rtux_Choose_Hard_Disk_Position() {
 } # rtux_Choose_Hard_Disk_Position()
 
 
-# User is asked to order the hard disks
+# User is asked to order the hard drives
 #  so that they have their actual order
 # Outputs device.map file with ordered devices
 function rtux_File_Reordered_Device_Map_payload() {
@@ -636,7 +636,7 @@ function rtux_User_List() {
   rtux_Run_Show_Progress "${USER_LIST_RUNNING_STR}" rtux_User_List_payload "$@"
 } # rtux_User_List()
 
-# Let the user choose an user
+# Let the user choose a user
 # Every parametre are the users
 # It outputs chosen user
 function rtux_Choose_User () {
@@ -666,7 +666,7 @@ function rtux_Choose_User () {
 } # function rtux_Choose_User ()
 
 # 1 parametre = User to change password
-# User is asked to write temp password
+# User is asked to type temp password
 # Outputs chosen password
 function rtux_Enter_Pass() {
 
@@ -681,8 +681,8 @@ function rtux_Enter_Pass() {
 
 } # rtux_Choose_Hard_Disk_Position()
 
-# 1 parametre = Temporal mount point
-# Return temporal fstab path
+# 1 parametre = Temporary mount point
+# Return temporary fstab path
 function rtux_make_tmp_fstab_payload() {
 
   local TMP_MNT_PARTITION="$1"
@@ -709,7 +709,7 @@ function rtux_make_tmp_fstab_payload() {
 } # rtux_make_tmp_fstab_payload()
 
 function rtux_make_tmp_fstab() {
-  MAKE_TMP_FSTAB_RUNNING_STR="Making temporal fstab file."
+  MAKE_TMP_FSTAB_RUNNING_STR="Making temporary fstab file."
   rtux_Run_Show_Progress "${MAKE_TMP_FSTAB_RUNNING_STR}" rtux_make_tmp_fstab_payload "$@"
 } # rtux_make_tmp_fstab()
 
@@ -821,7 +821,7 @@ function rtux_winpass_reset () {
   local SELECTED_PARTITION="$1"
   WINPASS_RESET_RUNNING_STR="Resetting Windows password."
   rtux_Get_Sam_Users ${SELECTED_PARTITION}
-  # Backup of the files in a temporal folder
+  # Backup of the files in a temporary folder
   rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
   # Ask the user which password to reset
   CHOSEN_USER=$(rtux_Choose_Sam_User \
@@ -857,7 +857,7 @@ function rtux_winpromote_payload () {
   local WINDOWS_GUESTS_GROUP_HEX='0x222'
   # Comment from chntpw.c file
   # Will add the user to the administrator group (0x220)
-  # and to the users group (0x221). That should usually be
+  # and to the users group (0x221). Usually, that should be
   # what is needed to log in and get administrator rights.
   # Also, remove the user from the guest group (0x222), since
   # it may forbid logins.
@@ -883,7 +883,7 @@ function rtux_winpromote () {
 
   local SELECTED_PARTITION="$1"
   rtux_Get_Sam_Users ${SELECTED_PARTITION}
-  # Backup of the files in a temporal folder
+  # Backup of the files in a temporary folder
   rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
   # Ask the user which password to reset
   CHOSEN_USER=$(rtux_Choose_Sam_User \
@@ -934,7 +934,7 @@ function rtux_winunlock () {
 
   local SELECTED_PARTITION="$1"
   rtux_Get_Sam_Users ${SELECTED_PARTITION}
-  # Backup of the files in a temporal folder
+  # Backup of the files in a temporary folder
   rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
   # Ask the user which password to reset
   CHOSEN_USER=$(rtux_Choose_Sam_User \
@@ -999,10 +999,10 @@ function rtux_Get_Sam_Users () {
 
 }
 
-# Reorder hard disks according to BIOS hard disk order
+# Reorder hard drives according to the BIOS hard disk order
 # 1 parametre = Selected partition
-# While it is being run user is shown the hard disks
-# and it is asked to order them
+# While it is being run the user is shown the hard drives
+# and is asked to order them.
 # Returns filepath where the temporary rescatux's device.map is saved.
 function rtux_Order_Hard_Disks () {
 # TODO: Extract last user interaction (Success/Failure)
@@ -1016,11 +1016,11 @@ function rtux_Order_Hard_Disks () {
 } # function rtux_Order_Hard_Disks ()
 
 # Install Grub from the chosen Linux partition to the chosen hard disk
-# 1 parametre = Selected hard disk
+# 1 parametre = Selected hard drive
 # 2 parametre = Selected partition
 # 3 parametre = Rescatux Device Map File Path
-# While it is being run user is shown the hard disks
-# and it is asked to order them
+# While it is being run user is shown the hard drives
+# and is asked to order them.
 function rtux_Grub_Install () {
 
   local EXIT_VALUE=1 # Error by default
@@ -1081,8 +1081,8 @@ function rtux_Grub_Install () {
 # Update Grub configuration file from the chosen Linux partition
 # 1 parametre = Selected partition
 # 2 parametre = Rescatux Device Map File Path
-# While it is being run user is shown the hard disks
-# and it is asked to order them
+# While it is being run user is shown the hard drives
+# and is asked to order them.
 function rtux_Grub_Update_Config () {
 # TODO: Extract last user interaction (Success/Failure)
 # So that this function returns being successful or not
@@ -1173,8 +1173,8 @@ function rtux_Run_Show_Progress () {
 
 # No parametres
 # Choose UEFI Boot Order
-# While it is being run user is shown the UEFI boot entries
-# and it is asked to order them
+# While it is being run the user is shown the UEFI boot entries
+# and is asked to order them
 # Outputs desired order ( E.g.: 0002,0001,0000 )
 function rtux_Choose_UEFI_Boot_Order_Update () {
 # TODO: Extract last user interaction (Success/Failure)
@@ -1182,7 +1182,7 @@ function rtux_Choose_UEFI_Boot_Order_Update () {
 
   local EXIT_VALUE=1 # Error by default
 
-  # TODO: Check if we are in UEFI system and warn the user
+  # TODO: Check if we are in a UEFI system and warn the user
 
 
   local COLUMN_NUMBER=2 # Determine UEFI entry id column and UEFI entry description column
@@ -1279,8 +1279,8 @@ function rtux_UEFI_Check_Is_EFI_System_Partition () {
 
 } # function rtux_UEFI_Check_Is_EFI_System_Partition ()
 
-# Let the user choose his main EFI System partition
-# It outputs chosen partition
+# Let the user choose their main EFI System partition
+# It outputs the chosen partition
 function rtux_Choose_EFI_System_partition () {
   rtux_Abstract_Choose_Partition "Which EFI System partition?" $(rtux_Get_EFI_System_Partitions)
 } # function rtux_Choose_EFI_System_partition ()
@@ -1390,7 +1390,7 @@ function rtux_UEFI_Choose_EFI_File () {
 } # function rtux_UEFI_Choose_EFI_File ()
 
 # $1 : Partition to check (E.g. sda2)
-# Check if a partition is has an esp flag
+# Check if a partition has an esp flag
 function rtux_UEFI_Part_Check_esp_Flag () {
 
   local PARTITION_TO_MOUNT=$1
@@ -1408,7 +1408,7 @@ function rtux_UEFI_Part_Check_esp_Flag () {
 } # function rtux_UEFI_Part_Check_esp_Flag ()
 
 # $1 : Partition to check (E.g. sda2)
-# Check if a partition is has a boot flag
+# Check if a partition has a boot flag
 function rtux_UEFI_Part_Check_boot_Flag () {
 
   local PARTITION_TO_MOUNT=$1
@@ -1426,7 +1426,7 @@ function rtux_UEFI_Part_Check_boot_Flag () {
 } # function rtux_UEFI_Part_Check_boot_Flag ()
 
 # $1 : Partition to check (E.g. sda2)
-# Check if a partition is has a valid uefi filesystem
+# Check if a partition has a valid uefi filesystem
 function rtux_UEFI_Part_Check_uefi_filesystem () {
 
   local PARTITION_TO_MOUNT=$1
@@ -1453,7 +1453,7 @@ function rtux_UEFI_Part_Check_uefi_filesystem () {
 } # function rtux_UEFI_Part_Check_uefi_filesystem ()
 
 # $1 : Partition to check (E.g. sda2)
-# Check if a partition can be mount
+# Check if a partition can be mounted
 # Return partitions which have Linux os detector on them
 function rtux_Partition_Can_Be_Mount() {
 
@@ -1668,7 +1668,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
     return 1;
   fi
 
-  # TODO: Check if we are in UEFI system and warn the user
+  # TODO: Check if we are in a UEFI system and warn the user
 
   # Step 2: Overwrite default files with the ones we have chosen
 
@@ -1757,7 +1757,7 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
     return 1;
   fi
 
-  # TODO: Check if we are in UEFI system and warn the user
+  # TODO: Check if we are in a UEFI system and warn the user
 
   # Step 2: Mount the Windows partition
 
@@ -1922,7 +1922,7 @@ RUNNING_STR="Running process... Please wait till finish message appears."
 
 UEFIORDER_WTITLE="Order UEFI boot entries"
 ORDER_UEFIORDER_STR="Order UEFI boot entries in the other you want. Press OK to continue."
-RIGHT_UEFIORDER_STR="Which is the right position for this UEFI boot entry?"
+RIGHT_UEFIORDER_STR="What is the right position for this UEFI boot entry?"
 UEFICREATE_BOOT_ENTRY_PREFIX="(Rescapp) "
 
 
