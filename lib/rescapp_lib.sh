@@ -235,14 +235,14 @@ function rtux_Get_Windows_Os_Partitions() {
   rtux_Run_Show_Progress "${GET_WINDOWS_OS_PARTITIONS_RUNNING_STR}" rtux_Get_Windows_Os_Partitions_payload "$@"
 } # rtux_Get_Windows_Os_Partitions ()
 
-# Return hard disks detected on the system
+# Return hard drives detected on the system
 function rtux_Get_System_HardDisks_payload () {
   awk '{ if ( ( NR>2 ) && ( $4 ~ "[[:alpha:]]$" ) ) {print $4} }' ${PROC_PARTITIONS_FILE}
 } # function rtux_Get_System_HardDisks_payload ()
 
-# Return hard disks detected on the system
+# Return hard drives detected on the system
 function rtux_Get_System_HardDisks () {
-  GET_SYSTEM_HARDDISKS_RUNNING_STR="Getting system hard disks."
+  GET_SYSTEM_HARDDISKS_RUNNING_STR="Getting system hard drives."
   rtux_Run_Show_Progress "${GET_SYSTEM_HARDDISKS_RUNNING_STR}" rtux_Get_System_HardDisks_payload "$@"
 } # function rtux_Get_System_HardDisks ()
 
@@ -294,7 +294,7 @@ function rtux_Message_Warning () {
   dbus-send --type=method_call --system --dest="${dbus_destination}" "/MessageRescapp" "org.rescapp.MessageInterface.MessageWarning" "string:${text_to_show}"
 } # function rtux_Message_Warning ()
 
-# Return the hard disk that the user chooses
+# Return the hard drive that the user chooses
 # Every parametre is treated as the question to be asked to the user.
 function rtux_Choose_Hard_Disk () {
   local text_to_ask="$@"
@@ -435,14 +435,14 @@ function rtux_Choose_Windows_partition () {
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Windows_Os_Partitions)
 } # function rtux_Choose_Windows_partition ()
 
-# Let the user rename hard disks if they want to
+# Let the user rename hard drives if they want to
 # Returns the new target partitions
 function rtux_Choose_HardDisk_Renaming () {
   local DETECTED_HARD_DISKS=$(rtux_Get_System_HardDisks)
 
   mkdir /dev/new
 
-  # Let's loop on detected hard disks so that user can rename them
+  # Let's loop on detected hard drives so that user can rename them
   for n_hard_disk in ${DETECTED_HARD_DISKS} ; do
 
     local new_hard_disk_name=$(zenity ${ZENITY_COMMON_OPTIONS}  \
@@ -529,7 +529,7 @@ function rtux_Choose_Hard_Disk_Position() {
   local SELECTED_HARD_DISK="$1"
   local DETECTED_HARD_DISKS="$(rtux_Get_System_HardDisks)";
 
-  # LOOP - Show hard disk and ask position - TODO - BEGIN
+  # LOOP - Show hard drive and ask position - TODO - BEGIN
   local HD_LIST_VALUES=""
   local m=1
   for n_hard_disk in ${DETECTED_HARD_DISKS}; do
@@ -1909,9 +1909,9 @@ POSITION_STR="Position"
 HARDDISK_STR="Hard Disk"
 SIZE_STR="Size"
 
-ORDER_HDS_WTITLE="Order hard disks"
-ORDER_HDS_STR="Order hard disks according to boot order. Press OK to continue."
-RIGHT_HD_POSITION_STR="Which is the right position for this hard disk?"
+ORDER_HDS_WTITLE="Order hard drives"
+ORDER_HDS_STR="Order hard drives according to boot order. Press OK to continue."
+RIGHT_HD_POSITION_STR="Which is the correct position for this hard drive?"
 SUCCESS_STR="Success!"
 INFO_STR="Information"
 FAILURE_STR="Failure!"
@@ -1922,7 +1922,7 @@ RUNNING_STR="Running process... Please wait till finish message appears."
 
 UEFIORDER_WTITLE="Order UEFI boot entries"
 ORDER_UEFIORDER_STR="Order UEFI boot entries in the other you want. Press OK to continue."
-RIGHT_UEFIORDER_STR="What is the right position for this UEFI boot entry?"
+RIGHT_UEFIORDER_STR="What is the correct position for this UEFI boot entry?"
 UEFICREATE_BOOT_ENTRY_PREFIX="(Rescapp) "
 
 
