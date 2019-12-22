@@ -22,7 +22,7 @@ Choose your language.
 
 <ul>
   <li>
-  <b>Step 1</b><p></p>Rescapp searchs for all the partitions based on information found in the <i>/proc/partitions</i> file. If the partition contains an: <i>/etc/issue</i> file it will also obtain the distribution name.
+  <b>Step 1</b><p></p>Rescapp searches for all the partitions based on information found in the <i>/proc/partitions</i> file. If the partition contains an: <i>/etc/issue</i> file it will also obtain the distribution name.
   </li>
   <li>
   <b>Step 2</b><p></p>Rescapp displays the partitions found on Step 1.<p></p>You are prompted:<p></p>
@@ -32,7 +32,7 @@ Choose your language.
 	<b>Distribution name</b>: Your distribution root partition has been detected and you are seeing its name.
       </li>
       <li>
-	<b>Not detected</b>: The partition can be mounted but there is not an <i>/etc/issue</i> file on it. Probably a non root partition.
+	<b>Not detected</b>: The partition could be mounted but there is not an <i>/etc/issue</i> file on it. Probably a non root partition.
       </li>
       <li>
 	<b>Can't mount:</b>: The partition cannot be mount. Maybe it is the partition you want to fix, another one that Rescatux cannot mount, or even a SWAP partition.
@@ -49,7 +49,7 @@ Choose your language.
   </li>
 <p></p><IMG SRC="images/fsck_003_success.png"><p></p>
   <li>
-  <b>Step 5</b><p></p>You should click OK on the <i>Running forced filesystem check and fix</i> window.
+  <b>Step 5</b><p></p>You should click OK in the <i>Running forced filesystem check and fix</i> window.
   </li>
   <li>
   <b>Step 6</b><p></p>A log file called <i>fsck.log.txt</i> can be found in the Desktop <i>logs</i> folder.
