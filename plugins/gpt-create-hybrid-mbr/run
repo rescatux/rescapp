@@ -43,7 +43,7 @@ function rtux_Hybridmbr_Create () {
 GPT_HYBRID_CREATED_OK_STR="Hybrid MBR was created OK! :)"
 GPT_HYBRID_NOT_CREATED_STR="Hybrid MBR was not created. Something went wrong! :("
 GPT_HYBRID_RUNNING_STR="Creating Hybrid MBR"
-WHICH_HARD_DISK_CREATE_HYBRIDMBR_STR="Which hard dirve to create hybrid MBR on?"
+WHICH_HARD_DISK_CREATE_HYBRIDMBR_STR="Which hard dirve do you want to create hybrid MBR on?"
 GPT_HYBRID_HARD_DISK_NOT_FOUND="No drives were found or selected."
 
 SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk "${WHICH_HARD_DISK_CREATE_HYBRIDMBR_STR}");
