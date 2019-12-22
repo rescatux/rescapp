@@ -408,15 +408,11 @@ function rtux_Abstract_Choose_Partition () {
 	--column "${ALTERNATENAME_STR}" \
 	${LIST_VALUES} \
 	);
-<<<<<<< HEAD
- rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${LIST_VALUES}"
+
+ rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${ALTERNATENAME_STR}" "${LIST_VALUES}"
  rtux_Message_Answer "${chosen_partition}"
  echo "${chosen_partition}"
-=======
- rtux_Message_Question "${text_to_ask}" "${SELECT_STR}" "${PARTITION_STR}" "${DESCRIPTION_STR}" "${FILESYSTEM_STR}" "${FLAGS_STR}" "${OSPROBER_LONGNAME_STR}" "${ALTERNATENAME_STR}" "${LIST_VALUES}"
- rtux_Message_Answer "${choosen_partition}"
- echo "${choosen_partition}"
->>>>>>> 9d1f68cf1da1d8d00e17dde8fc3ca1a80bb8f7bf
+
 } # function rtux_Abstract_Choose_Partition ()
 
 # Let the user choose his main GNU/Linux partition
@@ -493,7 +489,7 @@ function rtux_Get_Desktop_Width () {
 # DEVICE_MAP_BACKUP_STR has to be defined
 # Actually they are defined because they come with rescatux lib
 # Parametres: Main command line that has to be run.
-# Outputs the file to be run as an script inside chroot
+# Outputs the file to be run as a script inside chroot
 # It swaps current device.map with a temporal one
 function rtux_File_Chroot_Script_Device_Map() {
 local command_line_to_run="$@"
@@ -525,8 +521,8 @@ local command_line_to_run="$@"
 EOF
 }
 
-# 1 parametre = Selected hard disk
-# User is asked to select hard disk
+# 1 parametre = Selected hard drive
+# User is asked to select hard drive
 # position
 function rtux_Choose_Hard_Disk_Position() {
 
