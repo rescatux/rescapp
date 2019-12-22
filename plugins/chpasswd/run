@@ -125,7 +125,7 @@ function rtux_Chpasswd () {
 PASSWD_CHANGED_OK_STR="Password was changed OK! :). We recommend that you change it once you're back in your system to use your systems default encryption."
 PASSWD_NOT_CHANGED_STR="Password was not changed. Something went wrong! :("
 PASSWD_RUNNING_STR="Changing GNU/Linux password."
-WHICH_USER_PASS_STR="Which user do you want to change its password?"
+WHICH_USER_PASS_STR="Which user do you want to change the password for?"
 PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or selected."
 PASSWD_LINUX_USERS_NOT_FOUND="No GNU/Linux users were found or selected."
 PASSWD_PASS_NOT_FOUND="No password was selected."
