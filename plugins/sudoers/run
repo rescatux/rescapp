@@ -71,9 +71,9 @@ function rtux_Sudoers () {
 SUDOERS_CHANGED_OK_STR="Success! Sudoers was changed OK! :)"
 SUDOERS_NOT_CHANGED_STR="Failure! Sudoers was not changed. Something went wrong! :("
 SUDOERS_RUNNING_STR="Regenerating Sudoers file."
-WHICH_USER_SUDOERS_STR="Which user to be the sudo admin?"
-SUDOERS_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
-SUDOERS_USERS_NOT_FOUND="No GNU/Linux users were found or choosen."
+WHICH_USER_SUDOERS_STR="Which user do you want to be the sudo admin?"
+SUDOERS_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
+SUDOERS_USERS_NOT_FOUND="No GNU/Linux users were found or chosen."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
 
