@@ -34,8 +34,8 @@ UPDATE_GRUB_KO_STR="Grub configuration update went wrong! :("
 FSCK_FORCED_OK_STR="Filesystem check with automatic fix was OK! :)"
 FSCK_FORCED_KO_STR="Filesystem check with automatic fix was not successful! :("
 
-GRUBEASY_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries) was OK! :)"
-GRUBEASY_NOT_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries) was not fully completed. Something went wrong! :("
+GRUBEASY_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menus, restore GRUB into the MBR and order UEFI entries) was OK! :)"
+GRUBEASY_NOT_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menus, restore GRUB into the MBR and order UEFI entries) was not fully completed. Something went wrong! :("
 
 UEFIORDER_OK_STR="UEFI Boot order was updated OK! :)"
 UEFIORDER_KO_STR="UEFI Boot order update went wrong! :("
@@ -54,8 +54,8 @@ UEFI_SYSTEM_DETECTED_STR="UEFI System detected"
 
 SELECTED_PARTITION=$(rtux_Choose_Partition "Which GNU/Linux partition?")
 
-GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
-GRUBEASY_HARDDISKS_NOT_FOUND="No hard disks were found or choosen."
+GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
+GRUBEASY_HARDDISKS_NOT_FOUND="No hard disks were found or chosen."
 GRUBEASY_ORDER_HARDDISKS_NOT_FOUND="Hard disks order was not set."
 UEFI_ORDER_NOT_FOUND="UEFI order was not set."
 
