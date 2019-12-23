@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp photorec run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-PHOTOREC_OK_STR="Photorec was run at the background."
+PHOTOREC_OK_STR="Photorec was run in the background."
 PHOTOREC_KO_STR="Rescapp was not unable to start Photorec via xterm."
 
 PHOTOREC_FULL_PATH="$(which photorec)"

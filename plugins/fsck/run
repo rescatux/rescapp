@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Fsck run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,9 +24,9 @@ set -v
 # fsck Main program
 
 FSCK_FORCED_OK_STR="Filesystem check with automatic fix was OK! :)"
-FSCK_FORCED_KO_STR="Filesystem check with automatic fix went wrong! :("
+FSCK_FORCED_KO_STR="Filesystem check with automatic fix failed! :("
 FSCK_FORCED_RUNNING_STR="Performing Filesystem check with automatic fix"
-FSCK_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
+FSCK_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
 
 SELECTED_PARTITION=$(rtux_Choose_Partition)
 

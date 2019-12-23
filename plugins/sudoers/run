@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Sudoers run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ function rtux_Sudoers () {
 SUDOERS_CHANGED_OK_STR="Success! Sudoers was changed OK! :)"
 SUDOERS_NOT_CHANGED_STR="Failure! Sudoers was not changed. Something went wrong! :("
 SUDOERS_RUNNING_STR="Regenerating Sudoers file."
-WHICH_USER_SUDOERS_STR="Which user to be the sudo admin?"
+WHICH_USER_SUDOERS_STR="Which user do you want to be the sudo admin?"
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Fsck run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,8 +45,8 @@ UEFIPARTCHECK_UEFI_FILESYSTEM_OK_STR="EFI partition has a valid uefi filesystem 
 UEFIPARTCHECK_UEFI_FILESYSTEM_KO_STR="EFI partition does not have a valid uefi filesystem. :("
 UEFIPARTCHECK_UEFI_FILESYSTEM_RUNNING_STR="Performing EFI partition valid uefi filesystem check"
 
-UEFIPARTCHECK_PARTITION_MOUNT_OK_STR="EFI partition can be mount :)"
-UEFIPARTCHECK_PARTITION_MOUNT_KO_STR="EFI partition cannot be mount. :("
+UEFIPARTCHECK_PARTITION_MOUNT_OK_STR="EFI partition can be mounted :)"
+UEFIPARTCHECK_PARTITION_MOUNT_KO_STR="EFI partition cannot be mounted. :("
 UEFIPARTCHECK_PARTITION_MOUNT_RUNNING_STR="Performing EFI partition mount check"
 
 UEFIPARTCHECK_DISK_TYPE_IS_GPT_OK_STR="EFI partition disk type is either gpt or msdos :)"
