@@ -30,10 +30,10 @@ SHARE_FORUM_DEFAULT_PROBLEM_DESCRIPTION="I am unable to do something as easy as.
 SHARE_FORUM_THANKS_HINT="It is usually polite to say thank you to the people who are going to help you on the forum."
 SHARE_FORUM_DEFAULT_THANKS_DESCRIPTION="Thank you very much for your help!"
 
-SHARE_FORUM_SIGNATURE_HINT="Just an optional signature to let your helpers who you are."
+SHARE_FORUM_SIGNATURE_HINT="Just an optional signature to let your helpers know who you are."
 SHARE_FORUM_DEFAULT_SIGNATURE_DESCRIPTION="The ultimate noob! (You are supposed to change this)"
 
-SHARE_FORUM_FILES_NOT_FOUND="No files to share were found or choosen."
+SHARE_FORUM_FILES_NOT_FOUND="No files to share were found or chosen."
 SHARE_FORUM_OK_STR="Log was shared (forum) OK! :)"
 SHARE_FORUM_KO_STR="Log sharing (forum) went wrong! :("
 
