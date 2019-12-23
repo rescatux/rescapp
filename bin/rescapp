@@ -22,7 +22,6 @@ import subprocess
 import os
 import time
 import linecache
-import sip
 import datetime
 import errno
 from PyQt5 import QtGui, QtCore, QtWebKit, QtWidgets, QtWebKitWidgets

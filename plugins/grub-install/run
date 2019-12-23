@@ -46,15 +46,15 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
         rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
       fi
     else
-      rtux_Message_Info ${GRUB_INSTALL_HARD_DISKS_ORDER_NOT_FOUND}
+      rtux_Message_Warning ${GRUB_INSTALL_HARD_DISKS_ORDER_NOT_FOUND}
       rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
     fi
   else
-    rtux_Message_Info ${GRUB_INSTALL_HARD_DISK_NOT_FOUND}
+    rtux_Message_Warning ${GRUB_INSTALL_HARD_DISK_NOT_FOUND}
     rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
   fi
 else
-  rtux_Message_Info ${GRUB_INSTALL_GNU_LINUX_PARTITIONS_NOT_FOUND}
+  rtux_Message_Warning ${GRUB_INSTALL_GNU_LINUX_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${GRUB_NOT_INSTALLED_STR}
 fi
 

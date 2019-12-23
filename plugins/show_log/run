@@ -15,9 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 
+SHOWLOG_OK_STR="Show log OK!"
+
 source ${RESCAPP_LIB_FILE}
 
-${FILEMANAGER_COMMAND} file://${RESCAPP_LOG_DIRECTORY} &
+nohup ${FILEMANAGER_COMMAND} file://${RESCAPP_LOG_DIRECTORY} &disown
 
 
+rtux_Message_Success ${SHOWLOG_OK_STR}
 

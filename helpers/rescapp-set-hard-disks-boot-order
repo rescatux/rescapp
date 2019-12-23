@@ -98,8 +98,12 @@ class MainWindow(QtWidgets.QWidget):
 
 
         self.okbtn = QtWidgets.QPushButton('Ok', self)
-        self.okbtn.clicked.connect(self.close)
+        self.okbtn.clicked.connect(self.okclicked)
         self.okbtn.resize(self.okbtn.sizeHint())
+
+        self.cancelbtn = QtWidgets.QPushButton('Cancel', self)
+        self.cancelbtn.clicked.connect(self.closeEvent)
+        self.cancelbtn.resize(self.cancelbtn.sizeHint())
 
         # Initialize hard disk stuff - BEGIN
         self.harddisks_tablewidget = QtWidgets.QTableWidget()
@@ -133,20 +137,21 @@ class MainWindow(QtWidgets.QWidget):
         grid.addWidget(self.move_up_button, 1, 0, 1, 1)
         grid.addWidget(self.move_down_button, 1, 1, 1, 1)
         grid.addWidget(self.okbtn,2,0,1,1)
+        grid.addWidget(self.cancelbtn,3,0,1,1)
         
         #grid.setMargin(0)
         #grid.setContentsMargins(0,0,0,0)
         self.setLayout(grid)
 
-        self.setMinimumHeight(600)
+        self.setMinimumHeight(400)
         self.setMinimumWidth(600)
 
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
-    def closeEvent(self,event):
+    def okclicked(self):
       for harddisk in harddisks:
           print(harddisk[0])
-      event.accept()
+      self.close()
 
 
 if __name__ == "__main__":

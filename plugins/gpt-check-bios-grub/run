@@ -58,6 +58,6 @@ if [ "x${SELECTED_HARD_DISK}" != "x" ] ; then
         rtux_Message_Failure ${BIOS_GRUB_PARTITION_NOT_FOUND_STR}
     fi
 else
-    rtux_Message_Info ${BIOS_GRUB_HARD_DISK_NOT_FOUND}
+    rtux_Message_Warning ${BIOS_GRUB_HARD_DISK_NOT_FOUND}
     rtux_Message_Failure ${BIOS_GRUB_PARTITION_NOT_FOUND_STR}
 fi
