@@ -18,7 +18,7 @@ source ${RESCAPP_LIB_FILE}
 
 SHARELOG_OK_STR="Log was shared OK! :)"
 SHARELOG_KO_STR="Log sharing went wrong! :("
-SHARELOG_FILES_NOT_FOUND="No files to share were found or choosen."
+SHARELOG_FILES_NOT_FOUND="No files to share were found or chosen."
 SHARELOG_URL_NOT_FOUND="Log could not be shared online."
 
 # 1 parametre = Selected file
@@ -47,7 +47,7 @@ for ffile in ${RESCAPP_LOG_DIRECTORY}/* ; do
   fi
   let m=m+1
 done
-# No need to check if there are not log files.
+# No need to check if there are not any log files.
 # selftest.log will always be there.
 
 
