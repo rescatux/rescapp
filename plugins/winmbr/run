@@ -60,7 +60,7 @@ function rtux_Winmbr_Install () {
 
 WINMBR_INSTALLED_OK_STR="Windows mbr was installed OK! :)"
 WINMBR_NOT_INSTALLED_STR="Windows mbr was not installed. Something went wrong! :("
-WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard disk to install Windows mbr on?"
+WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard drive do you wish to install Windows mbr on?"
 
 SELECTED_PARTITION=$(rtux_Choose_Primary_Partition);
 
