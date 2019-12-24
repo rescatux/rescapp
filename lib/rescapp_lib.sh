@@ -331,7 +331,7 @@ function rtux_Choose_Hard_Disk () {
 } # function rtux_Choose_Hard_Disk ()
 
 # Let the user choose a partition
-# It outputs chosen partition
+# It outputs the chosen partition
 function rtux_Choose_Partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -341,7 +341,7 @@ function rtux_Choose_Partition () {
 } # function rtux_Choose_Partition ()
 
 # Let the user choose a partition
-# It outputs chosen partition
+# It outputs the chosen partition
 function rtux_Choose_Primary_Partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -352,7 +352,7 @@ function rtux_Choose_Primary_Partition () {
 
 # Let the user choose a partition
 # Every parametre are the source partitions
-# It outputs chosen partition
+# It outputs the chosen partition
 function rtux_Abstract_Choose_Partition () {
   local text_to_ask="$1"
   shift
@@ -413,8 +413,8 @@ function rtux_Abstract_Choose_Partition () {
  echo "${chosen_partition}"
 } # function rtux_Abstract_Choose_Partition ()
 
-# Let the user choose his main GNU/Linux partition
-# It outputs chosen partition
+# Let the user choose their main GNU/Linux partition
+# It outputs the chosen partition
 function rtux_Choose_Linux_partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -423,8 +423,8 @@ function rtux_Choose_Linux_partition () {
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Linux_Os_Partitions)
 } # function rtux_Choose_Linux_partition ()
 
-# Let the user choose his main Windows partition
-# It outputs chosen partition
+# Let the user choose their main Windows partition
+# It outputs the chosen partition
 function rtux_Choose_Windows_partition () {
   custom_question="$1"
   if [ "${custom_question}" -eq "" ] ; then
@@ -433,7 +433,7 @@ function rtux_Choose_Windows_partition () {
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Windows_Os_Partitions)
 } # function rtux_Choose_Windows_partition ()
 
-# Let the user rename hard drives if they want to
+# Let the user rename the hard drives if they want to
 # Returns the new target partitions
 function rtux_Choose_HardDisk_Renaming () {
   local DETECTED_HARD_DISKS=$(rtux_Get_System_HardDisks)
@@ -520,14 +520,14 @@ EOF
 }
 
 # 1 parametre = Selected hard drive
-# User is asked to select hard drive
+# User is asked to select the hard drive
 # position
 function rtux_Choose_Hard_Disk_Position() {
 
   local SELECTED_HARD_DISK="$1"
   local DETECTED_HARD_DISKS="$(rtux_Get_System_HardDisks)";
 
-  # LOOP - Show hard disk and ask position - TODO - BEGIN
+  # LOOP - Show hard drives and ask position - TODO - BEGIN
   local HD_LIST_VALUES=""
   local m=1
   for n_hard_disk in ${DETECTED_HARD_DISKS}; do
@@ -746,7 +746,7 @@ function rtux_backup_windows_config () {
 
 # TODO: FETCH WIDTH AND HEIGHT FROM COMMAND LINE OR SO
 # Return Windows SAM user that the user chooses
-# Every parametre is treated as the question to be asked to the user.
+# Every parametre is treated as a question to be asked to the user.
 function rtux_Choose_Sam_User () {
   local text_to_ask="$@"
 
@@ -999,9 +999,9 @@ function rtux_Get_Sam_Users () {
 
 # Reorder hard drives according to BIOS hard drive order
 # 1 parametre = Selected partition
-# While it is being run user is shown the hard disks
-# and it is asked to order them
-# Returns filepath where the temporary rescatux's device.map is saved.
+# While it is being run the user is shown a list of hard drives
+# and is asked to order them
+# Returns the filepath where the temporary rescatux's device.map is saved.
 function rtux_Order_Hard_Disks () {
 # TODO: Extract last user interaction (Success/Failure)
 # So that this function returns being successful or not
@@ -1919,7 +1919,7 @@ CANT_MOUNT_STR="Cannot mount"
 RUNNING_STR="Running process... Please wait untill the finished message appears."
 
 UEFIORDER_WTITLE="Order UEFI boot entries"
-ORDER_UEFIORDER_STR="Order UEFI boot entries in the other you want. Press OK to continue."
+ORDER_UEFIORDER_STR="Order UEFI boot entries in the order that you want. Press OK to continue."
 RIGHT_UEFIORDER_STR="What is the correct position for this UEFI boot entry?"
 UEFICREATE_BOOT_ENTRY_PREFIX="(Rescapp) "
 
