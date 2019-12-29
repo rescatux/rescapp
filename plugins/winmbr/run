@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Winmbr run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,13 +20,13 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-# Install Windows MBR so that it boots choosen Windows partition
-# From the choosen hard disk
-# 1 parametre = Selected hard disk
+# Install Windows MBR so that it boots chosen Windows partition
+# From the chosen hard drive
+# 1 parametre = Selected hard drive
 # 2 parametre = Selected partition
-# 3 parametre = Hard Disk position
-# While it is being run user is shown the hard disks
-# and it is asked to order them
+# 3 parametre = Hard Drive position
+# While it is being run the user is shown a list of the hard drives
+# and is asked to order them
 function rtux_Winmbr_Install () {
 
   local EXIT_VALUE=1 # Error by default
@@ -60,7 +60,7 @@ function rtux_Winmbr_Install () {
 
 WINMBR_INSTALLED_OK_STR="Windows mbr was installed OK! :)"
 WINMBR_NOT_INSTALLED_STR="Windows mbr was not installed. Something went wrong! :("
-WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard disk to install Windows mbr on?"
+WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard drive do you wish to install a Windows mbr on?"
 
 SELECTED_PARTITION=$(rtux_Choose_Primary_Partition);
 

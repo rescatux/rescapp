@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Chat run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
 source ${RESCAPP_LIB_FILE}
 
 
-XCHAT_OK_STR="Hexchat was run at the background."
-XCHAT_KO_STR="Rescapp was not unable to start Hexchat."
+XCHAT_OK_STR="Hexchat was run in the background."
+XCHAT_KO_STR="Rescapp was not able to start Hexchat, is it installed?"
 
 # Top right corner
 WIDTH=600

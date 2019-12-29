@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp testdisk run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +19,8 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-TESTDISK_OK_STR="Testdisk was run at the background."
-TESTDISK_KO_STR="Rescapp was not unable to start Testdisk via xterm."
+TESTDISK_OK_STR="Testdisk was run in the background."
+TESTDISK_KO_STR="Rescapp was unable to start Testdisk via xterm."
 
 TESTDISK_FULL_PATH="$(which testdisk)"
 XTERM_FULL_PATH="$(which xterm)"

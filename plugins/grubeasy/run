@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Grub-install run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,16 +26,16 @@ set -v
 
 GRUB_INSTALLED_OK_STR="Grub was installed OK! :)"
 GRUB_NOT_INSTALLED_STR="Grub was not installed. Something went wrong! :("
-WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard disk to install Grub on?"
+WHICH_HARD_DISK_INSTALL_GRUB_STR="Which hard drive do you wish to install Grub on?"
 
 UPDATE_GRUB_OK_STR="Grub configuration was updated OK! :)"
 UPDATE_GRUB_KO_STR="Grub configuration update went wrong! :("
 
 FSCK_FORCED_OK_STR="Filesystem check with automatic fix was OK! :)"
-FSCK_FORCED_KO_STR="Filesystem check with automatic fix went wrong! :("
+FSCK_FORCED_KO_STR="Filesystem check with automatic fix failed! :("
 
-GRUBEASY_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries) was OK! :)"
-GRUBEASY_NOT_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries) was not fully completed. Something went wrong! :("
+GRUBEASY_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB on the MBR and order UEFI entries) was OK! :)"
+GRUBEASY_NOT_OK_STR="Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB on the MBR and order UEFI entries) was not fully completed. Something went wrong! :("
 
 UEFIORDER_OK_STR="UEFI Boot order was updated OK! :)"
 UEFIORDER_KO_STR="UEFI Boot order update went wrong! :("
@@ -54,9 +54,9 @@ UEFI_SYSTEM_DETECTED_STR="UEFI System detected"
 
 SELECTED_PARTITION=$(rtux_Choose_Partition "Which GNU/Linux partition?")
 
-GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or choosen."
-GRUBEASY_HARDDISKS_NOT_FOUND="No hard disks were found or choosen."
-GRUBEASY_ORDER_HARDDISKS_NOT_FOUND="Hard disks order was not set."
+GRUBEASY_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
+GRUBEASY_HARDDISKS_NOT_FOUND="No hard drives were found or chosen."
+GRUBEASY_ORDER_HARDDISKS_NOT_FOUND="Hard drive order was not set."
 UEFI_ORDER_NOT_FOUND="UEFI order was not set."
 
 if [ "x${SELECTED_PARTITION}" != "x" ] ; then
