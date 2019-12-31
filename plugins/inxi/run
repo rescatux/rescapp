@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Inxi run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ inxi \
 INXI_OK_STR="Inxi was run OK! :)"
 INXI_KO_STR="Inxi had a problem. Something went wrong! :("
 
-INXI_EXPLANATION="Check the Support menu in order to see how you can show, share, share on forums, etc. the Inxi log."
+INXI_EXPLANATION="Check the Support menu in order to see how you can display or share on the forums the Inxi log."
 INXI_STR="Generating System Info (Inxi) File."
 
 

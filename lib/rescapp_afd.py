@@ -1,5 +1,5 @@
 # April Fools Day Script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 class CloseOnClickQWidget(QtWidgets.QWidget):
 	def mousePressEvent(self,event):
 		self.close()

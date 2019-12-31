@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Winpass run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ WINUNLOCK_RUNNING_STR="Unlocking Windows user"
 SELECTED_PARTITION=$(rtux_Choose_Windows_partition);
 
 rtux_Get_Sam_Users ${SELECTED_PARTITION}
-# Backup of the files in a temporal folder
+# Backup of the files in a temporary folder
 rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
 # Ask the user which password to reset
 CHOOSEN_USER=$(rtux_Choose_Sam_User \

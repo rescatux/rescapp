@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Winmbr run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,8 +20,8 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-# Compute Hybrid MBR CHS in a GPT partition
-# From the choosen hard disk
+# Compute Hybrid MBR CHS on a GPT partition
+# From the chosen hard disk
 
 function rtux_Hybridmbr_CHS_Compute () {
 
@@ -43,8 +43,8 @@ function rtux_Hybridmbr_CHS_Compute () {
 GPT_HYBRID_CHS_COMPUTED_OK_STR="Hybrid MBR CHS was recomputed OK! :)"
 GPT_HYBRID_CHS_NOT_COMPUTED_STR="Hybrid MBR was not recomputed. Something went wrong! :("
 GPT_HYBRID_CHS_COMPUTED_RUNNING_STR="Recomputing Hybrid MBR CHS"
-WHICH_HARD_DISK_CHS_COMPUTE_HYBRIDMBR_STR="Which hard disk to recompute its hybrid MBR CHS on?"
-GPT_HYBRID_CHS_HARD_DISK_NOT_FOUND="No disks were found or choosen."
+WHICH_HARD_DISK_CHS_COMPUTE_HYBRIDMBR_STR="Which hard drive do you wish to recompute its hybrid MBR CHS on?"
+GPT_HYBRID_CHS_HARD_DISK_NOT_FOUND="No drives were found or chosen."
 
 SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk "${WHICH_HARD_DISK_CHS_COMPUTE_HYBRIDMBR_STR}");
 
