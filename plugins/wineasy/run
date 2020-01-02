@@ -46,12 +46,12 @@ rtux_Get_Sam_Users ${SELECTED_PARTITION}
 # Backup of the files in a temporary folder
 rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
 # Ask the user which password to reset
-CHOOSEN_USER=$(rtux_Choose_Sam_User \
+CHOSEN_USER=$(rtux_Choose_Sam_User \
   "Choose Windows user to get Easy Admin")
 
 EXIT_SUM=0
 
-if rtux_Run_Show_Progress "${WINUNLOCK_RUNNING_STR}" rtux_winunlock_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOOSEN_USER} ; then
+if rtux_Run_Show_Progress "${WINUNLOCK_RUNNING_STR}" rtux_winunlock_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER} ; then
   rtux_Message_Success ${WINUNLOCK_OK_STR}
 else
   rtux_Message_Failure ${WINUNLOCK_NOT_OK_STR}
@@ -61,7 +61,7 @@ fi
 WINUNLOCK_EXIT_VALUE=$?
 EXIT_SUM=$((EXIT_SUM+WINUNLOCK_EXIT_VALUE))
 
-if rtux_Run_Show_Progress "${WINPROMOTE_RUNNING_STR}" rtux_winpromote_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOOSEN_USER} ; then
+if rtux_Run_Show_Progress "${WINPROMOTE_RUNNING_STR}" rtux_winpromote_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER} ; then
   rtux_Message_Success ${WINPROMOTE_OK_STR}
 else
   rtux_Message_Failure ${WINPROMOTE_NOT_OK_STR}
@@ -71,7 +71,7 @@ fi
 WINPROMOTE_EXIT_VALUE=$?
 EXIT_SUM=$((EXIT_SUM+WINPROMOTE_EXIT_VALUE))
 
-if rtux_Run_Show_Progress "${WINPASS_RESET_RUNNING_STR}" rtux_winpass_reset_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOOSEN_USER} ; then
+if rtux_Run_Show_Progress "${WINPASS_RESET_RUNNING_STR}" rtux_winpass_reset_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER} ; then
   rtux_Message_Success ${WINPASS_RESET_OK_STR}
 else
   rtux_Message_Failure ${WINPASS_NOT_RESET_STR}

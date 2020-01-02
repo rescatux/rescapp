@@ -630,7 +630,7 @@ function rtux_User_List_payload() {
 } # rtux_User_List_payload()
 
 function rtux_User_List() {
-  USER_LIST_RUNNING_STR="Getting users from passwd file."
+  USER_LIST_RUNNING_STR="Getting users from the passwd file."
   rtux_Run_Show_Progress "${USER_LIST_RUNNING_STR}" rtux_User_List_payload "$@"
 } # rtux_User_List()
 

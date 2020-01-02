@@ -46,8 +46,8 @@ function rtux_Check_Bios_Grub_Partition () {
 
 BIOS_GRUB_PARTITION_FOUND_STR="bios_grub partition was found! :)"
 BIOS_GRUB_PARTITION_NOT_FOUND_STR="bios_grub partition was not found. :("
-BIOS_GRUB_PARTITION_RUNNING_STR="Searching bios_grub partition."
-WHICH_HARD_DISK_BIOS_GRUB_PARTITION_STR="Which hard drive do you want to check for a bios_grub partition?"
+BIOS_GRUB_PARTITION_RUNNING_STR="Searching for a bios_grub partition."
+WHICH_HARD_DISK_BIOS_GRUB_PARTITION_STR="Which hard drive do you want to check for a bios_grub partition on?"
 BIOS_GRUB_HARD_DISK_NOT_FOUND="No drives were found or chosen."
 
 SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk "${WHICH_HARD_DISK_BIOS_GRUB_PARTITION_STR}");

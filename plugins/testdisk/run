@@ -20,7 +20,7 @@ set -x
 set -v
 
 TESTDISK_OK_STR="Testdisk was run in the background."
-TESTDISK_KO_STR="Rescapp was unable to start Testdisk via xterm."
+TESTDISK_KO_STR="Rescapp was unable to start Testdisk via xterm, is it installed?"
 
 TESTDISK_FULL_PATH="$(which testdisk)"
 XTERM_FULL_PATH="$(which xterm)"
