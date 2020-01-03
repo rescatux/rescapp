@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Chpasswd run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -122,13 +122,13 @@ function rtux_Chpasswd () {
 
 # MAIN PROGRAM
 
-PASSWD_CHANGED_OK_STR="Password was changed OK! :). We recommend to change it once you're back in your system, to use your systems default encryption."
-PASSWD_NOT_CHANGED_STR="Password was not changed. Something went wrong! :("
+PASSWD_CHANGED_OK_STR="The password was changed OK! :). We recommend that you change it once you're back in your system, to use your systems default encryption."
+PASSWD_NOT_CHANGED_STR="The password was not changed. Something went wrong! :("
 PASSWD_RUNNING_STR="Changing GNU/Linux password."
 WHICH_USER_PASS_STR="Which user do you want to change the password for?"
 PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or chosen."
 PASSWD_LINUX_USERS_NOT_FOUND="No GNU/Linux users were found or chosen."
-PASSWD_PASS_NOT_FOUND="No password was chosen."
+PASSWD_PASS_NOT_FOUND="No password was entered."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
 if [ "x${SELECTED_PARTITION}" != "x" ] ; then
