@@ -23,8 +23,8 @@ set -v
 
 # fsck Main program
 
-UEFIFAKEMICROSOFT_OK_STR="Faking UEFI Microsoft Windows boot entry was OK ! :)"
-UEFIFAKEMICROSOFT_KO_STR="Faking UEFI Microsoft Windows boot entry was not ok :("
+UEFIFAKEMICROSOFT_OK_STR="The faking of the UEFI, Microsoft Windows boot entry was OK ! :)"
+UEFIFAKEMICROSOFT_KO_STR="The faking of the UEFI, Microsoft Windows boot entry was not ok :("
 UEFIFAKEMICROSOFT_RUNNING_STR="Faking UEFI Microsoft Windows boot entry"
 
 

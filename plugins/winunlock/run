@@ -24,8 +24,8 @@ set -v
 
 # MAIN PROGRAM
 
-WINUNLOCK_OK_STR="User was unlocked OK! :)"
-WINUNLOCK_NOT_OK_STR="User was not unlocked. Something went wrong! :("
+WINUNLOCK_OK_STR="The user was unlocked OK! :)"
+WINUNLOCK_NOT_OK_STR="The user was not unlocked. Something went wrong! :("
 
 
 SELECTED_PARTITION=$(rtux_Choose_Windows_partition);

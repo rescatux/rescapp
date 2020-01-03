@@ -34,8 +34,8 @@ SHARE_FORUM_SIGNATURE_HINT="Just an optional signature to let your helpers who y
 SHARE_FORUM_DEFAULT_SIGNATURE_DESCRIPTION="The ultimate noob! (You are supposed to change this)"
 
 SHARE_FORUM_FILES_NOT_FOUND="No files to share were found or chosen."
-SHARE_FORUM_OK_STR="Log was shared (forum) OK! :)"
-SHARE_FORUM_KO_STR="Log sharing (forum) went wrong! :("
+SHARE_FORUM_OK_STR="The log file was shared (forum) OK! :)"
+SHARE_FORUM_KO_STR="The log file sharing (forum) went wrong! :("
 
 
 RANDOM_SHARE_FORUM_FILE="${TMP_FOLDER}/$$.text"
@@ -93,7 +93,7 @@ if [ "x${SELECTED_FILE}" != "x" ] ; then
   EOF
 
 
-  # Here there is the log from this Rescatux option
+  # Here is the log file from this Rescatux option
   cat << EOF >> ${RANDOM_SHARE_FORUM_FILE}
   I join the Rescatux output for ${SELECTED_FILE} :
   [CODE]

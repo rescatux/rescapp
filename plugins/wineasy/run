@@ -24,14 +24,14 @@ set -v
 
 # MAIN PROGRAM
 
-WINPROMOTE_OK_STR="User was promoted to Admin OK! :)"
-WINPROMOTE_NOT_OK_STR="User was not promoted to Admin. Something went wrong! :("
+WINPROMOTE_OK_STR="The user was promoted to Admin OK! :)"
+WINPROMOTE_NOT_OK_STR="The user was not promoted to Admin. Something went wrong! :("
 
 WINPASS_RESET_OK_STR="Windows password was reset OK! :)"
 WINPASS_NOT_RESET_STR="Windows password was not reset. Something went wrong! :("
 
-WINUNLOCK_OK_STR="User was unlocked OK! :)"
-WINUNLOCK_NOT_OK_STR="User was not unlocked. Something went wrong! :("
+WINUNLOCK_OK_STR="The user was unlocked OK! :)"
+WINUNLOCK_NOT_OK_STR="The user was not unlocked. Something went wrong! :("
 
 WINEASY_OK_STR="Easy Windows (promote, reset and unlock) was OK! :)"
 WINEASY_NOT_OK_STR="Easy Windows (promote, reset and unlock) was not fully completed. Something went wrong! :("

@@ -19,7 +19,7 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-PHOTOREC_OK_STR="Photorec was run in the background."
+PHOTOREC_OK_STR="Photorec was successfully run in the background."
 PHOTOREC_KO_STR="Rescapp was not able to start Photorec via xterm, is it installed?"
 
 PHOTOREC_FULL_PATH="$(which photorec)"
