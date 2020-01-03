@@ -62,7 +62,7 @@ Rescapp, depends on some software packages being installed at run time. If
 you don't have any of them, please obtain and install them before
 using Rescapp.
 
-The chntpw package should be get from Rescatux official repo.
+The chntpw package should be obtained from the official Rescatux repo.
 http://rescatux.sourceforge.io/repo/ stretch-dev main
 
 Debian Package Runtime Requirements
@@ -151,10 +151,10 @@ SELinux support
 If you want Rescapp to work with SELinux systems, your Live CD/DVD/USB-STICK
 probably needs to be booted in SELinux mode.
 
-The suggested Kernel parametres may be:
+The suggested Kernel parametres are:
 selinux=1 security=selinux enforcing=0
 
-And you will also need some SELinux packages.
+You will also need some SELinux packages.
 These were the ones needed when using jessie and sid
 back in October 2015:
 
