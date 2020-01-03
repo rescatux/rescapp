@@ -21,8 +21,8 @@ set -v
 
 # MAIN PROGRAM
 
-UEFIORDER_OK_STR="UEFI Boot order was updated OK! :)"
-UEFIORDER_KO_STR="UEFI Boot order update went wrong! :("
+UEFIORDER_OK_STR="The UEFI Boot order, was updated OK! :)"
+UEFIORDER_KO_STR="The UEFI Boot order, update went wrong! :("
 UEFIORDER_RUNNING_STR="Updating UEFI Boot order."
 
 if rtux_Run_Show_Progress "${UEFIORDER_RUNNING_STR}" rtux_UEFI_Boot_Order_Update $(rtux_Choose_UEFI_Boot_Order_Update);

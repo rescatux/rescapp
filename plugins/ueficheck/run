@@ -19,7 +19,7 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-# Check if Live CD was booted in UEFI mode
+# Check if the Live CD was booted in UEFI mode
 function rtux_UEFI_Boot_Check () {
 
   local EXIT_VALUE=1 # Error by default

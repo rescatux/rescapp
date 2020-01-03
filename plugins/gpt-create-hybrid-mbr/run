@@ -40,9 +40,9 @@ function rtux_Hybridmbr_Create () {
 # MAIN PROGRAM
 
 
-GPT_HYBRID_CREATED_OK_STR="Hybrid MBR was created OK! :)"
-GPT_HYBRID_NOT_CREATED_STR="Hybrid MBR was not created. Something went wrong! :("
-GPT_HYBRID_RUNNING_STR="Creating Hybrid MBR"
+GPT_HYBRID_CREATED_OK_STR="The hybrid MBR was created OK! :)"
+GPT_HYBRID_NOT_CREATED_STR="The hybrid MBR was not created. Something went wrong! :("
+GPT_HYBRID_RUNNING_STR="Creating the Hybrid MBR"
 WHICH_HARD_DISK_CREATE_HYBRIDMBR_STR="Which hard drive do you wish to create a hybrid MBR on?"
 GPT_HYBRID_HARD_DISK_NOT_FOUND="No drives were found or chosen."
 

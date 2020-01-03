@@ -25,32 +25,32 @@ set -v
 
 # fsck Main program
 
-UEFIPARTCHECK_OK_STR="EFI partition status was OK (Every test passed successfully.) ! :)"
+UEFIPARTCHECK_OK_STR="The EFI partition status was OK (Every test passed successfully.) ! :)"
 UEFIPARTCHECK_KO_STR="This might not be a valid EFI partition. At least one test failed. :("
 UEFIPARTCHECK_RUNNING_STR="Performing EFI partition status checks"
 
-UEFIPARTCHECK_EFI_SYSTEM_DETECTED_OK_STR="EFI partition has been detected as an EFI partition by fdisk :)"
-UEFIPARTCHECK_EFI_SYSTEM_DETECTED_KO_STR="EFI partition has NOT been detected as an EFI partition by fdisk. :("
+UEFIPARTCHECK_EFI_SYSTEM_DETECTED_OK_STR="The EFI partition, has been detected, as an EFI partition by fdisk :)"
+UEFIPARTCHECK_EFI_SYSTEM_DETECTED_KO_STR="The EFI partition, has NOT been detected, as an EFI partition by fdisk. :("
 UEFIPARTCHECK_EFI_SYSTEM_DETECTED_RUNNING_STR="Performing EFI partition detection by fdisk"
 
-UEFIPARTCHECK_ESP_FLAG_OK_STR="EFI partition has a esp flag :)"
-UEFIPARTCHECK_ESP_FLAG_KO_STR="EFI partition does not have a esp flag. :("
+UEFIPARTCHECK_ESP_FLAG_OK_STR="The EFI partition, has a esp flag :)"
+UEFIPARTCHECK_ESP_FLAG_KO_STR="The EFI partition, does not have a esp flag. :("
 UEFIPARTCHECK_ESP_FLAG_RUNNING_STR="Performing EFI partition esp flag check"
 
-UEFIPARTCHECK_BOOT_FLAG_OK_STR="EFI partition has a boot flag :)"
-UEFIPARTCHECK_BOOT_FLAG_KO_STR="EFI partition does not have a boot flag. :("
+UEFIPARTCHECK_BOOT_FLAG_OK_STR="The EFI partition, has a boot flag :)"
+UEFIPARTCHECK_BOOT_FLAG_KO_STR="The EFI partition, does not have a boot flag. :("
 UEFIPARTCHECK_BOOT_FLAG_RUNNING_STR="Performing EFI partition boot flag check"
 
-UEFIPARTCHECK_UEFI_FILESYSTEM_OK_STR="EFI partition has a valid uefi filesystem :)"
-UEFIPARTCHECK_UEFI_FILESYSTEM_KO_STR="EFI partition does not have a valid uefi filesystem. :("
+UEFIPARTCHECK_UEFI_FILESYSTEM_OK_STR="The EFI partition, has a valid uefi filesystem :)"
+UEFIPARTCHECK_UEFI_FILESYSTEM_KO_STR="The EFI partition, does not have a valid uefi filesystem. :("
 UEFIPARTCHECK_UEFI_FILESYSTEM_RUNNING_STR="Performing EFI partition valid uefi filesystem check"
 
-UEFIPARTCHECK_PARTITION_MOUNT_OK_STR="EFI partition can be mounted :)"
-UEFIPARTCHECK_PARTITION_MOUNT_KO_STR="EFI partition cannot be mounted. :("
+UEFIPARTCHECK_PARTITION_MOUNT_OK_STR="The EFI partition, can be mounted :)"
+UEFIPARTCHECK_PARTITION_MOUNT_KO_STR="The EFI partition, cannot be mounted. :("
 UEFIPARTCHECK_PARTITION_MOUNT_RUNNING_STR="Performing EFI partition mount check"
 
-UEFIPARTCHECK_DISK_TYPE_IS_GPT_OK_STR="EFI partition disk type is either gpt or msdos :)"
-UEFIPARTCHECK_DISK_TYPE_IS_GPT_KO_STR="EFI partition disk type is neither gpt nor msdos. :("
+UEFIPARTCHECK_DISK_TYPE_IS_GPT_OK_STR="The EFI partition, disk type is either gpt or msdos :)"
+UEFIPARTCHECK_DISK_TYPE_IS_GPT_KO_STR="The EFI partition, disk type is neither gpt nor msdos. :("
 UEFIPARTCHECK_DISK_TYPE_IS_GPT_RUNNING_STR="Performing EFI partition disk type check"
 
 SELECTED_PARTITION=$(rtux_Choose_Partition)

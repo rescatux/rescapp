@@ -18,7 +18,7 @@
 source ${RESCAPP_LIB_FILE}
 
 
-XCHAT_OK_STR="Hexchat was run in the background."
+XCHAT_OK_STR="Hexchat was successfully started in the background."
 XCHAT_KO_STR="Rescapp was not able to start Hexchat, is it installed?"
 
 # Top right corner

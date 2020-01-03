@@ -68,9 +68,9 @@ function rtux_Sudoers () {
 
 # MAIN PROGRAM
 
-SUDOERS_CHANGED_OK_STR="Success! Sudoers was changed OK! :)"
-SUDOERS_NOT_CHANGED_STR="Failure! Sudoers was not changed. Something went wrong! :("
-SUDOERS_RUNNING_STR="Regenerating Sudoers file."
+SUDOERS_CHANGED_OK_STR="Success! the sudoers file was changed OK! :)"
+SUDOERS_NOT_CHANGED_STR="Failure! The sudoers file was not changed. Something went wrong! :("
+SUDOERS_RUNNING_STR="Regenerating the sudoers file."
 WHICH_USER_SUDOERS_STR="Which user do you wish to be the sudo admin?"
 SUDOERS_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
 SUDOERS_USERS_NOT_FOUND="No GNU/Linux users were found or chosen."

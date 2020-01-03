@@ -5,10 +5,18 @@ This is Rescapp.  Welcome.
 This file contains instructions for installing Rescapp.
 Rescapp does not need to be compiled.
 
-The Install Requirements
+Even though the install instructions are for Debian,
+Rescapp can be successfully installed on other Distro's.
+
+In order to be able to do that, you will need to use the
+packages below as a guide, to be able to find the name that your
+chosen Distro uses, and install that particular package, making sure
+that the package that you are installing provides the same commands as those listed below.
+
+Install Requirements
 ========================
 
-Rescapp depends on some software packages installed into your system. If
+Rescapp depends on some software packages being already installed on your system. If
 you don't have any of them, please obtain and install them before
 installing Rescapp.
 
@@ -21,40 +29,40 @@ Installing Rescapp
 
 The simplest way to install this package is:
 
-  1. `cd' to the directory containing the package's source code.
+  1. "cd" to the directory containing the package's source code.
 
-  2. Type `make install' to install the programs and any data files and
+  2. Type "make install" to install the programs and any data files and
      documentation.
 
 
 Installation Names
 ==================
 
-By default, `make install' will install the package's files in
-`/usr/local/bin', `/usr/local/lib', etc.  You can specify an
-installation prefix by preceding `make' with environment variable prefix.
+By default, "make install" will install the package's files in
+"/usr/local/bin", "/usr/local/lib", etc.  You can specify a different
+installation prefix, by preceding the "make command" with an environment variable prefix.
 
 E.g.: prefix=/usr make install
 
-DESTDIR environment variable also works as a prefix as Debian (and other
+The DESTDIR, environment variable also works, as Debian (and other
 GNU/Linux distributions expect it to work).
 
 E.g.: DESTDIR=/tmp/rescapp-test prefix=/usr make install
 
 Please note, however, that Rescapp knows where it is located in the
 filesystem.  If you have installed it in an unusual location, the
-system might not work properly, or at all.  The chief utility of these
-options for Rescapp is to allow you to "install" in some alternate
-location, and then copy these to the actual root filesystem later.
+system may not work properly, or at all.  The chief utility of these
+options for Rescapp, is to allow you to "install" it in an alternative
+location, and then copy the files to the actual root filesystem later.
 
-The Runtime Requirements
+Runtime Requirements
 ========================
 
-Rescapp depends on some software packages installed into your system. If
+Rescapp, depends on some software packages being installed at run time. If
 you don't have any of them, please obtain and install them before
 using Rescapp.
 
-chntpw package should be get from Rescatux official repo.
+The chntpw package should be obtained from the official Rescatux repo.
 http://rescatux.sourceforge.io/repo/ stretch-dev main
 
 Debian Package Runtime Requirements
@@ -79,6 +87,7 @@ FILESYSTEM_PACKAGES="reiserfsprogs \
  xfsdump \
  ntfs-3g \
  dosfstools \
+ xterm \
  "
 
 GPT_PACKAGES="\
@@ -126,7 +135,7 @@ RESCAPP_PACKAGES=" \
  extundelete \
  os-prober \
  mokutil \
- " # I add syslinux so that isohybrid command is recognised.
+ " # I add syslinux so that the isohybrid command is recognised.
 
 Optional Debian Package Runtime Requirements
 ==============================================
@@ -139,15 +148,15 @@ testdisk
 SELinux support
 ===============
 
-If you want Rescapp to work ok with SELinux systems your Live CD system
-needs probably to be boot in SELinux mode.
+If you want Rescapp to work with SELinux systems, your Live CD/DVD/USB-STICK
+probably needs to be booted in SELinux mode.
 
-Suggested Kernel parametres might be:
+The suggested Kernel parametres are:
 selinux=1 security=selinux enforcing=0
 
-And you will also need some SELinux packages.
-These were the needed ones when using jessie and sid
-back in 2015 October.
+You will also need some SELinux packages.
+These were the ones needed when using jessie and sid
+back in October 2015:
 
 
 SELINUX_PACKAGES="\
@@ -169,36 +178,36 @@ and
  debian-dev
 .
 
-debian-dev branch is used only for representing the debian/ branch.
+The debian-dev branch, is only used for representing the debian/ branch.
 
 
-When a new release comes out there will be one tag at the master branch
-and another tag at the debian-dev tag.
+When a new release comes out there will be one tag on the master branch
+and another on the debian-dev branch.
 
-We are going to use version 0.51b3 as an example on how to build
+We are going to use version 0.54b4 as an example on how to build
 Rescapp as a package.
 
-Available tags are: v0.51b3 and v051b3-debian .
+Available tags are: v0.54b4 and v054b4-debian .
 Please enter an empty folder and follow this procedure:
 
-git clone https://github.com/rescatux/rescapp.git -b v0.51b3 rescapp-0.51b3
+git clone https://github.com/rescatux/rescapp.git -b v0.54b4 rescapp-0.54b4
 # Ignore detached HEAD warning
-rm -rf rescapp-0.51b3/.git/
-tar czf rescapp_0.51b3.orig.tar.gz rescapp-0.51b3/
-rm -rf rescapp-0.51b3/
-git clone https://github.com/rescatux/rescapp.git -b v0.51b3-debian rescapp-0.51b3
+rm -rf rescapp-0.54b4/.git/
+tar czf rescapp_0.54b4.orig.tar.gz rescapp-0.54b4/
+rm -rf rescapp-0.54b4/
+git clone https://github.com/rescatux/rescapp.git -b v0.54b4-debian rescapp-0.54b4
 # Ignore detached HEAD warning
-rm -rf rescapp-0.51b3/.git/
-cd rescapp-0.51b3
+rm -rf rescapp-0.54b4/.git/
+cd rescapp-0.54b4
 dpkg-buildpackage -us -uc
 cd ..
-rm -rf rescapp-0.51b3/
+rm -rf rescapp-0.54b4/
 
-Once the procedure has ended without any errors you will find these
-package files:
+Once the procedure has completed without errors you will find the following
+files:
 
-rescapp_0.51b3-1.debian.tar.xz
-rescapp_0.51b3-1.dsc
-rescapp_0.51b3-1_i386.changes
-rescapp_0.51b3-1_i386.deb
-rescapp_0.51b3.orig.tar.gz
+rescapp_0.54b4-1.debian.tar.xz
+rescapp_0.54b4-1.dsc
+rescapp_0.54b4-1_i386.changes
+rescapp_0.54b4-1_i386.deb
+rescapp_0.54b4.orig.tar.gz

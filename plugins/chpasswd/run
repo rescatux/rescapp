@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Chpasswd run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,16 +20,16 @@ source ${RESCAPP_LIB_FILE}
 set -x
 set -v
 
-# Change selected user's password from the choosen Linux partition
+# Change selected user's password from the chosen Linux partition
 # 1 parametre = Selected partition
 # 2 parametre = Selected user
-# 3 parametre = Choosen password
+# 3 parametre = Chosen password
 function rtux_Passwd () {
 
   local EXIT_VALUE=1 # Error by default
   local SELECTED_PARTITION="$1"
   local SELECTED_USER="$2"
-  local CHOOSEN_PASS="$3"
+  local CHOSEN_PASS="$3"
 
   local n_partition=${SELECTED_PARTITION}
 
@@ -45,8 +45,8 @@ function rtux_Passwd () {
     if [[ -e ${TMP_MNT_PARTITION}${LINUX_OS_DETECTOR} ]] ; then
 
       chroot ${TMP_MNT_PARTITION} passwd ${SELECTED_USER} <<EOF
-${CHOOSEN_PASS}
-${CHOOSEN_PASS}
+${CHOSEN_PASS}
+${CHOSEN_PASS}
 EOF
       EXIT_VALUE=$?
 
@@ -61,35 +61,35 @@ EOF
 
 } # function rtux_Passwd ()
 
-# Change selected user's password from the choosen Linux partition
+# Change selected user's password from the chosen Linux partition
 # 1 parametre = Selected partition
 # 2 parametre = Selected user
-# 3 parametre = Choosen password
+# 3 parametre = Chosen password
 function rtux_MetaChpasswd () {
 
   local EXIT_VALUE=1 # Error by default
   local SELECTED_PARTITION="$1"
   local SELECTED_USER="$2"
-  local CHOOSEN_PASS="$3"
+  local CHOSEN_PASS="$3"
 
-  if ! rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (ChPasswd)" rtux_ChPasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}; then
-    rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (Passwd)" rtux_Passwd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}
+  if ! rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (ChPasswd)" rtux_ChPasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOSEN_PASS}; then
+    rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (Passwd)" rtux_Passwd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOSEN_PASS}
   else
     return 0
   fi
 
 } # function rtux_MetaChpasswd ()
 
-# Change selected user's password from the choosen Linux partition
+# Change selected user's password from the chosen Linux partition
 # 1 parametre = Selected partition
 # 2 parametre = Selected user
-# 3 parametre = Choosen password
+# 3 parametre = Chosen password
 function rtux_Chpasswd () {
 
   local EXIT_VALUE=1 # Error by default
   local SELECTED_PARTITION="$1"
   local SELECTED_USER="$2"
-  local CHOOSEN_PASS="$3"
+  local CHOSEN_PASS="$3"
 
   local n_partition=${SELECTED_PARTITION}
 
@@ -104,7 +104,7 @@ function rtux_Chpasswd () {
 
     if [[ -e ${TMP_MNT_PARTITION}${LINUX_OS_DETECTOR} ]] ; then
 
-      echo "${SELECTED_USER}:${CHOOSEN_PASS}" | chpasswd -m --root ${TMP_MNT_PARTITION}
+      echo "${SELECTED_USER}:${CHOSEN_PASS}" | chpasswd -m --root ${TMP_MNT_PARTITION}
       EXIT_VALUE=$?
 		  
     fi # Linux detector was found
@@ -122,13 +122,13 @@ function rtux_Chpasswd () {
 
 # MAIN PROGRAM
 
-PASSWD_CHANGED_OK_STR="Password was changed OK! :). We recommend to change it once you're back in your system to use your system default encryption."
-PASSWD_NOT_CHANGED_STR="Password was not changed. Something went wrong! :("
+PASSWD_CHANGED_OK_STR="The password was changed OK! :). We recommend that you change it once you're back in your system, to use your systems default encryption."
+PASSWD_NOT_CHANGED_STR="The password was not changed. Something went wrong! :("
 PASSWD_RUNNING_STR="Changing GNU/Linux password."
-WHICH_USER_PASS_STR="Which user do you want to change its password?"
-PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or choosen."
-PASSWD_LINUX_USERS_NOT_FOUND="No GNU/Linux users were found or choosen."
-PASSWD_PASS_NOT_FOUND="No password was choosen."
+WHICH_USER_PASS_STR="Which user do you want to change the password for?"
+PASSWD_GNU_LINUX_PARTITIONS_NOT_FOUND="No GNU/Linux partitions were found or chosen."
+PASSWD_LINUX_USERS_NOT_FOUND="No GNU/Linux users were found or chosen."
+PASSWD_PASS_NOT_FOUND="No password was entered."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
 if [ "x${SELECTED_PARTITION}" != "x" ] ; then
@@ -142,9 +142,9 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
     SELECTED_USER=$(rtux_Choose_User ${SYSTEM_USERS});
     if [ "x${SELECTED_USER}" != "x" ] ; then
-        CHOOSEN_PASS=$(rtux_Enter_Pass ${SELECTED_USER})
-        if [ "x${CHOOSEN_PASS}" != "x" ] ; then
-            if rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (Meta)" rtux_MetaChpasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOOSEN_PASS}; then
+        CHOSEN_PASS=$(rtux_Enter_Pass ${SELECTED_USER})
+        if [ "x${CHOSEN_PASS}" != "x" ] ; then
+            if rtux_Run_Show_Progress "${PASSWD_RUNNING_STR} (Meta)" rtux_MetaChpasswd ${SELECTED_PARTITION} ${SELECTED_USER} ${CHOSEN_PASS}; then
                 rtux_Message_Success ${PASSWD_CHANGED_OK_STR}
             else
                 rtux_Message_Failure ${PASSWD_NOT_CHANGED_STR}

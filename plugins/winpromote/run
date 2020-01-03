@@ -24,8 +24,8 @@ set -v
 
 # MAIN PROGRAM
 
-WINPROMOTE_OK_STR="User was promoted to Admin OK! :)"
-WINPROMOTE_NOT_OK_STR="User was not promoted to Admin. Something went wrong! :("
+WINPROMOTE_OK_STR="The user was promoted to Admin OK! :)"
+WINPROMOTE_NOT_OK_STR="The user was not promoted to Admin. Something went wrong! :("
 
 
 SELECTED_PARTITION=$(rtux_Choose_Windows_partition);

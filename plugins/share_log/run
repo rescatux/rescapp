@@ -16,10 +16,10 @@
 # along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
 source ${RESCAPP_LIB_FILE}
 
-SHARELOG_OK_STR="Log was shared OK! :)"
-SHARELOG_KO_STR="Log sharing went wrong! :("
-SHARELOG_FILES_NOT_FOUND="No files to share were found or chosen."
-SHARELOG_URL_NOT_FOUND="Log could not be shared online."
+SHARELOG_OK_STR="The log file was shared OK! :)"
+SHARELOG_KO_STR="The log file sharing went wrong! :("
+SHARELOG_FILES_NOT_FOUND="No logs to share were found or chosen."
+SHARELOG_URL_NOT_FOUND="The log file could not be shared online."
 
 # 1 parametre = Selected file
 function rtux_share_log () {
