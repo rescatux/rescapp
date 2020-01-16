@@ -1,0 +1,69 @@
+The purpose of Rescapp, is to provide the user with a graphical rescue tool that will 
+assist them to regain access to a computer that has become non-bootable.
+
+You will also be able to regain access to a Windows based system that has had the 
+password forgotten, thanks to the chntpw package.
+
+It is recommended to use the chntpw package made by rescatux, as this is different
+to the package that is provided by your Distro.  It has had features added to
+automate the password change process as much as possible.
+
+It is available from:
+
+https://github.com/rescatux/chntpw
+
+Once there, click on the word "releases" which will take you to the downloads
+section.
+
+You will be able to either blank the password, and then change it once you reboot
+into Windows, or you can opt to change the password through this tool.  However, 
+it is recommended that you use a temporary password, and change it once you have 
+regained access to the computer, so that you can use the correct encryption 
+algorithm provided by the version of Windows that you are using.
+
+Rescapp makes use of a number of programs, such as gparted which is used for
+hard drives that have been partitioned as GUID (GPT). This type of partitioning
+is required for hard drives that are greater than 2TB, but can also be used
+for smaller drives, and is the prefered method for booting systems that also
+use UEFI.
+
+You can also use Rescapp, to regain access to systems that use SELinux for
+hardend security.  You will be guided through the restoration process, as
+Rescapp is a rescue "Wizard", providing inline help, as well as assistance
+via chat or via the support forums.
+
+Rescapp, is a collection of bash scripts, and makes use of Python3 and also
+QT5.
+
+If you are a Developer, and have a little bit of spare time, you can contribute
+to this project either as a one time only contribution, ie you have taken a look
+at the "todo" within the code, and find that it is a very quick implimentation,
+then you clone the https://github.com/rescatux/rescapp.git repository locally,
+create a new branch and then commit your changes and push them to an account
+that you have on github, and create a pull request, or ongoing, as time permitts.
+For this, you will need to contact Adrian, who is the developer, via the issue tracker, 
+on https://github.com/rescatux/rescapp/issues and ask which branch he is currently
+using for development, so that you can create the pull request on the correct
+branch.
+
+Rescapp, is also available on a live Debian cd/dvd/usb ISO, known as rescatux.
+
+For full documentation and features, please visit the rescatux website:
+
+https://www.supergrubdisk.org/rescatux/
+
+To know how to install Rescapp, please read the INSTALL file in the source code tarball.
+
+If you happen to find a bug in Rescapp, please use the issue tracker on github:
+
+https://github.com/rescatux/rescapp/issues
+
+If you happen to find a bug in the chntpw package provided by rescatux, please use the
+issue tracker on github:
+
+https://github.com/rescatux/chntpw/issues
+
+Please remember to use the correct issue tracker for the package that you have found
+an issue with, as this saves time in having to move it to the correct location.
+
+

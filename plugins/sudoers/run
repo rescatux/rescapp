@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rescapp Sudoers run script
-# Copyright (C) 2012,2013,2014,2015,2016 Adrian Gibanel Lopez
+# Copyright (C) 2012,2013,2014,2015,2016,2017,2018,2019,2020 Adrian Gibanel Lopez
 #
 # Rescapp is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -68,26 +68,36 @@ function rtux_Sudoers () {
 
 # MAIN PROGRAM
 
-SUDOERS_CHANGED_OK_STR="Success! Sudoers was changed OK! :)"
-SUDOERS_NOT_CHANGED_STR="Failure! Sudoers was not changed. Something went wrong! :("
-SUDOERS_RUNNING_STR="Regenerating Sudoers file."
-WHICH_USER_SUDOERS_STR="Which user to be the sudo admin?"
+SUDOERS_CHANGED_OK_STR="Success! the sudoers file was changed OK! :)"
+SUDOERS_NOT_CHANGED_STR="Failure! The sudoers file was not changed. Something went wrong! :("
+SUDOERS_RUNNING_STR="Regenerating the sudoers file."
+WHICH_USER_SUDOERS_STR="Which user do you wish to be the sudo admin?"
+SUDOERS_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
+SUDOERS_USERS_NOT_FOUND="No GNU/Linux users were found or chosen."
 
 SELECTED_PARTITION=$(rtux_Choose_Linux_partition);
 
-TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${SELECTED_PARTITION}
-TMP_DEV_PARTITION=/dev/${SELECTED_PARTITION}
-mkdir --parents ${TMP_MNT_PARTITION}
-mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null
-  SYSTEM_USERS=$(rtux_User_List "${TMP_MNT_PARTITION}/etc/passwd")
-umount ${TMP_MNT_PARTITION};
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
+  TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${SELECTED_PARTITION}
+  TMP_DEV_PARTITION=/dev/${SELECTED_PARTITION}
+  mkdir --parents ${TMP_MNT_PARTITION}
+  mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null
+    SYSTEM_USERS=$(rtux_User_List "${TMP_MNT_PARTITION}/etc/passwd")
+  umount ${TMP_MNT_PARTITION};
 
-SELECTED_USER=$(rtux_Choose_User ${SYSTEM_USERS});
-
-if rtux_Run_Show_Progress "${SUDOERS_RUNNING_STR}" rtux_Sudoers ${SELECTED_PARTITION} ${SELECTED_USER}; then
-  rtux_Message_Success ${SUDOERS_CHANGED_OK_STR}
+  SELECTED_USER=$(rtux_Choose_User ${SYSTEM_USERS});
+  if [ "x${SELECTED_USER}" != "x" ] ; then
+    if rtux_Run_Show_Progress "${SUDOERS_RUNNING_STR}" rtux_Sudoers ${SELECTED_PARTITION} ${SELECTED_USER}; then
+      rtux_Message_Success ${SUDOERS_CHANGED_OK_STR}
+    else
+      rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
+    fi
+  else
+    rtux_Message_Warning ${SUDOERS_USERS_NOT_FOUND}
+    rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
+  fi
 else
+  rtux_Message_Warning ${SUDOERS_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${SUDOERS_NOT_CHANGED_STR}
 fi
-
 
