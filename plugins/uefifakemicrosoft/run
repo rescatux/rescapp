@@ -26,13 +26,19 @@ set -v
 UEFIFAKEMICROSOFT_OK_STR="The faking of the UEFI, Microsoft Windows boot entry was OK ! :)"
 UEFIFAKEMICROSOFT_KO_STR="The faking of the UEFI, Microsoft Windows boot entry was not ok :("
 UEFIFAKEMICROSOFT_RUNNING_STR="Faking UEFI Microsoft Windows boot entry"
+UEFIFAKEMICROSOFT_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
 
 
 SELECTED_EFI_PARTITION="$(rtux_Choose_EFI_System_partition)"
+if [ "x${SELECTED_EFI_PARTITION}" != "x" ] ; then
 if rtux_Run_Show_Progress "${UEFIFAKEMICROSOFT_RUNNING_STR}" rtux_UEFI_Fake_Microsoft_Boot_Entry "${SELECTED_EFI_PARTITION}" "$(rtux_UEFI_Choose_EFI_File ${SELECTED_EFI_PARTITION})";
 then
   rtux_Message_Success ${UEFIFAKEMICROSOFT_OK_STR}
 else
+  rtux_Message_Failure ${UEFIFAKEMICROSOFT_KO_STR}
+fi
+else
+  rtux_Message_Warning ${UEFIFAKEMICROSOFT_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${UEFIFAKEMICROSOFT_KO_STR}
 fi
 
