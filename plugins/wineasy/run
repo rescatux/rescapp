@@ -42,6 +42,7 @@ WINUNLOCK_RUNNING_STR="Unlocking Windows user"
 
 WINEASY_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
 WINEASY_SAMUSERS_NOT_DETECTED="No SAM users or SAM file were detected."
+WINEASY_SAMUSERS_NOT_FOUND="No Windows users were found or chosen."
 
 SELECTED_PARTITION=$(rtux_Choose_Windows_partition);
 
@@ -52,6 +53,8 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
     rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
     # Ask the user which password to reset
     CHOSEN_USER=$(rtux_Choose_Sam_User "Choose Windows user to get Easy Admin")
+
+    if [ "x${CHOSEN_USER}" != "x" ] ; then
 
     EXIT_SUM=0
 
@@ -84,6 +87,12 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
     WINPASS_EXIT_VALUE=$?
     EXIT_SUM=$((EXIT_SUM+WINPASS_EXIT_VALUE))
+
+    else
+      rtux_Message_Warning ${WINEASY_SAMUSERS_NOT_FOUND}
+      EXIT_SUM=1
+      false
+    fi
 
   else
     rtux_Message_Warning ${WINEASY_SAMUSERS_NOT_DETECTED}
