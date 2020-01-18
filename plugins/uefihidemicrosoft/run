@@ -27,14 +27,21 @@ UEFIHIDEMICROSOFT_OK_STR="Hiding UEFI Microsoft Windows boot entry was OK ! :)"
 UEFIHIDEMICROSOFT_KO_STR="Hiding UEFI Microsoft Windows boot entry was not ok :("
 UEFIHIDEMICROSOFT_RUNNING_STR="Hiding UEFI Microsoft Windows boot entry"
 UEFIHIDEMICROSOFT_PARTITIONS_NOT_FOUND="No partitions were found or chosen."
+UEFIHIDEMICROSOFT_EFI_FILE_NOT_FOUND="No EFI files were found or chosen."
 
 
 SELECTED_EFI_PARTITION="$(rtux_Choose_EFI_System_partition)"
 if [ "x${SELECTED_EFI_PARTITION}" != "x" ] ; then
-  if rtux_Run_Show_Progress "${UEFIHIDEMICROSOFT_RUNNING_STR}" rtux_UEFI_Hide_Microsoft_Boot_Entry "${SELECTED_EFI_PARTITION}" "$(rtux_UEFI_Choose_EFI_File ${SELECTED_EFI_PARTITION})";
+  SELECTED_EFI_FILE="$(rtux_UEFI_Choose_EFI_File ${SELECTED_EFI_PARTITION})"
+  if [ "x${SELECTED_EFI_FILE}" != "x" ] ; then
+  if rtux_Run_Show_Progress "${UEFIHIDEMICROSOFT_RUNNING_STR}" rtux_UEFI_Hide_Microsoft_Boot_Entry "${SELECTED_EFI_PARTITION}" "${SELECTED_EFI_FILE}";
   then
     rtux_Message_Success ${UEFIHIDEMICROSOFT_OK_STR}
   else
+    rtux_Message_Failure ${UEFIHIDEMICROSOFT_KO_STR}
+  fi
+  else
+    rtux_Message_Warning ${UEFIHIDEMICROSOFT_EFI_FILE_NOT_FOUND}
     rtux_Message_Failure ${UEFIHIDEMICROSOFT_KO_STR}
   fi
 else
