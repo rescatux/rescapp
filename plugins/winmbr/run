@@ -61,6 +61,7 @@ function rtux_Winmbr_Install () {
 WINMBR_INSTALLED_OK_STR="The Windows mbr was installed OK! :)"
 WINMBR_NOT_INSTALLED_STR="The Windows mbr was not installed. Something went wrong! :("
 WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard drive do you wish to install a Windows mbr on?"
+WINMBR_HARDDISK_POSITION_NOT_FOUND="Hard disk position was not set."
 
 SELECTED_PARTITION=$(rtux_Choose_Primary_Partition);
 
@@ -70,10 +71,14 @@ SELECTED_PARTITION_HARD_DISK=$(echo "${SELECTED_PARTITION}" | sed 's/[0-9]*//g' 
 
 HARD_DISK_POSITION=$(rtux_Choose_Hard_Disk_Position ${SELECTED_PARTITION_HARD_DISK})
 
+if [ "x${HARD_DISK_POSITION}" != "x" ] ; then
 if rtux_Winmbr_Install ${SELECTED_HARD_DISK} ${SELECTED_PARTITION} ${HARD_DISK_POSITION}; then
   rtux_Message_Success ${WINMBR_INSTALLED_OK_STR}
 else
   rtux_Message_Failure ${WINMBR_NOT_INSTALLED_STR}
 fi
-
+else
+  rtux_Message_Warning ${WINMBR_HARDDISK_POSITION_NOT_FOUND}
+  rtux_Message_Failure ${WINMBR_NOT_INSTALLED_STR}
+fi
 
