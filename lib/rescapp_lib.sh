@@ -334,7 +334,7 @@ function rtux_Choose_Hard_Disk () {
 # It outputs the chosen partition.
 function rtux_Choose_Partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_System_Partitions)
@@ -344,7 +344,7 @@ function rtux_Choose_Partition () {
 # It outputs the chosen partition.
 function rtux_Choose_Primary_Partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which primary partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Primary_Partitions)
@@ -417,7 +417,7 @@ function rtux_Abstract_Choose_Partition () {
 # It outputs the chosen partition.
 function rtux_Choose_Linux_partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which GNU/Linux partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Linux_Os_Partitions)
@@ -427,7 +427,7 @@ function rtux_Choose_Linux_partition () {
 # It outputs the chosen partition.
 function rtux_Choose_Windows_partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which Windows partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Windows_Os_Partitions)
@@ -715,6 +715,7 @@ function rtux_make_tmp_fstab() {
 # 2 parametre = SAM file
 function rtux_backup_windows_config_payload () {
 
+  local EXIT_VALUE=1 # Error by default
   local SELECTED_PARTITION="$1"
   local SAM_FILE="$2"
 
@@ -730,12 +731,14 @@ function rtux_backup_windows_config_payload () {
       CURRENT_SECOND_STR="$(date +%Y-%m-%d-%H-%M-%S)"
       SAM_DIR="$(dirname ${SAM_FILE})"
       cp -r "${SAM_DIR}" "${SAM_DIR}_${PRE_RESCATUX_STR}_${CURRENT_SECOND_STR}"
+      EXIT_VALUE=$?
 
       # Umount the partition
 
       umount ${TMP_MNT_PARTITION};
   fi # Partition was mounted ok
 
+  return ${EXIT_VALUE};
 
 }
 
@@ -812,25 +815,6 @@ function rtux_winpass_reset_payload () {
 
 } # rtux_winpass_reset_payload ()
 
-# Reset windows password
-# 1 parametre = Selected partition
-function rtux_winpass_reset () {
-
-  local SELECTED_PARTITION="$1"
-  WINPASS_RESET_RUNNING_STR="Resetting Windows password."
-  rtux_Get_Sam_Users ${SELECTED_PARTITION}
-  # Backup of the files into a temporary folder
-  rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
-  # Ask the user which password to reset
-  CHOSEN_USER=$(rtux_Choose_Sam_User \
-    "Choose which Windows user to reset its password")
-  local PAYLOAD_EXIT_VALUE=1;
-  rtux_Run_Show_Progress "${WINPASS_RESET_RUNNING_STR}" rtux_winpass_reset_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER};
-  PAYLOAD_EXIT_VALUE=$?
-  return ${PAYLOAD_EXIT_VALUE};
-
-} # rtux_winpass_reset ()
-
 # Promote windows user payload
 # 1 parametre = Selected partition
 # 2 parametre = SAM file
@@ -874,26 +858,6 @@ function rtux_winpromote_payload () {
 
 } # function rtux_winpromote_payload ()
 
-# Promote windows user
-# 1 parametre = Selected partition
-function rtux_winpromote () {
-  WINPROMOTE_RUNNING_STR="Promoting Windows user to Admin"
-
-  local SELECTED_PARTITION="$1"
-  rtux_Get_Sam_Users ${SELECTED_PARTITION}
-  # Backup of the files into a temporary folder
-  rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
-  # Ask the user which password to reset
-  CHOSEN_USER=$(rtux_Choose_Sam_User \
-    "Choose Windows user to promote to Admin")
-
-  local PAYLOAD_EXIT_VALUE=1;
-  rtux_Run_Show_Progress "${WINPROMOTE_RUNNING_STR}" rtux_winpromote_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER};
-  PAYLOAD_EXIT_VALUE=$?
-  return ${PAYLOAD_EXIT_VALUE};
-
-} # function rtux_winpromote ()
-
 # Unlock windows user payload
 # 1 parametre = Selected partition
 # 2 parametre = SAM file
@@ -922,26 +886,6 @@ function rtux_winunlock_payload () {
   fi # Partition was mounted ok
 
   return ${EXIT_VALUE};
-
-} # function rtux_winunlock ()
-
-# Unlock windows user
-# 1 parametre = Selected partition
-function rtux_winunlock () {
-  WINUNLOCK_RUNNING_STR="Unlocking Windows user"
-
-  local SELECTED_PARTITION="$1"
-  rtux_Get_Sam_Users ${SELECTED_PARTITION}
-  # Backup of the files into a temporary folder
-  rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
-  # Ask the user which password to reset
-  CHOSEN_USER=$(rtux_Choose_Sam_User \
-    "Choose Windows user to unlock")
-
-  local PAYLOAD_EXIT_VALUE=1;
-  rtux_Run_Show_Progress "${WINUNLOCK_RUNNING_STR}" rtux_winunlock_payload ${SELECTED_PARTITION} ${SAM_FILE} ${CHOSEN_USER};
-  PAYLOAD_EXIT_VALUE=$?
-  return ${PAYLOAD_EXIT_VALUE};
 
 } # function rtux_winunlock ()
 
@@ -993,7 +937,12 @@ function rtux_Get_Sam_Users () {
       rm "${SAM_PIPE}"
 
     umount ${TMP_MNT_PARTITION};
+    if [ ! -z "${SAM_FILE}" ] ; then
+      local EXIT_VALUE=0
+    fi
   fi # Partition was mounted ok
+
+  return ${EXIT_VALUE}
 
 }
 
@@ -1883,7 +1832,7 @@ XCHAT_COMMAND="hexchat"
 FDISK_COMMAND="/sbin/fdisk"
 FILEMANAGER_COMMAND="xdg-open"
 
-FIREFOX_WINDOW_STR="Iceweasel"
+FIREFOX_WINDOW_STR="Firefox"
 XCHAT_WINDOW_STR="HexChat"
 
 CODE_STR="Code"

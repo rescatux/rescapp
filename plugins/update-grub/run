@@ -32,10 +32,24 @@ set -v
 UPDATE_GRUB_OK_STR="The grub configuration was updated OK! :)"
 UPDATE_GRUB_KO_STR="The grub configuration update failed! :("
 UPDATE_GRUB_RUNNING_STR="Updating Grub configuration."
+UPDATE_GRUB_PARTITIONS_NOT_FOUND="No Linux partitions were found or chosen."
+UPDATE_GRUB_HARDDISKS_NOT_FOUND="Hard disk order was not set."
 
-if rtux_Run_Show_Progress "${UPDATE_GRUB_RUNNING_STR}" rtux_Grub_Update_Config $(rtux_Choose_Linux_partition) $(rtux_Order_Hard_Disks) ; then
-  rtux_Message_Success ${UPDATE_GRUB_OK_STR}
+SELECTED_LINUX_PARTITION="$(rtux_Choose_Linux_partition)"
+if [ "x${SELECTED_LINUX_PARTITION}" != "x" ] ; then
+  HARDDISK_DESIRED_ORDER=$(rtux_Order_Hard_Disks)
+  if [ ! "x${HARDDISK_DESIRED_ORDER}" == "x" ] ; then
+    if rtux_Run_Show_Progress "${UPDATE_GRUB_RUNNING_STR}" rtux_Grub_Update_Config "${SELECTED_LINUX_PARTITION}" "${HARDDISK_DESIRED_ORDER}" ; then
+      rtux_Message_Success ${UPDATE_GRUB_OK_STR}
+    else
+      rtux_Message_Failure ${UPDATE_GRUB_KO_STR}
+    fi
+  else
+    rtux_Message_Warning ${UPDATE_GRUB_HARDDISKS_NOT_FOUND}
+    rtux_Message_Failure ${UPDATE_GRUB_KO_STR}
+  fi
 else
+  rtux_Message_Warning ${UPDATE_GRUB_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${UPDATE_GRUB_KO_STR}
 fi
 

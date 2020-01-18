@@ -27,14 +27,41 @@ set -v
 WINPASS_RESET_OK_STR="Windows password was reset OK! :)"
 WINPASS_NOT_RESET_STR="Windows password was not reset. Something went wrong! :("
 
+WINPASS_RESET_RUNNING_STR="Resetting Windows password."
+WINPASS_PARTITIONS_NOT_FOUND="No Windows partitions were found or chosen."
+WINPASS_SAMUSERS_NOT_DETECTED="No SAM users or SAM file were detected."
+WINPASS_SAMUSERS_NOT_FOUND="No Windows users were found or chosen."
+WINPASS_BACKUP_WENT_WRONG="Backup of SAM directory went wrong."
 
 SELECTED_PARTITION=$(rtux_Choose_Windows_partition);
 
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
+  if rtux_Get_Sam_Users ${SELECTED_PARTITION} ; then
+    # Backup of the files in a temporary folder
+    if rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}" ; then
+      # Ask the user which password to reset
+      WINDOWS_USER=$(rtux_Choose_Sam_User "Choose which Windows user to reset its password")
+      if [ "x${WINDOWS_USER}" != "x" ] ; then
+        if rtux_Run_Show_Progress "${WINPASS_RESET_RUNNING_STR}" rtux_winpass_reset_payload ${SELECTED_PARTITION} ${SAM_FILE} ${WINDOWS_USER} ; then
+          rtux_Message_Success ${WINPASS_RESET_OK_STR}
+        else
+          rtux_Message_Failure ${WINPASS_NOT_RESET_STR}
+        fi
+      else
+        rtux_Message_Warning ${WINPASS_SAMUSERS_NOT_FOUND}
+        rtux_Message_Failure ${WINPASS_NOT_RESET_STR}
+      fi
+    else
+      rtux_Message_Warning ${WINPASS_BACKUP_WENT_WRONG}
+      rtux_Message_Failure ${WINPASS_NOT_RESET_STR}
+    fi
 
-
-if rtux_winpass_reset ${SELECTED_PARTITION} ; then
-  rtux_Message_Success ${WINPASS_RESET_OK_STR}
+  else
+    rtux_Message_Warning ${WINPASS_SAMUSERS_NOT_DETECTED}
+    rtux_Message_Failure ${WINPASS_NOT_RESET_STR}
+  fi
 else
+  rtux_Message_Warning ${WINPASS_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${WINPASS_NOT_RESET_STR}
 fi
 
