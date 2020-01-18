@@ -17,6 +17,9 @@
 
 source ${RESCAPP_LIB_FILE}
 
+FIREFOX_OK_STR="Web browser was successfully started in the background."
+FIREFOX_KO_STR="Rescapp was unable to start Web browser, is it installed?"
+
 # Top left corner
 WIDTH=600
 HEIGHT=460
@@ -25,13 +28,19 @@ GRAVITY=0
 X_POSITION=0
 Y_POSITION=0
 
-${FIREFOX_COMMAND} ${RESCATUX_URL} &
-sleep 5s;
+FIREFOX_FULL_PATH="$(which ${FIREFOX_COMMAND})"
+if [ -x "${FIREFOX_FULL_PATH}" ] ; then
+  "${FIREFOX_FULL_PATH}" ${RESCATUX_URL} &
+  sleep 5s;
 
-wmctrl \
-  -r ${FIREFOX_WINDOW_STR} \
-  -e ${GRAVITY},\
+  wmctrl \
+    -r ${FIREFOX_WINDOW_STR} \
+    -e ${GRAVITY},\
 ${X_POSITION},\
 ${Y_POSITION},\
 ${WIDTH},\
 ${HEIGHT}
+  rtux_Message_Success ${FIREFOX_OK_STR}
+else
+  rtux_Message_Failure ${FIREFOX_KO_STR}
+fi
