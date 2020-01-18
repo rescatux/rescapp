@@ -33,7 +33,10 @@ UPDATE_GRUB_OK_STR="The grub configuration was updated OK! :)"
 UPDATE_GRUB_KO_STR="The grub configuration update failed! :("
 UPDATE_GRUB_RUNNING_STR="Updating Grub configuration."
 
-if rtux_Run_Show_Progress "${UPDATE_GRUB_RUNNING_STR}" rtux_Grub_Update_Config $(rtux_Choose_Linux_partition) $(rtux_Order_Hard_Disks) ; then
+SELECTED_LINUX_PARTITION="$(rtux_Choose_Linux_partition)"
+HARDDISK_DESIRED_ORDER=$(rtux_Order_Hard_Disks)
+
+if rtux_Run_Show_Progress "${UPDATE_GRUB_RUNNING_STR}" rtux_Grub_Update_Config "${SELECTED_LINUX_PARTITION}" "${HARDDISK_DESIRED_ORDER}" ; then
   rtux_Message_Success ${UPDATE_GRUB_OK_STR}
 else
   rtux_Message_Failure ${UPDATE_GRUB_KO_STR}
