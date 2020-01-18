@@ -715,6 +715,7 @@ function rtux_make_tmp_fstab() {
 # 2 parametre = SAM file
 function rtux_backup_windows_config_payload () {
 
+  local EXIT_VALUE=1 # Error by default
   local SELECTED_PARTITION="$1"
   local SAM_FILE="$2"
 
@@ -730,12 +731,14 @@ function rtux_backup_windows_config_payload () {
       CURRENT_SECOND_STR="$(date +%Y-%m-%d-%H-%M-%S)"
       SAM_DIR="$(dirname ${SAM_FILE})"
       cp -r "${SAM_DIR}" "${SAM_DIR}_${PRE_RESCATUX_STR}_${CURRENT_SECOND_STR}"
+      EXIT_VALUE=$?
 
       # Umount the partition
 
       umount ${TMP_MNT_PARTITION};
   fi # Partition was mounted ok
 
+  return ${EXIT_VALUE};
 
 }
 
