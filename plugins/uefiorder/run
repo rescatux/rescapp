@@ -24,11 +24,18 @@ set -v
 UEFIORDER_OK_STR="The UEFI Boot order, was updated OK! :)"
 UEFIORDER_KO_STR="The UEFI Boot order, update went wrong! :("
 UEFIORDER_RUNNING_STR="Updating UEFI Boot order."
+UEFI_ORDER_NOT_FOUND="UEFI order was not set."
 
-if rtux_Run_Show_Progress "${UEFIORDER_RUNNING_STR}" rtux_UEFI_Boot_Order_Update $(rtux_Choose_UEFI_Boot_Order_Update);
+UEFI_DESIRED_ORDER=$(rtux_Choose_UEFI_Boot_Order_Update)
+if [ ! "x${UEFI_DESIRED_ORDER}" == "x" ] ; then
+if rtux_Run_Show_Progress "${UEFIORDER_RUNNING_STR}" rtux_UEFI_Boot_Order_Update ${UEFI_DESIRED_ORDER};
 then
   rtux_Message_Success ${UEFIORDER_OK_STR}
 else
+  rtux_Message_Failure ${UEFIORDER_KO_STR}
+fi
+else
+  rtux_Message_Warning ${UEFI_ORDER_NOT_FOUND}
   rtux_Message_Failure ${UEFIORDER_KO_STR}
 fi
 
