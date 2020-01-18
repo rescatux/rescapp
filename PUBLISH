@@ -1,0 +1,144 @@
+-*- Text -*-
+
+This is Rescapp.  Welcome.
+
+This file contains instructions for publishing new Rescapp Debian packages.
+It's aimed at Rescapp developers whom have been given publishing permissions.
+
+
+Verification
+==============
+
+Before publishing a new Rescapp package a minimal set of verifications should be done.
+This might be documented in the future.
+
+VERSION file update
+=====================
+master branch needs to have its VERSION updated to a new distinct version.
+E.g. 0.54b5
+Its associated commit message needs to be: "Bumped version into 0.54b5".
+
+Example:
+
+```
+git checkout master
+echo "0.54b5" > VERSION
+git add VERSION
+git commit -m "Bumped version into 0.54b5"
+```
+
+Debian branch on pair to normal branch
+========================================
+
+Assuming that the debian branch is debian-dev and the upstream branch is master then you both of them in pair.
+That means that debian-dev has to have all of the master commits (but not otherwise).
+
+```
+git checkout debian-dev
+git merge master
+```
+
+Debian changelog properly updated
+===================================
+Once in debian-dev a new commit editing debian/changelog file needs to add the new version according to the current one.
+
+E.g.
+```
+rescapp (0.54b5-1) unstable; urgency=low
+
+  * Handle non found devices properly on the rest of options
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 18 Jan 2020 21:01:00 +0000
+```
+
+Its associated commit message needs to be: "Bumped version into 0.54b5 (debian)".
+
+Create and push new tags
+=========================
+Now we are ready to create and push the new tags to github
+
+```
+git checkout master
+git tag -a "v0.54b5" -m "v0.54b5"
+git push github-origin v0.54b5
+git checkout debian-dev
+git tag -a "v0.54b5-debian" -m "v0.54b5-debian"
+git push github-origin v0.54b5-debian
+git checkout master
+```
+
+Git based Debian package build (i386)
+========================================
+
+Please enter an empty folder (In Buster i386 chroot) and follow this procedure:
+
+git clone https://github.com/rescatux/rescapp.git -b v0.54b5 rescapp-0.54b5
+# Ignore detached HEAD warning
+rm -rf rescapp-0.54b5/.git/
+tar czf rescapp_0.54b5.orig.tar.gz rescapp-0.54b5/
+rm -rf rescapp-0.54b5/
+git clone https://github.com/rescatux/rescapp.git -b v0.54b5-debian rescapp-0.54b5
+# Ignore detached HEAD warning
+rm -rf rescapp-0.54b5/.git/
+cd rescapp-0.54b5
+dpkg-buildpackage -us -uc
+cd ..
+rm -rf rescapp-0.54b5/
+
+Once the procedure has completed without errors you will find the following
+files:
+
+rescapp_0.54b5-1.debian.tar.xz
+rescapp_0.54b5-1.dsc
+rescapp_0.54b5-1_i386.changes
+rescapp_0.54b5-1_i386.deb
+rescapp_0.54b5.orig.tar.gz
+
+
+Git based Debian package build (amd64)
+========================================
+
+Please enter an empty folder (In Buster amd64 chroot) and follow this procedure:
+
+git clone https://github.com/rescatux/rescapp.git -b v0.54b5 rescapp-0.54b5
+# Ignore detached HEAD warning
+rm -rf rescapp-0.54b5/.git/
+tar czf rescapp_0.54b5.orig.tar.gz rescapp-0.54b5/
+rm -rf rescapp-0.54b5/
+git clone https://github.com/rescatux/rescapp.git -b v0.54b5-debian rescapp-0.54b5
+# Ignore detached HEAD warning
+rm -rf rescapp-0.54b5/.git/
+cd rescapp-0.54b5
+dpkg-buildpackage -us -uc
+cd ..
+rm -rf rescapp-0.54b5/
+
+Once the procedure has completed without errors you will find the following
+files:
+
+rescapp_0.54b5-1.debian.tar.xz
+rescapp_0.54b5-1.dsc
+rescapp_0.54b5-1_amd64.changes
+rescapp_0.54b5-1_amd64.deb
+rescapp_0.54b5.orig.tar.gz
+
+
+Copy into local repo
+=====================
+* Copy rescapp_0.54b5-1.debian.tar.xz, rescapp_0.54b5-1.dsc, rescapp_0.54b5-1_i386.changes, rescapp_0.54b5-1_i386.deb, rescapp_0.54b5.orig.tar.gz built above into the Rescatux repo buster-dev/rescapp subfolder.
+* Copy rescapp_0.54b5-1.debian.tar.xz, rescapp_0.54b5-1.dsc, rescapp_0.54b5-1_amd64.changes, rescapp_0.54b5-1_amd64.deb, rescapp_0.54b5.orig.tar.gz built above into the Rescatux repo buster-dev/rescapp subfolder (If asked you can overwrite duplicated files)
+
+Rebuild local repo
+=====================
+In one of the chroots where the apt-ftparchive package (apt-utils) has been installed you can run in the repo dir:
+./update-repo.sh
+Note: You can find update-repo.sh file on the repo-template folder.
+
+Push local repo into sourceforge repo
+=====================================
+Use filezilla or other sftp client to upload files into http://rescatux.sourceforge.net/repo .
+
+Conclusion
+===========
+
+Now you have published the new Rescapp Debian packages and Rescatux build scripts can make use of them.
