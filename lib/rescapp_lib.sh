@@ -993,7 +993,12 @@ function rtux_Get_Sam_Users () {
       rm "${SAM_PIPE}"
 
     umount ${TMP_MNT_PARTITION};
+    if [ ! -z "${SAM_FILE}" ] ; then
+      local EXIT_VALUE=0
+    fi
   fi # Partition was mounted ok
+
+  return ${EXIT_VALUE}
 
 }
 
