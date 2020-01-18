@@ -53,12 +53,14 @@ UEFIPARTCHECK_DISK_TYPE_IS_GPT_OK_STR="The EFI partition, disk type is either gp
 UEFIPARTCHECK_DISK_TYPE_IS_GPT_KO_STR="The EFI partition, disk type is neither gpt nor msdos. :("
 UEFIPARTCHECK_DISK_TYPE_IS_GPT_RUNNING_STR="Performing EFI partition disk type check"
 
-SELECTED_PARTITION=$(rtux_Choose_Partition)
+UEFIPARTCHECK_PARTITIONS_NOT_FOUND="No EFI partitions were found or chosen."
+
+SELECTED_PARTITION=$(rtux_Choose_Partition "Which EFI partition?")
 
 
 
 
-
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
 
 EXIT_SUM=0
 
@@ -127,6 +129,12 @@ fi
 
 UEFIPARTCHECK_DISK_TYPE_IS_GPT_EXIT_VALUE=$?
 EXIT_SUM=$((EXIT_SUM+UEFIPARTCHECK_DISK_TYPE_IS_GPT_EXIT_VALUE))
+
+else
+  rtux_Message_Warning ${UEFIPARTCHECK_PARTITIONS_NOT_FOUND}
+  EXIT_SUM=1
+  false
+fi
 
 
 if [ ${EXIT_SUM} -eq 0 ] ; then
