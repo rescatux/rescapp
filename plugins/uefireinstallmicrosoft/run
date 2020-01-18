@@ -27,9 +27,11 @@ UEFIREINSTALLMICROSOFT_OK_STR="The reinstallation, of the Microsoft Windows UEFI
 UEFIREINSTALLMICROSOFT_KO_STR="The reinstallation, of the Microsoft Windows UEFI boot entries was not ok :("
 UEFIREINSTALLMICROSOFT_RUNNING_STR="Reinstalling Microsoft Windows UEFI boot entries"
 UEFIREINSTALLMICROSOFT_WINDOWS_PARTITIONS_NOT_FOUND="No Windows partitions were found or chosen."
+UEFIREINSTALLMICROSOFT_EFI_PARTITIONS_NOT_FOUND="No EFI partitions were found or chosen."
 
 
 SELECTED_EFI_PARTITION="$(rtux_Choose_EFI_System_partition)"
+if [ "x${SELECTED_EFI_PARTITION}" != "x" ] ; then
 SELECTED_WINDOWS_PARTITION=$(rtux_Choose_Windows_partition);
 if [ "x${SELECTED_WINDOWS_PARTITION}" != "x" ] ; then
   if rtux_Run_Show_Progress "${UEFIREINSTALLMICROSOFT_RUNNING_STR}" rtux_UEFI_Reinstall_Microsoft_Boot_Entries "${SELECTED_EFI_PARTITION}" "${SELECTED_WINDOWS_PARTITION}";
@@ -40,6 +42,10 @@ if [ "x${SELECTED_WINDOWS_PARTITION}" != "x" ] ; then
   fi
 else
   rtux_Message_Warning ${UEFIREINSTALLMICROSOFT_WINDOWS_PARTITIONS_NOT_FOUND}
+  rtux_Message_Failure ${UEFIREINSTALLMICROSOFT_KO_STR}
+fi
+else
+  rtux_Message_Warning ${UEFIREINSTALLMICROSOFT_EFI_PARTITIONS_NOT_FOUND}
   rtux_Message_Failure ${UEFIREINSTALLMICROSOFT_KO_STR}
 fi
 
