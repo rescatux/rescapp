@@ -29,8 +29,8 @@ UEFIREINSTALLMICROSOFT_RUNNING_STR="Reinstalling Microsoft Windows UEFI boot ent
 
 
 SELECTED_EFI_PARTITION="$(rtux_Choose_EFI_System_partition)"
-SELECTED_PARTITION=$(rtux_Choose_Windows_partition);
-if rtux_Run_Show_Progress "${UEFIREINSTALLMICROSOFT_RUNNING_STR}" rtux_UEFI_Reinstall_Microsoft_Boot_Entries "${SELECTED_EFI_PARTITION}" "${SELECTED_PARTITION}";
+SELECTED_WINDOWS_PARTITION=$(rtux_Choose_Windows_partition);
+if rtux_Run_Show_Progress "${UEFIREINSTALLMICROSOFT_RUNNING_STR}" rtux_UEFI_Reinstall_Microsoft_Boot_Entries "${SELECTED_EFI_PARTITION}" "${SELECTED_WINDOWS_PARTITION}";
 then
   rtux_Message_Success ${UEFIREINSTALLMICROSOFT_OK_STR}
 else
