@@ -65,7 +65,7 @@ WINMBR_HARDDISK_POSITION_NOT_FOUND="Hard disk position was not set."
 WINMBR_HARDDISK_NOT_FOUND="Hard disk was not set or found."
 WINMBR_PARTITION_NOT_FOUND="Partition was not set or found."
 
-SELECTED_PARTITION=$(rtux_Choose_Primary_Partition);
+SELECTED_PARTITION=$(rtux_Choose_Primary_Partition "Which Windows partition?");
 if [ "x${SELECTED_PARTITION}" != "x" ] ; then
   SELECTED_HARD_DISK=$(rtux_Choose_Hard_Disk "${WHICH_HARD_DISK_INSTALL_WINMBR_STR}");
   if [ "x${SELECTED_HARD_DISK}" != "x" ] ; then
