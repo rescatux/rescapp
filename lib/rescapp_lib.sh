@@ -334,7 +334,7 @@ function rtux_Choose_Hard_Disk () {
 # It outputs the chosen partition.
 function rtux_Choose_Partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_System_Partitions)
@@ -344,7 +344,7 @@ function rtux_Choose_Partition () {
 # It outputs the chosen partition.
 function rtux_Choose_Primary_Partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which primary partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Primary_Partitions)
@@ -417,7 +417,7 @@ function rtux_Abstract_Choose_Partition () {
 # It outputs the chosen partition.
 function rtux_Choose_Linux_partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which GNU/Linux partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Linux_Os_Partitions)
@@ -427,7 +427,7 @@ function rtux_Choose_Linux_partition () {
 # It outputs the chosen partition.
 function rtux_Choose_Windows_partition () {
   custom_question="$1"
-  if [ "${custom_question}" -eq "" ] ; then
+  if [ -z "${custom_question}" ] ; then
     custom_question="Which Windows partition?"
   fi
   rtux_Abstract_Choose_Partition "${custom_question}" $(rtux_Get_Windows_Os_Partitions)
