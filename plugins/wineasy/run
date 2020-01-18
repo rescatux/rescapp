@@ -51,8 +51,7 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
     # Backup of the files in a temporary folder
     rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}"
     # Ask the user which password to reset
-    CHOSEN_USER=$(rtux_Choose_Sam_User \
-      "Choose Windows user to get Easy Admin")
+    CHOSEN_USER=$(rtux_Choose_Sam_User "Choose Windows user to get Easy Admin")
 
     EXIT_SUM=0
 
