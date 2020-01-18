@@ -27,14 +27,41 @@ set -v
 WINPROMOTE_OK_STR="The user was promoted to Admin OK! :)"
 WINPROMOTE_NOT_OK_STR="The user was not promoted to Admin. Something went wrong! :("
 
+WINPROMOTE_RUNNING_STR="Promoting Windows user to Admin."
+WINPROMOTE_PARTITIONS_NOT_FOUND="No Windows partitions were found or chosen."
+WINPROMOTE_SAMUSERS_NOT_DETECTED="No SAM users or SAM file were detected."
+WINPROMOTE_SAMUSERS_NOT_FOUND="No Windows users were found or chosen."
+WINPROMOTE_BACKUP_WENT_WRONG="Backup of SAM directory went wrong."
 
 SELECTED_PARTITION=$(rtux_Choose_Windows_partition);
 
+if [ "x${SELECTED_PARTITION}" != "x" ] ; then
+  if rtux_Get_Sam_Users ${SELECTED_PARTITION} ; then
+    # Backup of the files in a temporary folder
+    if rtux_backup_windows_config ${SELECTED_PARTITION} "${SAM_FILE}" ; then
+      # Ask the user which password to reset
+      WINDOWS_USER=$(rtux_Choose_Sam_User "Choose Windows user to promote to Admin")
+      if [ "x${WINDOWS_USER}" != "x" ] ; then
+        if rtux_Run_Show_Progress "${WINPROMOTE_RUNNING_STR}" rtux_winpromote_payload ${SELECTED_PARTITION} ${SAM_FILE} ${WINDOWS_USER} ; then
+          rtux_Message_Success ${WINPROMOTE_OK_STR}
+        else
+          rtux_Message_Failure ${WINPROMOTE_NOT_OK_STR}
+        fi
+      else
+        rtux_Message_Warning ${WINPROMOTE_SAMUSERS_NOT_FOUND}
+        rtux_Message_Failure ${WINPROMOTE_NOT_RESET_STR}
+      fi
+    else
+      rtux_Message_Warning ${WINPROMOTE_BACKUP_WENT_WRONG}
+      rtux_Message_Failure ${WINPROMOTE_NOT_RESET_STR}
+    fi
 
-
-if rtux_winpromote ${SELECTED_PARTITION} ; then
-  rtux_Message_Success ${WINPROMOTE_OK_STR}
+  else
+    rtux_Message_Warning ${WINPROMOTE_SAMUSERS_NOT_DETECTED}
+    rtux_Message_Failure ${WINPROMOTE_NOT_RESET_STR}
+  fi
 else
-  rtux_Message_Failure ${WINPROMOTE_NOT_OK_STR}
+  rtux_Message_Warning ${WINPROMOTE_PARTITIONS_NOT_FOUND}
+  rtux_Message_Failure ${WINPROMOTE_NOT_RESET_STR}
 fi
 
