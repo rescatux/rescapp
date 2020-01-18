@@ -1,3 +1,9 @@
+rescapp (0.54b5-1) unstable; urgency=low
+
+  * Handle non found devices properly on the rest of options
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 18 Jan 2020 21:01:00 +0000
+
 rescapp (0.54b4-1) unstable; urgency=low
 
   * Minor inxi improvements
