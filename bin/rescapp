@@ -1001,7 +1001,7 @@ if __name__ == '__main__':
     description_filename = 'description'
     run_filename = 'run'
     beta_filename = 'ISBETA'
-    offlinedoc_filename = 'local_doc.html'
+    offlinedoc_filename = 'doc.html'
     version_filename = 'VERSION'
 
     maximum_option_columns = 3
