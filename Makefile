@@ -3,6 +3,7 @@ prefix?=/usr/local
 target=$(DESTDIR)$(prefix)
 doctarget=$(target)/share/doc/rescapp
 icontarget=$(target)/share/icons/rescapp
+desktopiconstarget=$(target)/share/icons/hicolor
 applicationtarget=$(target)/share/applications
 bintarget=$(target)/bin
 helpertarget=$(target)/bin
@@ -54,6 +55,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 
 install:	install_documentation\
 	install_icons\
+	install_desktopicons\
 	install_applications\
 	install_binaries\
 	install_helpers\
@@ -522,6 +524,24 @@ winunlock_install_documentation	winunlock_build_documentation:	plugins/winunlock
 install_icons:	icons/*png
 	install -d $(icontarget)/
 	install -m 644 icons/*png $(icontarget)/
+
+install_desktopicons:	desktop-icons/rescapp-16.png desktop-icons/rescapp-22.png desktop-icons/rescapp-24.png desktop-icons/rescapp-32.png desktop-icons/rescapp-48.png desktop-icons/rescapp-256.png desktop-icons/rescapp-512.png desktop-icons/rescapp.svg
+	install -d $(desktopiconstarget)/16x16/apps/
+	install -m 644 desktop-icons/rescapp-16.png $(desktopiconstarget)/16x16/apps/rescapp.png
+	install -d $(desktopiconstarget)/22x22/apps/
+	install -m 644 desktop-icons/rescapp-22.png $(desktopiconstarget)/22x22/apps/rescapp.png
+	install -d $(desktopiconstarget)/24x24/apps/
+	install -m 644 desktop-icons/rescapp-24.png $(desktopiconstarget)/24x24/apps/rescapp.png
+	install -d $(desktopiconstarget)/32x32/apps/
+	install -m 644 desktop-icons/rescapp-32.png $(desktopiconstarget)/32x32/apps/rescapp.png
+	install -d $(desktopiconstarget)/48x48/apps/
+	install -m 644 desktop-icons/rescapp-48.png $(desktopiconstarget)/48x48/apps/rescapp.png
+	install -d $(desktopiconstarget)/256x256/apps/
+	install -m 644 desktop-icons/rescapp-256.png $(desktopiconstarget)/256x256/apps/rescapp.png
+	install -d $(desktopiconstarget)/512x512/apps/
+	install -m 644 desktop-icons/rescapp-512.png $(desktopiconstarget)/512x512/apps/rescapp.png
+	install -d $(desktopiconstarget)/scalable/apps/
+	install -m 644 desktop-icons/rescapp.svg $(desktopiconstarget)/scalable/apps/
 
 install_applications:	applications/*desktop
 	install -d $(applicationtarget)/
