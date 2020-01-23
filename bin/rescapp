@@ -1055,6 +1055,7 @@ if __name__ == '__main__':
     stw = SelftestWindow()
     stw.setWindowTitle(rescapp_title + ' ' + rescapp_version + ' self-test')
     stw.setWindowFlags(QtCore.Qt.Widget)
+    stw.setWindowIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'rescapp-window-icon.png'))
     stw.show()
 
     app_stw.exec_()
@@ -1069,6 +1070,7 @@ if __name__ == '__main__':
     mw.setWindowTitle(rescapp_title + ' ' + rescapp_version)
 
     mw.selectSupportOption(main_menu_support_option)
+    mw.setWindowIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'rescapp-window-icon.png'))
     mw.show()
 
     sys.exit(app_rescapp.exec_())
