@@ -233,8 +233,13 @@ help-rescapp_install_documentation	help-rescapp_build_documentation:	plugins/hel
 	install -m 644 plugins/help-rescapp/*html $(doctarget)/plugins/help-rescapp/
 
 
+not-documented_installdocimages_directory = $(subst /,_,$(wildcard plugins/not-documented/images))
 
-not-documented_install_documentation	not-documented_build_documentation:	plugins/not-documented/*html
+$(not-documented_installdocimages_directory):	plugins/not-documented/images/*
+	install -d $(doctarget)/plugins/not-documented/images/
+	install -m 644 plugins/not-documented/images/* $(doctarget)/plugins/not-documented/images/
+
+not-documented_install_documentation	not-documented_build_documentation:	plugins/not-documented/*html	$(not-documented_installdocimages_directory)
 	install -d $(doctarget)/plugins/not-documented/
 	install -m 644 plugins/not-documented/*html $(doctarget)/plugins/not-documented/
 
