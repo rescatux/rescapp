@@ -3,6 +3,7 @@ prefix?=/usr/local
 target=$(DESTDIR)$(prefix)
 doctarget=$(target)/share/doc/rescapp
 icontarget=$(target)/share/icons/rescapp
+desktopiconstarget=$(target)/share/icons/hicolor
 applicationtarget=$(target)/share/applications
 bintarget=$(target)/bin
 helpertarget=$(target)/bin
@@ -29,31 +30,32 @@ all:
 #	uefireinstallmicrosoft_install_documentation
 #	web_install_documentation
 #	wineasy_install_documentation
-install_documentation:	about-rescapp_install_documentation\
-	bootinfoscript_install_documentation\
-	chat_install_documentation\
-	chpasswd_install_documentation\
-	fsck_install_documentation\
-	gpt-check-bios-grub_install_documentation\
-	gpt-create-hybrid-mbr_install_documentation\
-	gpt-recompute-hybrid-mbr-chs_install_documentation\
-	grub-install_install_documentation\
-	help-rescapp_install_documentation\
-	share_log_install_documentation\
-	share_log_forum_install_documentation\
-	show_log_install_documentation\
-	sudoers_install_documentation\
-	update-grub_install_documentation\
-	winmbr_install_documentation\
-	winpass_install_documentation\
-	winpromote_install_documentation\
-	winunlock_install_documentation\
-	not-documented_install_documentation\
-	inxi_install_documentation
+install_documentation:	about-rescapp_install_documentation	about-rescapp_build_documentation\
+	bootinfoscript_install_documentation	bootinfoscript_build_documentation\
+	chat_install_documentation	chat_build_documentation\
+	chpasswd_install_documentation	chpasswd_build_documentation\
+	fsck_install_documentation	fsck_build_documentation\
+	gpt-check-bios-grub_install_documentation	gpt-check-bios-grub_build_documentation\
+	gpt-create-hybrid-mbr_install_documentation	gpt-create-hybrid-mbr_build_documentation\
+	gpt-recompute-hybrid-mbr-chs_install_documentation	gpt-recompute-hybrid-mbr-chs_build_documentation\
+	grub-install_install_documentation	grub-install_build_documentation\
+	help-rescapp_install_documentation	help-rescapp_build_documentation\
+	share_log_install_documentation	share_log_build_documentation\
+	share_log_forum_install_documentation	share_log_forum_build_documentation\
+	show_log_install_documentation	show_log_build_documentation\
+	sudoers_install_documentation	sudoers_build_documentation\
+	update-grub_install_documentation	update-grub_build_documentation\
+	winmbr_install_documentation	winmbr_build_documentation\
+	winpass_install_documentation	winpass_build_documentation\
+	winpromote_install_documentation	winpromote_build_documentation\
+	winunlock_install_documentation	winunlock_build_documentation\
+	not-documented_install_documentation	not-documented_build_documentation\
+	inxi_install_documentation	inxi_build_documentation
 
 
 install:	install_documentation\
 	install_icons\
+	install_desktopicons\
 	install_applications\
 	install_binaries\
 	install_helpers\
@@ -72,7 +74,7 @@ $(about-rescapp_installdocimages_directory):	plugins/about-rescapp/images/*
 	install -d $(doctarget)/plugins/about-rescapp/images/
 	install -m 644 plugins/about-rescapp/images/* $(doctarget)/plugins/about-rescapp/images/
 
-about-rescapp_install_documentation:	plugins/about-rescapp/*html	$(about-rescapp_installdocimages_directory)
+about-rescapp_install_documentation	about-rescapp_build_documentation:	plugins/about-rescapp/*html	$(about-rescapp_installdocimages_directory)
 	install -d $(doctarget)/plugins/about-rescapp/
 	install -m 644 plugins/about-rescapp/*html $(doctarget)/plugins/about-rescapp/
 
@@ -86,7 +88,7 @@ $(bootinfoscript_installdocimages_directory):	plugins/bootinfoscript/images/*
 	install -d $(doctarget)/plugins/bootinfoscript/images/
 	install -m 644 plugins/bootinfoscript/images/* $(doctarget)/plugins/bootinfoscript/images/
 
-bootinfoscript_install_documentation:	plugins/bootinfoscript/*html	$(bootinfoscript_installdocimages_directory)
+bootinfoscript_install_documentation	bootinfoscript_build_documentation:	plugins/bootinfoscript/*html	$(bootinfoscript_installdocimages_directory)
 	install -d $(doctarget)/plugins/bootinfoscript/
 	install -m 644 plugins/bootinfoscript/*html $(doctarget)/plugins/bootinfoscript/
 
@@ -100,7 +102,7 @@ $(chat_installdocimages_directory):	plugins/chat/images/*
 	install -d $(doctarget)/plugins/chat/images/
 	install -m 644 plugins/chat/images/* $(doctarget)/plugins/chat/images/
 
-chat_install_documentation:	plugins/chat/*html	$(chat_installdocimages_directory)
+chat_install_documentation	chat_build_documentation:	plugins/chat/*html	$(chat_installdocimages_directory)
 	install -d $(doctarget)/plugins/chat/
 	install -m 644 plugins/chat/*html $(doctarget)/plugins/chat/
 
@@ -114,7 +116,7 @@ $(chpasswd_installdocimages_directory):	plugins/chpasswd/images/*
 	install -d $(doctarget)/plugins/chpasswd/images/
 	install -m 644 plugins/chpasswd/images/* $(doctarget)/plugins/chpasswd/images/
 
-chpasswd_install_documentation:	plugins/chpasswd/*html	$(chpasswd_installdocimages_directory)
+chpasswd_install_documentation	chpasswd_build_documentation:	plugins/chpasswd/*html	$(chpasswd_installdocimages_directory)
 	install -d $(doctarget)/plugins/chpasswd/
 	install -m 644 plugins/chpasswd/*html $(doctarget)/plugins/chpasswd/
 
@@ -128,7 +130,7 @@ $(fsck_installdocimages_directory):	plugins/fsck/images/*
 	install -d $(doctarget)/plugins/fsck/images/
 	install -m 644 plugins/fsck/images/* $(doctarget)/plugins/fsck/images/
 
-fsck_install_documentation:	plugins/fsck/*html	$(fsck_installdocimages_directory)
+fsck_install_documentation	fsck_build_documentation:	plugins/fsck/*html	$(fsck_installdocimages_directory)
 	install -d $(doctarget)/plugins/fsck/
 	install -m 644 plugins/fsck/*html $(doctarget)/plugins/fsck/
 
@@ -156,7 +158,7 @@ $(gpt-check-bios-grub_installdocimages_directory):	plugins/gpt-check-bios-grub/i
 	install -d $(doctarget)/plugins/gpt-check-bios-grub/images/
 	install -m 644 plugins/gpt-check-bios-grub/images/* $(doctarget)/plugins/gpt-check-bios-grub/images/
 
-gpt-check-bios-grub_install_documentation:	plugins/gpt-check-bios-grub/*html	$(gpt-check-bios-grub_installdocimages_directory)
+gpt-check-bios-grub_install_documentation	gpt-check-bios-grub_build_documentation:	plugins/gpt-check-bios-grub/*html	$(gpt-check-bios-grub_installdocimages_directory)
 	install -d $(doctarget)/plugins/gpt-check-bios-grub/
 	install -m 644 plugins/gpt-check-bios-grub/*html $(doctarget)/plugins/gpt-check-bios-grub/
 
@@ -170,7 +172,7 @@ $(gpt-create-hybrid-mbr_installdocimages_directory):	plugins/gpt-create-hybrid-m
 	install -d $(doctarget)/plugins/gpt-create-hybrid-mbr/images/
 	install -m 644 plugins/gpt-create-hybrid-mbr/images/* $(doctarget)/plugins/gpt-create-hybrid-mbr/images/
 
-gpt-create-hybrid-mbr_install_documentation:	plugins/gpt-create-hybrid-mbr/*html	$(gpt-create-hybrid-mbr_installdocimages_directory)
+gpt-create-hybrid-mbr_install_documentation	gpt-create-hybrid-mbr_build_documentation:	plugins/gpt-create-hybrid-mbr/*html	$(gpt-create-hybrid-mbr_installdocimages_directory)
 	install -d $(doctarget)/plugins/gpt-create-hybrid-mbr/
 	install -m 644 plugins/gpt-create-hybrid-mbr/*html $(doctarget)/plugins/gpt-create-hybrid-mbr/
 
@@ -184,7 +186,7 @@ $(gpt-recompute-hybrid-mbr-chs_installdocimages_directory):	plugins/gpt-recomput
 	install -d $(doctarget)/plugins/gpt-recompute-hybrid-mbr-chs/images/
 	install -m 644 plugins/gpt-recompute-hybrid-mbr-chs/images/* $(doctarget)/plugins/gpt-recompute-hybrid-mbr-chs/images/
 
-gpt-recompute-hybrid-mbr-chs_install_documentation:	plugins/gpt-recompute-hybrid-mbr-chs/*html	$(gpt-recompute-hybrid-mbr-chs_installdocimages_directory)
+gpt-recompute-hybrid-mbr-chs_install_documentation	gpt-recompute-hybrid-mbr-chs_build_documentation:	plugins/gpt-recompute-hybrid-mbr-chs/*html	$(gpt-recompute-hybrid-mbr-chs_installdocimages_directory)
 	install -d $(doctarget)/plugins/gpt-recompute-hybrid-mbr-chs/
 	install -m 644 plugins/gpt-recompute-hybrid-mbr-chs/*html $(doctarget)/plugins/gpt-recompute-hybrid-mbr-chs/
 
@@ -212,7 +214,7 @@ $(grub-install_installdocimages_directory):	plugins/grub-install/images/*
 	install -d $(doctarget)/plugins/grub-install/images/
 	install -m 644 plugins/grub-install/images/* $(doctarget)/plugins/grub-install/images/
 
-grub-install_install_documentation:	plugins/grub-install/*html	$(grub-install_installdocimages_directory)
+grub-install_install_documentation	grub-install_build_documentation:	plugins/grub-install/*html	$(grub-install_installdocimages_directory)
 	install -d $(doctarget)/plugins/grub-install/
 	install -m 644 plugins/grub-install/*html $(doctarget)/plugins/grub-install/
 
@@ -226,17 +228,22 @@ $(help-rescapp_installdocimages_directory):	plugins/help-rescapp/images/*
 	install -d $(doctarget)/plugins/help-rescapp/images/
 	install -m 644 plugins/help-rescapp/images/* $(doctarget)/plugins/help-rescapp/images/
 
-help-rescapp_install_documentation:	plugins/help-rescapp/*html	$(help-rescapp_installdocimages_directory)
+help-rescapp_install_documentation	help-rescapp_build_documentation:	plugins/help-rescapp/*html	$(help-rescapp_installdocimages_directory)
 	install -d $(doctarget)/plugins/help-rescapp/
 	install -m 644 plugins/help-rescapp/*html $(doctarget)/plugins/help-rescapp/
 
 
+not-documented_installdocimages_directory = $(subst /,_,$(wildcard plugins/not-documented/images))
 
-not-documented_install_documentation:	plugins/not-documented/*html
+$(not-documented_installdocimages_directory):	plugins/not-documented/images/*
+	install -d $(doctarget)/plugins/not-documented/images/
+	install -m 644 plugins/not-documented/images/* $(doctarget)/plugins/not-documented/images/
+
+not-documented_install_documentation	not-documented_build_documentation:	plugins/not-documented/*html	$(not-documented_installdocimages_directory)
 	install -d $(doctarget)/plugins/not-documented/
 	install -m 644 plugins/not-documented/*html $(doctarget)/plugins/not-documented/
 
-inxi_install_documentation:	plugins/inxi/*html
+inxi_install_documentation	inxi_build_documentation:	plugins/inxi/*html
 	install -d $(doctarget)/plugins/inxi/
 	install -m 644 plugins/inxi/*html $(doctarget)/plugins/inxi/
 
@@ -261,7 +268,7 @@ $(share_log_installdocimages_directory):	plugins/share_log/images/*
 	install -d $(doctarget)/plugins/share_log/images/
 	install -m 644 plugins/share_log/images/* $(doctarget)/plugins/share_log/images/
 
-share_log_install_documentation:	plugins/share_log/*html	$(share_log_installdocimages_directory)
+share_log_install_documentation	share_log_build_documentation:	plugins/share_log/*html	$(share_log_installdocimages_directory)
 	install -d $(doctarget)/plugins/share_log/
 	install -m 644 plugins/share_log/*html $(doctarget)/plugins/share_log/
 
@@ -275,7 +282,7 @@ $(share_log_forum_installdocimages_directory):	plugins/share_log_forum/images/*
 	install -d $(doctarget)/plugins/share_log_forum/images/
 	install -m 644 plugins/share_log_forum/images/* $(doctarget)/plugins/share_log_forum/images/
 
-share_log_forum_install_documentation:	plugins/share_log_forum/*html	$(share_log_forum_installdocimages_directory)
+share_log_forum_install_documentation	share_log_forum_build_documentation:	plugins/share_log_forum/*html	$(share_log_forum_installdocimages_directory)
 	install -d $(doctarget)/plugins/share_log_forum/
 	install -m 644 plugins/share_log_forum/*html $(doctarget)/plugins/share_log_forum/
 
@@ -289,7 +296,7 @@ $(show_log_installdocimages_directory):	plugins/show_log/images/*
 	install -d $(doctarget)/plugins/show_log/images/
 	install -m 644 plugins/show_log/images/* $(doctarget)/plugins/show_log/images/
 
-show_log_install_documentation:	plugins/show_log/*html	$(show_log_installdocimages_directory)
+show_log_install_documentation	show_log_build_documentation:	plugins/show_log/*html	$(show_log_installdocimages_directory)
 	install -d $(doctarget)/plugins/show_log/
 	install -m 644 plugins/show_log/*html $(doctarget)/plugins/show_log/
 
@@ -303,7 +310,7 @@ $(sudoers_installdocimages_directory):	plugins/sudoers/images/*
 	install -d $(doctarget)/plugins/sudoers/images/
 	install -m 644 plugins/sudoers/images/* $(doctarget)/plugins/sudoers/images/
 
-sudoers_install_documentation:	plugins/sudoers/*html	$(sudoers_installdocimages_directory)
+sudoers_install_documentation	sudoers_build_documentation:	plugins/sudoers/*html	$(sudoers_installdocimages_directory)
 	install -d $(doctarget)/plugins/sudoers/
 	install -m 644 plugins/sudoers/*html $(doctarget)/plugins/sudoers/
 
@@ -429,7 +436,7 @@ $(update-grub_installdocimages_directory):	plugins/update-grub/images/*
 	install -d $(doctarget)/plugins/update-grub/images/
 	install -m 644 plugins/update-grub/images/* $(doctarget)/plugins/update-grub/images/
 
-update-grub_install_documentation:	plugins/update-grub/*html	$(update-grub_installdocimages_directory)
+update-grub_install_documentation	update-grub_build_documentation:	plugins/update-grub/*html	$(update-grub_installdocimages_directory)
 	install -d $(doctarget)/plugins/update-grub/
 	install -m 644 plugins/update-grub/*html $(doctarget)/plugins/update-grub/
 
@@ -471,7 +478,7 @@ $(winmbr_installdocimages_directory):	plugins/winmbr/images/*
 	install -d $(doctarget)/plugins/winmbr/images/
 	install -m 644 plugins/winmbr/images/* $(doctarget)/plugins/winmbr/images/
 
-winmbr_install_documentation:	plugins/winmbr/*html	$(winmbr_installdocimages_directory)
+winmbr_install_documentation	winmbr_build_documentation:	plugins/winmbr/*html	$(winmbr_installdocimages_directory)
 	install -d $(doctarget)/plugins/winmbr/
 	install -m 644 plugins/winmbr/*html $(doctarget)/plugins/winmbr/
 
@@ -485,7 +492,7 @@ $(winpass_installdocimages_directory):	plugins/winpass/images/*
 	install -d $(doctarget)/plugins/winpass/images/
 	install -m 644 plugins/winpass/images/* $(doctarget)/plugins/winpass/images/
 
-winpass_install_documentation:	plugins/winpass/*html	$(winpass_installdocimages_directory)
+winpass_install_documentation	winpass_build_documentation:	plugins/winpass/*html	$(winpass_installdocimages_directory)
 	install -d $(doctarget)/plugins/winpass/
 	install -m 644 plugins/winpass/*html $(doctarget)/plugins/winpass/
 
@@ -499,7 +506,7 @@ $(winpromote_installdocimages_directory):	plugins/winpromote/images/*
 	install -d $(doctarget)/plugins/winpromote/images/
 	install -m 644 plugins/winpromote/images/* $(doctarget)/plugins/winpromote/images/
 
-winpromote_install_documentation:	plugins/winpromote/*html	$(winpromote_installdocimages_directory)
+winpromote_install_documentation	winpromote_build_documentation:	plugins/winpromote/*html	$(winpromote_installdocimages_directory)
 	install -d $(doctarget)/plugins/winpromote/
 	install -m 644 plugins/winpromote/*html $(doctarget)/plugins/winpromote/
 
@@ -513,7 +520,7 @@ $(winunlock_installdocimages_directory):	plugins/winunlock/images/*
 	install -d $(doctarget)/plugins/winunlock/images/
 	install -m 644 plugins/winunlock/images/* $(doctarget)/plugins/winunlock/images/
 
-winunlock_install_documentation:	plugins/winunlock/*html	$(winunlock_installdocimages_directory)
+winunlock_install_documentation	winunlock_build_documentation:	plugins/winunlock/*html	$(winunlock_installdocimages_directory)
 	install -d $(doctarget)/plugins/winunlock/
 	install -m 644 plugins/winunlock/*html $(doctarget)/plugins/winunlock/
 
@@ -522,6 +529,24 @@ winunlock_install_documentation:	plugins/winunlock/*html	$(winunlock_installdoci
 install_icons:	icons/*png
 	install -d $(icontarget)/
 	install -m 644 icons/*png $(icontarget)/
+
+install_desktopicons:	desktop-icons/rescapp-16.png desktop-icons/rescapp-22.png desktop-icons/rescapp-24.png desktop-icons/rescapp-32.png desktop-icons/rescapp-48.png desktop-icons/rescapp-256.png desktop-icons/rescapp-512.png desktop-icons/rescapp.svg
+	install -d $(desktopiconstarget)/16x16/apps/
+	install -m 644 desktop-icons/rescapp-16.png $(desktopiconstarget)/16x16/apps/rescapp.png
+	install -d $(desktopiconstarget)/22x22/apps/
+	install -m 644 desktop-icons/rescapp-22.png $(desktopiconstarget)/22x22/apps/rescapp.png
+	install -d $(desktopiconstarget)/24x24/apps/
+	install -m 644 desktop-icons/rescapp-24.png $(desktopiconstarget)/24x24/apps/rescapp.png
+	install -d $(desktopiconstarget)/32x32/apps/
+	install -m 644 desktop-icons/rescapp-32.png $(desktopiconstarget)/32x32/apps/rescapp.png
+	install -d $(desktopiconstarget)/48x48/apps/
+	install -m 644 desktop-icons/rescapp-48.png $(desktopiconstarget)/48x48/apps/rescapp.png
+	install -d $(desktopiconstarget)/256x256/apps/
+	install -m 644 desktop-icons/rescapp-256.png $(desktopiconstarget)/256x256/apps/rescapp.png
+	install -d $(desktopiconstarget)/512x512/apps/
+	install -m 644 desktop-icons/rescapp-512.png $(desktopiconstarget)/512x512/apps/rescapp.png
+	install -d $(desktopiconstarget)/scalable/apps/
+	install -m 644 desktop-icons/rescapp.svg $(desktopiconstarget)/scalable/apps/
 
 install_applications:	applications/*desktop
 	install -d $(applicationtarget)/
@@ -1060,3 +1085,108 @@ install_version:	VERSION
 install_dbussystemconf:	system/dbus/conf/org.rescapp.MessageService.conf
 	install -d $(dbussystemconftarget)
 	install -m 644 system/dbus/conf/org.rescapp.MessageService.conf $(dbussystemconftarget)
+
+about-rescapp_build_documentation:	plugins/about-rescapp/doc.html
+
+plugins/about-rescapp/doc.html:	plugins/about-rescapp/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh about-rescapp
+
+share_log_build_documentation:	plugins/share_log/doc.html
+
+plugins/share_log/doc.html:	plugins/share_log/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh share_log
+
+inxi_build_documentation:	plugins/inxi/doc.html
+
+plugins/inxi/doc.html:	plugins/inxi/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh inxi
+
+help-rescapp_build_documentation:	plugins/help-rescapp/doc.html
+
+plugins/help-rescapp/doc.html:	plugins/help-rescapp/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh help-rescapp
+
+winmbr_build_documentation:	plugins/winmbr/doc.html
+
+plugins/winmbr/doc.html:	plugins/winmbr/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh winmbr
+
+sudoers_build_documentation:	plugins/sudoers/doc.html
+
+plugins/sudoers/doc.html:	plugins/sudoers/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh sudoers
+
+update-grub_build_documentation:	plugins/update-grub/doc.html
+
+plugins/update-grub/doc.html:	plugins/update-grub/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh update-grub
+
+gpt-create-hybrid-mbr_build_documentation:	plugins/gpt-create-hybrid-mbr/doc.html
+
+plugins/gpt-create-hybrid-mbr/doc.html:	plugins/gpt-create-hybrid-mbr/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh gpt-create-hybrid-mbr
+
+gpt-check-bios-grub_build_documentation:	plugins/gpt-check-bios-grub/doc.html
+
+plugins/gpt-check-bios-grub/doc.html:	plugins/gpt-check-bios-grub/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh gpt-check-bios-grub
+
+winunlock_build_documentation:	plugins/winunlock/doc.html
+
+plugins/winunlock/doc.html:	plugins/winunlock/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh winunlock
+
+winpromote_build_documentation:	plugins/winpromote/doc.html
+
+plugins/winpromote/doc.html:	plugins/winpromote/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh winpromote
+
+bootinfoscript_build_documentation:	plugins/bootinfoscript/doc.html
+
+plugins/bootinfoscript/doc.html:	plugins/bootinfoscript/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh bootinfoscript
+
+not-documented_build_documentation:	plugins/not-documented/doc.html
+
+plugins/not-documented/doc.html:	plugins/not-documented/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh not-documented
+
+gpt-recompute-hybrid-mbr-chs_build_documentation:	plugins/gpt-recompute-hybrid-mbr-chs/doc.html
+
+plugins/gpt-recompute-hybrid-mbr-chs/doc.html:	plugins/gpt-recompute-hybrid-mbr-chs/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh gpt-recompute-hybrid-mbr-chs
+
+share_log_forum_build_documentation:	plugins/share_log_forum/doc.html
+
+plugins/share_log_forum/doc.html:	plugins/share_log_forum/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh share_log_forum
+
+grub-install_build_documentation:	plugins/grub-install/doc.html
+
+plugins/grub-install/doc.html:	plugins/grub-install/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh grub-install
+
+winpass_build_documentation:	plugins/winpass/doc.html
+
+plugins/winpass/doc.html:	plugins/winpass/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh winpass
+
+chpasswd_build_documentation:	plugins/chpasswd/doc.html
+
+plugins/chpasswd/doc.html:	plugins/chpasswd/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh chpasswd
+
+show_log_build_documentation:	plugins/show_log/doc.html
+
+plugins/show_log/doc.html:	plugins/show_log/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh show_log
+
+chat_build_documentation:	plugins/chat/doc.html
+
+plugins/chat/doc.html:	plugins/chat/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh chat
+
+fsck_build_documentation:	plugins/fsck/doc.html
+
+plugins/fsck/doc.html:	plugins/fsck/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh fsck

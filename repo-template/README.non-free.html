@@ -1,0 +1,56 @@
+<h2> Why non-free?</h2>
+Because you have some special hardware in your computer/laptop which doesn't behave correctly with free-as-freedom drivers only.
+Some examples might be:
+<ul>
+<li>Not getting a graphical desktop but a blank screen.</li>
+<li>Getting unusable video resolutions.</li>
+<li>Wifi not working.</li>
+</ul>
+
+
+<h2>Where do I download non-free version of Rescatux?</h2>
+Rescatux does not release a non-free version of Rescatux because of <a href="https://www.gnu.org/philosophy/free-sw.en.html">ethics</a>.
+
+<h2>But I need help to repair my computer. Please help me!</h2>
+Well, you can just use a Debian non-free live cd/usb and install rescapp on top of it.
+It's almost as if you had Rescatux but without SELinux support (mostly needed for Fedora/Redhat/CentOS systems).
+
+<h2>Where do I download those non-free Debian live cds?</h2>
+<br/>
+You can find the latest non-free stable releases for Debian live here:
+<a href="https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/">Current non-free live images</a>.
+The current Debian version as of 2019 is buster. Rescapp is based on buster and buster will last for about two years.
+<br/>
+
+You should aim at the lxqt version, e.g. download <a href="https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/current-live/amd64/iso-hybrid/debian-live-10.1.0-amd64-lxqt+nonfree.iso">debian-live-10.1.0-amd64-lxqt+nonfree.iso</a>.
+<br/>
+You may want to use an older version: <a href="https://cdimage.debian.org/mirror/cdimage/unofficial/non-free/cd-including-firmware/archive/10.0.0-live+nonfree/amd64/iso-hybrid/debian-live-10.0.0-amd64-lxqt+nonfree.iso">debian-live-10.0.0-amd64-lxqt+nonfree.iso</a> if the newest 10.1.0 version features unusable keyboard+mouse in your specific computer model.
+<br/>
+You can use other graphical live cd versions other than the lxqt one, but be aware that you may have to download more packages.
+<br/>
+
+<h2> Rescapp installation on non-free Debian live cds.</h2>
+First of all make sure that your non-free Debian live cd has a working internet connection.
+<br/>
+<b>TIP</b>: At this point you may want to visit this page from your non-free live cd so that it's easier to copy and paste.
+<br/>
+Then at the menu choose <b>System Tools</b> then <b>Qterminal</b>.
+<br/>
+Copy and paste this single line in a go and press enter.
+<pre>
+sudo apt update ; sudo apt install wget ; wget "http://rescatux.sf.net/repo/rescapp-nonfree-install.sh" -O rnfi.sh ; chmod +x rnfi.sh ; sudo ./rnfi.sh
+</pre>
+Please wait untill all the packages are installed and configured. Once the <i>user@debian:~$</i> prompt is back you can close the Qterminal window.
+<br/>
+<h2> How do I start repairing my computer ? </h2>
+In order to start rescapp, on the menu choose <b>Other</b> then <b>rescapp</b>.
+
+<h2>Additional notes</h2>
+<ul>
+<li>
+Sometimes the rescapp version for amd64 repo is not in sync with the one that Rescatux uses (i386). If you feel this method installs a too old version of Rescapp please complain on <a href="https://github.com/rescatux/rescapp/issues">rescapp github issues</a>.
+</li>
+<li>
+If you have problems using this method,  please do not open a bug on the Rescatux github issues page but instead,  on the <a href="https://github.com/rescatux/rescapp/issues">rescapp github issues</a>. Please specify in your bug reports which Debian non-free live cd filename you were using exactly.
+</li>
+</ul>
