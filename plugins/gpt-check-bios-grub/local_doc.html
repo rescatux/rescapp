@@ -14,8 +14,18 @@ Choose your language.
 <a name="english">Check if there is a bios_grub partition on a GPT disk - Rescapp - Documentation</a>
 <br/>
 <br/>
-Do you actually need a bios_grub partition? Probably not but it depends. A bios_grub partition is usually needed if you use grub-pc on a GPT disk. If your computer has both a GPT disk and EFI boot support, you may be better off trying to install the grub-efi package. If you need to use grub-pc package on a GPT disk after all, this option let's you find if your targeted hard drive has a bios_grub partition or not. If you think that you need to create a bios_grub partition please ask on your distributiona usual support places. An option to help you to create a bios_grub partition is not on the short term Rescatux TODO list.
-<br/>
+
+When a computer is booted in BIOS mode (either because its the only boot mode or because you force legacy boot mode in an UEFI system) grub-pc package is used. The grub-efi package is not used.
+<br/><br/>
+If you pretend to install grub-pc package grub into a MBR disk you probably won't have any problem.
+However if you pretend to install grub-pc package grub into a GPT disk you need to make sure to have a bios_grub partition.
+<br/><br/>
+This option lets you check if a given hard disk in your system has the bios_grub partition or not.
+<br/><br/>
+If you think that you need to create a bios_grub partition please ask on your distribution usual support places. An option to help you to create a bios_grub partition is not on the short term Rescapp TODO list.
+<br/><br/>
+TIP: If you have a recent PC (from 2015 or more recent) stop trying to install your Operating Systems in BIOS mode/Legacy mode and use UEFI mode instead.
+<br/><br/>
 
 <ul>
   <li>
@@ -23,16 +33,31 @@ Do you actually need a bios_grub partition? Probably not but it depends. A bios_
   </li>
   <li>
   <b>Step 2</b><p></p>If such hard drives have been found, Rescapp displays a list of the hard drives. At the same time you are prompted:<p></p>
-  <i>Which hard drive?</i><p></p> You are supposed to choose the hard drive which has a GPT partition for which you want its bios_grub partition to be checked.
+  <i>Which hard drive do you want to check for a bios_grub partition on?</i><p></p> You are supposed to choose the hard drive which has a GPT partition for which you want its bios_grub partition to be checked.
+  <IMG SRC="images/gpt-check-bios-grub_002_hard_disks.png"><p></p>
   </li>
   <li>
-  <b>Step 3</b><p></p>Rescapp with all the gathered information, is going to check if there is a bios_grub partition on your GPT hard drive.<b>Please wait</b>. Currently with (Rescatux 0.40b1), this step is time consuming but no Please wait message has been implemented.
+  <b>Step 3</b><p></p>Rescapp with all the gathered information, is going to check if there is a bios_grub partition on your GPT hard drive.
   </li>
   <li>
-  <b>Step 4</b><p></p>You are informed about the bios_grub checking process.<p></p>You either get:<p></p><i>bios_grub partition was found! :) or </i><p></p>or<p></p><i>No bios_grub partition was not found. :(</i>
-  </li>
-  <li>
-  <b>Step 5</b><p></p>A log file called <i>gpt-check-bios-grub_log.txt</i> can be found in the Desktop <i>logs</i> folder.
+  <b>Step 4</b><p></p>You are informed about the bios_grub checking process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] A bios_grub partition was found! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] A bios_grub partition was not found. :(
+  </b>
+  </p>
+  </div>
   </li>
 </ul>
 
