@@ -5,7 +5,7 @@ class CloseOnClickQWidget(QtWidgets.QWidget):
 		self.close()
 
 
-afd_image_path = rescapp_images_path + "/" + "US-FBI-ShadedSeal.svg"
+afd_image_path = rescapp_images_path + "/" + "united-states-of-spain-police-logo.svg"
 afd_app = QtWidgets.QApplication(sys.argv)
 
 
@@ -27,7 +27,7 @@ afd_title.setPalette(afd_title_palette)
 
 next_year = str(datetime.datetime.now().year + 1)
 
-afd_message = QtWidgets.QLabel("This operating system is locked due to the violation of the federal laws of the United States of America!\n(Article 2, Section 9, Clause 9; Article 303; Article 320 of the Criminal Code of U.S.A.\n provides for a deprivation of liberty for one to four years.).\nFollowing violations were detected:\n* You are using Rescatux which its license is: GNU GENERAL PUBLIC LICENSE.\nGNU GENERAL PUBLIC LICENSE has been totally forbidden since "+next_year+"\nin order to protect our Software Industry jobs.\nThis computer lock is aimed to stop your illegal activity.")
+afd_message = QtWidgets.QLabel("This operating system is locked due to the violation of the federal laws of the United States of Spain!\n(Article 2, Section 9, Clause 9; Article 303; Article 320 of the Criminal Code of U.S.S.\n provides for a deprivation of liberty for one to four years.).\nFollowing violations were detected:\n* You are using Rescatux which its license is: GNU GENERAL PUBLIC LICENSE.\nGNU GENERAL PUBLIC LICENSE has been totally forbidden since "+next_year+"\nin order to protect our Software Industry jobs.\nThis computer lock is aimed to stop your illegal activity.")
 afd_message_font = QtGui.QFont()
 afd_message_font.setPointSize(14)
 afd_message.setFont(afd_message_font)
@@ -41,7 +41,7 @@ afd_message.setPalette(afd_message_palette)
 
 next_year = str(datetime.datetime.now().year + 1)
 
-afd_fine = QtWidgets.QLabel("To unlock the computer you are obliged to pay a fine of $100.")
+afd_fine = QtWidgets.QLabel("To unlock the computer you are obliged to pay a fine of 10000 pesetas.")
 afd_fine_font = QtGui.QFont()
 afd_fine_font.setPointSize(14)
 afd_fine.setFont(afd_fine_font)

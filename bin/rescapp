@@ -1041,14 +1041,14 @@ if __name__ == '__main__':
     if datetime.datetime.now().month == 4 \
         and datetime.datetime.now().day == 1 \
         and not lang_environment.startswith('es_'):
-        execfile(rescapp_library_path + '/' + 'rescapp_afd.py')
-        execfile(rescapp_library_path + '/' + 'rescapp_afd2.py')
+        exec(open(rescapp_library_path + '/' + 'rescapp_afd.py').read())
+        exec(open(rescapp_library_path + '/' + 'rescapp_afd2.py').read())
 
     if datetime.datetime.now().month == 12 \
         and datetime.datetime.now().day == 28 \
         and lang_environment.startswith('es_'):
-        execfile(rescapp_library_path + '/' + 'rescapp_afd_es.py')
-        execfile(rescapp_library_path + '/' + 'rescapp_afd2_es.py')
+        exec(open(rescapp_library_path + '/' + 'rescapp_afd_es.py').read())
+        exec(open(rescapp_library_path + '/' + 'rescapp_afd2_es.py').read())
 
     app_stw = QtWidgets.QApplication(sys.argv)
 
