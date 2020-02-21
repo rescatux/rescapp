@@ -5,7 +5,7 @@ class CloseOnClickQWidget(QtWidgets.QWidget):
 		self.close()
 
 
-afd_image_path = rescapp_images_path + "/" + "united-states-of-spain-police-logo.svg"
+afd_image_path = rescapp_images_path + "/" + "united-states-of-spain-police-and-map.svg"
 afd_app = QtWidgets.QApplication(sys.argv)
 
 
