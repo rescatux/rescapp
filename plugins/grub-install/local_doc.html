@@ -18,30 +18,43 @@ Choose your language.
   <b>Step 1</b><p></p>Rescapp searches for partitions, that have on them the following file: <i>/etc/issue</i> based on information found in the <i>/proc/partitions</i> file.
   </li>
   <li>
-  <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays a list of partitions that have on them the following file: <i>/etc/issue</i>. At the same time you are prompted:<p></p>
-  <i>Which partition?</i><p></p> You are supposed to choose, your main GNU/Linux distribution, (you will probably only see one) and press the OK button.
+  <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays them. At the same time you are prompted:<p></p>
+  <i>Which GNU/Linux partition?</i><p></p> You are supposed to choose, your main GNU/Linux distribution, (you will probably only see one) and press the OK button.
   </li>
 <p></p><IMG SRC="images/grub-install_001_partition.png"><p></p>
   <li>
   <b>Step 3</b><p></p>Rescapp searches for hard disks present, on your system based on information found in the <i>/proc/partitions</i> file.
   </li>
   <li>
-  <b>Step 4</b><p></p>You are prompted:<p></p><i>Which hard drive, do you wish to install Grub on?</i><p></p> You are supposed to, take a look at the hard drive sizes, (to be able to identify your hard drives) and choose (usually) the one, that is set to be the first one, to boot in your BIOS settings.
+  <b>Step 4</b><p></p>You are prompted:<p></p><i>Which hard drive do you wish to install Grub on?</i><p></p> You are supposed to, take a look at the hard drive sizes, (to be able to identify your hard drives) and choose (usually) the one, that is set to be the first one, to boot in your BIOS or UEFI settings.
   </li>
 <p></p><IMG SRC="images/grub-install_002_hard_disk.png"><p></p>
   <li>
-  <b>Step 5</b><p></p>You are prompted:<p></p><i>Order hard drives, according to boot order. Press OK to continue.</i><p></p>. Take a look at the hard drives and their sizes. Order them according, to the BIOS boot order and then press OK.
+  <b>Step 5</b><p></p>(NOTE: This step is automatically skipped if your system only has one hard disk.) <p></p>You are prompted:<p></p><i>Order hard drives, according to boot order. Press OK to continue.</i><p></p>. Take a look at the hard drives and their sizes. Order them according, to the BIOS boot order and then press OK.
   </li>
 <p></p><IMG SRC="images/grub-install_003_order_hard_disk.png"><p></p>
   <li>
-  <b>Step 6</b><p></p>Rescapp with all the gathered information, is going to create a temporary device.map on your Linux installation, (which will be deleted later) and try to install grub on your selected hard drive, thanks to your own distributions grub-install command.<b>Please wait</b>. Currently with (Rescatux 0.23), this step is time consuming but no Please wait message has been implemented.
+  <b>Step 6</b><p></p>Rescapp with all the gathered information, is going to create a temporary device.map on your Linux installation, (which will be deleted later) and try to install grub on your selected hard drive, thanks to your own distribution's grub-install command.
   </li>
   <li>
-  <b>Step 7</b><p></p>You are informed about the grub installation process.<p></p>You either get:<p></p><i>Grub was installed OK! :) or</i><p></p>or<p></p><i>Failure! Grub was not installed. Something went wrong! :(</i>
-  </li>
-<p></p><IMG SRC="images/grub-install_004_sucess.png"><p></p>
-  <li>
-  <b>Step 8</b><p></p>A log file called <i>grub-install.log.txt</i> can be found in the Desktop <i>logs</i> folder.
+  <b>Step 7</b><p></p>You are informed about the grub installation process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] Grub was installed OK! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] Grub was not installed. Something went wrong! :(
+  </b>
+  </p>
+  </div>
   </li>
 </ul>
 
