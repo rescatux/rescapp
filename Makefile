@@ -201,7 +201,7 @@ $(grubeasy_installdocimages_directory):	plugins/grubeasy/images/*
 	install -d $(doctarget)/plugins/grubeasy/images/
 	install -m 644 plugins/grubeasy/images/* $(doctarget)/plugins/grubeasy/images/
 
-grubeasy_install_documentation:	grubeasy_build_documentation:	plugins/grubeasy/*html	$(grubeasy_installdocimages_directory)
+grubeasy_install_documentation	grubeasy_build_documentation:	plugins/grubeasy/*html	$(grubeasy_installdocimages_directory)
 	install -d $(doctarget)/plugins/grubeasy/
 	install -m 644 plugins/grubeasy/*html $(doctarget)/plugins/grubeasy/
 
