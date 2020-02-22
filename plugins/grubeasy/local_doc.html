@@ -11,33 +11,79 @@ Choose your language.
   <li><a href="#english">English</a></li>
 </ul>
 
-<a name="english">Restore GRUB on the MBR - Rescapp - Documentation</a>
+<a name="english">Easy GNU/Linux Boot Fix - Rescapp - Documentation</a>
 
 <ul>
   <li>
-  <b>Step 1</b><p></p>Rescapp searches for partitions, that have on them the following file: <i>/etc/issue</i> based on information found in the <i>/proc/partitions</i> file.
+  <b>Step 1</b><p></p>Rescapp searches for partitions on your system.
   </li>
   <li>
   <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays them. At the same time you are prompted:<p></p>
-  <i>Which GNU/Linux partition?</i><p></p> You are supposed to choose, your main GNU/Linux distribution, (you will probably only see one) and press the OK button.
+  <i>Which GNU/Linux partition?</i><p></p> You are supposed to choose, your main GNU/Linux distribution and press the OK button.
   </li>
-<p></p><IMG SRC="images/grub-install_001_partition.png"><p></p>
+<p></p><IMG SRC="images/grubeasy_001_partition.png"><p></p>
   <li>
-  <b>Step 3</b><p></p>Rescapp searches for hard disks present, on your system based on information found in the <i>/proc/partitions</i> file.
+  <b>Step 3</b><p></p>Rescapp searches for hard disks present, on your system.
   </li>
   <li>
   <b>Step 4</b><p></p>You are prompted:<p></p><i>Which hard drive do you wish to install Grub on?</i><p></p> You are supposed to, take a look at the hard drive sizes, (to be able to identify your hard drives) and choose (usually) the one, that is set to be the first one, to boot in your BIOS or UEFI settings.
   </li>
-<p></p><IMG SRC="images/grub-install_002_hard_disk.png"><p></p>
+<p></p><IMG SRC="../grub-install/images/grub-install_002_hard_disk.png"><p></p>
   <li>
   <b>Step 5</b><p></p>(NOTE: This step is automatically skipped if your system only has one hard disk.) <p></p>You are prompted:<p></p><i>Order hard drives, according to boot order. Press OK to continue.</i><p></p>. Take a look at the hard drives and their sizes. Order them according, to the BIOS boot order and then press OK.
   </li>
-<p></p><IMG SRC="images/grub-install_003_order_hard_disk.png"><p></p>
+<p></p><IMG SRC="../grub-install/images/grub-install_003_order_hard_disk.png"><p></p>
   <li>
-  <b>Step 6</b><p></p>Rescapp with all the gathered information, is going to create a temporary device.map on your Linux installation, (which will be deleted later) and try to install grub on your selected hard drive, thanks to your own distribution's grub-install command.
+  <b>Step 6</b><p></p>Rescapp with all the gathered information, is going to filesystem check your Linux partition.
   </li>
   <li>
-  <b>Step 7</b><p></p>You are informed about the grub installation process.<p></p>You either get:<p></p>
+  <b>Step 7</b><p></p>You are informed about the (forced) file system check process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] Filesystem check with automatic fix was OK! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] Filesystem check with automatic fix failed! :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 8</b><p></p>Rescapp with all the gathered information, is going to create a temporary device.map, on your Linux installation, (which will be deleted later), and try to update your grub configuration file, on your selected hard drive, thanks to your own distributions update-grub command.
+  </li>
+  <li>
+  <b>Step 9</b><p></p>You are informed about the grub configuration update process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] Grub configuration was updated OK! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] Grub configuration update went wrong! :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 10</b><p></p>Rescapp with all the gathered information, is going to create a temporary device.map on your Linux installation, (which will be deleted later) and try to install grub on your selected hard drive, thanks to your own distribution's grub-install command.
+  </li>
+  <li>
+  <b>Step 11</b><p></p>You are informed about the grub install process.<p></p>You either get:<p></p>
   <div style="padding: 5px; border: 6px solid green; margin: 7px;">
   <p>
   <b>
@@ -52,6 +98,26 @@ Choose your language.
   <b>
   <IMG SRC="../not-documented/images/dialog-error.png">
   [ERROR] Grub was not installed. Something went wrong! :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 12</b><p></p>You are informed about the overall process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB on the MBR and order UEFI entries) was OK! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] Easy GNU/Linux Boot Fix (Fsck partition, update grub menues, restore GRUB on the MBR and order UEFI entries) was not fully completed. Something went wrong! :(
   </b>
   </p>
   </div>
