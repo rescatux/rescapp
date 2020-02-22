@@ -1069,7 +1069,7 @@ if __name__ == '__main__':
     mw = MainWindow(url)
     mw.setWindowTitle(rescapp_title + ' ' + rescapp_version)
 
-    mw.selectSupportOption(main_menu_support_option)
+    mw.selectSupportOption(help_support_option)
     mw.setWindowIcon(QtGui.QIcon(rescapp_icons_path + '/' + 'rescapp-window-icon.png'))
     mw.show()
 
