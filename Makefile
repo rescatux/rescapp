@@ -39,6 +39,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	gpt-create-hybrid-mbr_install_documentation	gpt-create-hybrid-mbr_build_documentation\
 	gpt-recompute-hybrid-mbr-chs_install_documentation	gpt-recompute-hybrid-mbr-chs_build_documentation\
 	grub-install_install_documentation	grub-install_build_documentation\
+	grubeasy_install_documentation	grubeasy_build_documentation\
 	help-rescapp_install_documentation	help-rescapp_build_documentation\
 	share_log_install_documentation	share_log_build_documentation\
 	share_log_forum_install_documentation	share_log_forum_build_documentation\
@@ -200,7 +201,7 @@ $(grubeasy_installdocimages_directory):	plugins/grubeasy/images/*
 	install -d $(doctarget)/plugins/grubeasy/images/
 	install -m 644 plugins/grubeasy/images/* $(doctarget)/plugins/grubeasy/images/
 
-grubeasy_install_documentation:	plugins/grubeasy/*html	$(grubeasy_installdocimages_directory)
+grubeasy_install_documentation:	grubeasy_build_documentation:	plugins/grubeasy/*html	$(grubeasy_installdocimages_directory)
 	install -d $(doctarget)/plugins/grubeasy/
 	install -m 644 plugins/grubeasy/*html $(doctarget)/plugins/grubeasy/
 
@@ -1163,8 +1164,13 @@ plugins/share_log_forum/doc.html:	plugins/share_log_forum/local_doc.html	docscri
 
 grub-install_build_documentation:	plugins/grub-install/doc.html
 
+grubeasy_build_documentation:	plugins/grubeasy/doc.html
+
 plugins/grub-install/doc.html:	plugins/grub-install/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh grub-install
+
+plugins/grubeasy/doc.html:	plugins/grubeasy/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh grubeasy
 
 winpass_build_documentation:	plugins/winpass/doc.html
 
