@@ -1,3 +1,17 @@
+rescapp (0.54b6-1) unstable; urgency=low
+
+  * Added PUBLISH instructions.
+  * Removed non English translations from internal documentation.
+  * winmbr option is now stable.
+  * Local documentation build process has been improved to be based on a template.
+  * Add experimental logo to Rescapp about page.
+  * Added new Rescapp desktop icons and a window icon
+  * AFD Scanning technology has been improved with new United States of Spain gimmick
+  * Show Rescapp help right at the Rescapp startup.
+  * Many plugins documentation have been updated to match 2019 gui
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 18 Jan 2020 21:01:00 +0000
+
 rescapp (0.54b5-1) unstable; urgency=low
 
   * Handle non found devices properly on the rest of options
