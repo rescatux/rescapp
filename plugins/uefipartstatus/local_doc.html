@@ -1,0 +1,166 @@
+
+Choose your language.
+<center><TABLE width="176" BORDER="0">
+
+<TR>
+   <TD><a href="#english">English</a></TD>
+</TR>
+
+</TABLE></center>
+<ul>
+  <li><a href="#english">English</a></li>
+</ul>
+
+<a name="english">Check UEFI partition status - Rescapp - Documentation</a>
+
+<ul>
+  <li>
+  <b>Step 1</b><p></p>Rescapp searches for partitions on your system.
+  </li>
+  <li>
+  <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays them. At the same time you are prompted:<p></p>
+  <i>Which EFI partition?</i><p></p> You are supposed to choose, your EFI System partition and press the OK button.
+  </li>
+<p></p><IMG SRC="images/uefipartstatus_001_efi_partition.png"><p></p>
+  <li>
+  <b>Step 3</b><p></p>You are informed about the EFI partition check by fdisk.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition, has been detected, as an EFI partition by fdisk :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The EFI partition, has NOT been detected, as an EFI partition by fdisk. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 4</b><p></p>You are informed about the esp flag check.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition, has a esp flag :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The EFI partition, does not have a esp flag. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 5</b><p></p>You are informed about the boot flag check.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition, has a boot flag :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The EFI partition, does not have a boot flag. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 6</b><p></p>You are informed about the valid uefi filesystem check.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition, has a valid uefi filesystem :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The EFI partition, does not have a valid uefi filesystem. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 7</b><p></p>You are informed about the partition mount check.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition, can be mounted :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The EFI partition, cannot be mounted. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 8</b><p></p>You are informed about the disk type check.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition, disk type is either gpt or msdos :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The EFI partition, disk type is neither gpt nor msdos. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  <li>
+  <b>Step 9</b><p></p>You are informed about the overall Check UEFI partition status process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The EFI partition status was OK (Every test passed successfully.) ! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] This might not be a valid EFI partition. At least one test failed. :(
+  </b>
+  </p>
+  </div>
+  </li>
+  </li>
+</ul>

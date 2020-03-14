@@ -21,11 +21,6 @@ all:
 #	grubeasy_install_documentation
 #	photorec_install_documentation
 #	testdisk_install_documentation
-#	uefifakemicrosoft_install_documentation
-#	uefihidemicrosoft_install_documentation
-#	uefiorder_install_documentation
-#	uefipartstatus_install_documentation
-#	uefireinstallmicrosoft_install_documentation
 #	web_install_documentation
 #	wineasy_install_documentation
 install_documentation:	about-rescapp_install_documentation	about-rescapp_build_documentation\
@@ -45,6 +40,11 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	sudoers_install_documentation	sudoers_build_documentation\
 	ueficheck_install_documentation	ueficheck_build_documentation\
 	ueficreate_install_documentation	ueficreate_build_documentation\
+	uefifakemicrosoft_install_documentation	uefifakemicrosoft_build_documentation\
+	uefihidemicrosoft_install_documentation	uefihidemicrosoft_build_documentation\
+	uefiorder_install_documentation	uefiorder_build_documentation\
+	uefipartstatus_install_documentation	uefipartstatus_build_documentation\
+	uefireinstallmicrosoft_install_documentation	uefireinstallmicrosoft_build_documentation\
 	update-grub_install_documentation	update-grub_build_documentation\
 	winmbr_install_documentation	winmbr_build_documentation\
 	winpass_install_documentation	winpass_build_documentation\
@@ -367,7 +367,7 @@ $(uefifakemicrosoft_installdocimages_directory):	plugins/uefifakemicrosoft/image
 	install -d $(doctarget)/plugins/uefifakemicrosoft/images/
 	install -m 644 plugins/uefifakemicrosoft/images/* $(doctarget)/plugins/uefifakemicrosoft/images/
 
-uefifakemicrosoft_install_documentation:	plugins/uefifakemicrosoft/*html	$(uefifakemicrosoft_installdocimages_directory)
+uefifakemicrosoft_install_documentation	uefifakemicrosoft_build_documentation:	plugins/uefifakemicrosoft/*html	$(uefifakemicrosoft_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefifakemicrosoft/
 	install -m 644 plugins/uefifakemicrosoft/*html $(doctarget)/plugins/uefifakemicrosoft/
 
@@ -381,7 +381,7 @@ $(uefihidemicrosoft_installdocimages_directory):	plugins/uefihidemicrosoft/image
 	install -d $(doctarget)/plugins/uefihidemicrosoft/images/
 	install -m 644 plugins/uefihidemicrosoft/images/* $(doctarget)/plugins/uefihidemicrosoft/images/
 
-uefihidemicrosoft_install_documentation:	plugins/uefihidemicrosoft/*html	$(uefihidemicrosoft_installdocimages_directory)
+uefihidemicrosoft_install_documentation	uefihidemicrosoft_build_documentation:	plugins/uefihidemicrosoft/*html	$(uefihidemicrosoft_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefihidemicrosoft/
 	install -m 644 plugins/uefihidemicrosoft/*html $(doctarget)/plugins/uefihidemicrosoft/
 
@@ -395,7 +395,7 @@ $(uefiorder_installdocimages_directory):	plugins/uefiorder/images/*
 	install -d $(doctarget)/plugins/uefiorder/images/
 	install -m 644 plugins/uefiorder/images/* $(doctarget)/plugins/uefiorder/images/
 
-uefiorder_install_documentation:	plugins/uefiorder/*html	$(uefiorder_installdocimages_directory)
+uefiorder_install_documentation	uefiorder_build_documentation:	plugins/uefiorder/*html	$(uefiorder_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefiorder/
 	install -m 644 plugins/uefiorder/*html $(doctarget)/plugins/uefiorder/
 
@@ -409,7 +409,7 @@ $(uefipartstatus_installdocimages_directory):	plugins/uefipartstatus/images/*
 	install -d $(doctarget)/plugins/uefipartstatus/images/
 	install -m 644 plugins/uefipartstatus/images/* $(doctarget)/plugins/uefipartstatus/images/
 
-uefipartstatus_install_documentation:	plugins/uefipartstatus/*html	$(uefipartstatus_installdocimages_directory)
+uefipartstatus_install_documentation	uefipartstatus_build_documentation:	plugins/uefipartstatus/*html	$(uefipartstatus_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefipartstatus/
 	install -m 644 plugins/uefipartstatus/*html $(doctarget)/plugins/uefipartstatus/
 
@@ -423,7 +423,7 @@ $(uefireinstallmicrosoft_installdocimages_directory):	plugins/uefireinstallmicro
 	install -d $(doctarget)/plugins/uefireinstallmicrosoft/images/
 	install -m 644 plugins/uefireinstallmicrosoft/images/* $(doctarget)/plugins/uefireinstallmicrosoft/images/
 
-uefireinstallmicrosoft_install_documentation:	plugins/uefireinstallmicrosoft/*html	$(uefireinstallmicrosoft_installdocimages_directory)
+uefireinstallmicrosoft_install_documentation	uefireinstallmicrosoft_build_documentation:	plugins/uefireinstallmicrosoft/*html	$(uefireinstallmicrosoft_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefireinstallmicrosoft/
 	install -m 644 plugins/uefireinstallmicrosoft/*html $(doctarget)/plugins/uefireinstallmicrosoft/
 
@@ -1206,3 +1206,31 @@ ueficreate_build_documentation:	plugins/ueficreate/doc.html
 
 plugins/ueficreate/doc.html:	plugins/ueficreate/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh ueficreate
+
+
+uefifakemicrosoft_build_documentation:	plugins/uefifakemicrosoft/doc.html
+
+plugins/uefifakemicrosoft/doc.html:	plugins/uefifakemicrosoft/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefifakemicrosoft
+
+
+uefihidemicrosoft_build_documentation:	plugins/uefihidemicrosoft/doc.html
+
+plugins/uefihidemicrosoft/doc.html:	plugins/uefihidemicrosoft/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefihidemicrosoft
+
+
+uefiorder_build_documentation:	plugins/uefiorder/doc.html
+
+plugins/uefiorder/doc.html:	plugins/uefiorder/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefiorder
+
+uefipartstatus_build_documentation:	plugins/uefipartstatus/doc.html
+
+plugins/uefipartstatus/doc.html:	plugins/uefipartstatus/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefipartstatus
+
+uefireinstallmicrosoft_build_documentation:	plugins/uefireinstallmicrosoft/doc.html
+
+plugins/uefireinstallmicrosoft/doc.html:	plugins/uefireinstallmicrosoft/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefireinstallmicrosoft
