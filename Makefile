@@ -21,7 +21,6 @@ all:
 #	grubeasy_install_documentation
 #	photorec_install_documentation
 #	testdisk_install_documentation
-#	uefireinstallmicrosoft_install_documentation
 #	web_install_documentation
 #	wineasy_install_documentation
 install_documentation:	about-rescapp_install_documentation	about-rescapp_build_documentation\
@@ -45,6 +44,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	uefihidemicrosoft_install_documentation	uefihidemicrosoft_build_documentation\
 	uefiorder_install_documentation	uefiorder_build_documentation\
 	uefipartstatus_install_documentation	uefipartstatus_build_documentation\
+	uefireinstallmicrosoft_install_documentation	uefireinstallmicrosoft_build_documentation\
 	update-grub_install_documentation	update-grub_build_documentation\
 	winmbr_install_documentation	winmbr_build_documentation\
 	winpass_install_documentation	winpass_build_documentation\
@@ -423,7 +423,7 @@ $(uefireinstallmicrosoft_installdocimages_directory):	plugins/uefireinstallmicro
 	install -d $(doctarget)/plugins/uefireinstallmicrosoft/images/
 	install -m 644 plugins/uefireinstallmicrosoft/images/* $(doctarget)/plugins/uefireinstallmicrosoft/images/
 
-uefireinstallmicrosoft_install_documentation:	plugins/uefireinstallmicrosoft/*html	$(uefireinstallmicrosoft_installdocimages_directory)
+uefireinstallmicrosoft_install_documentation	uefireinstallmicrosoft_build_documentation:	plugins/uefireinstallmicrosoft/*html	$(uefireinstallmicrosoft_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefireinstallmicrosoft/
 	install -m 644 plugins/uefireinstallmicrosoft/*html $(doctarget)/plugins/uefireinstallmicrosoft/
 
@@ -1229,3 +1229,8 @@ uefipartstatus_build_documentation:	plugins/uefipartstatus/doc.html
 
 plugins/uefipartstatus/doc.html:	plugins/uefipartstatus/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh uefipartstatus
+
+uefireinstallmicrosoft_build_documentation:	plugins/uefireinstallmicrosoft/doc.html
+
+plugins/uefireinstallmicrosoft/doc.html:	plugins/uefireinstallmicrosoft/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefireinstallmicrosoft
