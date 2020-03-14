@@ -21,7 +21,6 @@ all:
 #	grubeasy_install_documentation
 #	photorec_install_documentation
 #	testdisk_install_documentation
-#	ueficheck_install_documentation
 #	ueficreate_install_documentation
 #	uefifakemicrosoft_install_documentation
 #	uefihidemicrosoft_install_documentation
@@ -45,6 +44,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	share_log_forum_install_documentation	share_log_forum_build_documentation\
 	show_log_install_documentation	show_log_build_documentation\
 	sudoers_install_documentation	sudoers_build_documentation\
+	ueficheck_install_documentation	ueficheck_build_documentation\
 	update-grub_install_documentation	update-grub_build_documentation\
 	winmbr_install_documentation	winmbr_build_documentation\
 	winpass_install_documentation	winpass_build_documentation\
@@ -339,7 +339,7 @@ $(ueficheck_installdocimages_directory):	plugins/ueficheck/images/*
 	install -d $(doctarget)/plugins/ueficheck/images/
 	install -m 644 plugins/ueficheck/images/* $(doctarget)/plugins/ueficheck/images/
 
-ueficheck_install_documentation:	plugins/ueficheck/*html	$(ueficheck_installdocimages_directory)
+ueficheck_install_documentation	ueficheck_build_documentation:	plugins/ueficheck/*html	$(ueficheck_installdocimages_directory)
 	install -d $(doctarget)/plugins/ueficheck/
 	install -m 644 plugins/ueficheck/*html $(doctarget)/plugins/ueficheck/
 
@@ -1196,3 +1196,8 @@ fsck_build_documentation:	plugins/fsck/doc.html
 
 plugins/fsck/doc.html:	plugins/fsck/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh fsck
+
+ueficheck_build_documentation:	plugins/ueficheck/doc.html
+
+plugins/ueficheck/doc.html:	plugins/ueficheck/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh ueficheck
