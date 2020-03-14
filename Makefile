@@ -21,7 +21,6 @@ all:
 #	grubeasy_install_documentation
 #	photorec_install_documentation
 #	testdisk_install_documentation
-#	uefiorder_install_documentation
 #	uefipartstatus_install_documentation
 #	uefireinstallmicrosoft_install_documentation
 #	web_install_documentation
@@ -45,6 +44,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	ueficreate_install_documentation	ueficreate_build_documentation\
 	uefifakemicrosoft_install_documentation	uefifakemicrosoft_build_documentation\
 	uefihidemicrosoft_install_documentation	uefihidemicrosoft_build_documentation\
+	uefiorder_install_documentation	uefiorder_build_documentation\
 	update-grub_install_documentation	update-grub_build_documentation\
 	winmbr_install_documentation	winmbr_build_documentation\
 	winpass_install_documentation	winpass_build_documentation\
@@ -395,7 +395,7 @@ $(uefiorder_installdocimages_directory):	plugins/uefiorder/images/*
 	install -d $(doctarget)/plugins/uefiorder/images/
 	install -m 644 plugins/uefiorder/images/* $(doctarget)/plugins/uefiorder/images/
 
-uefiorder_install_documentation:	plugins/uefiorder/*html	$(uefiorder_installdocimages_directory)
+uefiorder_install_documentation	uefiorder_build_documentation:	plugins/uefiorder/*html	$(uefiorder_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefiorder/
 	install -m 644 plugins/uefiorder/*html $(doctarget)/plugins/uefiorder/
 
@@ -1218,3 +1218,9 @@ uefihidemicrosoft_build_documentation:	plugins/uefihidemicrosoft/doc.html
 
 plugins/uefihidemicrosoft/doc.html:	plugins/uefihidemicrosoft/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh uefihidemicrosoft
+
+
+uefiorder_build_documentation:	plugins/uefiorder/doc.html
+
+plugins/uefiorder/doc.html:	plugins/uefiorder/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefiorder
