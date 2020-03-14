@@ -21,7 +21,6 @@ all:
 #	grubeasy_install_documentation
 #	photorec_install_documentation
 #	testdisk_install_documentation
-#	uefipartstatus_install_documentation
 #	uefireinstallmicrosoft_install_documentation
 #	web_install_documentation
 #	wineasy_install_documentation
@@ -45,6 +44,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	uefifakemicrosoft_install_documentation	uefifakemicrosoft_build_documentation\
 	uefihidemicrosoft_install_documentation	uefihidemicrosoft_build_documentation\
 	uefiorder_install_documentation	uefiorder_build_documentation\
+	uefipartstatus_install_documentation	uefipartstatus_build_documentation\
 	update-grub_install_documentation	update-grub_build_documentation\
 	winmbr_install_documentation	winmbr_build_documentation\
 	winpass_install_documentation	winpass_build_documentation\
@@ -409,7 +409,7 @@ $(uefipartstatus_installdocimages_directory):	plugins/uefipartstatus/images/*
 	install -d $(doctarget)/plugins/uefipartstatus/images/
 	install -m 644 plugins/uefipartstatus/images/* $(doctarget)/plugins/uefipartstatus/images/
 
-uefipartstatus_install_documentation:	plugins/uefipartstatus/*html	$(uefipartstatus_installdocimages_directory)
+uefipartstatus_install_documentation	uefipartstatus_build_documentation:	plugins/uefipartstatus/*html	$(uefipartstatus_installdocimages_directory)
 	install -d $(doctarget)/plugins/uefipartstatus/
 	install -m 644 plugins/uefipartstatus/*html $(doctarget)/plugins/uefipartstatus/
 
@@ -1224,3 +1224,8 @@ uefiorder_build_documentation:	plugins/uefiorder/doc.html
 
 plugins/uefiorder/doc.html:	plugins/uefiorder/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh uefiorder
+
+uefipartstatus_build_documentation:	plugins/uefipartstatus/doc.html
+
+plugins/uefipartstatus/doc.html:	plugins/uefipartstatus/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh uefipartstatus
