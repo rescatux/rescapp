@@ -12,14 +12,24 @@ Choose your language.
 </ul>
 
 <a name="english">File System Check (Forced Fix) - Rescapp - Documentation</a>
+<p>
+Sometimes there might be a power outage and your computer is halted suddenly.
+This might have a filesystem inconsistency as a result which, in turn, might make Grub unable to find your kernel and initrd files (which are files needed to boot) or even its own files.
+One of the multiple messages you can see when there is a filesystem inconsistency is:
+<i>grub rescue></i> .
+</p>
+<br/>
+<p>
+This option lets you fix the filesystem inconsistency so that you can boot again in your system. It's also recommended that you update your grub configuration (<b>Update Grub menus</b> option) and reinstall grub (<b>Restore grub</b> option) if this fileystem inconsistency fix is not enough.
+</p>
 
 <ul>
   <li>
-  <b>Step 1</b><p></p>Rescapp searches for all the partitions based on information found in the <i>/proc/partitions</i> file. If the partition contains an: <i>/etc/issue</i> file it will also obtain the distribution name.
+  <b>Step 1</b><p></p>Rescapp searches for all the partitions on your sytem.
   </li>
   <li>
-  <b>Step 2</b><p></p>Rescapp displays a list of the partitions found on Step 1.<p></p>You are prompted:<p></p>
-  <i>Which partition?</i><p></p> You are supposed to choose whatever partition you want to force the filesystem check on and press the OK button.<p></p>Explanation of description is:
+  <b>Step 2</b><p></p>Rescapp displays a list of the partitions found previously.<p></p>You are prompted:<p></p>
+  <i>Which partition?</i><p></p> You are supposed to choose whatever partition you want to force the filesystem check on and press the OK button.<p></p>Explanation of Description column is:
     <ul>
       <li>
 	<b>Distribution name</b>: Your distribution root partition has been detected and you are seeing its name.
@@ -52,9 +62,6 @@ Choose your language.
   </b>
   </p>
   </div>
-  </li>
-  <li>
-  <b>Step 4</b><p></p>A log file called <i>fsck.log.txt</i> is generated so that you can share it later if needed.
   </li>
 </ul>
 
