@@ -22,7 +22,6 @@ all:
 #	photorec_install_documentation
 #	testdisk_install_documentation
 #	web_install_documentation
-#	wineasy_install_documentation
 install_documentation:	about-rescapp_install_documentation	about-rescapp_build_documentation\
 	bootinfoscript_install_documentation	bootinfoscript_build_documentation\
 	chat_install_documentation	chat_build_documentation\
@@ -46,6 +45,7 @@ install_documentation:	about-rescapp_install_documentation	about-rescapp_build_d
 	uefipartstatus_install_documentation	uefipartstatus_build_documentation\
 	uefireinstallmicrosoft_install_documentation	uefireinstallmicrosoft_build_documentation\
 	update-grub_install_documentation	update-grub_build_documentation\
+	wineasy_install_documentation	wineasy_build_documentation\
 	winmbr_install_documentation	winmbr_build_documentation\
 	winpass_install_documentation	winpass_build_documentation\
 	winpromote_install_documentation	winpromote_build_documentation\
@@ -465,7 +465,7 @@ $(wineasy_installdocimages_directory):	plugins/wineasy/images/*
 	install -d $(doctarget)/plugins/wineasy/images/
 	install -m 644 plugins/wineasy/images/* $(doctarget)/plugins/wineasy/images/
 
-wineasy_install_documentation:	plugins/wineasy/*html	$(wineasy_installdocimages_directory)
+wineasy_install_documentation	wineasy_build_documentation:	plugins/wineasy/*html	$(wineasy_installdocimages_directory)
 	install -d $(doctarget)/plugins/wineasy/
 	install -m 644 plugins/wineasy/*html $(doctarget)/plugins/wineasy/
 
@@ -1234,3 +1234,8 @@ uefireinstallmicrosoft_build_documentation:	plugins/uefireinstallmicrosoft/doc.h
 
 plugins/uefireinstallmicrosoft/doc.html:	plugins/uefireinstallmicrosoft/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
 	./docscripts/build-local-doc.sh uefireinstallmicrosoft
+
+wineasy_build_documentation:	plugins/wineasy/doc.html
+
+plugins/wineasy/doc.html:	plugins/wineasy/local_doc.html	docscripts/build-local-doc.sh	VERSION	plugins/templates/local_header.html	plugins/templates/local_footer.html
+	./docscripts/build-local-doc.sh wineasy
