@@ -49,19 +49,19 @@ if [ "x${SELECTED_PARTITION}" != "x" ] ; then
         fi
       else
         rtux_Message_Warning ${WINUNLOCK_SAMUSERS_NOT_FOUND}
-        rtux_Message_Failure ${WINUNLOCK_NOT_RESET_STR}
+        rtux_Message_Failure ${WINUNLOCK_NOT_OK_STR}
       fi
     else
       rtux_Message_Warning ${WINUNLOCK_BACKUP_WENT_WRONG}
-      rtux_Message_Failure ${WINUNLOCK_NOT_RESET_STR}
+      rtux_Message_Failure ${WINUNLOCK_NOT_OK_STR}
     fi
 
   else
     rtux_Message_Warning ${WINUNLOCK_SAMUSERS_NOT_DETECTED}
-    rtux_Message_Failure ${WINUNLOCK_NOT_RESET_STR}
+    rtux_Message_Failure ${WINUNLOCK_NOT_OK_STR}
   fi
 else
   rtux_Message_Warning ${WINUNLOCK_PARTITIONS_NOT_FOUND}
-  rtux_Message_Failure ${WINUNLOCK_NOT_RESET_STR}
+  rtux_Message_Failure ${WINUNLOCK_NOT_OK_STR}
 fi
 
