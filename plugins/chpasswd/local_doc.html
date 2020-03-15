@@ -9,16 +9,18 @@ Choose your language.
 </TABLE></center>
 
 <a name="english">Change Gnu/Linux password - Rescapp - Documentation</a>
-
+<p>
+If you have forgotten your Gnu/Linux distribution user password you can use this option to reset it to another password. Please use a temporary password and change it later again from inside your distribution session.
+</p>
 <ul>
   <li>
-  <b>Step 1</b><p></p>Rescapp searches for partitions that have on them the following file: <i>/etc/issue</i> based on information found in the <i>/proc/partitions</i> file.
+  <b>Step 1</b><p></p>Rescapp searches for GNU/Linux partitions.
   </li>
   <li>
   <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays partitions that have on them the following file: <i>/etc/issue</i>. At the same time you are prompted:<p></p>
   <i>Which GNU/Linux partition?</i><p></p> You are supposed to choose your main GNU/Linux distribution (you will probably only see one) and press the OK button.
   </li>
-<p></p><IMG SRC="images/chpasswd_001_partition.png"><p></p>
+<p></p><IMG SRC="../grub-install/images/grub-install_001_partition.png"><p></p>
   <li>
   <b>Step 3</b><p></p>You are prompted:<p></p><i>Which user?</i><p></p> Select the desired user from the list.
   </li>
@@ -50,9 +52,6 @@ Choose your language.
   </b>
   </p>
   </div>
-  </li>
-  <li>
-  <b>Step 7</b><p></p>A log file called <i>chpasswd.log.txt</i> is generated so that you can share it later if needed.
   </li>
 </ul>
 
