@@ -42,7 +42,7 @@ BOOT_INFO_SCRIPT_BINARY="bootinfoscript"
 BOOT_INFO_SCRIPT_OK_STR="Boot Info Script was run OK! :)"
 BOOT_INFO_SCRIPT_KO_STR="Boot Info Script had a problem. Something went wrong! :("
 
-BOOT_INFO_SCRIPT_EXPLANATION="Check the Support menu in order to see how you can display or share on the forums, the Boot Info Script log."
+BOOT_INFO_SCRIPT_EXPLANATION="Check the Support options in order to see how you can display or share on the forums, the Boot Info Script log."
 BOOT_INFO_SCRIPT_STR="Generating Boot Info File."
 
 

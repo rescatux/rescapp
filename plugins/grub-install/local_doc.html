@@ -12,10 +12,14 @@ Choose your language.
 </ul>
 
 <a name="english">Restore GRUB on the MBR - Rescapp - Documentation</a>
-
+<p>
+If you have an old system based on MBR boot (non UEFI) you might find that a Windows reinstallation hides your GNU/Linux distribution.<br/>
+You are not longer able to boot into your GNU/Linux distribution because the Grub menu is no longer there.<br/>
+This option lets you reinstall your GNU/Linux distribution grub into your MBR again so that your Grub menu appears again.
+</p>
 <ul>
   <li>
-  <b>Step 1</b><p></p>Rescapp searches for partitions, that have on them the following file: <i>/etc/issue</i> based on information found in the <i>/proc/partitions</i> file.
+  <b>Step 1</b><p></p>Rescapp searches for GNU/Linux partitions.
   </li>
   <li>
   <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays them. At the same time you are prompted:<p></p>

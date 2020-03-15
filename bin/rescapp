@@ -479,7 +479,7 @@ class MainWindow(QtWidgets.QWidget):
                 self.rescue_btn.setText(' (BETA) ' + 'Run !')
             else:
                 self.rescue_btn.setText('Run !')
-            self.rescue_btn.setToolTip(self.selected_option.getDescription())
+            #self.rescue_btn.setToolTip(self.selected_option.getDescription())
         else:
             if hasattr(self, 'rescue_btn') == True:
                 self.rescue_btn.hide()
@@ -565,7 +565,7 @@ class MainWindow(QtWidgets.QWidget):
                     tmp_name_button.setText('<img src='
                             + menu_icon_path + '>' + '<b>' + n_option.getName() + '</b>')
 
-                tmp_name_button.setToolTip(n_option.getDescription())
+                #tmp_name_button.setToolTip(n_option.getDescription())
                 if n_option.isMenu():
                     name_pos_y = name_pos_y + 1
                     name_pos_x = name_pos_x + 1
