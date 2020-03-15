@@ -12,30 +12,58 @@ Choose your language.
   <li><a href="#english">English</a></li>
 </ul>
 
-<a name="english">Promote Windows NT, 200x, XP, Vista and Seven user to Administrator  - Rescapp - Documentation</a>
+<a name="english">Promote Windows NT, 200x, XP, Vista, Seven and 10 user to Administrator - Rescapp - Documentation</a>
 
 <ul>
   <li>
-  <b>Step 1</b><p></p>Rescapp searches for partitions, on your disk with system32/config/sam files on them.
+  <b>Step 1</b><p></p>Rescapp searches for Windows system partitions, on your disk.
   </li>
   <li>
   <b>Step 2</b><p></p>If such partitions have been found, Rescapp displays a list of the partitions. At the same time you are prompted:<p></p>
-  <i>Which partition?</i><p></p> You are supposed to choose, your Windows partition, (you will probably only see one), and press the OK button.
+  <i>Which Windows partition?</i><p></p> You are supposed to choose, your Windows partition, (you will probably only see one), and press the OK button.
   </li>
-<!--<p></p><IMG SRC="images/winpass_001_partition.png"><p></p>-->
+<p></p><IMG SRC="../winpass/images/winpass_001_partition.png"><p></p>
   <li>
-  <b>Step 3</b><p></p>Rescapp searches for System users, based on previous information.
+  <b>Step 3</b><p></p>Rescapp tries to backup your Windows registry files, on your Windows sytem.
+  </li>
+
+  <li>
+  <b>Step 4</b><p></p>You are optionally informed about the Windows registry files backup process.<p></p>You will get (if an error happens):<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] Backup of SAM directory went wrong.
+  </b>
+  </p>
+  </div>
   </li>
   <li>
-  <b>Step 4</b><p></p>You are prompted:<p></p><i>Choose Windows user to promote to Admin</i><p></p> You are supposed to select, the user which you want to, promote to Administrator.
+  <b>Step 5</b><p></p>Rescapp searches for System users, based on previous information.
   </li>
-<!--<p></p><IMG SRC="images/winpass_002_user.png"><p></p>-->
   <li>
-  <b>Step 5</b><p></p>You are informed about, the user promotion process.<p></p>You either get:<p></p><i>The user was promoted to Admin OK! :) or</i><p></p>or<p></p><i>The user was not promoted to Admin. Something went wrong! :(</i>
+  <b>Step 6</b><p></p>You are prompted:<p></p><i>Choose Windows user to promote to Admin</i><p></p> You are supposed to select, the user which you want to, promote to Administrator.
   </li>
-<!--<p></p><IMG SRC="images/winpass_003_success.png"><p></p>-->
+<p></p><IMG SRC="images/winpromote_002_user.png"><p></p>
   <li>
-  <b>Step 6</b><p></p>A log file called <i>winpromote.log.txt</i> can be found in the Desktop <i>logs</i> folder.
+  <b>Step 7</b><p></p>You are informed about, the promote Windows NT, 200x, XP, Vista, Seven and 10 user to Administrator process.<p></p>You either get:<p></p>
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-ok-apply.png">
+  [SUCCESS] The user was promoted to Admin OK! :)
+  </b>
+  </p>
+  </div>
+  or
+  <div style="padding: 5px; border: 6px solid green; margin: 7px;">
+  <p>
+  <b>
+  <IMG SRC="../not-documented/images/dialog-error.png">
+  [ERROR] The user was not promoted to Admin. Something went wrong! :(
+  </b>
+  </p>
+  </div>
   </li>
 </ul>
 
