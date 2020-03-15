@@ -60,7 +60,7 @@ function rtux_Winmbr_Install () {
 
 WINMBR_INSTALLED_OK_STR="The Windows mbr was installed OK! :)"
 WINMBR_NOT_INSTALLED_STR="The Windows mbr was not installed. Something went wrong! :("
-WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard drive do you wish to install a Windows mbr on?"
+WHICH_HARD_DISK_INSTALL_WINMBR_STR="Which hard drive, do you wish to install a Windows mbr on?"
 WINMBR_HARDDISK_POSITION_NOT_FOUND="Hard disk position was not set."
 WINMBR_HARDDISK_NOT_FOUND="Hard disk was not set or found."
 WINMBR_PARTITION_NOT_FOUND="Partition was not set or found."
