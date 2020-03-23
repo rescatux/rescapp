@@ -12,7 +12,25 @@ Choose your language.
 </ul>
 
 <a name="english">Hide Microsoft Windows UEFI boot entry - Rescapp - Documentation</a>
-
+<p>
+Newest computers start up thanks to the newest (from 2015 onwards) UEFI boot system.
+</p>
+<p>
+Some of the UEFI firmware vendors do not comply with UEFI specifications but enforce their own UEFI boot menu algorithm. One of the most abused algorithms is booting by default into Microsoft Windows entries. That means that it tries to boot into boot entries which its label is <b>Windows Boot Manager</b> and also one of those two paths: EFI/Microsoft/Boot/bootmgr.efi and EFI/Microsoft/Boot/bootmgfw.efi.
+</p>
+<p>
+So one scenario is someone trying to install a GNU/Linux distribution alongside Windows. <b>Despite of the UEFI entries being properly installed into the UEFI firmware somehow the UEFI firmware insists in booting only into Windows.</b>
+This option lets you install your GNU/Linux UEFI boot entries as the default boot entry. At the same time the Windows entry is deleted.
+</p>
+<p>
+Please note that in some UEFI systems you might need to press an special hotkey (such as F8 or F10) in order to show up the UEFI boot menu in order to be able to choose your added UEFI boot entry.
+</p>
+<p>
+Please note that if you have Windows entries they will be deleted. However Rescapp backups them before deleting them.
+</p>
+<p>
+<b>TIP</b>: You can recover the Windows entries later thanks to the Reinstall Microsoft Windows UEFI boot entries.
+</p>
 <ul>
   <li>
   <b>Step 1</b><p></p>Rescapp searches for EFI partitions on your system.
@@ -30,7 +48,13 @@ Choose your language.
   </li>
 <p></p><IMG SRC="../ueficreate/images/ueficreate_002_efi_file.png"><p></p>
   <li>
-  <b>Step 5</b><p></p>You are informed about the Hide Microsoft Windows UEFI boot entry process.<p></p>You either get:<p></p>
+  <b>Step 5</b><p></p>Rescapp backups your current EFI boot entries.
+  </li>
+  <li>
+  <b>Step 6</b><p></p>Rescapp tries to hide the Microsoft Windows UEFI boot entry.
+  </li>
+  <li>
+  <b>Step 7</b><p></p>You are informed about the Hide Microsoft Windows UEFI boot entry process.<p></p>You either get:<p></p>
   <div style="padding: 5px; border: 6px solid green; margin: 7px;">
   <p>
   <b>
@@ -48,7 +72,6 @@ Choose your language.
   </b>
   </p>
   </div>
-  </li>
   </li>
 </ul>
 
