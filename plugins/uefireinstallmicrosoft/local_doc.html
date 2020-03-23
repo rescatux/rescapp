@@ -12,7 +12,18 @@ Choose your language.
 </ul>
 
 <a name="english">Reinstall Microsoft Windows UEFI boot entries - Rescapp - Documentation</a>
-
+<p>
+Newest computers start up thanks to the newest (from 2015 onwards) UEFI boot system.
+</p>
+<p>
+If you are playing with the UEFI boot entries you might end losing your Microsoft Windows UEFI boot entries. It might be because you have used the Rescapp Fake Microsoft Windows UEFI boot entry option or the Rescapp Hide Microsoft Windows UEFI boot entry option. <b>Or it might be because of your own fault.</b>
+</p>
+<p>
+Windows has a copy of its own EFI files in its Windows partition. This option let's you reinstall them into your EFI partition so that you can boot into Windows again.
+</p>
+<p>
+Please note that in some UEFI systems you might need to press an special hotkey (such as F8 or F10) in order to show up the UEFI boot menu in order to be able to choose your added UEFI boot entry.
+</p>
 <ul>
   <li>
   <b>Step 1</b><p></p>Rescapp searches for EFI partitions on your system.
@@ -30,7 +41,13 @@ Choose your language.
   </li>
 <p></p><IMG SRC="../winpass/images/winpass_001_partition.png"><p></p>
   <li>
-  <b>Step 5</b><p></p>You are informed about the Reinstall Microsoft Windows UEFI boot entries process.<p></p>You either get:<p></p>
+  <b>Step 5</b><p></p>Rescapp backups your current EFI boot entries.
+  </li>
+  <li>
+  <b>Step 6</b><p></p>Rescapp tries to reinstall Microsoft Windows UEFI boot entries.
+  </li>
+  <li>
+  <b>Step 7</b><p></p>You are informed about the Reinstall Microsoft Windows UEFI boot entries process.<p></p>You either get:<p></p>
   <div style="padding: 5px; border: 6px solid green; margin: 7px;">
   <p>
   <b>
@@ -48,7 +65,6 @@ Choose your language.
   </b>
   </p>
   </div>
-  </li>
   </li>
 </ul>
 
