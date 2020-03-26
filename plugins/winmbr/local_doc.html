@@ -12,7 +12,35 @@ Choose your language.
 </ul>
 
 <a name="english">Restore generic MBR code so that Windows boots again - Rescapp - Documentation</a>
-
+<p>
+Newest computers start up thanks to the newest (from 2015 onwards) UEFI boot system.
+</p>
+<p>
+Older computers start up thanks to the old BIOS boot system.
+</p>
+<p>
+This option is aimed at older computers starting up thanks to the old BIOS boot system (or new systems where the CSM (Compatibility Support Module) is turned on).
+</p>
+<p>
+One common scenario is having your GNU/Linux distribution installed alongside Microsoft Windows. You decide to get rid of your GNU/Linux distribution and you remove its partition. Unfortunately in your next boot you get:
+</p>
+<p>
+<ul>
+<li>
+<b>grub rescue></b>
+</li>
+or
+<li>
+<b>grub></b>
+</li>
+</ul>
+</p>
+<p>
+and whatever you try you are unable to boot either into GNU/Linux (that's correct because you have removed the GNU/Linux partition) or to boot into Windows.
+</p>
+<p>
+This option lets you install a generic MBR code so that you can directly boot into Windows bypassing the grub remainings from your old GNU/Linux distribution.
+</p>
 <ul>
   <li>
   <b>Step 1</b><p></p>Rescapp searches for, primary partitions on your drive.
@@ -23,7 +51,7 @@ Choose your language.
   </li>
 <p></p><IMG SRC="images/winmbr_001_partition.png"><p></p>
   <li>
-  <b>Step 3</b><p></p>Rescapp searches for hard drives present, on your system based on information found in the <i>/proc/partitions</i> file.
+  <b>Step 3</b><p></p>Rescapp searches for hard drives present, on your system.
   </li>
   <li>
   <b>Step 4</b><p></p>You are prompted:<p></p><i>Which hard drive, do you wish to install the Windows mbr on?</i><p></p> You are supposed to, take a look at the hard drive sizes, (to be able to identify your hard drives), and choose (usually), the one that is set, to be the first one to boot, in your UEFI/BIOS settings.
