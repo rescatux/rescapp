@@ -1458,17 +1458,9 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
   local UEFI_EFI_PARTITION="$1"
   local UEFI_EFI_RELATIVE_FILEPATH="$2"
 
-  # Step 1: Backup EFI files just in case
-
-  if rtux_backup_efi_partition ${UEFI_EFI_PARTITION} ; then
-    :
-  else
-    return 1;
-  fi
-
   # TODO: Check if we are in a UEFI system and warn the user
 
-  # Step 2: Overwrite default files with the ones we have chosen
+  # Step 1: Overwrite default files with the ones we have chosen
 
   local n_partition=${UEFI_EFI_PARTITION}
   local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1533,7 +1525,7 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
       umount ${TMP_MNT_PARTITION};
   fi # Partition was mounted ok
 
-  # Step 3: Define the default level to the default filename and label
+  # Step 2: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
   local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
