@@ -1599,17 +1599,9 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
   local UEFI_EFI_PARTITION="$1"
   local UEFI_EFI_RELATIVE_FILEPATH="$2"
 
-  # Step 1: Backup EFI files just in case
-
-  if rtux_backup_efi_partition ${UEFI_EFI_PARTITION} ; then
-    :
-  else
-    return 1;
-  fi
-
   # TODO: Check if we are in a UEFI system and warn the user
 
-  # Step 2: Overwrite default files with the ones we have chosen
+  # Step 1: Overwrite default files with the ones we have chosen
 
   local n_partition=${UEFI_EFI_PARTITION}
   local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1617,7 +1609,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
   mkdir --parents ${TMP_MNT_PARTITION}
   if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
     then
-      # Step 2.A: Overwrite default files with the ones we have chosen
+      # Step 1.A: Overwrite default files with the ones we have chosen
 
       TMP_CHECK_AND_CREATE_DIRECTORY="$(dirname ${TMP_MNT_PARTITION}/${DEFAULT_UEFI_BOOT_ENTRY_RELATIVE_PATH})"
       if [ ! -d "${TMP_CHECK_AND_CREATE_DIRECTORY}" ] ; then
@@ -1635,7 +1627,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
          umount ${TMP_MNT_PARTITION};
          return 1
       fi
-      # Step 2.B: Delete Microsoft entries
+      # Step 1.B: Delete Microsoft entries
       if rm -rf "${TMP_MNT_PARTITION}/${DEFAULT_MICROSOFT_UEFI_BOOT_DIRECTORY_RELATIVE_PATH}" ; then
         :
       else
@@ -1648,7 +1640,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
       umount ${TMP_MNT_PARTITION};
   fi # Partition was mounted ok
 
-  # Step 3: Define the default level to the default filename and label
+  # Step 2: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
   local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
