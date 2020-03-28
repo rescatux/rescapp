@@ -1,3 +1,15 @@
+rescapp (0.56-1) unstable; urgency=low
+
+  * Rest of the plugins documentation has been updated to match 2019 gui.
+  * Removed tooltips from main menu.
+  * Added initial useful explanations on options documentation.
+  * Disable action buttons when an option is run.
+  * UEFI options now show the final user when the backup of EFI directory fails.
+  * README reorganisation.
+  * Stable version.
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sat, 28 Mar 2020 21:54:00 +0000
+
 rescapp (0.54b6-1) unstable; urgency=low
 
   * Added PUBLISH instructions.
