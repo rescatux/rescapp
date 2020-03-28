@@ -14,7 +14,10 @@ For full documentation and features, please visit the Rescatux website:
 
 https://www.rescatux.org
 
-** If you are an end user please use [Rescatux](https://www.rescatux.org) instead of trying to install Rescapp into a live cd on yourself. **
+**If you are an end user please use [Rescatux](https://www.rescatux.org) instead of trying to install Rescapp into a live cd on yourself.**
+
+![Rescapp 0.56 Main menu](gitrepo-images/rescapp-0.56-main-menu.png "Rescapp 0.56 Main menu")
+
 
 # Rescapp features
 
@@ -23,6 +26,13 @@ https://www.rescatux.org
 * Change Gnu/Linux Password : Change a user's password
 * File System Check (Forced Fix) : File System Check (Forced Fix)
 * Easy GNU/Linux Boot Fix : Fsck partition, update grub menues, restore GRUB into the MBR and order UEFI entries
+
+![Rescapp 0.56 Main menu](gitrepo-images/rescapp-0.56-grubeasy-doc.png "Rescapp 0.56 Main menu")
+![Rescapp 0.56 Easy GNU/Linux Boot Fix option running](gitrepo-images/rescapp-0.56-grubeasy-running.png "Rescapp 0.56 Easy GNU/Linux Boot Fix option running")
+![Rescapp 0.56 Easy GNU/Linux Boot Fix option asking for GNU/Linux partition](gitrepo-images/rescapp-0.56-grubeasy-which-linux-partition.png "Rescapp 0.56 Easy GNU/Linux Boot Fix option asking for GNU/Linux partition")
+![Rescapp 0.56 Easy GNU/Linux Boot Fix option finished its task](gitrepo-images/rescapp-0.56-grubeasy-finished.png "Rescapp 0.56 Easy GNU/Linux Boot Fix option finished its task")
+
+
 * Restore Grub : Restore GRUB into the MBR
 * Regenerate sudoers file : Define a new sudoers file
 * Update Grub Menus : Update GRUB Configuration File
