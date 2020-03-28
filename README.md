@@ -14,7 +14,7 @@ For full documentation and features, please visit the Rescatux website:
 
 https://www.rescatux.org
 
-** If you are an end user please use [Rescatux](https://www.rescatux.org) instead of trying to install Rescapp into a live cd on yourself. **
+**If you are an end user please use [Rescatux](https://www.rescatux.org) instead of trying to install Rescapp into a live cd on yourself.**
 
 ![Rescapp 0.56 Main menu](gitrepo-images/rescapp-0.56-main-menu.png "Rescapp 0.56 Main menu")
 
