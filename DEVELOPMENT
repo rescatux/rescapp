@@ -1,0 +1,27 @@
+= Contributing to Rescapp =
+
+The suggested steps of contributing back to Rescapp are the following ones:
+
+* Open an issue on https://github.com/rescatux/rescapp/issues explaining what you want to fix. 
+* Use the same issue to ask for the current development branch
+* Fork the rescapp repository on your github account
+* Clone your rescapp repository locally 
+* Create a new branch based on the current development branch and then commit your changes
+* Push your changes to your github account rescapp repo
+* Create a pull request
+* Update former open issue referencing the new pull request
+
+= About chntpw package =
+
+It is recommended to use the chntpw package made by rescatux, as this is different
+to the package that is provided by your Distro.  It has had extra features added to
+automate the password change process as much as possible.
+These extra features for rescapp to interact properly with the different chntpw commands.
+
+It is available from:
+
+https://github.com/rescatux/chntpw
+
+= How to build and install rescapp =
+
+To know how to (build and) install Rescapp, please read the INSTALL file in the source code tarball.

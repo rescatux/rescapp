@@ -1458,17 +1458,9 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
   local UEFI_EFI_PARTITION="$1"
   local UEFI_EFI_RELATIVE_FILEPATH="$2"
 
-  # Step 1: Backup EFI files just in case
-
-  if rtux_backup_efi_partition ${UEFI_EFI_PARTITION} ; then
-    :
-  else
-    return 1;
-  fi
-
   # TODO: Check if we are in a UEFI system and warn the user
 
-  # Step 2: Overwrite default files with the ones we have chosen
+  # Step 1: Overwrite default files with the ones we have chosen
 
   local n_partition=${UEFI_EFI_PARTITION}
   local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1533,7 +1525,7 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
       umount ${TMP_MNT_PARTITION};
   fi # Partition was mounted ok
 
-  # Step 3: Define the default level to the default filename and label
+  # Step 2: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
   local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
@@ -1607,17 +1599,9 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
   local UEFI_EFI_PARTITION="$1"
   local UEFI_EFI_RELATIVE_FILEPATH="$2"
 
-  # Step 1: Backup EFI files just in case
-
-  if rtux_backup_efi_partition ${UEFI_EFI_PARTITION} ; then
-    :
-  else
-    return 1;
-  fi
-
   # TODO: Check if we are in a UEFI system and warn the user
 
-  # Step 2: Overwrite default files with the ones we have chosen
+  # Step 1: Overwrite default files with the ones we have chosen
 
   local n_partition=${UEFI_EFI_PARTITION}
   local TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1625,7 +1609,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
   mkdir --parents ${TMP_MNT_PARTITION}
   if $(mount -t auto ${TMP_DEV_PARTITION} ${TMP_MNT_PARTITION} 2> /dev/null)
     then
-      # Step 2.A: Overwrite default files with the ones we have chosen
+      # Step 1.A: Overwrite default files with the ones we have chosen
 
       TMP_CHECK_AND_CREATE_DIRECTORY="$(dirname ${TMP_MNT_PARTITION}/${DEFAULT_UEFI_BOOT_ENTRY_RELATIVE_PATH})"
       if [ ! -d "${TMP_CHECK_AND_CREATE_DIRECTORY}" ] ; then
@@ -1643,7 +1627,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
          umount ${TMP_MNT_PARTITION};
          return 1
       fi
-      # Step 2.B: Delete Microsoft entries
+      # Step 1.B: Delete Microsoft entries
       if rm -rf "${TMP_MNT_PARTITION}/${DEFAULT_MICROSOFT_UEFI_BOOT_DIRECTORY_RELATIVE_PATH}" ; then
         :
       else
@@ -1656,7 +1640,7 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
       umount ${TMP_MNT_PARTITION};
   fi # Partition was mounted ok
 
-  # Step 3: Define the default level to the default filename and label
+  # Step 2: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
   local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
@@ -1696,17 +1680,9 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
   local UEFI_EFI_PARTITION="$1"
   local WINDOWS_PARTITION="$2"
 
-  # Step 1: Backup EFI files just in case
-
-  if rtux_backup_efi_partition ${UEFI_EFI_PARTITION} ; then
-    :
-  else
-    return 1;
-  fi
-
   # TODO: Check if we are in UEFI system and warn the user
 
-  # Step 2: Mount the Windows partition
+  # Step 1: Mount the Windows partition
 
   local n_partition=${WINDOWS_PARTITION}
   local WINDOWS_TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1720,7 +1696,7 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
     return 1
   fi
 
-  # Step 3: Mount the UEFI partition
+  # Step 2: Mount the UEFI partition
 
   local n_partition=${UEFI_EFI_PARTITION}
   local EFI_TMP_MNT_PARTITION=${RESCATUX_ROOT_MNT}/${n_partition}
@@ -1734,7 +1710,7 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
     return 1
   fi
 
-  # Step 4: Prepare destination directory
+  # Step 3: Prepare destination directory
 
   TMP_CHECK_AND_CREATE_DIRECTORY="$(dirname ${EFI_TMP_MNT_PARTITION}/${DEFAULT_SECURE_MICROSOFT_UEFI_BOOT_ENTRY_RELATIVE_PATH})"
   if [ ! -d "${TMP_CHECK_AND_CREATE_DIRECTORY}" ] ; then
@@ -1747,7 +1723,7 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
     fi
   fi
 
-  # Step 5.A: Copy Secure Windows EFI File
+  # Step 4.A: Copy Secure Windows EFI File
 
   if cp "${WINDOWS_TMP_MNT_PARTITION}/${DEFAULT_SECURE_MICROSOFT_UEFI_FILE_RELATIVE_PATH}" \
           "${EFI_TMP_MNT_PARTITION}/${DEFAULT_SECURE_MICROSOFT_UEFI_BOOT_ENTRY_RELATIVE_PATH}" ; then
@@ -1758,7 +1734,7 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
 	  return 1
   fi
 
-  # Step 5.B: Copy Non Secure Windows EFI File
+  # Step 4.B: Copy Non Secure Windows EFI File
 
   if cp "${WINDOWS_TMP_MNT_PARTITION}/${DEFAULT_NON_SECURE_MICROSOFT_UEFI_FILE_RELATIVE_PATH}" \
           "${EFI_TMP_MNT_PARTITION}/${DEFAULT_NON_SECURE_MICROSOFT_UEFI_BOOT_ENTRY_RELATIVE_PATH}" ; then
@@ -1775,7 +1751,7 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
   umount ${EFI_TMP_MNT_PARTITION};
 
 
-  # Step 6: Define the default level to the default filename and label
+  # Step 5: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
   local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
