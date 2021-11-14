@@ -1,3 +1,9 @@
+rescapp (0.57-1) unstable; urgency=low
+
+  * Support chat rooms have been moved to Libera IRC.
+
+ -- Adrian Gibanel Lopez <adrian15sgd@gmail.com>  Sun, 14 Nov 2021 15:43:00 +0000
+
 rescapp (0.56-1) unstable; urgency=low
 
   * Rest of the plugins documentation has been updated to match 2019 gui.
