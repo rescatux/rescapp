@@ -1789,7 +1789,7 @@ function rtux_Dbus_End () {
 # Rescatux lib main variables
 
 RESCATUX_URL="https://www.rescatux.org/"
-RESCATUX_IRC_URL="irc://irc.freenode.net/rescatux"
+RESCATUX_IRC_URL="ircs://irc.libera.chat:6697/rescatux"
 RESCATUX_PASTEBIN_URL="https://paste.debian.net"
 RESC_USER_IRC_PREFIX="resc_"
 
