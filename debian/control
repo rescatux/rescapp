@@ -24,7 +24,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 # Filesystem
          ,reiserfsprogs
          ,reiser4progs
-         ,btrfs-tools
+         ,btrfs-tools | btrfs-prog
          ,xfsprogs
          ,xfsdump
          ,ntfs-3g
