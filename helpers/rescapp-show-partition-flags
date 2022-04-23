@@ -22,6 +22,7 @@
 
 import parted
 import _ped
+import os
 import sys
 import re
 
@@ -33,9 +34,14 @@ if ((len(sys.argv)-1) != 1 ):
         print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2')
         sys.exit(1)
 
+rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
+
 flag_partition_str=sys.argv[1]
 
-flag_disk_str=re.sub(r'[0-9]*$', '', flag_partition_str)
+flag_disk_str = os.popen(rescapp_binary_path + "/rescapp-find-partition-disk " + flag_partition_str).readline().strip()
+if flag_disk_str == "":
+        print ("Can not find the corresponding disk device of " + flag_partition_str + "!")
+        sys.exit(1)
 
 flag_device = parted.Device(flag_disk_str,None)
 flag_disk = parted.Disk(flag_device,None)
