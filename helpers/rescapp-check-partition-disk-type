@@ -20,6 +20,7 @@
 # Returns True (Exit code 0) if Disk type matches the requested one. False (Exit code 2) if it does not match the requested one.
 
 import parted
+import os
 import sys
 import re
 
@@ -28,10 +29,15 @@ if ((len(sys.argv)-1) != 2 ):
         print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/sda2' + ' ' + 'gpt')
         sys.exit(1)
 
+rescapp_binary_path = os.path.dirname(os.path.realpath(__file__))
+
 disktype_partition_str=sys.argv[1]
 disktype_to_check_str=sys.argv[2]
 
-disktype_disk_str=re.sub(r'[0-9]*$', '', disktype_partition_str)
+disktype_disk_str = os.popen(rescapp_binary_path + "/rescapp-find-partition-disk " + disktype_partition_str).readline().strip()
+if disktype_disk_str == "":
+        print ("Can not find the corresponding disk device of " + disktype_partition_str + "!")
+        sys.exit(1)
 
 disktype_device = parted.Device(disktype_disk_str,None)
 disktype_disk = parted.Disk(disktype_device,None)

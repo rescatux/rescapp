@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+# Copyright (C) 2022 Jiansheng Qiu
+#
+# Rescapp is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Rescapp is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Rescapp.  If not, see <http://www.gnu.org/licenses/>.
+
+# 1st parametre = Partition device
+
+import os
+import stat
+import sys
+import re
+
+if ((len(sys.argv)-1) != 1 ):
+    print ('Usage: ' + sys.argv[0] + ' ' + 'partition_device')
+    print ('E.g.: ' + sys.argv[0] + ' ' + '/dev/nvme0n1p6')
+
+partition_path = sys.argv[1]
+partition_name = os.path.basename(partition_path)
+
+# The longest possible disk name
+longest=re.sub(r'[0-9]*$', '', partition_name)
+
+# Find the block device with the longest name that is the prefix of the longest possible disk name
+for name in os.listdir("/dev/"):
+    path = os.path.join("/dev/", name)
+    if not stat.S_ISBLK(os.stat(path).st_mode):
+        continue
+    if re.match(name + ".*", longest):
+        try:
+            if len(name) >= len(ans):
+                ans = name
+        except NameError:
+            ans = name
+try:
+    print("/dev/" + ans)
+except NameError:
+    # If not found, print nothing.
+    pass

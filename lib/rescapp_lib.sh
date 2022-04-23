@@ -1215,8 +1215,11 @@ function rtux_UEFI_Check_Is_EFI_System_Partition () {
   local EXIT_VALUE=1 # Error by default
 
   local efi_partition_to_check="$1"
-  local efi_partition_hard_disk="$(echo ${efi_partition_to_check} | sed 's/[0-9]*$//g' 2> /dev/null)"
-  fdisk -lu /dev/${efi_partition_hard_disk} \
+  local efi_partition_hard_disk=$(${RESCAPP_BINARY_PATH}/rescapp-find-partition-disk /dev/${efi_partition_to_check})
+  if "${efi_partition_hard_disk}" == ""; then
+    return 1
+  fi
+  fdisk -lu ${efi_partition_hard_disk} \
        | grep '^/dev/'"${efi_partition_to_check}"'\+[[:space:]]\+' \
        | grep "${FDISK_EFI_SYSTEM_DETECTOR}"'$' \
        > /dev/null 2>&1
@@ -1266,8 +1269,11 @@ function rtux_UEFI_Add_Boot_Entry () {
   # TODO: Check if we are in a UEFI system and warn the user
 
   # Convert EFI PARTITION into EFI disk
-  local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
-  local UEFI_EFI_DISK="/dev/${TMP_UEFI_EFI_DISK}"
+  # /dev/nvme0n1p6 -> /dev/nvme0n1
+  local UEFI_EFI_DISK=$(${RESCAPP_BINARY_PATH}/rescapp-find-partition-disk /dev/${UEFI_EFI_PARTITION})
+  if "${UEFI_EFI_DISK}" == ""; then
+    return 1
+  fi
 
   # Convert EFI PARTITION into partition number
   local UEFI_EFI_PARTITION_NUMBER="$(echo ${UEFI_EFI_PARTITION} | grep -o '[0-9]*$')"
@@ -1528,8 +1534,11 @@ function rtux_UEFI_Fake_Microsoft_Boot_Entry () {
   # Step 2: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
-  local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
-  local UEFI_EFI_DISK="/dev/${TMP_UEFI_EFI_DISK}"
+  # /dev/nvme0n1p6 -> /dev/nvme0n1
+  local UEFI_EFI_DISK=$(${RESCAPP_BINARY_PATH}/rescapp-find-partition-disk /dev/${UEFI_EFI_PARTITION})
+  if "${UEFI_EFI_DISK}" == ""; then
+    return 1
+  fi
 
   # Convert EFI PARTITION into partition number
   local UEFI_EFI_PARTITION_NUMBER="$(echo ${UEFI_EFI_PARTITION} | grep -o '[0-9]*$')"
@@ -1643,8 +1652,11 @@ function rtux_UEFI_Hide_Microsoft_Boot_Entry () {
   # Step 2: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
-  local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
-  local UEFI_EFI_DISK="/dev/${TMP_UEFI_EFI_DISK}"
+  # /dev/nvme0n1p6 -> /dev/nvme0n1
+  local UEFI_EFI_DISK=$(${RESCAPP_BINARY_PATH}/rescapp-find-partition-disk /dev/${UEFI_EFI_PARTITION})
+  if "${UEFI_EFI_DISK}" == ""; then
+    return 1
+  fi
 
   # Convert EFI PARTITION into partition number
   local UEFI_EFI_PARTITION_NUMBER="$(echo ${UEFI_EFI_PARTITION} | grep -o '[0-9]*$')"
@@ -1754,8 +1766,11 @@ function rtux_UEFI_Reinstall_Microsoft_Boot_Entries () {
   # Step 5: Define the default level to the default filename and label
 
   # Convert EFI PARTITION into EFI disk
-  local TMP_UEFI_EFI_DISK="$(echo ${UEFI_EFI_PARTITION} | sed 's/[0-9]*$//g')" # sda21 -> sda
-  local UEFI_EFI_DISK="/dev/${TMP_UEFI_EFI_DISK}"
+  # /dev/nvme0n1p6 -> /dev/nvme0n1
+  local UEFI_EFI_DISK=$(${RESCAPP_BINARY_PATH}/rescapp-find-partition-disk /dev/${UEFI_EFI_PARTITION})
+  if "${UEFI_EFI_DISK}" == ""; then
+    return 1
+  fi
 
   # Convert EFI PARTITION into partition number
   local UEFI_EFI_PARTITION_NUMBER="$(echo ${UEFI_EFI_PARTITION} | grep -o '[0-9]*$')"
